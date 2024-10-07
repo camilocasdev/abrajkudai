@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utc-8"> <!-- Codificación -->
+        <meta name="viewport" content="width=device-width"> <!-- Responsive? -->
+        <title>Alojamiento | Abraj Kudai</title> <!-- Titulo de la pesataña -->
+        
+        <meta name="description" content="El hotel Abraj Kudai es un hotel de alto prestigio... etc">
+        <meta main="robots" content="index, follow"> <!-- SEO y Google -->
+        <meta name="theme-color" content="#131313"> <!-- Color de Pestaña (algunos navegadores ) -->
+
+        <link rel="icon" type="image/png" href="images/icon.png"> <!-- Icono de la pesataña -->
+        
+        <!-- SEO = OPEN GRAPH -->
+        <meta property="og:title" content="La mejor estancia para tu recorrido en La Meca | Hotel Abraj Kudai">
+        <meta property="og:description" content="El hotel Abraj Kudai es la mejor estadia donde no solo... etc">
+        <meta property="og:image" content="images/imagen.jpg">
+        <meta property="og:image:alt" content="Imagen del hotel">
+        <!-- Página alternativa (Ideal para idiomas) y Página principal para evitar detección de duplicados -->
+        <link rel="alternate" href="https://abrajkudai.com/ar" hreflang="ar-SA"> 
+        <link rel="canonical" href="https://abrajkudai.com">
+        <!-- Insertar el CSS en el HTML -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <section class="header">
+            <article class="headerbox">
+                <div>
+                    <a class="headerlogo" href="index.html">
+                        <img src="images/ui/iconheader.png"></a>
+                </div>
+                <div class="headeranchores">
+                    <div>
+                        <a href="alojamiento.html">Alojamiento</a>
+                    </div>
+                    <div>
+                        <a href="amenidades.html">Amenidades</a>
+                    </div>
+                    <div>
+                        <a href="eventos.html">Eventos</a>
+                    </div>
+                    <div>
+                        <a 
+                        href="alojamiento.html"
+                        target="_blank"
+                        rel="noreferrer"> <!-- No entrega datos de usuario por temas de seguridad -->
+                        <strong>Reservar</strong>
+                        </a>
+                    </div>
+                </div>
+                <div class="perfil">
+                    <a href="signin.html">
+                        <img src="https://nicodev.s-ul.eu/Dt8gET3T">
+                    </a>
+                </div>
+            </article>
+        </section> 
+        <main> 
+            <section class="signcaja">
+                <section class="signbackground">
+                    <img src="https://nicodev.s-ul.eu/2wafDffC"> <!--Solucionar la puesta de imagen como se desarrollo en el diseño-->
+                </section>
+                <article>
+                    <h1>¡Bienvenido!</h1>
+                    <p>Inicia Sesión para acceder a tu cuenta y explorar nuestras ofertas exclusivas</p>
+                </article>
+                <article>
+                    <form method="post" action="/AbrajKudaiWeb/perfil.html">
+                        <fieldset class="signin">
+                            <div class="signincampos">
+                                <label for="correo">
+                                    <input type="email" id="correo" correo="correo"
+                                    placeholder="Correo" required>
+                                </label>
+                                <label>
+                                    <input type="password" name="contraseña" placeholder="Contraseña"
+                                    required>
+                                </label>
+                            </div>
+                            <!-- Mantener Sesión Iniciada para futura actualización por muestreo incorrecto.
+                            <div class="signincheckbox">
+                                <label>
+                                    <input type="checkbox">
+                                    <span>¿Mantener sesión iniciada?</span>
+                                </label>
+                            </div>
+                            -->
+                            <div class="signpost">
+                                <div>
+                                    <a href=""><p>Olvide mi contraseña</p></a>
+                                    <a href="signup.html"><p>Registrarse</p></a>
+                                </div>
+                                <button type="submit">Ingresar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </article>
+                <article>
+                </article>
+                <article class="conexion">
+                    <p><strong>Conexión</strong></p>
+                    <div class="conexionlinks">
+                        <a href="index.html" target="_blank" class="google-btn">
+                            <img src="images/ui/google.png" class="google" alt="Iniciar con Google">
+                        </a>
+                        <a href="index.html" target="_blank" class="facebook-btn">
+                            <img src="images/ui/facebook.png" class="facebook" alt="Iniciar con Facebook">
+                        </a>
+                    </div>
+                </article>
+            </section>
+        </main>
+        <footer>
+            <section class="footer">
+                <article class="footerlogo">
+                    <img src="images/ui/icon.png">
+                    <h3>Abraj Kudai Hotel</h3>
+                    <p>أبراج كدي</p>
+                </article>
+                <article class="footercont">
+                    <div>
+                        <h3><strong>Acerca del Hotel</strong></h3>
+                    </div> 
+                    <div class="footercontlv2">
+                        <div class="footerubicontact">
+                            <div class="footerp1">
+                                <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                target="_blank">
+                                        <img class="icubicacion" src="images/ui/ubicacion.png">
+                                </a>
+                                <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                target="_blank">
+                                        <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
+                                </a>
+                            </div>
+                            <div class="footerp2">
+                                <div>
+                                    <img class="icontacto" src="images/ui/llamada.png">
+                                </div>
+                                <div>
+                                    <div>
+                                        <a href="mailto:support@abrajkudai.com">support@abrajkudai.com</a>
+                                    </div>
+                                    <div>
+                                        <a href="tel:+966-29301-48939">Llamanos!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footerp3">
+                            <div>
+                                <div>
+                                    <a>Términos y Condiciones</a>
+                                </div>
+                                <div>
+                                    <a>Políticas de Privacidad</a>
+                                </div> 
+                                <div>
+                                    <a>Políticas de Cookies</a>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <a>Avisos Legales</a>
+                                </div>
+                                <div>
+                                    <a>FAQ</a>
+                                </div> 
+                                <div>
+                                    <a>Mapa del Sitio</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footercredit">
+                        <p>
+                            El Hotel Abraj Kudai, diseñado por Dar Al-Handasah, representa una obra
+                            maestra de la arquitectura moderna en le corazon de La Meca. Este sitio
+                            web ha sido desarrollado en colaboración con 404 Developers, garantizando
+                            uan experiencia digital excepcional para nuestros huéspedes.
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </footer>
+    </body>
+</html>
