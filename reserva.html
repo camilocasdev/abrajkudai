@@ -3,9 +3,9 @@
     <head>
         <meta charset="utc-8"> <!-- Codificación -->
         <meta name="viewport" content="width=device-width"> <!-- Responsive? -->
-        <title>Junior Suite | Reservar</title> <!-- Titulo de la pesataña -->
+        <title>Hotel Abraj Kudai</title> <!-- Titulo de la pesataña -->
         
-        <meta name="description" content="La habitación Junior Suite ofrece... etc">
+        <meta name="description" content="El hotel Abraj Kudai es un hotel de alto prestigio... etc">
         <meta main="robots" content="index, follow"> <!-- SEO y Google -->
         <meta name="theme-color" content="#131313"> <!-- Color de Pestaña (algunos navegadores ) -->
 
@@ -20,29 +20,33 @@
         <link rel="alternate" href="https://abrajkudai.com/ar" hreflang="ar-SA"> 
         <link rel="canonical" href="https://abrajkudai.com">
         <!-- Insertar el CSS en el HTML -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body> 
+    <body>
         <section class="header">
             <article class="headerbox">
                 <div>
-                    <a class="headerlogo" href="../index.html">
-                        <img src="../images/ui/iconheader.png"></a>
+                    <a class="headerlogo" href="index.html">
+                        <img src="https://nicodev.s-ul.eu/hJFC5YUy"></a>
                 </div>
                 <div class="headeranchores">
                     <div>
-                        <a href="../alojamiento.html">Alojamiento</a>
+                        <a href="alojamiento.html">Alojamiento</a>
                     </div>
                     <div>
-                        <a href="../amenidades.html">Amenidades</a>
+                        <a href="amenidades.html">Amenidades</a>
                     </div>
                     <div>
-                        <a href="../eventos.html">Eventos</a>
+                        <a href="eventos.html">Eventos</a>
                     </div>
                     <div>
                         <a 
-                        href="../alojamiento.html"
+                        href="reserva.html"
                         target="_blank"
                         rel="noreferrer"> <!-- No entrega datos de usuario por temas de seguridad -->
                         Reservar
@@ -50,87 +54,21 @@
                     </div>
                 </div>
                 <div class="perfil">
-                    <a href="../signin.html">
+                    <a href="signin.html">
                         <img src="https://nicodev.s-ul.eu/Dt8gET3T">
                     </a>
                 </div>
             </article>
-        </section>  
-        <main>
-            <section class="habitacion"> <!--Sección de habitación-->
-                <article class="habimgcontein"> <!--Apartado de imagen, tipo de habitación y precio-->
-                    <div class="habimgtext">
-                        <h2>Family Suite</h2>
-                    </div>
-                    <div class="habimgwidth">
-                        <img src="https://nicodev.s-ul.eu/pct9Cpj4" alt="Imagen de la habitación">
-                    </div>
-                </article>
-                <article class="habdescontein"> <!--Apartado de descripción, configuración de reserva y continuar-->
-                    <div>
-                        <h2><strong>Family Suite</strong></h2>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum culpa libero ipsa repudiandae voluptates pariatur reprehenderit obcaecati cum non doloribus laboriosam doloremque voluptatem quo, officia dicta fugit soluta explicabo expedita?
-                        </p>
-                    </div>
-                    <div class="habconfigres">
-                        <fieldset>
-                            <form method="post" action="../pago.html">
-                                <label>
-                                    <div class="habformdiv">
-                                        <div class="habfieldsetdate">
-                                            <span>Desde</span>
-                                            <span>Hasta</span>
-                                        </div>
-                                        <div class="habfieldsetdate">
-                                            <input type="date" name="decha_desde" required>
-                                            <input type="date" name="fecha_hasta" required>
-                                        </div>
-                                        <div class="habfieldsetcant">
-                                            <input type="number" name="cantidad" placeholder="Cantidad">
-                                        </div>
-                                        <div class="habformdiv">
-                                            <div>
-                                                <span><strong>Servicios Extra</strong></span>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" name="bieneSpa">
-                                                <span>Bienestar y Spa</span>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" name="limpieza">
-                                                <span>Limpieza diaria</span>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" name="cuidadoInf">
-                                                <span>Cuidado Infantil</span>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" name="confidence">
-                                                <span>Confidencialidad</span>
-                                            </div>
-                                            <div>
-                                                <span><strong>Apartar Zonas Sociales</strong></span>
-                                            </div>
-                                            <div>
-                                                <span>Salon de Eventos</span>
-                                                <input type="datetime-local" name="salEvent">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </label>
-                                <button type="submit">Reservar</button>
-                            </form>
-                        </fieldset>
-                    </div>
-                </article>
-            </section>
-            <section class="sugerencias"> <!--Sección de otras habitaciones-->
-                <div class="cajaSug">
-                    <h2 style="color: #131313">sugerencias</h2>
-                </div>
-            </section>
-        </main>
+        </section>
+        <section>
+            <h1>Lista de Reserva</h1>
+            <article>
+                <p>Barra de navegación de habitaciones</p>
+            </article>
+            <article>
+                <p>Resultado de habitaciones (default=relevancia)</p>
+            </article>
+        </section>
         <footer>
             <section class="footer">
                 <article class="footerlogo">
