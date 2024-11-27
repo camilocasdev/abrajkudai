@@ -1,53 +1,35 @@
 import './style.css'
 
-function Mainpage() {
+function Alojamiento(){
     return(
         <div>
             <div>
-                <title>Abraj Kudai</title>
+                <title>Alojamiento | Abraj Kudai</title>
             </div>
             <body>
                 <section class="header">
                     <article class="bannerbox">
-                        <img src="https://nicodev.s-ul.eu/NF7l0Fs8" 
+                        <img src="https://nicodev.s-ul.eu/5orX4zO4" 
                             title="Apartado del hotel"
                             alt="Imagen de un apartado del hotel"
                             class="homeImg"/>
                         <div class="bannertitle">
                             <div>
-                                <h1><strong>Abraj Kudai</strong></h1>
+                                <h1><strong>Alojamiento</strong></h1>
                             </div>
                             <div class="bannerp">
                                 <p>
-                                    Redefine tu estancia en <em>La Meca</em> con el lujo sin igual del Hotel Abraj Kudai.
-                                    Tu oasis de <strong>confort</strong> y <strong>elegancia</strong> te espera.
+                                    Descubre el confort y lujo del Hotel Abraj Kudai. Explora nuestras 
+                                    habitaciones y suites, diseñadas para ofrecer una experiencia única 
+                                    y relajante.
                                 </p>
-                            </div>
-                            <div>
-                                <fieldset method="post" action="alojamiento.html">
-                                    <div class="indexfieldset">
-                                        <label>
-                                            <div class="bannerflexcolumn">
-                                                <div class="bannerflexrow">
-                                                    <span>Desde</span>
-                                                    <span>Hasta</span>
-                                                </div>
-                                                <div class="bannerflexrow">
-                                                    <input type="date" name="decha_desde" required/>
-                                                    <input type="date" name="fecha_hasta" required/>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <button type="submit">Reservar</button>
-                                    </div>
-                                </fieldset>
                             </div>
                         </div>
                     </article>
                     <article class="headerbox">
                         <div>
                             <a class="headerlogo" href="index.html">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy"/></a>
+                                <img src="images/ui/iconheader.png"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
@@ -61,7 +43,7 @@ function Mainpage() {
                             </div>
                             <div>
                                 <a 
-                                href="reserva.html"
+                                href="alojamiento.html"
                                 target="_blank"
                                 rel="noreferrer">
                                 Reservar
@@ -76,60 +58,99 @@ function Mainpage() {
                     </article>
                 </section>
                 <main>
-                    <section class="homeCont">
-                        <article class="homeContArt">
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/8XyS7Q0O"/>
+                    <section class="hab">
+                        <article class="habrow1">
+                            <div class="habsep">
+                                <a href="habitaciones/juniorsuite.html">
+                                    <div class="tarjeta">
+                                        <h3><em>Junior Suite</em></h3>
+                                        <img src="images/Junior Suite Type 1.jpg"/>
+                                        <p>
+                                            Ofrecemos un espacio generoso y cómodo, ideal para aquellos
+                                            que buscan más amplitud. Equipada con una elegante zona de
+                                            estar, estas suites proporcionan una estancia relajante y
+                                            agradable.
+                                        </p>
+                                    </div>
+                                </a>
                             </div>
-                            <div>
-                                <h2>Confort</h2>
-                                <p>
-                                    En el Hotel Abraj Kudai, el confort es nuestra máxima prioridad. 
-                                    Cada rincón de nuestras instalaciones ha sido cuidadosamente diseñado 
-                                    para ofrecer una atmósfera de relajación y bienestar. Nuestras amplias 
-                                    y elegantes habitaciones están equipadas con amenidades de primera clase, 
-                                    que van desde camas lujosas hasta tecnología de vanguardia, todo pensado 
-                                    para su comodidad.
-                                </p>
-                            </div>
-                        </article>
-                        <article class="homeContArt">
-                            <div>
-                                <h2>
-                                    Vistas
-                                </h2>
-                                <p>
-                                    Déjate maravillar por las impresionantes vistas panorámicas de La Meca desde 
-                                    cada rincón del Hotel Abraj Kudai. Nuestras habitaciones y suites están 
-                                    estratégicamente ubicadas para ofrecer una experiencia visual inigualable, 
-                                    permitiéndote contemplar la majestuosidad de la ciudad sagrada en todo momento. 
-                                </p>
-                            </div>
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/VGk3hf96"/>
+                            <div class="habsep">
+                                <a href="habitaciones/executivesuite.html">
+                                    <div class="tarjeta">
+                                        <h3><em>Executive Suite</em></h3>
+                                        <img src="images/Executive Suite.jpg"/>
+                                        <p>
+                                            Diseñada para satisfacer las necesidades de los viajeros de 
+                                            negocios y de placer. Con una sala de estar separada y una 
+                                            zona de trabajo dedicada, ofrece un ambiente sofisticado y 
+                                            profesional.
+                                        </p>
+                                    </div> 
+                                </a>
                             </div>
                         </article>
-                        <article class="homeContArt">
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/VGk3hf96"/>
+                        <article class="habrow2">
+                            <div class="habsep">
+                                <a href="habitaciones/deluxesuite.html">
+                                    <div class="tarjeta">
+                                        <h3><em>Deluxe Suite</em></h3>
+                                        <img src="images/Deluxe Suit.jpg"/>
+                                        <p>
+                                            Redefine el concepto de lujo y confort. Con una sala de estar 
+                                            independiente, decoracion refinada y vistas mejoradas, asegura 
+                                            una experiencia superior para los huéspedes más exigentes.
+                                        </p>
+                                    </div>
+                                </a>
                             </div>
-                            <div>
-                                <h2>Habitaciones</h2>
-                                <p>
-                                    Nuestras habitaciones, cuidadosamente diseñadas y decoradas con un estilo 
-                                    elegante, brindan el refugio perfecto para relajarse después de un día de 
-                                    exploración o trabajo. Equipadas con tecnología moderna, desde sistemas de 
-                                    entretenimiento avanzados hasta conexión Wi-Fi de alta velocidad, nuestras 
-                                    habitaciones ofrecen todo lo necesario para su comodidad.
-                                </p>
+                            <div class="habsep">
+                                <a href="habitaciones/presidentsuite.html">
+                                    <div class="tarjeta">
+                                        <h3><em>Presidential Suite</em></h3>
+                                        <img src="images/Presidential Suit.jpg"/>
+                                        <p>
+                                            Representa el pináculo de del lujo y exclusividad. Con múltiples
+                                            habitaciones, una amplia sala de estar, comedor privado y servicios 
+                                            adicionales como jacuzzi, garantiza una experiencia excepcional.
+                                        </p>    
+                                    </div>
+                                </a>
                             </div>
-                            </article>
+                        </article>
+                        <article class="habrow3">
+                            <div class="habsep">
+                                <a href="habitaciones/familysuite.html">
+                                    <div class="tarjeta">
+                                        <h3><em>Family Suite</em></h3>
+                                        <img src="images/Family suite.jpg"/>
+                                        <p>
+                                            Diseñada para la comodidad de las familias. Con múltiples habitaciones 
+                                            y amplios espacios de estar, ofrece todo lo necesario para que cada 
+                                            miembro de la familia se sienta como en casa.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="habsep">
+                                <a href="habitaciones/honeymoonsuite.html">
+                                    <div class="tarjeta">
+                                        <h3><em>Honeymoon Suite</em></h3>
+                                        <img src="images/Honeymoon suite.jpg"/>
+                                        <p>
+                                            Es el refugio perfecto para parejas en su luna de miel. Decorada
+                                            con un toque romántico y equipada con caracteristicas exclusivas, creando
+                                            un ambiente intimo y encantador.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </article>
                     </section>
                 </main>
                 <footer>
                     <section class="footer">
                         <article class="footerlogo">
-                            <img src="https://nicodev.s-ul.eu/128gaUMW"/>
+                            <img src="images/ui/icon.png"/>
                             <h3>Abraj Kudai Hotel</h3>
                             <p>أبراج كدي</p>
                         </article>
@@ -201,8 +222,7 @@ function Mainpage() {
                 </footer>
             </body>
         </div>
-    );
+    )
 }
 
-export default Mainpage;
-
+export default Alojamiento;

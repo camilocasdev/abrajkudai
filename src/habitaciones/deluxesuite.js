@@ -1,135 +1,123 @@
-import './style.css'
+import '../style.css'
 
-function Mainpage() {
+function Deluxesuite(){
     return(
         <div>
             <div>
-                <title>Abraj Kudai</title>
+                <title></title>
             </div>
-            <body>
+            <body> 
                 <section class="header">
-                    <article class="bannerbox">
-                        <img src="https://nicodev.s-ul.eu/NF7l0Fs8" 
-                            title="Apartado del hotel"
-                            alt="Imagen de un apartado del hotel"
-                            class="homeImg"/>
-                        <div class="bannertitle">
-                            <div>
-                                <h1><strong>Abraj Kudai</strong></h1>
-                            </div>
-                            <div class="bannerp">
-                                <p>
-                                    Redefine tu estancia en <em>La Meca</em> con el lujo sin igual del Hotel Abraj Kudai.
-                                    Tu oasis de <strong>confort</strong> y <strong>elegancia</strong> te espera.
-                                </p>
-                            </div>
-                            <div>
-                                <fieldset method="post" action="alojamiento.html">
-                                    <div class="indexfieldset">
-                                        <label>
-                                            <div class="bannerflexcolumn">
-                                                <div class="bannerflexrow">
-                                                    <span>Desde</span>
-                                                    <span>Hasta</span>
-                                                </div>
-                                                <div class="bannerflexrow">
-                                                    <input type="date" name="decha_desde" required/>
-                                                    <input type="date" name="fecha_hasta" required/>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <button type="submit">Reservar</button>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </article>
                     <article class="headerbox">
                         <div>
-                            <a class="headerlogo" href="index.html">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy"/></a>
+                            <a class="headerlogo" href="../index.html">
+                                <img src="../images/ui/iconheader.png"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="alojamiento.html">Alojamiento</a>
+                                <a href="../alojamiento.html">Alojamiento</a>
                             </div>
                             <div>
-                                <a href="amenidades.html">Amenidades</a>
+                                <a href="../amenidades.html">Amenidades</a>
                             </div>
                             <div>
-                                <a href="eventos.html">Eventos</a>
+                                <a href="../eventos.html">Eventos</a>
                             </div>
                             <div>
                                 <a 
-                                href="reserva.html"
+                                href="../alojamiento.html"
                                 target="_blank"
-                                rel="noreferrer">
+                                rel="noreferrer"> 
                                 Reservar
                                 </a>
                             </div>
                         </div>
                         <div class="perfil">
-                            <a href="signin.html">
+                            <a href="../signin.html">
                                 <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
                             </a>
                         </div>
                     </article>
                 </section>
                 <main>
-                    <section class="homeCont">
-                        <article class="homeContArt">
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/8XyS7Q0O"/>
+                    <section class="habitacion">
+                        <article class="habimgcontein">
+                            <div class="habimgtext">
+                                <h2>Deluxe Suite</h2>
                             </div>
-                            <div>
-                                <h2>Confort</h2>
-                                <p>
-                                    En el Hotel Abraj Kudai, el confort es nuestra máxima prioridad. 
-                                    Cada rincón de nuestras instalaciones ha sido cuidadosamente diseñado 
-                                    para ofrecer una atmósfera de relajación y bienestar. Nuestras amplias 
-                                    y elegantes habitaciones están equipadas con amenidades de primera clase, 
-                                    que van desde camas lujosas hasta tecnología de vanguardia, todo pensado 
-                                    para su comodidad.
-                                </p>
+                            <div class="habimgwidth">
+                                <img src="https://nicodev.s-ul.eu/NqdOigvV" alt="Imagen de la habitación"/>
                             </div>
                         </article>
-                        <article class="homeContArt">
+                        <article class="habdescontein"> 
                             <div>
-                                <h2>
-                                    Vistas
-                                </h2>
+                                <h2><strong>Deluxe Suite</strong></h2>
                                 <p>
-                                    Déjate maravillar por las impresionantes vistas panorámicas de La Meca desde 
-                                    cada rincón del Hotel Abraj Kudai. Nuestras habitaciones y suites están 
-                                    estratégicamente ubicadas para ofrecer una experiencia visual inigualable, 
-                                    permitiéndote contemplar la majestuosidad de la ciudad sagrada en todo momento. 
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum culpa libero ipsa repudiandae voluptates pariatur reprehenderit obcaecati cum non doloribus laboriosam doloremque voluptatem quo, officia dicta fugit soluta explicabo expedita?
                                 </p>
                             </div>
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/VGk3hf96"/>
+                            <div class="habconfigres">
+                                <fieldset>
+                                    <form method="post" action="../pago.html">
+                                        <label>
+                                            <div class="habformdiv">
+                                                <div class="habfieldsetdate">
+                                                    <span>Desde</span>
+                                                    <span>Hasta</span>
+                                                </div>
+                                                <div class="habfieldsetdate">
+                                                    <input type="date" name="decha_desde" required/>
+                                                    <input type="date" name="fecha_hasta" required/>
+                                                </div>
+                                                <div class="habfieldsetcant">
+                                                    <input type="number" name="cantidad" placeholder="Cantidad"/>
+                                                </div>
+                                                <div class="habformdiv">
+                                                    <div>
+                                                        <span><strong>Servicios Extra</strong></span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" name="bieneSpa"/>
+                                                        <span>Bienestar y Spa</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" name="limpieza"/>
+                                                        <span>Limpieza diaria</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" name="cuidadoInf"/>
+                                                        <span>Cuidado Infantil</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" name="confidence"/>
+                                                        <span>Confidencialidad</span>
+                                                    </div>
+                                                    <div>
+                                                        <span><strong>Apartar Zonas Sociales</strong></span>
+                                                    </div>
+                                                    <div>
+                                                        <span>Salon de Eventos</span>
+                                                        <input type="datetime-local" name="salEvent"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <button type="submit">Reservar</button>
+                                    </form>
+                                </fieldset>
                             </div>
                         </article>
-                        <article class="homeContArt">
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/VGk3hf96"/>
-                            </div>
-                            <div>
-                                <h2>Habitaciones</h2>
-                                <p>
-                                    Nuestras habitaciones, cuidadosamente diseñadas y decoradas con un estilo 
-                                    elegante, brindan el refugio perfecto para relajarse después de un día de 
-                                    exploración o trabajo. Equipadas con tecnología moderna, desde sistemas de 
-                                    entretenimiento avanzados hasta conexión Wi-Fi de alta velocidad, nuestras 
-                                    habitaciones ofrecen todo lo necesario para su comodidad.
-                                </p>
-                            </div>
-                            </article>
+                    </section>
+                    <section class="sugerencias">
+                        <div class="cajaSug">
+                            <h2 style={{color: "#131313"}}>sugerencias</h2>
+                        </div>
                     </section>
                 </main>
                 <footer>
                     <section class="footer">
                         <article class="footerlogo">
-                            <img src="https://nicodev.s-ul.eu/128gaUMW"/>
+                            <img src="images/ui/icon.png"/>
                             <h3>Abraj Kudai Hotel</h3>
                             <p>أبراج كدي</p>
                         </article>
@@ -201,8 +189,7 @@ function Mainpage() {
                 </footer>
             </body>
         </div>
-    );
+    )
 }
 
-export default Mainpage;
-
+export default Deluxesuite;

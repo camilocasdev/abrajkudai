@@ -1,49 +1,13 @@
 import './style.css'
 
-function Mainpage() {
+function Reserva(){
     return(
         <div>
             <div>
-                <title>Abraj Kudai</title>
+                <title>Reservas | Abraj Kudai</title>
             </div>
             <body>
                 <section class="header">
-                    <article class="bannerbox">
-                        <img src="https://nicodev.s-ul.eu/NF7l0Fs8" 
-                            title="Apartado del hotel"
-                            alt="Imagen de un apartado del hotel"
-                            class="homeImg"/>
-                        <div class="bannertitle">
-                            <div>
-                                <h1><strong>Abraj Kudai</strong></h1>
-                            </div>
-                            <div class="bannerp">
-                                <p>
-                                    Redefine tu estancia en <em>La Meca</em> con el lujo sin igual del Hotel Abraj Kudai.
-                                    Tu oasis de <strong>confort</strong> y <strong>elegancia</strong> te espera.
-                                </p>
-                            </div>
-                            <div>
-                                <fieldset method="post" action="alojamiento.html">
-                                    <div class="indexfieldset">
-                                        <label>
-                                            <div class="bannerflexcolumn">
-                                                <div class="bannerflexrow">
-                                                    <span>Desde</span>
-                                                    <span>Hasta</span>
-                                                </div>
-                                                <div class="bannerflexrow">
-                                                    <input type="date" name="decha_desde" required/>
-                                                    <input type="date" name="fecha_hasta" required/>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <button type="submit">Reservar</button>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </article>
                     <article class="headerbox">
                         <div>
                             <a class="headerlogo" href="index.html">
@@ -75,61 +39,19 @@ function Mainpage() {
                         </div>
                     </article>
                 </section>
-                <main>
-                    <section class="homeCont">
-                        <article class="homeContArt">
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/8XyS7Q0O"/>
-                            </div>
-                            <div>
-                                <h2>Confort</h2>
-                                <p>
-                                    En el Hotel Abraj Kudai, el confort es nuestra máxima prioridad. 
-                                    Cada rincón de nuestras instalaciones ha sido cuidadosamente diseñado 
-                                    para ofrecer una atmósfera de relajación y bienestar. Nuestras amplias 
-                                    y elegantes habitaciones están equipadas con amenidades de primera clase, 
-                                    que van desde camas lujosas hasta tecnología de vanguardia, todo pensado 
-                                    para su comodidad.
-                                </p>
-                            </div>
-                        </article>
-                        <article class="homeContArt">
-                            <div>
-                                <h2>
-                                    Vistas
-                                </h2>
-                                <p>
-                                    Déjate maravillar por las impresionantes vistas panorámicas de La Meca desde 
-                                    cada rincón del Hotel Abraj Kudai. Nuestras habitaciones y suites están 
-                                    estratégicamente ubicadas para ofrecer una experiencia visual inigualable, 
-                                    permitiéndote contemplar la majestuosidad de la ciudad sagrada en todo momento. 
-                                </p>
-                            </div>
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/VGk3hf96"/>
-                            </div>
-                        </article>
-                        <article class="homeContArt">
-                            <div>
-                                <img src="https://nicodev.s-ul.eu/VGk3hf96"/>
-                            </div>
-                            <div>
-                                <h2>Habitaciones</h2>
-                                <p>
-                                    Nuestras habitaciones, cuidadosamente diseñadas y decoradas con un estilo 
-                                    elegante, brindan el refugio perfecto para relajarse después de un día de 
-                                    exploración o trabajo. Equipadas con tecnología moderna, desde sistemas de 
-                                    entretenimiento avanzados hasta conexión Wi-Fi de alta velocidad, nuestras 
-                                    habitaciones ofrecen todo lo necesario para su comodidad.
-                                </p>
-                            </div>
-                            </article>
-                    </section>
-                </main>
+                <section>
+                    <h1>Lista de Reserva</h1>
+                    <article>
+                        <p>Barra de navegación de habitaciones</p>
+                    </article>
+                    <article>
+                        <p>Resultado de habitaciones (default=relevancia)</p>
+                    </article>
+                </section>
                 <footer>
                     <section class="footer">
                         <article class="footerlogo">
-                            <img src="https://nicodev.s-ul.eu/128gaUMW"/>
+                            <img src="images/ui/icon.png"/>
                             <h3>Abraj Kudai Hotel</h3>
                             <p>أبراج كدي</p>
                         </article>
@@ -201,8 +123,7 @@ function Mainpage() {
                 </footer>
             </body>
         </div>
-    );
+    )
 }
 
-export default Mainpage;
-
+export default Reserva;
