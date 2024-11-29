@@ -29,30 +29,29 @@ function Eventos(){
                     </article>
                     <article class="headerbox">
                         <div>
-                            <a class="headerlogo" href="index.html">
+                            <a class="headerlogo" href="/">
                                 <img src="images/ui/iconheader.png"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="alojamiento.html">Alojamiento</a>
+                                <a href="alojamiento">Alojamiento</a>
                             </div>
                             <div>
-                                <a href="amenidades.html">Amenidades</a>
+                                <a href="amenidades">Amenidades</a>
                             </div>
                             <div>
-                                <a href="eventos.html">Eventos</a>
+                                <a href="eventos">Eventos</a>
                             </div>
                             <div>
                                 <a 
-                                href="alojamiento.html"
-                                target="_blank"
+                                href="reserva"
                                 rel="noreferrer">
                                 Reservar
                                 </a>
                             </div>
                         </div>
                         <div class="perfil">
-                            <a href="signin.html">
+                            <a href="signin">
                                 <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
                             </a>
                         </div>
@@ -60,9 +59,9 @@ function Eventos(){
                 </section>
                 <main>
                     <section class="eventcont">
-                        <a href="signin.html">
+                        <a href="signin">
                             <article class="mainevent">
-                                <a href="signin.html">
+                                <a href="signin">
                                     <img src="https://nicodev.s-ul.eu/vOUPwrhG" alt="Concierto Exclusivo"/>
                                     <div class="maineventext">
                                         <h2>BILLIE EILISH EN EXCLUSIVA EN ABRAJ KUDAI</h2>

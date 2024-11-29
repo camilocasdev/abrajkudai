@@ -28,30 +28,29 @@ function Alojamiento(){
                     </article>
                     <article class="headerbox">
                         <div>
-                            <a class="headerlogo" href="index.html">
+                            <a class="headerlogo" href="/">
                                 <img src="images/ui/iconheader.png"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="alojamiento.html">Alojamiento</a>
+                                <a href="alojamiento">Alojamiento</a>
                             </div>
                             <div>
-                                <a href="amenidades.html">Amenidades</a>
+                                <a href="amenidades">Amenidades</a>
                             </div>
                             <div>
-                                <a href="eventos.html">Eventos</a>
+                                <a href="eventos">Eventos</a>
                             </div>
                             <div>
                                 <a 
-                                href="alojamiento.html"
-                                target="_blank"
+                                href="alojamiento"
                                 rel="noreferrer">
                                 Reservar
                                 </a>
                             </div>
                         </div>
                         <div class="perfil">
-                            <a href="signin.html">
+                            <a href="signin">
                                 <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
                             </a>
                         </div>
@@ -61,7 +60,7 @@ function Alojamiento(){
                     <section class="hab">
                         <article class="habrow1">
                             <div class="habsep">
-                                <a href="habitaciones/juniorsuite.html">
+                                <a href="habitaciones/juniorsuite">
                                     <div class="tarjeta">
                                         <h3><em>Junior Suite</em></h3>
                                         <img src="images/Junior Suite Type 1.jpg"/>
@@ -75,7 +74,7 @@ function Alojamiento(){
                                 </a>
                             </div>
                             <div class="habsep">
-                                <a href="habitaciones/executivesuite.html">
+                                <a href="habitaciones/executivesuite">
                                     <div class="tarjeta">
                                         <h3><em>Executive Suite</em></h3>
                                         <img src="images/Executive Suite.jpg"/>
@@ -91,7 +90,7 @@ function Alojamiento(){
                         </article>
                         <article class="habrow2">
                             <div class="habsep">
-                                <a href="habitaciones/deluxesuite.html">
+                                <a href="habitaciones/deluxesuite">
                                     <div class="tarjeta">
                                         <h3><em>Deluxe Suite</em></h3>
                                         <img src="images/Deluxe Suit.jpg"/>
@@ -104,7 +103,7 @@ function Alojamiento(){
                                 </a>
                             </div>
                             <div class="habsep">
-                                <a href="habitaciones/presidentsuite.html">
+                                <a href="habitaciones/presidentialsuite">
                                     <div class="tarjeta">
                                         <h3><em>Presidential Suite</em></h3>
                                         <img src="images/Presidential Suit.jpg"/>
@@ -119,7 +118,7 @@ function Alojamiento(){
                         </article>
                         <article class="habrow3">
                             <div class="habsep">
-                                <a href="habitaciones/familysuite.html">
+                                <a href="habitaciones/familysuite">
                                     <div class="tarjeta">
                                         <h3><em>Family Suite</em></h3>
                                         <img src="images/Family suite.jpg"/>
@@ -132,7 +131,7 @@ function Alojamiento(){
                                 </a>
                             </div>
                             <div class="habsep">
-                                <a href="habitaciones/honeymoonsuite.html">
+                                <a href="habitaciones/honeymoonsuite">
                                     <div class="tarjeta">
                                         <h3><em>Honeymoon Suite</em></h3>
                                         <img src="images/Honeymoon suite.jpg"/>

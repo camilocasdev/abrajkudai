@@ -10,30 +10,29 @@ function Juniorsuite(){
                 <section class="header">
                     <article class="headerbox">
                         <div>
-                            <a class="headerlogo" href="../index.html">
-                                <img src="../images/ui/iconheader.png"/></a>
+                            <a class="headerlogo" href="/">
+                                <img src="/images/ui/iconheader.png"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="../alojamiento.html">Alojamiento</a>
+                                <a href="/alojamiento">Alojamiento</a>
                             </div>
                             <div>
-                                <a href="../amenidades.html">Amenidades</a>
+                                <a href="/amenidades">Amenidades</a>
                             </div>
                             <div>
-                                <a href="../eventos.html">Eventos</a>
+                                <a href="/eventos">Eventos</a>
                             </div>
                             <div>
                                 <a 
-                                href="../alojamiento.html"
-                                target="_blank"
+                                href="/reserva"
                                 rel="noreferrer"> 
                                 Reservar
                                 </a>
                             </div>
                         </div>
                         <div class="perfil">
-                            <a href="../signin.html">
+                            <a href="/signin">
                                 <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
                             </a>
                         </div>
@@ -66,7 +65,7 @@ function Juniorsuite(){
                             </div>
                             <div class="habconfigres">
                                 <fieldset>
-                                    <form method="post" action="../pago.html">
+                                    <form method="post" action="/pago">
                                         <label>
                                             <div class="habformdiv">
                                                 <div class="habfieldsetdate">

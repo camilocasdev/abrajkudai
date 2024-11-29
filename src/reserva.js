@@ -10,30 +10,29 @@ function Reserva(){
                 <section class="header">
                     <article class="headerbox">
                         <div>
-                            <a class="headerlogo" href="index.html">
+                            <a class="headerlogo" href="/">
                                 <img src="https://nicodev.s-ul.eu/hJFC5YUy"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="alojamiento.html">Alojamiento</a>
+                                <a href="alojamiento">Alojamiento</a>
                             </div>
                             <div>
-                                <a href="amenidades.html">Amenidades</a>
+                                <a href="amenidades">Amenidades</a>
                             </div>
                             <div>
-                                <a href="eventos.html">Eventos</a>
+                                <a href="eventos">Eventos</a>
                             </div>
                             <div>
                                 <a 
-                                href="reserva.html"
-                                target="_blank"
+                                href="reserva"
                                 rel="noreferrer">
                                 Reservar
                                 </a>
                             </div>
                         </div>
                         <div class="perfil">
-                            <a href="signin.html">
+                            <a href="signin">
                                 <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
                             </a>
                         </div>

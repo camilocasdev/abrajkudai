@@ -10,30 +10,29 @@ function Signin(){
                 <section class="header">
                     <article class="headerbox">
                         <div>
-                            <a class="headerlogo" href="index.html">
+                            <a class="headerlogo" href="/">
                                 <img src="images/ui/iconheader.png"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="alojamiento.html">Alojamiento</a>
+                                <a href="alojamiento">Alojamiento</a>
                             </div>
                             <div>
-                                <a href="amenidades.html">Amenidades</a>
+                                <a href="amenidades">Amenidades</a>
                             </div>
                             <div>
-                                <a href="eventos.html">Eventos</a>
+                                <a href="eventos">Eventos</a>
                             </div>
                             <div>
                                 <a 
-                                href="alojamiento.html"
-                                target="_blank"
+                                href="reserva"
                                 rel="noreferrer">
                                 Reservar
                                 </a>
                             </div>
                         </div>
                         <div class="perfil">
-                            <a href="signin.html">
+                            <a href="signin">
                                 <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
                             </a>
                         </div>
@@ -49,7 +48,7 @@ function Signin(){
                             <p>Inicia Sesión para acceder a tu cuenta y explorar nuestras ofertas exclusivas</p>
                         </article>
                         <article>
-                            <form method="post" action="/AbrajKudaiWeb/perfil.html">
+                            <form method="post" action="/AbrajKudaiWeb/perfil">
                                 <fieldset class="signin">
                                     <div class="signincampos">
                                         <label for="correo">
@@ -70,7 +69,7 @@ function Signin(){
                                     <div class="signpost">
                                         <div>
                                             <a href=""><p>Olvide mi contraseña</p></a>
-                                            <a href="signup.html"><p>Registrarse</p></a>
+                                            <a href="signup"><p>Registrarse</p></a>
                                         </div>
                                         <button type="submit">Ingresar</button>
                                     </div>
@@ -82,10 +81,10 @@ function Signin(){
                         <article class="conexion">
                             <p><strong>Conexión</strong></p>
                             <div class="conexionlinks">
-                                <a href="index.html" target="_blank" class="google-btn">
+                                <a href="index" target="_blank" class="google-btn">
                                     <img src="images/ui/google.png" class="google" alt="Iniciar con Google"/>
                                 </a>
-                                <a href="index.html" target="_blank" class="facebook-btn">
+                                <a href="index" target="_blank" class="facebook-btn">
                                     <img src="images/ui/facebook.png" class="facebook" alt="Iniciar con Facebook"/>
                                 </a>
                             </div>

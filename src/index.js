@@ -19,14 +19,32 @@ import Executivesuite from './habitaciones/executivesuite';
 import Familysuite from './habitaciones/familysuite';
 import Honeymoonsuite from './habitaciones/honeymoonsuite';
 import Juniorsuite from './habitaciones/juniorsuite';
-import Presidentesuite from './habitaciones/presidentsuite';
+import Presidentialsuite from './habitaciones/presidentialsuite';
+import { BrowserRouter, Routes, Route } from 'react-router';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <Presidentesuite />
-  </React.StrictMode>
-);
+const root = document.getElementById('root');
+
+ReactDOM.createRoot(root).render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Mainpage />} />
+      <Route path="amenidades" element={<Amenidades />} />
+      <Route path="alojamiento" element={<Alojamiento />} />
+      <Route path="eventos" element={<Eventos />} />
+      <Route path="reserva" element={<Reserva />} />
+      <Route path="pago" element={<Pago />} />
+      <Route path="perfil" element={<Perfil />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="signin" element={<Signin />} />
+      <Route path="habitaciones/deluxesuite" element={<Deluxesuite />} />
+      <Route path="habitaciones/executivesuite" element={<Executivesuite />} />
+      <Route path="habitaciones/familysuite" element={<Familysuite />} />
+      <Route path="habitaciones/honeymoonsuite" element={<Honeymoonsuite />} />
+      <Route path="habitaciones/juniorsuite" element={<Juniorsuite />} />
+      <Route path="habitaciones/presidentialsuite" element={<Presidentialsuite />} />
+    </Routes>
+  </BrowserRouter>
+)
 
 
 
