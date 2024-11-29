@@ -30,7 +30,7 @@ function Perfil(){
                     <article class="headerbox">
                         <div>
                             <a class="headerlogo" href="/">
-                                <img src="images/ui/iconheader.png"/></a>
+                                <img src="https://nicodev.s-ul.eu/hJFC5YUy"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
@@ -45,7 +45,6 @@ function Perfil(){
                             <div>
                                 <a 
                                 href="reserva"
-                                target="_blank"
                                 rel="noreferrer">
                                 Reservar
                                 </a>
@@ -53,7 +52,7 @@ function Perfil(){
                         </div>
                         <div class="perfil">
                             <a href="signin">
-                                <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
+                                <ion-icon name="person-circle"></ion-icon>
                             </a>
                         </div>
                     </article>
@@ -137,78 +136,82 @@ function Perfil(){
                 </section>
             </body>
             <footer>
-                <section class="footer">
-                    <article class="footerlogo">
-                        <img src="images/ui/icon.png"/>
-                        <h3>Abraj Kudai Hotel</h3>
-                        <p>أبراج كدي</p>
-                    </article>
-                    <article class="footercont">
-                        <div>
-                            <h3><strong>Acerca del Hotel</strong></h3>
-                        </div> 
-                        <div class="footercontlv2">
-                            <div class="footerubicontact">
-                                <div class="footerp1">
-                                    <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                    target="_blank">
-                                            <img class="icubicacion" src="images/ui/ubicacion.png"/>
-                                    </a>
-                                    <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                    target="_blank">
-                                            <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
-                                    </a>
+                    <section class="footer">
+                        <article class="footerlogo">
+                            <img src="https://nicodev.s-ul.eu/128gaUMW"/>
+                            <h3>Abraj Kudai Hotel</h3>
+                            <p>أبراج كدي</p>
+                        </article>
+                        <article class="footercont">
+                            <div>
+                                <h3><strong>Acerca del Hotel</strong></h3>
+                            </div> 
+                            <div class="footercontlv2">
+                                <div class="footerubicontact">
+                                    <div class="footerp1">
+                                        <div>
+                                        <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                            target="_blank">
+                                                <ion-icon class="icubicacion" name="location"></ion-icon>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                            target="_blank">
+                                                    <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="footerp2">
+                                        <div>
+                                            <ion-icon class="icontacto" name="call"></ion-icon>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <a href="mailto:support@abrajkudai.com">support@abrajkudai.com</a>
+                                            </div>
+                                            <div>
+                                                <a href="tel:+966-29301-48939">Llamanos!</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="footerp2">
+                                <div class="footerp3">
                                     <div>
-                                        <img class="icontacto" src="images/ui/llamada.png"/>
+                                        <div>
+                                            <a>Términos y Condiciones</a>
+                                        </div>
+                                        <div>
+                                            <a>Políticas de Privacidad</a>
+                                        </div> 
+                                        <div>
+                                            <a>Políticas de Cookies</a>
+                                        </div>
                                     </div>
                                     <div>
                                         <div>
-                                            <a href="mailto:support@abrajkudai.com">support@abrajkudai.com</a>
+                                            <a>Avisos Legales</a>
                                         </div>
                                         <div>
-                                            <a href="tel:+966-29301-48939">Llamanos!</a>
+                                            <a>FAQ</a>
+                                        </div> 
+                                        <div>
+                                            <a>Mapa del Sitio</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="footerp3">
-                                <div>
-                                    <div>
-                                        <a>Términos y Condiciones</a>
-                                    </div>
-                                    <div>
-                                        <a>Políticas de Privacidad</a>
-                                    </div> 
-                                    <div>
-                                        <a>Políticas de Cookies</a>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <a>Avisos Legales</a>
-                                    </div>
-                                    <div>
-                                        <a>FAQ</a>
-                                    </div> 
-                                    <div>
-                                        <a>Mapa del Sitio</a>
-                                    </div>
-                                </div>
+                            <div class="footercredit">
+                                <p>
+                                    El Hotel Abraj Kudai, diseñado por Dar Al-Handasah, representa una obra
+                                    maestra de la arquitectura moderna en le corazon de La Meca. Este sitio
+                                    web ha sido desarrollado en colaboración con 404 Developers, garantizando
+                                    uan experiencia digital excepcional para nuestros huéspedes.
+                                </p>
                             </div>
-                        </div>
-                        <div class="footercredit">
-                            <p>
-                                El Hotel Abraj Kudai, diseñado por Dar Al-Handasah, representa una obra
-                                maestra de la arquitectura moderna en le corazon de La Meca. Este sitio
-                                web ha sido desarrollado en colaboración con 404 Developers, garantizando
-                                uan experiencia digital excepcional para nuestros huéspedes.
-                            </p>
-                        </div>
-                    </article>
-                </section>
-            </footer>
+                        </article>
+                    </section>
+                </footer>
         </div>
     )
 }

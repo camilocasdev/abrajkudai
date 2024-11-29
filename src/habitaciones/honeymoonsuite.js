@@ -11,7 +11,7 @@ function Honeymoonsuite(){
                     <article class="headerbox">
                         <div>
                             <a class="headerlogo" href="/">
-                                <img src="/images/ui/iconheader.png"/></a>
+                                <img src="https://nicodev.s-ul.eu/hJFC5YUy"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
@@ -33,11 +33,11 @@ function Honeymoonsuite(){
                         </div>
                         <div class="perfil">
                             <a href="/signin">
-                                <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
+                                <ion-icon name="person-circle"></ion-icon>
                             </a>
                         </div>
                     </article>
-                </section>   
+                </section>
                 <main>            
                     <section class="habitacion"> 
                         <article class="habimgcontein">
@@ -116,7 +116,7 @@ function Honeymoonsuite(){
                 <footer>
                     <section class="footer">
                         <article class="footerlogo">
-                            <img src="images/ui/icon.png"/>
+                            <img src="https://nicodev.s-ul.eu/128gaUMW"/>
                             <h3>Abraj Kudai Hotel</h3>
                             <p>أبراج كدي</p>
                         </article>
@@ -127,18 +127,22 @@ function Honeymoonsuite(){
                             <div class="footercontlv2">
                                 <div class="footerubicontact">
                                     <div class="footerp1">
+                                        <div>
                                         <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                        target="_blank">
-                                                <img class="icubicacion" src="images/ui/ubicacion.png"/>
-                                        </a>
-                                        <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                        target="_blank">
-                                                <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
-                                        </a>
+                                            target="_blank">
+                                                <ion-icon class="icubicacion" name="location"></ion-icon>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                            target="_blank">
+                                                    <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="footerp2">
                                         <div>
-                                            <img class="icontacto" src="images/ui/llamada.png"/>
+                                            <ion-icon class="icontacto" name="call"></ion-icon>
                                         </div>
                                         <div>
                                             <div>

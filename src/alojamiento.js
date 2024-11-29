@@ -29,7 +29,7 @@ function Alojamiento(){
                     <article class="headerbox">
                         <div>
                             <a class="headerlogo" href="/">
-                                <img src="images/ui/iconheader.png"/></a>
+                                <img src="https://nicodev.s-ul.eu/hJFC5YUy"/></a>
                         </div>
                         <div class="headeranchores">
                             <div>
@@ -51,7 +51,7 @@ function Alojamiento(){
                         </div>
                         <div class="perfil">
                             <a href="signin">
-                                <img src="https://nicodev.s-ul.eu/Dt8gET3T"/>
+                                <ion-icon name="person-circle"></ion-icon>
                             </a>
                         </div>
                     </article>
@@ -63,7 +63,7 @@ function Alojamiento(){
                                 <a href="habitaciones/juniorsuite">
                                     <div class="tarjeta">
                                         <h3><em>Junior Suite</em></h3>
-                                        <img src="images/Junior Suite Type 1.jpg"/>
+                                        <img src="https://nicodev.s-ul.eu/VfvJhItz"/>
                                         <p>
                                             Ofrecemos un espacio generoso y cómodo, ideal para aquellos
                                             que buscan más amplitud. Equipada con una elegante zona de
@@ -77,7 +77,7 @@ function Alojamiento(){
                                 <a href="habitaciones/executivesuite">
                                     <div class="tarjeta">
                                         <h3><em>Executive Suite</em></h3>
-                                        <img src="images/Executive Suite.jpg"/>
+                                        <img src="https://nicodev.s-ul.eu/bw4KjHpc"/>
                                         <p>
                                             Diseñada para satisfacer las necesidades de los viajeros de 
                                             negocios y de placer. Con una sala de estar separada y una 
@@ -93,7 +93,7 @@ function Alojamiento(){
                                 <a href="habitaciones/deluxesuite">
                                     <div class="tarjeta">
                                         <h3><em>Deluxe Suite</em></h3>
-                                        <img src="images/Deluxe Suit.jpg"/>
+                                        <img src="https://nicodev.s-ul.eu/NqdOigvV"/>
                                         <p>
                                             Redefine el concepto de lujo y confort. Con una sala de estar 
                                             independiente, decoracion refinada y vistas mejoradas, asegura 
@@ -106,7 +106,7 @@ function Alojamiento(){
                                 <a href="habitaciones/presidentialsuite">
                                     <div class="tarjeta">
                                         <h3><em>Presidential Suite</em></h3>
-                                        <img src="images/Presidential Suit.jpg"/>
+                                        <img src="https://nicodev.s-ul.eu/tjaHUBsG"/>
                                         <p>
                                             Representa el pináculo de del lujo y exclusividad. Con múltiples
                                             habitaciones, una amplia sala de estar, comedor privado y servicios 
@@ -121,7 +121,7 @@ function Alojamiento(){
                                 <a href="habitaciones/familysuite">
                                     <div class="tarjeta">
                                         <h3><em>Family Suite</em></h3>
-                                        <img src="images/Family suite.jpg"/>
+                                        <img src="https://nicodev.s-ul.eu/pct9Cpj4"/>
                                         <p>
                                             Diseñada para la comodidad de las familias. Con múltiples habitaciones 
                                             y amplios espacios de estar, ofrece todo lo necesario para que cada 
@@ -134,7 +134,7 @@ function Alojamiento(){
                                 <a href="habitaciones/honeymoonsuite">
                                     <div class="tarjeta">
                                         <h3><em>Honeymoon Suite</em></h3>
-                                        <img src="images/Honeymoon suite.jpg"/>
+                                        <img src="https://nicodev.s-ul.eu/eVEkueHl"/>
                                         <p>
                                             Es el refugio perfecto para parejas en su luna de miel. Decorada
                                             con un toque romántico y equipada con caracteristicas exclusivas, creando
@@ -149,7 +149,7 @@ function Alojamiento(){
                 <footer>
                     <section class="footer">
                         <article class="footerlogo">
-                            <img src="images/ui/icon.png"/>
+                            <img src="https://nicodev.s-ul.eu/128gaUMW"/>
                             <h3>Abraj Kudai Hotel</h3>
                             <p>أبراج كدي</p>
                         </article>
@@ -160,18 +160,22 @@ function Alojamiento(){
                             <div class="footercontlv2">
                                 <div class="footerubicontact">
                                     <div class="footerp1">
+                                        <div>
                                         <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                        target="_blank">
-                                                <img class="icubicacion" src="images/ui/ubicacion.png"/>
-                                        </a>
-                                        <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                        target="_blank">
-                                                <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
-                                        </a>
+                                            target="_blank">
+                                                <ion-icon class="icubicacion" name="location"></ion-icon>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                            target="_blank">
+                                                    <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="footerp2">
                                         <div>
-                                            <img class="icontacto" src="images/ui/llamada.png"/>
+                                            <ion-icon class="icontacto" name="call"></ion-icon>
                                         </div>
                                         <div>
                                             <div>

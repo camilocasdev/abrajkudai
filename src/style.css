@@ -1,7 +1,7 @@
             body{
-                background: rgb(70,77,112);
+                background-color: transparent;
+                /*background: rgb(70,77,112);*/
                 background: linear-gradient(60deg, rgba(70,77,112,1) 0%, rgba(52,56,75,1) 55%);
-                scrollbar-color: #FFFFFF;
                 padding:0px;
                 margin: 0px;
             }
@@ -57,6 +57,27 @@
                 font-family: "Rubik", sans-serif;
                 color: #eeeeee;
             }
+            /* Scroll Bar*/
+            body::-webkit-scrollbar{
+                width: 8px;
+                background-color: #656e99;
+            }
+            body::-webkit-scrollbar-track {
+                background: #656e99;
+                border-radius: 4px;
+                margin: 5px 0px 5px 0px;
+            }
+            body::-webkit-scrollbar-thumb {
+                background: #a1abda;
+                border-radius: 5px;
+            }
+            body::-webkit-scrollbar-thumb:hover {
+                background: #aabcd1;
+                box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+            }
+            body::-webkit-scrollbar-thumb:active {
+                background-color:#c1d2e6;
+            }
             /* Header */
             .header{
                 display: flex;
@@ -104,7 +125,7 @@
                 height: 35px;
                 margin: 0px 10px 0px 0px;
             }
-            .perfil img{
+            .perfil ion-icon{
                 width: 35px;
                 height: 35px;
             }
@@ -275,7 +296,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                max-width: 400px;
+                max-width: 450px;
                 min-width: 200px;
                 gap: 10px;
                 line-height: 30px;
@@ -295,11 +316,15 @@
                 width: 50px;
                 height: 50px;
                 margin: 10px 10px 10px 10px;
+                padding: 10px 0px 0px 0px;
+                color:#eeeeee;
             }
             .icontacto{
                 width: 42px;
                 height: 45px;
                 margin: 10px 10px 10px 10px;
+                padding: 10px 0px 0px 0px;
+                color:#eeeeee;
             }
             /* Alojamiento */
             .hab{
@@ -437,6 +462,7 @@
             .mainevent button:hover{
                 color:#FFFFFF;
                 background-color: #798165;
+                cursor: pointer;
             }
             .restevent{
                 display:flex;
@@ -466,21 +492,19 @@
             }
             .estado{
                 position: absolute;
-                margin-left: -43px;
-                align-items: center;
-                justify-content: center;
                 text-decoration: none;
                 text-align: left;
-                align-self: self-start;
-                margin-top: 20px;
-                padding: 5px;
+                align-self: center;
+                margin: 0px 0px 10% -43px;
+                padding: 10px 20px 10px 10px;
                 width: 130px;
+                height: 50px;
                 background-color: #A1AC88;
                 border-radius: 15px;
             }
             .estado p{
                 color:#eeeeee;
-                padding-left: 5px
+                padding: 0 0 0 5px;
             }
             /* Sign In & Sign Up */
             .signcaja{
@@ -544,13 +568,18 @@
                 border-radius: 20px;
                 font-size:20px;
                 font-weight: 600;
+                cursor: pointer;
+            }
+            .signincheckbox label{
+                align-items: left;
+                cursor: pointer;
             }
             .signpost a{
                 font-weight: 100;
             }
             .signpost button:hover{
                 background-color: #646d4f;
-                color:#e2e2e2
+                color:#e2e2e2;
             }
             .signpost p{
                 text-align: left;
@@ -596,10 +625,12 @@
             .google{
                 height:35px;
                 width:52px;
+                color:#464D70;
             }
             .facebook{
-                height:35px; 
-                width:37px;
+                height:35px;
+                width:52px;
+                color:#464D70;
             }
             .signup{
                 display: flex;
