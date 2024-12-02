@@ -12,7 +12,7 @@ function Pago(){
                         <article class="headerbox">
                             <div>
                                 <a class="headerlogo" href="/">
-                                    <img src="https://nicodev.s-ul.eu/hJFC5YUy"/></a>
+                                    <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
                             </div>
                             <div class="headeranchores">
                                 <div>
@@ -27,7 +27,6 @@ function Pago(){
                                 <div>
                                     <a 
                                     href="reserva"
-                                    target="_blank"
                                     rel="noreferrer">
                                     Reservar
                                     </a>
@@ -35,7 +34,7 @@ function Pago(){
                             </div>
                             <div class="perfil">
                                 <a href="signin">
-                                    <ion-icon name="person-circle"></ion-icon>
+                                    <ion-icon name="person-circle" alt="Icono de perfil"></ion-icon>
                                 </a>
                             </div>
                         </article>
@@ -54,7 +53,7 @@ function Pago(){
                 <footer>
                     <section class="footer">
                         <article class="footerlogo">
-                            <img src="https://nicodev.s-ul.eu/128gaUMW"/>
+                            <img src="https://nicodev.s-ul.eu/128gaUMW" alt="Logotipo del hotel piedepagina"/>
                             <h3>Abraj Kudai Hotel</h3>
                             <p>أبراج كدي</p>
                         </article>
@@ -67,13 +66,16 @@ function Pago(){
                                     <div class="footerp1">
                                         <div>
                                         <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                            target="_blank">
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            >
                                                 <ion-icon class="icubicacion" name="location"></ion-icon>
                                             </a>
                                         </div>
                                         <div>
                                             <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
-                                            target="_blank">
+                                            target="_blank"
+                                            rel="noreferrer">
                                                     <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>
                                             </a>
                                         </div>
@@ -95,24 +97,24 @@ function Pago(){
                                 <div class="footerp3">
                                     <div>
                                         <div>
-                                            <a>Términos y Condiciones</a>
+                                            <a href="manualdeusuario/#terminosycondiciones">Términos y Condiciones</a>
                                         </div>
                                         <div>
-                                            <a>Políticas de Privacidad</a>
+                                            <a href="manualdeusuario/#politicasdeprivacidad">Políticas de Privacidad</a>
                                         </div> 
                                         <div>
-                                            <a>Políticas de Cookies</a>
+                                            <a href="manualdeusuario/#politicasdecookies">Políticas de Cookies</a>
                                         </div>
                                     </div>
                                     <div>
                                         <div>
-                                            <a>Avisos Legales</a>
+                                            <a href="avisoslegales">Avisos Legales</a>
                                         </div>
                                         <div>
-                                            <a>FAQ</a>
+                                            <a href="faq">FAQ</a>
                                         </div> 
                                         <div>
-                                            <a>Mapa del Sitio</a>
+                                            <a href="faq/mapadelsitio">Mapa del Sitio</a>
                                         </div>
                                     </div>
                                 </div>

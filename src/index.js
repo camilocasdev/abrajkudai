@@ -12,7 +12,7 @@ import Pago from './pago';
 import Perfil from './perfil';
 import Reserva from './reserva';
 import Signup from './signup';
-import Signin from './signin';
+import Login from './login';
 //Páginas de Habitaciones
 import Deluxesuite from './habitaciones/deluxesuite';
 import Executivesuite from './habitaciones/executivesuite';
@@ -34,8 +34,8 @@ ReactDOM.createRoot(root).render(
       <Route path="reserva" element={<Reserva />} />
       <Route path="pago" element={<Pago />} />
       <Route path="perfil" element={<Perfil />} />
+      <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
-      <Route path="signin" element={<Signin />} />
       <Route path="habitaciones/deluxesuite" element={<Deluxesuite />} />
       <Route path="habitaciones/executivesuite" element={<Executivesuite />} />
       <Route path="habitaciones/familysuite" element={<Familysuite />} />
