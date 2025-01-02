@@ -10,7 +10,7 @@ function Login(){
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
+    const ingresar = async (event) => {
         event.preventDefault()
         
         try {
@@ -27,7 +27,7 @@ function Login(){
             const data = await response.json();
 
             if (response.ok) {
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('x-access-token', data.token);
                 navigate('/perfil');
             } else {
                 setError(data.message || 'Error en la autenticación');
@@ -84,7 +84,7 @@ function Login(){
                             <p>Inicia Sesión para acceder a tu cuenta y explorar nuestras ofertas exclusivas</p>
                         </article>
                         <article>
-                            <form method="post" onSubmit={handleSubmit} action="/validation/signin">
+                            <form method="post" onSubmit={ingresar} action="/validation/signin">
                                 <fieldset class="signin">
                                     <div class="signincampos">
                                         <label for="correo">

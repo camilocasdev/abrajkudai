@@ -8,6 +8,21 @@ function Perfil(){
     var {$historial} = 'on work...'
     var {$proxResShow} = 'on work...'
 
+    const navigate = useNavigate()
+    useEffect(() => {
+        try {
+            const token = localStorage.getItem('x-access-token');
+
+            if (!token) {
+                navigate('/signin')
+            }
+            
+        } catch (error) {
+            console.log('ERROR: No se pudo obtener el token', error);
+            
+        }
+    })
+
     return(
         <div>
             <div>

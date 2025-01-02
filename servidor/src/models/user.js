@@ -8,6 +8,13 @@ const usuarioSchema = new Schema ({
     apellido:{
         type:String
     },
+    pais:{
+        type:String
+    },
+    identificacion:{
+        type:String,
+        unique:true
+    },
     contrasena:{
         type:String,
     },

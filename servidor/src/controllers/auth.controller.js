@@ -26,8 +26,6 @@ export const signIn = async (req, res) => {
             expiresIn: 86400
         });
 
-        console.log('Inició Sesión...')
-
         return res.json({ token });
     } catch (error) {
         console.log(error)
@@ -37,16 +35,18 @@ export const signIn = async (req, res) => {
     
 export const signUp = async (req, res) => {
 
-    const { nombre, apellido, contrasena, correo, telefono, role } = req.body;
+    const { nombre, apellido, pais, identificacion, contrasena, correo, telefono, role } = req.body;
 
     const nuevoUsuario = new Usuario({
         nombre,
         apellido,
+        pais,
+        identificacion,
         contrasena: await Usuario.encryptPassword(contrasena),
         correo,
         telefono, 
         role
-    })
+    })  
 
     if (role){
         const foundRoles = await Role.find({nombre:{$in: role}});
@@ -65,6 +65,12 @@ export const signUp = async (req, res) => {
 
     if (emailFound) {
         return res.status(400).json({ msg: 'Correo ya existe' });
+    }
+    
+    const identFound = await Usuario.findOne({ identificacion: identificacion });
+
+    if (identFound) {
+        return res.status(400).json({ msg: 'Identificación ya existe' });
     }
 
     const usuarioGuardado = await nuevoUsuario.save();

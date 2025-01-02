@@ -1,6 +1,54 @@
 import './style.css'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Signup(){
+
+    const [nombre, setNombre] = useState('')
+    const [apellido, setApellido] = useState('')
+    const [pais, setPais] = useState('')
+    const [identificacion, setIdentificacion] = useState('')
+    const [telefono, setTelefono] = useState('')
+    const [correo, setCorreo] = useState('')
+    const [contrasena, setContrasena] = useState('')
+    const [error, setError] = useState('')
+
+    const navigate = useNavigate()
+
+    const registrar = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await fetch('/validation/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nombre: nombre,
+                    apellido: apellido,
+                    pais: pais,
+                    identificacion: identificacion,
+                    telefono, telefono,
+                    correo: correo,
+                    contrasena: contrasena,
+                }),
+            });
+
+            const data = await response.json()
+
+            if (response.ok){
+                return navigate('/signin')
+            } else {
+                setError(data.message || 'Error en la autenticación');
+            }
+        } catch (error) {
+            setError('Hubo un problema con la solicitud.');
+                console.error(error);
+        }
+    }
+
+
     return(
         <div>
             <div>
@@ -57,51 +105,91 @@ function Signup(){
                             <p><strong>O</strong></p>
                         </article>
                         <article class="signincampos">
-                            <form method="post" action="/AbrajKudaiWeb/perfil">
+                            <form method="post" onSubmit={registrar} action="/validation/signup">
                                 <fieldset class="signup">
                                     <div class="signupclose">
                                         <label for="nombre">
-                                            <input type="text" id="nombre" name="nombre"
-                                            placeholder="Nombre/s" required/>
+                                            <input type="text" 
+                                            id="nombre" 
+                                            name="nombre"
+                                            value={nombre}
+                                            onChange={(e) => setNombre(e.target.value)} 
+                                            placeholder="Nombre/s" 
+                                            required/>
                                         </label>
                                         <label for="apellido">
-                                            <input type="text" id="apellido" name="apellido"
-                                            placeholder="Apellido/s" required/>
+                                            <input type="text" 
+                                            id="apellido" 
+                                            name="apellido"
+                                            value={apellido}
+                                            onChange={(e) => setApellido(e.target.value)} 
+                                            placeholder="Apellido/s"
+                                            required/>
                                         </label>
                                     </div>
                                     <div class="signupclose">
                                         <div class="signshort">
                                             <label for="pais">
-                                                <input type="text" id="pais" name="pais"
-                                                placeholder="Pais" required/>
+                                                <input type="text" 
+                                                id="pais" 
+                                                name="pais"
+                                                value={pais}
+                                                onChange={(e) => setPais(e.target.value)} 
+                                                placeholder="Pais" 
+                                                required/>
                                             </label>
                                         </div> 
                                         <div class="signmedium">
                                             <label for="identificacion">
-                                                <input type="number" inputmode="numeric" id="identificacion" name="identificacion"
-                                                placeholder="Identificacion" required/>
+                                                <input type="number" 
+                                                inputmode="numeric" 
+                                                id="identificacion" 
+                                                name="identificacion"
+                                                value={identificacion}
+                                                onChange={(e) => setIdentificacion(e.target.value)}
+                                                placeholder="Identificacion" 
+                                                required/>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="signupclose">
-                                        <label for="tel">
-                                            <input type="tel" id="tel" tel="tel"
-                                            placeholder="Teléfono" required/>
+                                        <label for="telefono">
+                                            <input type="tel" 
+                                            id="tel" 
+                                            name="telefono"
+                                            value={telefono}
+                                            onChange={(e) => setTelefono(e.target.value)}
+                                            placeholder="Teléfono" 
+                                            required/>
                                         </label>
                                         <label for="correo">
-                                            <input type="email" id="correo" name="correo"
-                                            placeholder="Correo" required/>
-                                        </label>
-                                    </div>
-                                    <div class="signlong">
-                                        <label for="contraseña">
-                                            <input type="password" name="contraseña" placeholder="Contraseña"
+                                            <input 
+                                            type="email" 
+                                            id="correo" 
+                                            value={correo}
+                                            onChange={(e) => setCorreo(e.target.value)}
+                                            name="correo"
+                                            placeholder="Correo" 
                                             required/>
                                         </label>
                                     </div>
                                     <div class="signlong">
-                                        <label for="contraseña">
-                                            <input type="password" name="contraseña" placeholder="Repetir Contraseña"
+                                        <label for="contrasena">
+                                            <input 
+                                            type="password" 
+                                            name="contrasena"
+                                            value={contrasena}
+                                            onChange={(e) => setContrasena(e.target.value)}
+                                            placeholder="Contraseña"
+                                            required/>
+                                        </label>
+                                    </div>
+                                    <div class="signlong">
+                                        <label for="repcontrasena">
+                                            <input 
+                                            type="password" 
+                                            name="repcontrasena" 
+                                            placeholder="Repetir Contraseña"
                                             required/>
                                         </label>
                                     </div>
