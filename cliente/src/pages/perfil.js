@@ -8,20 +8,37 @@ function Perfil(){
     var {$historial} = 'on work...'
     var {$proxResShow} = 'on work...'
 
-    const navigate = useNavigate()
-    useEffect(() => {
-        try {
-            const token = localStorage.getItem('x-access-token');
+    const [usuario, setUsuario] = useState({});
 
-            if (!token) {
-                navigate('/signin')
+    const navigate = useNavigate()
+
+    useEffect(() => {
+
+        const userdata = async() => {
+            try {
+                const token = localStorage.getItem('x-access-token');
+
+                if (!token) {
+                    navigate('/signin')
+                } else {
+                    const response = await fetch('/priv/get', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': token
+                        }
+                    })
+                    
+                    const data = await response.json()
+
+                    setUsuario(data)
+                }
+            } catch (error) {
+                console.log('ERROR: No se pudo obtener el token', error);
             }
-            
-        } catch (error) {
-            console.log('ERROR: No se pudo obtener el token', error);
-            
         }
-    })
+        userdata()
+    }, [navigate])
 
     return(
         <div>
@@ -30,8 +47,8 @@ function Perfil(){
             </div>
             <body>
                 <section class="header">
-                    <article class="bannerbox">
-                        <img src={$currentRoom} 
+                    <article class="bannerboxperf">
+                        <img src="https://nicodev.s-ul.eu/VfvJhItz"
                             title="Habitacion Actual"
                             alt="Imagen de la habitacion actual del usuario"
                             />
@@ -67,13 +84,10 @@ function Perfil(){
                     </article>
                 </section>
                 <section class="banner">
-                    <article>
-                        Habitacion de backgroun blurred
-                    </article>
                     <article class="currentroom">
                         <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Habitación Actual"/>
                         <div class="curRoom">
-                            <h1>¡Hola! ....</h1>
+                            <h1>¡Hola! {usuario?.nombre}</h1>
                             <p> Habitacion Actual ...</p>
                         </div>
                     </article>            

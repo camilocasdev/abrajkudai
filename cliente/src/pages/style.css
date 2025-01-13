@@ -4,6 +4,7 @@
                 background: linear-gradient(60deg, rgba(70,77,112,1) 0%, rgba(52,56,75,1) 55%);
                 padding:0px;
                 margin: 0px;
+                overflow: hidden;
             }
             h1{
                 color: #eeeeee;
@@ -83,7 +84,8 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                min-height: 100px;         
+                min-height: 100px;
+                left: 50%
             }
             .headerbox{
                 display: flex;
@@ -146,6 +148,17 @@
                 width: 100%;
                 max-width: 2560px;
                 border-radius: 0px 0px 10px 10px;
+            }
+            .bannerboxperf img{
+                width: 100%;
+                max-width: 1440px;
+                border-radius: 0px 0px 10px 10px;
+                filter: blur(1em);
+                mask-image: linear-gradient(
+                    black 60%,
+                    transparent
+                );
+                position: relative;
             }
             .bannertitle{
                 display: flex;
@@ -760,6 +773,9 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                position: absolute;
+                top: 3%;
+                left: 3%;
                 margin-top: 100px;
             }
             .curRoom{
