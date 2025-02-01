@@ -26,12 +26,14 @@ export const get_user_by_id = async (req, res) => {
 
 export const add_user = async (req, res) => {
     
-    const { nombre, apellido, contrasena, correo, telefono, role } = req.body;
+    const { nombre, apellido, contrasena, identificacion, pais, correo, telefono, role } = req.body;
     
         const nuevoUsuario = new Usuario({
             nombre,
             apellido,
             contrasena: await Usuario.encryptPassword(contrasena),
+            identificacion,
+            pais,
             correo,
             telefono, 
             role
@@ -58,6 +60,8 @@ export const add_user = async (req, res) => {
     
         const usuarioGuardado = await nuevoUsuario.save();
     
+        
+
         jwt.sign({id: usuarioGuardado._id}, cfig.SECRET_KEY, {
             expiresIn: 864000 //24 Horas
         });

@@ -2,7 +2,6 @@ import Role from '../models/role';
 import Room from '../models/room';
 import RoomType from '../models/roomType';
 import User from '../models/user';
-import mongoose from 'mongoose';
 
 export const crearRole = async (req, res) => {
 
@@ -24,11 +23,59 @@ export const crearRole = async (req, res) => {
 
 export const defaultUsers = async (req, res) => {
     try {
-        const count = await User.findMany({nombre: 'default'}).estimatedDocumentCount();
+        const count = await User.find({nombre:'default'}).countDocuments();
+        
+        if (count == 3) return;
+        
+        if (count == 0 || count >= 1 && count < 3) {
+            
+            try {
+                if (count >= 1) {
+                    const array = await User.find({nombre:'default'});
+                    const del = await User.deleteMany({ _id: { $in: [array[0]._id, array[1]._id] } });
+                } 
 
-        console.log(count);
-    } catch {
-
+                const empleado = await Role.findOne({nombre: 'empleado'})
+                const admin = await Role.findOne({nombre: 'admin'})
+                const usuario = await Role.findOne({nombre: 'usuario'})
+                
+                const values = await Promise.all([
+                    new User({nombre: 'default',
+                        apellido: 'empleado',
+                        pais: 'naa',
+                        identificacion: 'naap',
+                        contrasena: 'na',
+                        correo:'default@empleado.com',
+                        telefono: 0,
+                        role: [empleado._id],
+                    }).save(),
+                    new User({nombre: 'default',
+                        apellido: 'admin',
+                        pais: 'na',
+                        identificacion: 'naa',
+                        contrasena: 'na',
+                        correo:'default@admin.com',
+                        telefono: 0,
+                        role: [admin._id]
+                    }).save(),
+                    new User({
+                        nombre: 'default',
+                        apellido: 'usuario',
+                        pais: 'na',
+                        identificacion: 'na',
+                        contrasena: 'na',
+                        correo:'default@usuario.com',
+                        telefono: 0,
+                        role: [usuario._id]
+                    }).save()
+                ]);
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }    
+    } catch (error) {
+        console.log(error);
     }
 }
 
