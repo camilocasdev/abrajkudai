@@ -5,14 +5,20 @@ import reservart from './routes/reservar.routes';
 import authrt from './routes/auth.routes'
 import userprivrt from './routes/userpriv.routes'
 import usersrt from './routes/user.routes'
-import { crearRole } from './libs/initialSetup';
+import { crearRole, crearRoom, defaultUsers } from './libs/initialSetup';
 import path from 'path'
 
 const app = express();
 
 app.set('pkg', pkg);
 
-crearRole();
+try {
+    crearRole();
+    crearRoom();
+    defaultUsers();
+} catch (error) {
+    console.log(error)
+}
 
 app.set(morgan('dev'));
 
@@ -38,8 +44,5 @@ export const browser = function() {
         window.open('http://localhost:3000', '_blank');
     }
 }
-
-
-
 
 export default app;
