@@ -11,14 +11,17 @@ var _reservar = _interopRequireDefault(require("./routes/reservar.routes"));
 var _auth = _interopRequireDefault(require("./routes/auth.routes"));
 var _userpriv = _interopRequireDefault(require("./routes/userpriv.routes"));
 var _user = _interopRequireDefault(require("./routes/user.routes"));
+var _rooms = _interopRequireDefault(require("./routes/rooms.routes"));
 var _initialSetup = require("./libs/initialSetup");
 var _path = _interopRequireDefault(require("path"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var app = (0, _express["default"])();
 app.set('pkg', _package["default"]);
 try {
+  console.log('Iniciando entorno... ');
   (0, _initialSetup.crearRole)();
   (0, _initialSetup.crearRoom)();
+  (0, _initialSetup.defaultUsers)();
 } catch (error) {
   console.log(error);
 }
@@ -28,6 +31,7 @@ app.use(_express["default"].urlencoded({
   extended: true
 }));
 app.use('/validation', _auth["default"]);
+app.use('/public', _rooms["default"]);
 app.use('/restr', _user["default"], _reservar["default"]);
 app.use('/priv', _userpriv["default"]);
 var basePath = _path["default"].resolve('..');

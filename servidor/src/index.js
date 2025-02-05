@@ -9,6 +9,7 @@ try {
 
     db.dbconnect();
     browser()
+    
 } catch (error) {
     console.log('Ha ocurrido un error al conectar', error)
 }

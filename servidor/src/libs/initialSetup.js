@@ -1,6 +1,8 @@
+import { TIMEOUT } from 'dns';
 import Role from '../models/role';
 import Room from '../models/room';
-import RoomType from '../models/roomType';
+import roomtype from '../models/roomtype';
+import Roomtype from '../models/roomtype';
 import User from '../models/user';
 
 export const crearRole = async (req, res) => {
@@ -81,16 +83,31 @@ export const defaultUsers = async (req, res) => {
 
 export const crearRoomType = async (req, res) => {
     try {
-        const count = await RoomType.collection.estimatedDocumentCount();
-        if (count > 0) return;
+        const count = await Roomtype.collection.estimatedDocumentCount();
+        if (count === 8) return;
 
-        const values = await RoomType.insertMany([
-            {nombre:'Junior Suite', precio: 250, capacidad: 3, descripcion:''},
-            {nombre:'Executive Suite', precio: 350, capacidad: 4, descripcion:''},
-            {nombre:'Deluxe Suite', precio: 450, capacidad: 5, descripcion:''},
-            {nombre:'Presidential Suite', precio: 700, capacidad: 6, descripcion:''},
-            {nombre:'Family Suite', precio: 500, capacidad: 8, descripcion:''},
-            {nombre:'Honeymoon Suite', precio: 300, capacidad: 2, descripcion:''}
+        if (count >= 1 && count < 8) {
+            try {
+                if (count >= 1) {
+                    const array = await Roomtype.find();
+                    const del = await Roomtype.deleteMany({});
+                } 
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        const values = await Roomtype.insertMany([
+
+            {nombre: 'Junior Suite', precio: 250, capacidad: 3, descripcion:''},
+            {nombre: 'Honeymoon Suite', precio: 300, capacidad: 2, descripcion:''},
+            {nombre: 'Executive Suite', precio: 350, capacidad: 4, descripcion:''},
+            {nombre: 'Deluxe Suite', precio: 450, capacidad: 5, descripcion:''},
+            {nombre: 'Family Suite', precio: 500, capacidad: 8, descripcion:''},
+            {nombre: 'Presidential Suite', precio: 700, capacidad: 6, descripcion:''},
+            {nombre: 'Penthouse Gold', precio: 1000, capacidad: 10, descripcion:''},
+            {nombre: 'Penthouse Black', precio: 1500, capacidad: 12, descripcion:''}
+
         ])
 
     } catch (error) {
@@ -100,17 +117,25 @@ export const crearRoomType = async (req, res) => {
 
 export const crearRoom = async (req, res) => {
 
-    crearRoomType();
-
     try {
         const count = await Room.collection.estimatedDocumentCount();
         if (count > 0) return; 
+
+        try {
+            if (count >= 1) {
+                const array = await User.find({nombre:'default'});
+                const del = await User.deleteMany({});
+            }
+        } catch (error) {
+            console.log(error)
+        };
 
         let nh; //Número de Habitación
         let nhm; // Se agrega un 0 para los números menores a 10
         let tr; // Torre de habitaciónes
         let ps; // Piso de habitaciónes
-        let rt; // Tipo de habitaciónes, se obtiene de la base de datos para la iteración
+        //let rt; // Tipo de habitaciónes, se obtiene de la base de datos para la iteración
+        let n = 0;
 
         for (tr = 1; tr <= 6; tr++) {
 
@@ -128,23 +153,29 @@ export const crearRoom = async (req, res) => {
                         nhm = nh
                     );
 
-                    rt = await RoomType.findOne({nombre: 'Junior Suite'});
-                    if (ps == 1 && nh > 15) {
-                        rt = await RoomType.findOne({nombre: 'Family Suite'})
+                    const rt = await Roomtype.find().sort({precio: 1})
+
+                    if (ps == 1 && nh <= 15) {
+                        n = 0;
+                    } else if (ps == 1 && nh > 15) {
+                        n = 4;
                     } else if (ps == 2 && nh <= 15) {
-                        rt = await RoomType.findOne({nombre: 'Executive Suite'})
+                        n = 2;
                     } else if (ps == 2 && nh > 15) {
-                        rt = await RoomType.findOne({nombre: 'Honeymoon Suite'})
-                    } else if (ps == 3) {
-                        rt = await RoomType.findOne({nombre: 'Deluxe Suite'})
-                    } else if (ps == 5) {
-                        rt = await RoomType.findOne({nombre: 'Presidential Suite'})
+                        n = 1;
+                    } else if (ps == 3 || ps == 4) {
+                        n = 3;
+                    } else if (ps == 5 || ps == 6) {
+                        n = 5;
+                    } else if (ps == 7 || ps == 8) {
+                        n = 6;
+                    } else if (ps == 9 || ps == 10) {
+                        n = 7;
                     }
 
                     //console.log(`${rt.nombre}`,'Torre: ' + tr + ', Piso: ' + ps + ', Habitacion: ' + nhm)
-
                     const values = await Room.insertMany([
-                            {codigo: `T${tr} ${ps}${nhm}`, tipo: `${rt.nombre}` , capacidad: (rt.capacidad), precio: (rt.precio)},
+                            {numero: `T${tr} ${ps}${nhm}`, roomid: `${rt[n]._id}`}
                         ]);
                     }
                 };
@@ -153,3 +184,4 @@ export const crearRoom = async (req, res) => {
         console.log(error)
     }
 }
+

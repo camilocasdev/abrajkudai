@@ -16,10 +16,10 @@ var reserva = new _mongoose.Schema({
   hora: {
     type: String
   },
-  habitacion: {
-    type: String,
-    require: true
-  },
+  habitacion: [{
+    rel: 'Room',
+    type: _mongoose.Schema.Types.ObjectId
+  }],
   precio: {
     type: Number,
     require: true

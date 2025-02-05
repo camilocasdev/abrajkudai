@@ -1,9 +1,9 @@
 import {Router} from 'express'
-import * as userprivctrl from '../controllers/userpriv.controller'
+import * as usersctrl from '../controllers/users.controller'
 import { verifyToken } from '../middlewares/authjwt'
 
 const router = Router();
 
-router.get('/get', [verifyToken], userprivctrl.getuser);
+router.get('/get', [verifyToken], usersctrl.privgetuser);
 
 export default router;
