@@ -29,7 +29,7 @@ function Signup(){
                     apellido: apellido,
                     pais: pais,
                     identificacion: identificacion,
-                    telefono, telefono,
+                    telefono: telefono,
                     correo: correo,
                     contrasena: contrasena,
                 }),
@@ -40,11 +40,11 @@ function Signup(){
             if (response.ok){
                 return navigate('/signin')
             } else {
-                setError(data.message || 'Error en la autenticación');
+                error(data.message || 'Error en la autenticación');
             }
         } catch (error) {
             setError('Hubo un problema con la solicitud.');
-                console.error(error);
+            console.error(error);
         }
     }
 

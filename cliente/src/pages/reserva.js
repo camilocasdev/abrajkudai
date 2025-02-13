@@ -1,6 +1,15 @@
+
 import './style.css'
 
 function Reserva(){
+
+    fetch("/")
+
+    let room;
+
+    room = [{nombre:"Junior Suite"}]
+
+
     return(
         <div>
             <div>
@@ -38,14 +47,40 @@ function Reserva(){
                         </div>
                     </article>
                 </section>
-                <section>
-                    <h1>Lista de Reserva</h1>
-                    <article>
-                        <p>Barra de navegación de habitaciones</p>
-                    </article>
-                    <article>
-                        <p>Resultado de habitaciones (default=relevancia)</p>
-                    </article>
+                <section class="resSection">
+                    <div class="fixer">
+                        <h2>Reservas Disponibles</h2>
+                        <article class="resFilter">
+                            <div class="resSectRow">
+                                <p>Filtros</p>
+                            </div>
+                            <div class="resSectRow">
+                                <p>Filtros low section</p>
+                            </div>
+                        </article>
+                        <article class="resResult">
+                            <div class="resultRow">
+                                <div class="defaulttarjet">
+                                    <p>{room[0].nombre}</p>
+                                    <img 
+                                        src='${room[0].imagen}'
+                                    />
+                                </div>
+                                <div class="defaulttarjet">
+                                    <p>{room[0].nombre}</p>
+                                    <img 
+                                        src='${room[0].imagen}'
+                                    />
+                                </div>
+                                <div class="defaulttarjet">
+                                    <p>{room[0].nombre}</p>
+                                    <img 
+                                        src='${room[0].imagen}'
+                                    />
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                 </section>
                 <footer>
                     <section class="footer">

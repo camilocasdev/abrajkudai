@@ -10,4 +10,4 @@ export const roomList = async (req, res) => {
     console.log(lista[0])
 
     res.status(200).json(lista)
-}
+} 

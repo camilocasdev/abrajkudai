@@ -30,7 +30,7 @@ function Login(){
                 localStorage.setItem('x-access-token', data.token);
                 navigate('/perfil');
             } else {
-                setError(data.message || 'Error en la autenticación');
+                error(data.message || 'Error en la autenticación');
             }
         } catch (error) {
             setError('Hubo un problema con la solicitud.');

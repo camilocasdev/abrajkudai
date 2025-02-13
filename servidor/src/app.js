@@ -6,7 +6,7 @@ import authrt from './routes/auth.routes'
 import userprivrt from './routes/userpriv.routes'
 import usersrt from './routes/user.routes'
 import roomsrt from './routes/rooms.routes'
-import { crearRole, crearRoom, defaultUsers } from './libs/initialSetup';
+import { crearRole, crearRoom, defaultUsers, crearRoomType } from './libs/initialSetup';
 import path from 'path'
 
 const app = express();
@@ -17,8 +17,10 @@ try {
     console.log('Iniciando entorno... ')
 
     crearRole();
-    crearRoom();
     defaultUsers();
+    crearRoomType();
+    crearRoom();
+    
 
 } catch (error) {
     console.log(error)

@@ -4,7 +4,6 @@
                 background: linear-gradient(60deg, rgba(70,77,112,1) 0%, rgba(52,56,75,1) 55%);
                 padding:0px;
                 margin: 0px;
-                overflow: hidden;
             }
             h1{
                 color: #eeeeee;
@@ -709,6 +708,7 @@
                 text-decoration: none;
                 text-align: center;
                 font-family: "Lora";
+                z-index: 10
             }
             .navperf{
                 display: flex;
@@ -912,3 +912,64 @@
             .habfieldsetcant input{
                 width: 450px;
             }
+
+        /* Página de lista de habitaciones */
+
+        .resSection{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-content: center;
+            flex-wrap: wrap;
+            margin: 2rem;
+            padding: 1rem;
+            gap: 0.5rem;    
+        }
+        .fixer{
+            max-width: 80rem;
+        }
+        .resSection h2{
+            margin: 0;
+        }
+        .resFilter{
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            background-color: rgba(102, 122, 223, 0.5);
+            backdrop-filter: blur(5px);
+            filter: drop-shadow(1, 1, 1, 0.5);
+            gap: 0.2rem;
+            margin: 1rem;
+            z-index: 0;
+        }
+        .resFilter p{
+            margin: 0.4rem;
+        }
+        .resSectRow{
+            display: flex;
+            flex-direction: row;
+        }
+        .resResult{
+            display: flex;
+            flex-direction: column;
+            margin: 1rem;
+        }
+        .defaulttarjet{
+            display: flex;
+            flex-direction: column;
+            background-color: #e2e2e2;
+            filter: drop-shadow(1, 1, 1, 0.5);
+            width: 40rem;
+            color:rgba(0, 0, 0);
+            border-radius: 1rem;
+            padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+        }
+        .defaulttarjet :is(h2, p, h1){
+            color:#131313
+        }
+        .resultRow{
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        } 
