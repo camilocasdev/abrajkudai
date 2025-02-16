@@ -8,8 +8,8 @@ const reserva = new Schema ({
         rel: 'Room',
         type: Schema.Types.ObjectId
     }],
-    precio: { type: Number, require: true },
-    estado: { type: String, require: true }
+    total: { type: Number, require: true },
+    estadoPago: { type: String, require: true }
 }, {
     timestamps: true,
     versionKey: false

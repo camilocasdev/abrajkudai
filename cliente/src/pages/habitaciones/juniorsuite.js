@@ -106,6 +106,19 @@ function Juniorsuite(){
                                                         <span>Salon de Eventos</span>
                                                         <input type="datetime-local" name="salEvent"/>
                                                     </div>
+                                                    <div>
+                                                        <span>Localización</span>
+                                                        <div>
+                                                            <select name="localizacion">
+                                                                <option>Torre 1</option>
+                                                                <option>Torre 2</option>
+                                                                <option>Torre 3</option>
+                                                                <option>Torre 4</option>
+                                                                <option>Torre 5</option>
+                                                                <option>Torre 6</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </label>

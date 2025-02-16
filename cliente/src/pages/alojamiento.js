@@ -60,7 +60,7 @@ function Alojamiento(){
                     <section class="hab">
                         <article class="habrow1">
                             <div class="habsep">
-                                <a href="habitaciones/juniorsuite">
+                                <a href="habitacion/juniorsuite">
                                     <div class="tarjeta">
                                         <h3><em>Junior Suite</em></h3>
                                         <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Imagen de la Junior Suite" />
@@ -74,7 +74,7 @@ function Alojamiento(){
                                 </a>
                             </div>
                             <div class="habsep">
-                                <a href="habitaciones/executivesuite">
+                                <a href="habitacion/executivesuite">
                                     <div class="tarjeta">
                                         <h3><em>Executive Suite</em></h3>
                                         <img src="https://nicodev.s-ul.eu/bw4KjHpc" alt="Imagen de la Executive Suite" />
@@ -90,7 +90,7 @@ function Alojamiento(){
                         </article>
                         <article class="habrow2">
                             <div class="habsep">
-                                <a href="habitaciones/deluxesuite">
+                                <a href="habitacion/deluxesuite">
                                     <div class="tarjeta">
                                         <h3><em>Deluxe Suite</em></h3>
                                         <img src="https://nicodev.s-ul.eu/NqdOigvV" alt="Imagen de la Deluxe Suite" />
@@ -103,7 +103,7 @@ function Alojamiento(){
                                 </a>
                             </div>
                             <div class="habsep">
-                                <a href="habitaciones/presidentialsuite">
+                                <a href="habitacion/presidentialsuite">
                                     <div class="tarjeta">
                                         <h3><em>Presidential Suite</em></h3>
                                         <img src="https://nicodev.s-ul.eu/tjaHUBsG" alt="Imagen de la Presidential Suite" />
@@ -118,7 +118,7 @@ function Alojamiento(){
                         </article>
                         <article class="habrow3">
                             <div class="habsep">
-                                <a href="habitaciones/familysuite">
+                                <a href="habitacion/familysuite">
                                     <div class="tarjeta">
                                         <h3><em>Family Suite</em></h3>
                                         <img src="https://nicodev.s-ul.eu/pct9Cpj4" alt="Imagen de la Family Suite" />
@@ -131,7 +131,7 @@ function Alojamiento(){
                                 </a>
                             </div>
                             <div class="habsep">
-                                <a href="habitaciones/honeymoonsuite">
+                                <a href="habitacion/honeymoonsuite">
                                     <div class="tarjeta">
                                         <h3><em>Honeymoon Suite</em></h3>
                                         <img src="https://nicodev.s-ul.eu/eVEkueHl" alt="Imagen de la Honeymoon Suite" />

@@ -7,7 +7,10 @@ export const roomList = async (req, res) => {
         path: 'roomid',
         model: 'Roomtype'
     });
-    console.log(lista[0])
+    
+    const listafiltrada = lista.filter(roomType => roomType.estado = 'Disponible');
 
-    res.status(200).json(lista)
-} 
+    console.log(listafiltrada[0])
+
+    res.status(200)
+}

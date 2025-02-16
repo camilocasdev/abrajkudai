@@ -7,6 +7,7 @@ export const createReserva = async (req, res) => {
 
         const nuevaReserva = new Reserva({ usuario, fecha, hora, habitacion, precio, estado });
     
+        
         const guardarReserva = await nuevaReserva.save();
     
         return res.status(201).json(guardarReserva);
