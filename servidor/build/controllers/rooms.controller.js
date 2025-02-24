@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.roomList = void 0;
+exports.roomUpdate = exports.roomList = void 0;
 var _room = _interopRequireDefault(require("../models/room"));
 var _roomtype = _interopRequireDefault(require("../models/roomtype"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
@@ -13,7 +13,7 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var roomList = exports.roomList = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var lista;
+    var lista, miniFilter, listaDisponible, listaOcupada;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -24,15 +24,126 @@ var roomList = exports.roomList = /*#__PURE__*/function () {
           });
         case 2:
           lista = _context.sent;
-          console.log(lista[0]);
-          res.status(200).json(lista);
-        case 5:
+          miniFilter = req.headers['filter'];
+          if (miniFilter) {
+            _context.next = 6;
+            break;
+          }
+          return _context.abrupt("return", res.status(200).json(lista));
+        case 6:
+          if (!(miniFilter === 'disponible')) {
+            _context.next = 20;
+            break;
+          }
+          _context.prev = 7;
+          listaDisponible = lista.filter(function (RoomType) {
+            return RoomType.estado === 'Disponible';
+          }).slice(0, 10);
+          if (!(listaDisponible.length < 0)) {
+            _context.next = 13;
+            break;
+          }
+          return _context.abrupt("return", res.status(200).json({
+            message: 'No hay habitaciones disponibles'
+          }));
+        case 13:
+          return _context.abrupt("return", res.status(200).json({
+            message: 'Habitaciones disponibles',
+            Array: listaDisponible
+          }));
+        case 14:
+          _context.next = 20;
+          break;
+        case 16:
+          _context.prev = 16;
+          _context.t0 = _context["catch"](7);
+          console.log(_context.t0);
+          res.status(400).json({
+            msg: 'Error inesperado...'
+          });
+        case 20:
+          if (!(miniFilter === 'ocupado')) {
+            _context.next = 33;
+            break;
+          }
+          _context.prev = 21;
+          listaOcupada = lista.filter(function (RoomType) {
+            return RoomType.estado === 'Ocupado';
+          }).slice(0, 10);
+          console.log(listaOcupada.lenght);
+          if (!(listaOcupada.lenght < 0)) {
+            _context.next = 26;
+            break;
+          }
+          return _context.abrupt("return", res.status(200).json({
+            message: 'No hay habitaciones ocupadas'
+          }));
+        case 26:
+          return _context.abrupt("return", res.status(200).json({
+            message: 'Habitaciones ocupadas',
+            Array: listaOcupada
+          }));
+        case 29:
+          _context.prev = 29;
+          _context.t1 = _context["catch"](21);
+          console.log(_context.t1);
+          res.status(400).json({
+            msg: 'Error inesperado...'
+          });
+        case 33:
         case "end":
           return _context.stop();
       }
-    }, _callee);
+    }, _callee, null, [[7, 16], [21, 29]]);
   }));
   return function roomList(_x, _x2) {
     return _ref.apply(this, arguments);
+  };
+}();
+var roomUpdate = exports.roomUpdate = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
+    var prueba, room;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _context2.next = 3;
+          return _room["default"].findById(req.params.roomId);
+        case 3:
+          prueba = _context2.sent;
+          console.log('Antes ' + prueba);
+          _context2.next = 7;
+          return _room["default"].findByIdAndUpdate(req.params.roomId, req.body, {
+            "new": true
+          });
+        case 7:
+          room = _context2.sent;
+          if (room) {
+            _context2.next = 10;
+            break;
+          }
+          return _context2.abrupt("return", res.status(404).json({
+            message: 'Room not found'
+          }));
+        case 10:
+          console.log('Despues ' + prueba);
+          res.status(200).json({
+            msg: 'Habitación Actualizada Existosamente',
+            actualizacion: room
+          });
+          _context2.next = 17;
+          break;
+        case 14:
+          _context2.prev = 14;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
+        case 17:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[0, 14]]);
+  }));
+  return function roomUpdate(_x3, _x4) {
+    return _ref2.apply(this, arguments);
   };
 }();

@@ -20,8 +20,9 @@ app.set('pkg', _package["default"]);
 try {
   console.log('Iniciando entorno... ');
   (0, _initialSetup.crearRole)();
-  (0, _initialSetup.crearRoom)();
   (0, _initialSetup.defaultUsers)();
+  (0, _initialSetup.crearRoomType)();
+  (0, _initialSetup.crearRoom)();
 } catch (error) {
   console.log(error);
 }

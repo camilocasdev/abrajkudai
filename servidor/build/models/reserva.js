@@ -20,11 +20,11 @@ var reserva = new _mongoose.Schema({
     rel: 'Room',
     type: _mongoose.Schema.Types.ObjectId
   }],
-  precio: {
+  total: {
     type: Number,
     require: true
   },
-  estado: {
+  estadoPago: {
     type: String,
     require: true
   }
