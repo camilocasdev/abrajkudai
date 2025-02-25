@@ -1,14 +1,38 @@
 
 import './style.css'
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Reserva(){
 
-    fetch("/")
+    const [Resultados, setResultados] = useState({});
 
-    let room;
+    const navigate = useNavigate();
 
-    room = [{nombre:"Junior Suite"}]
+    useEffect(() => {
 
+        const resultados = async () => {
+    
+            try {
+                const response = await fetch("/public/list", {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                
+                const data = await response.json()
+                console.log(data)
+
+                setResultados(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    
+        resultados()
+
+    }, [navigate])
 
     return(
         <div>
@@ -23,9 +47,6 @@ function Reserva(){
                                 <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
                         </div>
                         <div class="headeranchores">
-                            <div>
-                                <a href="alojamiento">Alojamiento</a>
-                            </div>
                             <div>
                                 <a href="amenidades">Amenidades</a>
                             </div>
@@ -61,19 +82,20 @@ function Reserva(){
                         <article class="resResult">
                             <div class="resultRow">
                                 <div class="defaulttarjet">
-                                    <p>{room[0].nombre}</p>
+                                    <p>nombre</p>
+                                    <img 
+                                        src='${room[0].imagen}'
+                                    />
+                                    
+                                </div>
+                                <div class="defaulttarjet">
+                                    <p>"nombre</p>
                                     <img 
                                         src='${room[0].imagen}'
                                     />
                                 </div>
                                 <div class="defaulttarjet">
-                                    <p>{room[0].nombre}</p>
-                                    <img 
-                                        src='${room[0].imagen}'
-                                    />
-                                </div>
-                                <div class="defaulttarjet">
-                                    <p>{room[0].nombre}</p>
+                                    <p>nombre</p>
                                     <img 
                                         src='${room[0].imagen}'
                                     />
