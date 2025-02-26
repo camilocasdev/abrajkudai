@@ -13,33 +13,44 @@ function Perfil(){
     const navigate = useNavigate()
 
     useEffect(() => {
-
         const userdata = async() => {
             try {
-                const token = localStorage.getItem('x-access-token');
-
-                if (!token) {
-                    navigate('/signin')
-                } else {
-                    const response = await fetch('/priv/get', {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-access-token': token
-                        }
-                    })
-                    
+                const response = await fetch('/priv/get', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
                     const data = await response.json()
+                    console.log(data)
+
+                    if (data.estado === 'error'){
+                        navigate(data.redirect)
+                    }
 
                     setUsuario(data)
-                }
             } catch (error) {
-                console.log('ERROR: No se pudo obtener el token', error);
+                console.error('ERROR: No se pudo obtener el token ' + error);
             }
         }
         userdata()
     }, [navigate])
 
+    const clearData = async(event) => {
+        event.preventDefault()
+
+        fetch('/priv/logout', {method:'POST'})
+            .then(response =>{
+                if(response.ok){
+                    localStorage.clear()
+                    sessionStorage.clear()
+                    window.location.href = '/signin';
+            } else {
+                alert('Error: Al cerrar sesión')
+                }
+            })
+            .catch (error => console.error('Error:', error))
+    }
     return(
         <div>
             <div>
@@ -98,7 +109,7 @@ function Perfil(){
                             <div class="navbar">
                                 <a href="#reservas"><strong>Reservas</strong></a>
                                 <a href="#configuracion"><strong>Configuración</strong></a>
-                                <a href="signout.js"><strong>Cerrar Sesión</strong></a>                    
+                                <a href='#' onClick={clearData}><strong>Cerrar Sesión</strong></a>                    
                             </div>
                         </nav>
                     </article>

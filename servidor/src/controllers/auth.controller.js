@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import cfig from '../config'
 import Role from '../models/role';
 
+
+
 export const signIn = async (req, res) => {
 
     try {
@@ -10,26 +12,36 @@ export const signIn = async (req, res) => {
         const usuarioEncontrado = await Usuario.findOne({correo: req.body.correo}).populate("role")
         
         if (!usuarioEncontrado) {
-            return res.status(404).json({token: null, message: "Usuario no encontrado" });
+            return res.status(401).json({token: null, msg: "Usuario no encontrado", redirect: '/signin?error=user_not_found'});
         }
 
         if (!usuarioEncontrado.contrasena) {
-            return res.status(401).json({ token: null, message: "Contraseña no encontrada" });
+            return res.status(401).json({ token: null, msg: "Contraseña no encontrada", redirect: '/signin?error=password_not_found'});
         }
         
         const matchPass = await Usuario.comparePassword(req.body.contrasena, usuarioEncontrado.contrasena);
         
         if (!matchPass) {
-            return res.status(401).json({token: null, message: "Contraseña Invalida"})
+            return res.status(401).json({token: null, msg: "Contraseña Invalida", redirect: '/signin?error=invalid_password'});
         }
         const token = jwt.sign({id: usuarioEncontrado._id}, cfig.SECRET_KEY, {
             expiresIn: 86400
         });
 
-        return res.json({ token });
+        const cookiecfg = {
+            expires: new Date(Date.now() + cfig.COOKIE_EXPIRATION * 24 * 60 * 60 * 1000),
+            path: "/",
+            httpOnly: true,
+            secure: true,
+            samesite: "Strict"
+        }
+
+        res.cookie('Tookie', token, cookiecfg)
+
+        return res.json({ msg: "Usuario autenticado, iniciando sesión..." , token: token });
     } catch (error) {
         console.log(error)
-        res.status(400).json('Error al intentar hacer la comparación con la contraseña')
+        res.status(400).json('Error al autenticar el usuario')
     }
 };
     
@@ -79,6 +91,5 @@ export const signUp = async (req, res) => {
         expiresIn: 864000 //24 Horas
     });
 
-    res.status(200).json(usuarioGuardado)
-    
+    res.status(200).json({ msg: 'Registro exitoso.' , usuarioGuardado})
 };

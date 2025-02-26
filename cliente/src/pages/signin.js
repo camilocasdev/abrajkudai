@@ -24,17 +24,23 @@ function Login(){
                     contrasena: contrasena,
                 }),
             });
+
+            if (!response){
+                console.log('Fatal Crash: ' + error)
+            }
+
             const data = await response.json();
 
             if (response.ok) {
-                localStorage.setItem('x-access-token', data.token);
+                //localStorage.setItem('x-access-token', data.token);
                 navigate('/perfil');
             } else {
-                error(data.message || 'Error en la autenticación');
+                setError(data.message || 'Error en la autenticación');
+                navigate(data.redirect)
             }
         } catch (error) {
             setError('Hubo un problema con la solicitud.');
-            console.error(error);
+            navigate('/signin?error')
         }
     }
     return(
@@ -99,7 +105,7 @@ function Login(){
                                             <input type="password" 
                                             value={contrasena}
                                             onChange={(e) => setContrasena(e.target.value)}
-                                            placeholder="contrasena"
+                                            placeholder="Contrasena"
                                             required/>
                                         </label>
                                     </div>

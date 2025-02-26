@@ -5,9 +5,9 @@ import Role from '../models/role';
 
 export const verifyToken = async (req, res, next) => {
 
-    const token = req.headers["x-access-token"];
+    const token = req.cookies['Tookie'];
 
-    if (!token) return res.status(403).json({msg: "No token provided"}) //Limita la información o la ruta para los que no tienen un token, es decir un usuario no registrado o logeado
+    if (!token) return res.status(401).json({msg: "No se ha proporcionado un token...", redirect: ''}) //Limita la información o la ruta para los que no tienen un token, es decir un usuario no registrado o logeado
 
     try {
         const decoded = jwt.verify(token, cfig.SECRET_KEY); //Verifica el token
@@ -15,12 +15,12 @@ export const verifyToken = async (req, res, next) => {
 
         const usuario = await Usuario.findById(req.UsuarioId, {contrasena: 0});
 
-        if (!usuario) return res.status(404).json({message: 'Usuario no encontrado'});
+        if (!usuario) return res.status(404).json({message: 'Token sin usuario asociado...'});
 
         next();
 
     } catch (error) {
-        res.status(404).json('Error inesperado')
+        res.status(404).json({msg: 'Token invalido...'})
     }
 }
 

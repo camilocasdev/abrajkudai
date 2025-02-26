@@ -87,15 +87,21 @@ export const update_user = async (req, res) => {
 }
 
 export const privgetuser = async (req, res) => {
-
     
-    const token = req.headers["x-access-token"];
+    const token = req.cookies['Tookie'];
 
-    if (!token) return res.status(403).json({msg: "No token provided"})
+    console.log(token)
+
+    if (!token) return res.status(403).json({estado: 'error', msg: "No ha proporcionado un token, redirigiendo...", redirect: '/signin?error=not_logged' })
 
     try {
 
         const decoded = jwt.verify(token, cfig.SECRET_KEY);
+
+        console.log(!decoded)
+        
+        if (!decoded) console.log('El token ya expiró')
+
         req.UsuarioId = decoded.id;
 
         const usuario = await Usuario.findById(req.UsuarioId, {contrasena: 0});
@@ -105,7 +111,13 @@ export const privgetuser = async (req, res) => {
         res.status(200).json(usuario)
 
     } catch (error) {
-        return res.status(401).json({message: 'Error'});
+        return res.status(401).json({estado: 'error', message: 'Error al autenticar el token', redirect: '/signin?error=invalid_token'});
     }
 
+}
+
+export const logout = async (req, res) => {
+    res.clearCookie('Tookie');
+    res.status(200).json({message: 'Sesión cerrada'});
+    return;
 }
