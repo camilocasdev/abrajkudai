@@ -19,7 +19,6 @@ ReactDOM.createRoot(root).render(
     <Routes>
       <Route path="/" element={<pages.mainpage />} />
       <Route path="amenidades" element={<pages.amenidades />} />
-      <Route path="alojamiento" element={<pages.alojamiento />} />
       <Route path="eventos" element={<pages.eventos />} />
       <Route path="reserva" element={<pages.reserva />} />
       <Route path="pago" element={<pages.pago />} />

@@ -33,6 +33,8 @@
                 font-family: "Rubik", Bold;
                 border-radius: 10px;
                 font-size: 20px;
+                cursor: pointer;
+                padding: 1rem;
             }
             img{
                 border-radius: 10px;
@@ -46,6 +48,9 @@
             }
             a{
                 text-decoration: none;
+            }
+            a:hover{
+                cursor: pointer,
             }
             main{
                 display: flex;
@@ -95,7 +100,7 @@
                 align-items: center;
                 margin: 20px 0px 20px 0px;
                 width: auto;
-                gap: 180px;
+                gap: 15rem;
                 border-radius: 20px;
                 position: absolute;
                 overflow: hidden;
@@ -120,7 +125,7 @@
                 
                 display: flex;
                 flex-direction: row;
-                gap: 60px;
+                gap: 6rem;
             }
             .perfil{
                 height: 35px;
@@ -145,12 +150,12 @@
             }
             .bannerbox img{
                 width: 100%;
-                max-width: 2560px;
+                max-width: 1920px;
                 border-radius: 0px 0px 10px 10px;
             }
             .bannerboxperf img{
                 width: 100%;
-                max-width: 1440px;
+                max-width: 1920px;
                 border-radius: 0px 0px 10px 10px;
                 filter: blur(1em);
                 mask-image: linear-gradient(
@@ -228,8 +233,8 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 50px;
-                padding: 25px;
+                gap: 5rem;
+                padding: 4rem 2rem;
                 max-width: 2400px;
             }
             .homeCont h2{
@@ -265,6 +270,7 @@
                 justify-content: center;
                 flex-wrap: nowrap;
                 padding: 0px 20px 0px 20px;
+                margin-top: 2rem
             }
             .footercont{
                 display: flex;
@@ -342,13 +348,24 @@
             .hab{
                 display: flex;
                 flex-direction: column;
-                padding: 0px 20px 20px 20px;
+                padding: 1rem 2rem;
                 align-items: center;
+                gap: 2rem;
+                max-width: 1920px;
+                overflow: hidden;
             }
-            .habrow1, .habrow2, .habrow3{
+            .habrow{
                 display:flex;
                 flex-direction: row;
                 text-align: justify;
+                gap: 2rem;
+            }
+            .habfin{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                max-width: 85rem;
             }
             .tarjeta{
                 display: flex;
@@ -371,9 +388,6 @@
             }
             .hab img{
                 max-width: 550px;
-            }
-            .habsep{
-                margin: 20px;        
             }
             /* Amenidades */
             .ameniscroll{

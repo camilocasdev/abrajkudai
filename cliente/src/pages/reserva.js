@@ -25,6 +25,8 @@ function Reserva(){
                 console.log(data)
 
                 setResultados(data)
+
+                console.log(Resultados[0].nombre)
             } catch (error) {
                 console.log(error)
             }
@@ -85,6 +87,7 @@ function Reserva(){
                                     <p>nombre</p>
                                     <img 
                                         src='${room[0].imagen}'
+                                        alt='Imagen de la habitación '
                                     />
                                     
                                 </div>
@@ -92,12 +95,14 @@ function Reserva(){
                                     <p>"nombre</p>
                                     <img 
                                         src='${room[0].imagen}'
+                                        alt='Imagen de la habitación '
                                     />
                                 </div>
                                 <div class="defaulttarjet">
                                     <p>nombre</p>
                                     <img 
                                         src='${room[0].imagen}'
+                                        alt='Imagen de la habitación '
                                     />
                                 </div>
                             </div>

@@ -51,9 +51,6 @@ function Mainpage() {
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="alojamiento">Alojamiento</a>
-                            </div>
-                            <div>
                                 <a href="amenidades">Amenidades</a>
                             </div>
                             <div>
@@ -123,6 +120,106 @@ function Mainpage() {
                                 </p>
                             </div>
                             </article>
+                    </section>
+                    <section class="hab">
+                        <article class="habrow">
+                            <a href="habitacion/juniorsuite">
+                                <div class="tarjeta">
+                                    <h3><em>Junior Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Imagen de la Junior Suite" />
+                                    <p>
+                                        Ofrecemos un espacio generoso y cómodo, ideal para aquellos
+                                        que buscan más amplitud. Equipada con una elegante zona de
+                                        estar, estas suites proporcionan una estancia relajante y
+                                        agradable.
+                                    </p>
+                                </div>
+                            </a>
+                            <a href="habitacion/executivesuite">
+                                <div class="tarjeta">
+                                    <h3><em>Executive Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/bw4KjHpc" alt="Imagen de la Executive Suite" />
+                                    <p>
+                                        Diseñada para satisfacer las necesidades de los viajeros de 
+                                        negocios y de placer. Con una sala de estar separada y una 
+                                        zona de trabajo dedicada, ofrece un ambiente sofisticado y 
+                                        profesional.
+                                    </p>
+                                </div> 
+                            </a>
+                            <a href="habitacion/deluxesuite">
+                                <div class="tarjeta">
+                                    <h3><em>Deluxe Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/NqdOigvV" alt="Imagen de la Deluxe Suite" />
+                                    <p>
+                                        Redefine el concepto de lujo y confort. Con una sala de estar 
+                                        independiente, decoracion refinada y vistas mejoradas, asegura 
+                                        una experiencia superior para los huéspedes más exigentes.
+                                    </p>
+                                </div>
+                            </a>
+                            <a href="habitacion/presidentialsuite">
+                                <div class="tarjeta">
+                                    <h3><em>Presidential Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/tjaHUBsG" alt="Imagen de la Presidential Suite" />
+                                    <p>
+                                        Representa el pináculo de del lujo y exclusividad. Con múltiples
+                                        habitaciones, una amplia sala de estar, comedor privado y servicios 
+                                        adicionales como jacuzzi, garantiza una experiencia excepcional.
+                                    </p>    
+                                </div>
+                            </a>
+                            <a href="habitacion/familysuite">
+                                <div class="tarjeta">
+                                    <h3><em>Family Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/pct9Cpj4" alt="Imagen de la Family Suite" />
+                                    <p>
+                                        Diseñada para la comodidad de las familias. Con múltiples habitaciones 
+                                        y amplios espacios de estar, ofrece todo lo necesario para que cada 
+                                        miembro de la familia se sienta como en casa.
+                                    </p>
+                                </div>
+                            </a>
+                            <a href="habitacion/honeymoonsuite">
+                                <div class="tarjeta">
+                                    <h3><em>Honeymoon Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/eVEkueHl" alt="Imagen de la Honeymoon Suite" />
+                                    <p>
+                                        Es el refugio perfecto para parejas en su luna de miel. Decorada
+                                        con un toque romántico y equipada con caracteristicas exclusivas, creando
+                                        un ambiente intimo y encantador.
+                                    </p>
+                                </div>
+                            </a>
+                            <a href="habitacion/honeymoonsuite">
+                                <div class="tarjeta">
+                                    <h3><em>Golden Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/eVEkueHl" alt="Imagen de la Honeymoon Suite" />
+                                    <p>
+                                        Es el refugio perfecto para parejas en su luna de miel. Decorada
+                                        con un toque romántico y equipada con caracteristicas exclusivas, creando
+                                        un ambiente intimo y encantador.
+                                    </p>
+                                </div>
+                            </a>
+                            <a href="habitacion/honeymoonsuite">
+                                <div class="tarjeta">
+                                    <h3><em>Golden Suite</em></h3>
+                                    <img src="https://nicodev.s-ul.eu/eVEkueHl" alt="Imagen de la Honeymoon Suite" />
+                                    <p>
+                                        Es el refugio perfecto para parejas en su luna de miel. Decorada
+                                        con un toque romántico y equipada con caracteristicas exclusivas, creando
+                                        un ambiente intimo y encantador.
+                                    </p>
+                                </div>
+                            </a>
+                        </article>
+                        <article class='habfin'>
+                            <h1>No esperes más, ¡Vive una experiencia unica!</h1>
+                            <a href='reserva'>
+                                <button>Reserva ahora</button>
+                            </a>
+                        </article>
                     </section>
                 </main>
                 <footer>

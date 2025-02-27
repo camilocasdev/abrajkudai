@@ -63,9 +63,6 @@ function Signup(){
                         </div>
                         <div class="headeranchores">
                             <div>
-                                <a href="alojamiento">Alojamiento</a>
-                            </div>
-                            <div>
                                 <a href="amenidades">Amenidades</a>
                             </div>
                             <div>
