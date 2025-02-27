@@ -1,7 +1,6 @@
 import { TIMEOUT } from 'dns';
 import Role from '../models/role';
 import Room from '../models/room';
-import roomtype from '../models/roomtype';
 import Roomtype from '../models/roomtype';
 import User from '../models/user';
 
@@ -37,6 +36,7 @@ export const defaultUsers = async (req, res) => {
                     const del = await User.deleteMany({ _id: { $in: [array[0]._id, array[1]._id] } });
                 } 
 
+
                 const empleado = await Role.findOne({nombre: 'empleado'})
                 const admin = await Role.findOne({nombre: 'admin'})
                 const usuario = await Role.findOne({nombre: 'usuario'})
@@ -46,7 +46,7 @@ export const defaultUsers = async (req, res) => {
                         apellido: 'empleado',
                         pais: 'naa',
                         identificacion: 'naap',
-                        contrasena: 'na',
+                        contrasena: await User.encryptPassword('na'),
                         correo:'default@empleado.com',
                         telefono: 0,
                         role: [empleado._id],
@@ -55,7 +55,7 @@ export const defaultUsers = async (req, res) => {
                         apellido: 'admin',
                         pais: 'na',
                         identificacion: 'naa',
-                        contrasena: 'na',
+                        contrasena:  await User.encryptPassword('na'),
                         correo:'default@admin.com',
                         telefono: 0,
                         role: [admin._id]
@@ -65,7 +65,7 @@ export const defaultUsers = async (req, res) => {
                         apellido: 'usuario',
                         pais: 'na',
                         identificacion: 'na',
-                        contrasena: 'na',
+                        contrasena:  await User.encryptPassword('na'),
                         correo:'default@usuario.com',
                         telefono: 0,
                         role: [usuario._id]

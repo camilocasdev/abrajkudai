@@ -1,7 +1,10 @@
 import { Schema, model} from "mongoose";
 
 const reserva = new Schema ({
-    usuario: { type: String, require: true},
+    usuario: [{
+        rel: 'Usuario',
+        type: Schema.Types.ObjectId,
+    }],
     fecha: { type: Date },
     hora: { type: String },
     habitacion: [{

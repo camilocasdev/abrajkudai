@@ -49,8 +49,6 @@ export const roomList = async (req, res) => {
 
 }
 
-
-
 export const roomUpdate = async (req, res) => {
     
     try{

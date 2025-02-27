@@ -1,16 +1,38 @@
-import Reserva from '../models/reserva' 
+import Reserva from '../models/reserva';
+import cfig from '../config.js';
+import jwt from 'jsonwebtoken';
+import User from '../models/user';
 
 export const createReserva = async (req, res) => {
 
     try {
-        const { usuario, fecha, hora, habitacion, precio, estado } = req.body;
-
-        const nuevaReserva = new Reserva({ usuario, fecha, hora, habitacion, precio, estado });
-    
+        const { fechaInicio, fechaHasta, cantidad, habitacion, precio, estado } = req.body;
         
+        const token = req.cookies['Tookie']
+
+        if (!token) {
+
+        }
+        
+        const decoded = jwt.verify(token, cfig.SECRET_KEY)
+
+        console.log(decoded._id)
+
+        return res.json({msg: 'Funciona', decoded: decoded})
+        /*
+
+
+
+        const nuevaReserva = new Reserva({
+            usuario: decoded.id,
+            fecha, hora, habitacion, precio, estado });
+        
+
         const guardarReserva = await nuevaReserva.save();
-    
-        return res.status(201).json(guardarReserva);
+        
+        
+
+        return res.status(201).json(guardarReserva);*/
     } catch (error) {
         res.status(401).json('Ha ocurrido un error inesperado');
         console.log(error);
@@ -46,3 +68,4 @@ export const deleteReserva = async (req, res) => {
 
 /* Modificar las variables que relacionan al usuario ingresado, con la reserva hecha y los campos de input 
 elegidos para hacer la reserva */
+
