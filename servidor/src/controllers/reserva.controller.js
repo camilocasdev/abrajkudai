@@ -6,22 +6,39 @@ import User from '../models/user';
 export const createReserva = async (req, res) => {
 
     try {
-        const { fechaInicio, fechaHasta, cantidad, habitacion, precio, estado } = req.body;
+        const { fechaInicio, fechaHasta, cantidad, habitacion } = req.body; //Falta el total y el estado de pago
         
         const token = req.cookies['Tookie']
 
-        if (!token) {
-
-        }
         
         const decoded = jwt.verify(token, cfig.SECRET_KEY)
+        
+            const datos = {
+                usuario: decoded.id,
+                fechaInicio: fechaInicio,
+                fechaHasta: fechaHasta,
+                cantidad: cantidad,
+                habitacion: habitacion, //Falta el total y el estado de pago
+            }
 
-        console.log(decoded._id)
+        if (!token) {
+            res.status(401).json({error: '', msg: 'Inicie sesión para continuar con su reserva', datosTemp: nuevaReserva ,redirect: '/signin?error'})
+        }
+        
+        return res.json({msg: 'Funciona', usuario: decoded, datos: datos})
 
-        return res.json({msg: 'Funciona', decoded: decoded})
+        
         /*
-
-
+            // Traer la habitación de la torre, disponible y mostrando la información del tipo de habitación
+            const torre = '^T2'
+            const room = await Room.find({
+                numero: {$regex: torre},
+                estado: 'Disponible',
+                roomid: type[roomNumber]._id
+            }).populate({
+                path: 'roomid',
+                model: 'Roomtype'
+            })
 
         const nuevaReserva = new Reserva({
             usuario: decoded.id,

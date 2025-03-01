@@ -70,3 +70,21 @@ export const roomUpdate = async (req, res) => {
     }
 
 }
+
+
+export const search = async (req, res) => {
+    try {
+        
+        const roomNumber = req.query.t
+        
+        
+        const type = await Roomtype.find().sort({precio: 1})
+            
+        res.status(201).json({params: roomNumber, room: type[roomNumber]})
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({error: 'Error inesperado'})
+    }
+}
+

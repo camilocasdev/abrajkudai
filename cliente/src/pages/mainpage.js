@@ -123,7 +123,7 @@ function Mainpage() {
                     </section>
                     <section class="hab">
                         <article class="habrow">
-                            <a href="habitacion/juniorsuite">
+                            <a href="habitacion?t=0">
                                 <div class="tarjeta">
                                     <h3><em>Junior Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Imagen de la Junior Suite" />

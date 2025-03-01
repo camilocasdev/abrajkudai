@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 //Páginas Principales
 import * as pages from './pages';
 //Páginas de Habitaciones
-import * as room from './pages/habitaciones';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
 const root = document.getElementById('root');
@@ -25,12 +24,7 @@ ReactDOM.createRoot(root).render(
       <Route path="perfil" element={<pages.perfil />} />
       <Route path="signin" element={<pages.signin />} />
       <Route path="signup" element={<pages.signup />} />
-      <Route path="habitacion/deluxesuite" element={<room.deluxesuite />} />
-      <Route path="habitacion/executivesuite" element={<room.executivesuite />} />
-      <Route path="habitacion/familysuite" element={<room.familysuite />} />
-      <Route path="habitacion/honeymoonsuite" element={<room.honeymoonsuite />} />
-      <Route path="habitacion/juniorsuite" element={<room.juniorsuite />} />
-      <Route path="habitacion/presidentialsuite" element={<room.presidentialsuite />} />
+      <Route path="/habitacion" element={<pages.rooms />} /> 
     </Routes>
   </BrowserRouter>
 )
