@@ -1,16 +1,16 @@
 import './style.css'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Rooms(){
 
-    const [datos, setDatos] = useState()
+    const [room, setRoom] = useState({})
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
 
     useEffect(() => {
 
-        const datosHabitacion = async function(){
+        const datosHabitacion = async() => {
 
             const url = searchParams.get('t')
 
@@ -28,15 +28,24 @@ function Rooms(){
                     console.error('No hay datos de respuesta del servidor.')
                 } 
                 
-                console.log(data)
+                console.log("Datos recibidos en React:", data);
 
-                setDatos(data)
+                if (!data.roomServer) {
+                    console.error("No hay datos de habitación en la respuesta.");
+                    return;
+                }
+
+                setRoom(data.roomServer)
             } catch (error){
                 console.log(error)
             }
         }
         datosHabitacion()
-    }, [searchParams], [navigate])
+    }, [searchParams])
+
+    useEffect(() => {
+        console.log("Estado actualizado de room:", room);
+        }, [room]);
 
     return(
         <div>
@@ -76,7 +85,7 @@ function Rooms(){
                     <section class="habitacion"> 
                         <article class="habimgcontein"> 
                             <div class="habimgtext">
-                                <h2>Junior Suite</h2>
+                                <h2>¿</h2>
                             </div>
                             <div class="habimgwidth">
                                 <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Imagen de la habitación"/>
@@ -84,7 +93,7 @@ function Rooms(){
                         </article>
                         <article class="habdescontein"> 
                             <div>
-                                <h2><strong>Junior Suite</strong></h2>
+                                <h2><strong>¿</strong></h2>
                                 <p>
                                     La Junior Suite del Hotel Abraj Kudai ofrece una experiencia cómoda y funcional con los siguientes servicios:
                                     Espacio Generoso: Más amplio que una habitación estándar, con una zona de estar acogedora.

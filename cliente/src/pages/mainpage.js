@@ -135,7 +135,7 @@ function Mainpage() {
                                     </p>
                                 </div>
                             </a>
-                            <a href="habitacion/executivesuite">
+                            <a href="habitacion?t=2">
                                 <div class="tarjeta">
                                     <h3><em>Executive Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/bw4KjHpc" alt="Imagen de la Executive Suite" />
@@ -147,7 +147,7 @@ function Mainpage() {
                                     </p>
                                 </div> 
                             </a>
-                            <a href="habitacion/deluxesuite">
+                            <a href="habitacion?t=3">
                                 <div class="tarjeta">
                                     <h3><em>Deluxe Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/NqdOigvV" alt="Imagen de la Deluxe Suite" />
@@ -158,7 +158,7 @@ function Mainpage() {
                                     </p>
                                 </div>
                             </a>
-                            <a href="habitacion/presidentialsuite">
+                            <a href="habitacion?t=5">
                                 <div class="tarjeta">
                                     <h3><em>Presidential Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/tjaHUBsG" alt="Imagen de la Presidential Suite" />
@@ -169,7 +169,7 @@ function Mainpage() {
                                     </p>    
                                 </div>
                             </a>
-                            <a href="habitacion/familysuite">
+                            <a href="habitacion?t=4">
                                 <div class="tarjeta">
                                     <h3><em>Family Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/pct9Cpj4" alt="Imagen de la Family Suite" />
@@ -180,7 +180,7 @@ function Mainpage() {
                                     </p>
                                 </div>
                             </a>
-                            <a href="habitacion/honeymoonsuite">
+                            <a href="habitacion?t=1">
                                 <div class="tarjeta">
                                     <h3><em>Honeymoon Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/eVEkueHl" alt="Imagen de la Honeymoon Suite" />
@@ -191,7 +191,7 @@ function Mainpage() {
                                     </p>
                                 </div>
                             </a>
-                            <a href="habitacion/honeymoonsuite">
+                            <a href="habitacion?t=6">
                                 <div class="tarjeta">
                                     <h3><em>Golden Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/eVEkueHl" alt="Imagen de la Honeymoon Suite" />
@@ -202,9 +202,9 @@ function Mainpage() {
                                     </p>
                                 </div>
                             </a>
-                            <a href="habitacion/honeymoonsuite">
+                            <a href="habitacion?t=7">
                                 <div class="tarjeta">
-                                    <h3><em>Golden Suite</em></h3>
+                                    <h3><em>Black Suite</em></h3>
                                     <img src="https://nicodev.s-ul.eu/eVEkueHl" alt="Imagen de la Honeymoon Suite" />
                                     <p>
                                         Es el refugio perfecto para parejas en su luna de miel. Decorada

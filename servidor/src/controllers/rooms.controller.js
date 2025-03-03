@@ -80,11 +80,14 @@ export const search = async (req, res) => {
         
         const type = await Roomtype.find().sort({precio: 1})
             
-        res.status(201).json({params: roomNumber, room: type[roomNumber]})
+            //console.log(type)
+        const roomshow = type[roomNumber]
+        
+        res.status(201).json({params: roomNumber, roomServer: roomshow})
 
     } catch (error) {
         console.log(error)
-        res.status(400).json({error: 'Error inesperado'})
+        res.status(400).json({error: 'error', msg: 'Error inesperado...'})
     }
 }
 
