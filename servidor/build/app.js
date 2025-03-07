@@ -14,6 +14,7 @@ var _user = _interopRequireDefault(require("./routes/user.routes"));
 var _rooms = _interopRequireDefault(require("./routes/rooms.routes"));
 var _initialSetup = require("./libs/initialSetup");
 var _path = _interopRequireDefault(require("path"));
+var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var app = (0, _express["default"])();
 app.set('pkg', _package["default"]);
@@ -28,6 +29,7 @@ try {
 }
 app.set((0, _morgan["default"])('dev'));
 app.use(_express["default"].json());
+app.use((0, _cookieParser["default"])());
 app.use(_express["default"].urlencoded({
   extended: true
 }));

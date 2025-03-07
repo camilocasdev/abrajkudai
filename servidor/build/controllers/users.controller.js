@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.update_user = exports.privgetuser = exports.get_user_by_id = exports.get_user = exports.del_user = exports.add_user = void 0;
+exports.update_user = exports.privgetuser = exports.logout = exports.get_user_by_id = exports.get_user = exports.del_user = exports.add_user = void 0;
 var _user = _interopRequireDefault(require("../models/user"));
 var _role = _interopRequireDefault(require("../models/role"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
@@ -227,48 +227,75 @@ var privgetuser = exports.privgetuser = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
-          token = req.headers["x-access-token"];
+          token = req.cookies['Tookie'];
+          console.log(token);
           if (token) {
-            _context6.next = 3;
+            _context6.next = 4;
             break;
           }
           return _context6.abrupt("return", res.status(403).json({
-            msg: "No token provided"
+            estado: 'error',
+            msg: "No ha proporcionado un token, redirigiendo...",
+            redirect: '/signin?error=not_logged'
           }));
-        case 3:
-          _context6.prev = 3;
+        case 4:
+          _context6.prev = 4;
           decoded = _jsonwebtoken["default"].verify(token, _config["default"].SECRET_KEY);
+          console.log(!decoded);
+          if (!decoded) console.log('El token ya expiró');
           req.UsuarioId = decoded.id;
-          _context6.next = 8;
+          _context6.next = 11;
           return _user["default"].findById(req.UsuarioId, {
             contrasena: 0
           });
-        case 8:
+        case 11:
           usuario = _context6.sent;
           if (usuario) {
-            _context6.next = 11;
+            _context6.next = 14;
             break;
           }
           return _context6.abrupt("return", res.status(404).json({
             message: 'Usuario no encontrado'
           }));
-        case 11:
-          res.status(200).json(usuario);
-          _context6.next = 17;
-          break;
         case 14:
-          _context6.prev = 14;
-          _context6.t0 = _context6["catch"](3);
-          return _context6.abrupt("return", res.status(401).json({
-            message: 'Error'
-          }));
+          res.status(200).json(usuario);
+          _context6.next = 20;
+          break;
         case 17:
+          _context6.prev = 17;
+          _context6.t0 = _context6["catch"](4);
+          return _context6.abrupt("return", res.status(401).json({
+            estado: 'error',
+            message: 'Error al autenticar el token',
+            redirect: '/signin?error=invalid_token'
+          }));
+        case 20:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[3, 14]]);
+    }, _callee6, null, [[4, 17]]);
   }));
   return function privgetuser(_x11, _x12) {
     return _ref6.apply(this, arguments);
+  };
+}();
+var logout = exports.logout = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(req, res) {
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          res.clearCookie('Tookie');
+          res.status(200).json({
+            message: 'Sesión cerrada'
+          });
+          return _context7.abrupt("return");
+        case 3:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7);
+  }));
+  return function logout(_x13, _x14) {
+    return _ref7.apply(this, arguments);
   };
 }();

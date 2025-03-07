@@ -15,7 +15,7 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var signIn = exports.signIn = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var usuarioEncontrado, matchPass, token;
+    var usuarioEncontrado, matchPass, token, cookiecfg;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -30,9 +30,10 @@ var signIn = exports.signIn = /*#__PURE__*/function () {
             _context.next = 6;
             break;
           }
-          return _context.abrupt("return", res.status(404).json({
+          return _context.abrupt("return", res.status(401).json({
             token: null,
-            message: "Usuario no encontrado"
+            msg: "Usuario no encontrado",
+            redirect: '/signin?error=user_not_found'
           }));
         case 6:
           if (usuarioEncontrado.contrasena) {
@@ -41,7 +42,8 @@ var signIn = exports.signIn = /*#__PURE__*/function () {
           }
           return _context.abrupt("return", res.status(401).json({
             token: null,
-            message: "Contraseña no encontrada"
+            msg: "Contraseña no encontrada",
+            redirect: '/signin?error=password_not_found'
           }));
         case 8:
           _context.next = 10;
@@ -54,7 +56,8 @@ var signIn = exports.signIn = /*#__PURE__*/function () {
           }
           return _context.abrupt("return", res.status(401).json({
             token: null,
-            message: "Contraseña Invalida"
+            msg: "Contraseña Invalida",
+            redirect: '/signin?error=invalid_password'
           }));
         case 13:
           token = _jsonwebtoken["default"].sign({
@@ -62,19 +65,28 @@ var signIn = exports.signIn = /*#__PURE__*/function () {
           }, _config["default"].SECRET_KEY, {
             expiresIn: 86400
           });
+          cookiecfg = {
+            expires: new Date(Date.now() + _config["default"].COOKIE_EXPIRATION * 24 * 60 * 60 * 1000),
+            path: "/",
+            httpOnly: true,
+            secure: true,
+            samesite: "Strict"
+          };
+          res.cookie('Tookie', token, cookiecfg);
           return _context.abrupt("return", res.json({
+            msg: "Usuario autenticado, iniciando sesión...",
             token: token
           }));
-        case 17:
-          _context.prev = 17;
+        case 19:
+          _context.prev = 19;
           _context.t0 = _context["catch"](0);
           console.log(_context.t0);
-          res.status(400).json('Error al intentar hacer la comparación con la contraseña');
-        case 21:
+          res.status(400).json('Error al autenticar el usuario');
+        case 23:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 17]]);
+    }, _callee, null, [[0, 19]]);
   }));
   return function signIn(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -185,7 +197,10 @@ var signUp = exports.signUp = /*#__PURE__*/function () {
           }, _config["default"].SECRET_KEY, {
             expiresIn: 864000 //24 Horas
           });
-          res.status(200).json(usuarioGuardado);
+          res.status(200).json({
+            msg: 'Registro exitoso.',
+            usuarioGuardado: usuarioGuardado
+          });
         case 45:
         case "end":
           return _context2.stop();

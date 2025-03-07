@@ -25,16 +25,17 @@ function Rooms(){
                 const data = await response.json()
 
                 if (!data) {
-                    console.error('No hay datos de respuesta del servidor.')
+                    console.error('No hay datos de respuesta del servidor.')  //Borrar
                 } 
                 
-                console.log("Datos recibidos en React:", data);
+                // Traer la lista de disponibles por torre, si no hay en una torre, ocultar la opción.
+
+                 //console.log("Datos recibidos en React:", data);  //Borrar
 
                 if (!data.roomServer) {
-                    console.error("No hay datos de habitación en la respuesta.");
+                    console.error("No hay datos de habitación en la respuesta.");  //Borrar
                     return;
                 }
-
                 setRoom(data.roomServer)
             } catch (error){
                 console.log(error)
@@ -44,13 +45,14 @@ function Rooms(){
     }, [searchParams])
 
     useEffect(() => {
-        console.log("Estado actualizado de room:", room);
+         //console.log("Estado actualizado de room:", room);
+         //console.log(room?.descripcion?.[0])
         }, [room]);
 
     return(
         <div>
             <div>
-                <title>Junior Suite | Abraj Kudai</title>
+                <title>{room?.nombre} | Abraj Kudai</title>
             </div>
             <body> 
                 <section class="header">
@@ -85,25 +87,17 @@ function Rooms(){
                     <section class="habitacion"> 
                         <article class="habimgcontein"> 
                             <div class="habimgtext">
-                                <h2>¿</h2>
+                                <h2>{room?.nombre}</h2>
                             </div>
                             <div class="habimgwidth">
-                                <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Imagen de la habitación"/>
+                                <img src={room?.imagen} alt="Imagen de la habitación"/>
                             </div>
                         </article>
                         <article class="habdescontein"> 
                             <div>
-                                <h2><strong>¿</strong></h2>
+                                <h2><strong>{room?.nombre}</strong></h2>
                                 <p>
-                                    La Junior Suite del Hotel Abraj Kudai ofrece una experiencia cómoda y funcional con los siguientes servicios:
-                                    Espacio Generoso: Más amplio que una habitación estándar, con una zona de estar acogedora.
-                                    Cama King Size: Para un descanso reparador.
-                                    Decoración Elegante: Interiores modernos y sofisticados.
-                                    Baño Privado: Equipado con artículos de tocador premium y una ducha espaciosa.
-                                    Conectividad: Internet de alta velocidad y TV de pantalla plana con canales internacionales.
-                                    Servicio de Habitaciones 24/7: Disfruta de una selección de platos y bebidas a cualquier hora.
-                                    Vista a la Ciudad: Algunas suites ofrecen vistas panorámicas.
-                                    Minibar y Cafetera: Con bebidas, snacks y cafetera para tu comodidad.
+                                    {room?.descripcion?.[0]}
                                 </p>
                             </div>
                             <div class="habconfigres">

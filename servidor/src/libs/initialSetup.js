@@ -99,16 +99,65 @@ export const crearRoomType = async (req, res) => {
 
         const values = await Roomtype.insertMany([
 
-            {nombre: 'Junior Suite', precio: 250, capacidad: 3, descripcion:''},
-            {nombre: 'Honeymoon Suite', precio: 300, capacidad: 2, descripcion:''},
-            {nombre: 'Executive Suite', precio: 350, capacidad: 4, descripcion:''},
-            {nombre: 'Deluxe Suite', precio: 450, capacidad: 5, descripcion:''},
-            {nombre: 'Family Suite', precio: 500, capacidad: 8, descripcion:''},
-            {nombre: 'Presidential Suite', precio: 700, capacidad: 6, descripcion:''},
-            {nombre: 'Penthouse Gold', precio: 1000, capacidad: 10, descripcion:''},
-            {nombre: 'Penthouse Black', precio: 1500, capacidad: 12, descripcion:''}
+            {
+                nombre: 'Junior Suite', 
+                precio: 250, 
+                capacidad: 3, 
+                descripcion: ['Sumérgete en el máximo confort y exclusividad en nuestra Junior Suite del Abraj Kudai, una habitación diseñada para ofrecer una experiencia de lujo sin igual. Inspirada en la elegancia de la arquitectura árabe, esta suite combina detalles tradicionales con comodidades modernas para garantizar una estancia inolvidable. Disfruta de un amplio espacio decorado con materiales de la más alta calidad, donde cada detalle ha sido cuidadosamente seleccionado para reflejar sofisticación y serenidad. La habitación cuenta con una cómoda cama king-size con sábanas de algodón egipcio, perfecta para un descanso reparador. Además, una zona de estar elegantemente amueblada te invita a relajarte mientras disfrutas de un servicio de té árabe de cortesía o trabajas en un entorno distinguido con conexión Wi-Fi de alta velocidad. El baño privado de lujo está equipado con mármol, espejos dorados y una bañera profunda para un momento de relajación absoluta. Los productos de baño de alta gama, junto con la iluminación ambiental, crean una experiencia similar a la de un spa dentro de la habitación. Desde las amplias ventanas de la suite, disfruta de unas vistas impresionantes de La Meca, con la majestuosa Mezquita Sagrada en el horizonte. Ya sea de día o de noche, este escenario ofrece una sensación de paz y conexión única. Para mayor comodidad, la Junior Suite incluye servicio de habitaciones 24 horas, minibar, aire acondicionado, pantalla plana con canales internacionales y un sistema de control inteligente de iluminación y temperatura. Déjate envolver por la hospitalidad incomparable del Abraj Kudai y vive una estancia de ensueño en nuestra Junior Suite, donde el lujo y la tranquilidad se fusionan en un ambiente perfecto.',
+                    'Descubre la elegancia y el confort en nuestra Junior Suite, una estancia espaciosa con diseño árabe sofisticado, cama king-size, zona de estar y un lujoso baño privado con acabados en mármol. Disfruta de vistas panorámicas a La Meca, Wi-Fi de alta velocidad y servicio de habitaciones 24 horas. Una experiencia de lujo inigualable.'],
+                imagen: ['https://nicodev.s-ul.eu/j7SH6hi3']
+            },
+            {
+                nombre: 'Honeymoon Suite',
+                precio: 300,
+                capacidad: 2,
+                descripcion: ['', ''],
+                imagen: ['https://nicodev.s-ul.eu/eVEkueHl']
+            },
+            {
+                nombre: 'Executive Suite',
+                precio: 350,
+                capacidad: 4,
+                descripcion: ['', ''],
+                imagen: ['https://nicodev.s-ul.eu/bw4KjHpc']
+            },
+            {
+                nombre: 'Deluxe Suite',
+                precio: 450,
+                capacidad: 5,
+                descripcion: ['', ''],
+                imagen: ['https://nicodev.s-ul.eu/NqdOigvV']
+            },
+            {
+                nombre: 'Family Suite',
+                precio: 500,
+                capacidad: 8,
+                descripcion: ['', ''],
+                imagen: ['https://nicodev.s-ul.eu/pct9Cpj4']
+            },
+            {
+                nombre: 'Presidential Suite',
+                precio: 700,
+                capacidad: 6,
+                descripcion: ['', ''],
+                imagen: ['https://nicodev.s-ul.eu/tjaHUBsG']
+            },
+            {
+                nombre: 'Penthouse Gold',
+                precio: 1000,
+                capacidad: 10,
+                descripcion: ['', ''],
+                imagen: ['']
+            },
+            {
+                nombre: 'Penthouse Black',
+                precio: 1500,
+                capacidad: 12,
+                descripcion: ['', ''],
+                imagen: ['']
+            }
 
-        ])
+        ],{ordered: true})
 
     } catch (error) {
         console.log(error);

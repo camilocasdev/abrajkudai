@@ -19,9 +19,12 @@ var roomType = new _mongoose.Schema({
     type: Number,
     required: true
   },
-  descripcion: {
+  descripcion: [{
     type: String
-  }
+  }],
+  imagen: [{
+    type: String
+  }]
 }, {
   timestamps: false,
   versionkey: false

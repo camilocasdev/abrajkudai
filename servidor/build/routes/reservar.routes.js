@@ -13,7 +13,7 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 var router = (0, _express.Router)();
 router.get('/reserva', [_authjwt.verifyToken, _authjwt.isAdminOrEmpleado], reservactrl.getReserva);
 router.get('/reserva/:reservaId', [_authjwt.verifyToken], reservactrl.getReservaId); // Operación por ID
-router.post('/reserva/new', [_authjwt.verifyToken, _authjwt.isUsuario], reservactrl.createReserva);
+router.post('/reserva/new', [_authjwt.verifyToken], reservactrl.createReserva);
 router.put('/reserva/:reservaId', [_authjwt.verifyToken, _authjwt.isAdminOrEmpleado], reservactrl.updateReserva); // Operación por ID
 router["delete"]('/reserva/:reservaId', [_authjwt.verifyToken, _authjwt.isAdminOrEmpleado], reservactrl.deleteReserva); // Operación por ID
 var _default = exports["default"] = router;

@@ -77,7 +77,7 @@ var defaultUsers = exports.defaultUsers = /*#__PURE__*/function () {
           return _context2.abrupt("return");
         case 6:
           if (!(count == 0 || count >= 1 && count < 3)) {
-            _context2.next = 32;
+            _context2.next = 55;
             break;
           }
           _context2.prev = 7;
@@ -118,55 +118,81 @@ var defaultUsers = exports.defaultUsers = /*#__PURE__*/function () {
           });
         case 23:
           usuario = _context2.sent;
-          _context2.next = 26;
-          return Promise.all([new _user["default"]({
+          _context2.t0 = Promise;
+          _context2.t1 = _user["default"];
+          _context2.next = 28;
+          return _user["default"].encryptPassword('na');
+        case 28:
+          _context2.t2 = _context2.sent;
+          _context2.t3 = [empleado._id];
+          _context2.t4 = {
             nombre: 'default',
             apellido: 'empleado',
             pais: 'naa',
             identificacion: 'naap',
-            contrasena: 'na',
+            contrasena: _context2.t2,
             correo: 'default@empleado.com',
             telefono: 0,
-            role: [empleado._id]
-          }).save(), new _user["default"]({
+            role: _context2.t3
+          };
+          _context2.t5 = new _context2.t1(_context2.t4).save();
+          _context2.t6 = _user["default"];
+          _context2.next = 35;
+          return _user["default"].encryptPassword('na');
+        case 35:
+          _context2.t7 = _context2.sent;
+          _context2.t8 = [admin._id];
+          _context2.t9 = {
             nombre: 'default',
             apellido: 'admin',
             pais: 'na',
             identificacion: 'naa',
-            contrasena: 'na',
+            contrasena: _context2.t7,
             correo: 'default@admin.com',
             telefono: 0,
-            role: [admin._id]
-          }).save(), new _user["default"]({
+            role: _context2.t8
+          };
+          _context2.t10 = new _context2.t6(_context2.t9).save();
+          _context2.t11 = _user["default"];
+          _context2.next = 42;
+          return _user["default"].encryptPassword('na');
+        case 42:
+          _context2.t12 = _context2.sent;
+          _context2.t13 = [usuario._id];
+          _context2.t14 = {
             nombre: 'default',
             apellido: 'usuario',
             pais: 'na',
             identificacion: 'na',
-            contrasena: 'na',
+            contrasena: _context2.t12,
             correo: 'default@usuario.com',
             telefono: 0,
-            role: [usuario._id]
-          }).save()]);
-        case 26:
+            role: _context2.t13
+          };
+          _context2.t15 = new _context2.t11(_context2.t14).save();
+          _context2.t16 = [_context2.t5, _context2.t10, _context2.t15];
+          _context2.next = 49;
+          return _context2.t0.all.call(_context2.t0, _context2.t16);
+        case 49:
           values = _context2.sent;
-          _context2.next = 32;
+          _context2.next = 55;
           break;
-        case 29:
-          _context2.prev = 29;
-          _context2.t0 = _context2["catch"](7);
-          console.log(_context2.t0);
-        case 32:
-          _context2.next = 37;
+        case 52:
+          _context2.prev = 52;
+          _context2.t17 = _context2["catch"](7);
+          console.log(_context2.t17);
+        case 55:
+          _context2.next = 60;
           break;
-        case 34:
-          _context2.prev = 34;
-          _context2.t1 = _context2["catch"](0);
-          console.log(_context2.t1);
-        case 37:
+        case 57:
+          _context2.prev = 57;
+          _context2.t18 = _context2["catch"](0);
+          console.log(_context2.t18);
+        case 60:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 34], [7, 29]]);
+    }, _callee2, null, [[0, 57], [7, 52]]);
   }));
   return function defaultUsers(_x3, _x4) {
     return _ref2.apply(this, arguments);
@@ -219,43 +245,53 @@ var crearRoomType = exports.crearRoomType = /*#__PURE__*/function () {
             nombre: 'Junior Suite',
             precio: 250,
             capacidad: 3,
-            descripcion: ''
+            descripcion: ['Sumérgete en el máximo confort y exclusividad en nuestra Junior Suite del Abraj Kudai, una habitación diseñada para ofrecer una experiencia de lujo sin igual. Inspirada en la elegancia de la arquitectura árabe, esta suite combina detalles tradicionales con comodidades modernas para garantizar una estancia inolvidable. Disfruta de un amplio espacio decorado con materiales de la más alta calidad, donde cada detalle ha sido cuidadosamente seleccionado para reflejar sofisticación y serenidad. La habitación cuenta con una cómoda cama king-size con sábanas de algodón egipcio, perfecta para un descanso reparador. Además, una zona de estar elegantemente amueblada te invita a relajarte mientras disfrutas de un servicio de té árabe de cortesía o trabajas en un entorno distinguido con conexión Wi-Fi de alta velocidad. El baño privado de lujo está equipado con mármol, espejos dorados y una bañera profunda para un momento de relajación absoluta. Los productos de baño de alta gama, junto con la iluminación ambiental, crean una experiencia similar a la de un spa dentro de la habitación. Desde las amplias ventanas de la suite, disfruta de unas vistas impresionantes de La Meca, con la majestuosa Mezquita Sagrada en el horizonte. Ya sea de día o de noche, este escenario ofrece una sensación de paz y conexión única. Para mayor comodidad, la Junior Suite incluye servicio de habitaciones 24 horas, minibar, aire acondicionado, pantalla plana con canales internacionales y un sistema de control inteligente de iluminación y temperatura. Déjate envolver por la hospitalidad incomparable del Abraj Kudai y vive una estancia de ensueño en nuestra Junior Suite, donde el lujo y la tranquilidad se fusionan en un ambiente perfecto.', 'Descubre la elegancia y el confort en nuestra Junior Suite, una estancia espaciosa con diseño árabe sofisticado, cama king-size, zona de estar y un lujoso baño privado con acabados en mármol. Disfruta de vistas panorámicas a La Meca, Wi-Fi de alta velocidad y servicio de habitaciones 24 horas. Una experiencia de lujo inigualable.'],
+            imagen: ['https://nicodev.s-ul.eu/j7SH6hi3']
           }, {
             nombre: 'Honeymoon Suite',
             precio: 300,
             capacidad: 2,
-            descripcion: ''
+            descripcion: ['', ''],
+            imagen: ['https://nicodev.s-ul.eu/eVEkueHl']
           }, {
             nombre: 'Executive Suite',
             precio: 350,
             capacidad: 4,
-            descripcion: ''
+            descripcion: ['', ''],
+            imagen: ['https://nicodev.s-ul.eu/bw4KjHpc']
           }, {
             nombre: 'Deluxe Suite',
             precio: 450,
             capacidad: 5,
-            descripcion: ''
+            descripcion: ['', ''],
+            imagen: ['https://nicodev.s-ul.eu/NqdOigvV']
           }, {
             nombre: 'Family Suite',
             precio: 500,
             capacidad: 8,
-            descripcion: ''
+            descripcion: ['', ''],
+            imagen: ['https://nicodev.s-ul.eu/pct9Cpj4']
           }, {
             nombre: 'Presidential Suite',
             precio: 700,
             capacidad: 6,
-            descripcion: ''
+            descripcion: ['', ''],
+            imagen: ['https://nicodev.s-ul.eu/tjaHUBsG']
           }, {
             nombre: 'Penthouse Gold',
             precio: 1000,
             capacidad: 10,
-            descripcion: ''
+            descripcion: ['', ''],
+            imagen: ['']
           }, {
             nombre: 'Penthouse Black',
             precio: 1500,
             capacidad: 12,
-            descripcion: ''
-          }]);
+            descripcion: ['', ''],
+            imagen: ['']
+          }], {
+            ordered: true
+          });
         case 22:
           values = _context3.sent;
           _context3.next = 28;

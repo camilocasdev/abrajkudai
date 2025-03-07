@@ -19,13 +19,14 @@ var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          token = req.headers["x-access-token"];
+          token = req.cookies['Tookie'];
           if (token) {
             _context.next = 3;
             break;
           }
-          return _context.abrupt("return", res.status(403).json({
-            msg: "No token provided"
+          return _context.abrupt("return", res.status(401).json({
+            msg: "No se ha proporcionado un token...",
+            redirect: ''
           }));
         case 3:
           _context.prev = 3;
@@ -42,7 +43,7 @@ var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
             break;
           }
           return _context.abrupt("return", res.status(404).json({
-            message: 'Usuario no encontrado'
+            message: 'Token sin usuario asociado...'
           }));
         case 11:
           next();
@@ -51,7 +52,9 @@ var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
         case 14:
           _context.prev = 14;
           _context.t0 = _context["catch"](3);
-          res.status(404).json('Error inesperado');
+          res.status(404).json({
+            msg: 'Token invalido...'
+          });
         case 17:
         case "end":
           return _context.stop();

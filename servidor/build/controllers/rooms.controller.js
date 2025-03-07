@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.roomUpdate = exports.roomList = void 0;
+exports.search = exports.roomUpdate = exports.roomList = void 0;
 var _room = _interopRequireDefault(require("../models/room"));
 var _roomtype = _interopRequireDefault(require("../models/roomtype"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
@@ -145,5 +145,45 @@ var roomUpdate = exports.roomUpdate = /*#__PURE__*/function () {
   }));
   return function roomUpdate(_x3, _x4) {
     return _ref2.apply(this, arguments);
+  };
+}();
+var search = exports.search = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
+    var roomNumber, type, roomshow;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          roomNumber = req.query.t;
+          _context3.next = 4;
+          return _roomtype["default"].find().sort({
+            precio: 1
+          });
+        case 4:
+          type = _context3.sent;
+          //console.log(type)
+          roomshow = type[roomNumber];
+          res.status(201).json({
+            params: roomNumber,
+            roomServer: roomshow
+          });
+          _context3.next = 13;
+          break;
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](0);
+          console.log(_context3.t0);
+          res.status(400).json({
+            error: 'error',
+            msg: 'Error inesperado...'
+          });
+        case 13:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[0, 9]]);
+  }));
+  return function search(_x5, _x6) {
+    return _ref3.apply(this, arguments);
   };
 }();

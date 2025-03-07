@@ -11,12 +11,15 @@ const roomType = new Schema({
         required: true
     },
     capacidad: {
-        type: Number,
+        type: Number, 
         required: true
     },
-    descripcion: {
+    descripcion: [{
         type: String
-    }
+    }],
+    imagen: [{
+        type: String
+    }]
 },{
     timestamps: false,
     versionkey: false
