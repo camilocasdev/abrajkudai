@@ -15,7 +15,6 @@ export const verifyToken = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, cfig.SECRET_KEY); //Verifica el token
-        console.log(decoded)
 
         if (!decoded) return res.status(401).json({msg: "not decoded"})
 

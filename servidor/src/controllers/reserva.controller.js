@@ -11,7 +11,7 @@ export const createReserva = async (req, res) => {
         const token = req.cookies['Tookie']
 
         const decoded = jwt.verify(token, cfig.SECRET_KEY)
-        
+        console.log(decoded)
             const datos = {
                 usuario: decoded.id,
                 fechaInicio: fechaInicio,
@@ -21,7 +21,8 @@ export const createReserva = async (req, res) => {
                 estado: estado //Falta el total
             }
 
-        return res.json({msg: 'Funciona', usuario: decoded, datos: datos})
+        console.log("Paso al return servidor")
+        return res.status(201).json({msg: 'Funciona', usuario: decoded.id, datos: datos})
 
         
         /*

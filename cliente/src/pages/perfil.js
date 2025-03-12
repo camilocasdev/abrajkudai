@@ -22,9 +22,8 @@ function Perfil(){
                     }
                 })
                     const data = await response.json()
-                    console.log(data)
 
-                    if (data.estado === 'error'){
+                    if (data.error === true){
                         navigate(data.redirect)
                     }
 
@@ -106,7 +105,7 @@ function Perfil(){
                             <div class="navbar">
                                 <a href="#reservas"><strong>Reservas</strong></a>
                                 <a href="#configuracion"><strong>Configuración</strong></a>
-                                <a href='#' onClick={clearData}><strong>Cerrar Sesión</strong></a>                    
+                                <button class="logout" href='#' onClick={clearData}><strong>Cerrar Sesión</strong></button>                    
                             </div>
                         </nav>
                     </article>

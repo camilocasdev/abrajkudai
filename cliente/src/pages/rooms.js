@@ -12,7 +12,7 @@ function Rooms(){
     const [cantidad, setCantidad] = useState()
     const [error, setError] = useState()
 
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
 
         const datosHabitacion = async() => {
@@ -42,8 +42,6 @@ function Rooms(){
                     return;
                 }
                 setRoom(data.roomServer)
-
-                console.log(room)
             } catch (error){
                 console.error(error)
                 setError(error)
@@ -52,19 +50,20 @@ function Rooms(){
         datosHabitacion()
 
     }, [searchParams])
-
+/*
     useEffect(() => {
          //console.log("Estado actualizado de room:", room);
          //console.log(room?.descripcion?.[0])
         }, [room]);
+*/
+    const enviarForm = async(event) => {
+        event.preventDefault()
 
-    const enviarForm = async() => {
-        
         try {
             const response = await fetch('/restr/reserva/new', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     fechaInicio: fechaInicio,
@@ -77,15 +76,16 @@ function Rooms(){
                     ]
                 }),
             });
-
             const data = await response.json()
-
-            console.log(data)
 
             sessionStorage.setItem('resTemp', JSON.stringify(data))
 
-            if (error === true){
+            if (data.error === true){
+                console.error('Hubo un error')
                 navigate(data.redirect)
+            } else {
+                console.log("Redirigiendo")
+                return navigate('/pago')
             }
 
         } catch (error) {
@@ -182,7 +182,7 @@ function Rooms(){
                                                         placeholder="Cantidad"
                                                         required
                                                     >
-                                                        // Convertir este input de lista en un input de elección de botón
+                                                        (/* Convertir este input de lista en un input de elección de botón */)
                                                     
                                                         <option value="">Seleccione cantidad</option>
                                                         <option value="1">1</option>

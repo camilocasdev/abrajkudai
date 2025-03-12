@@ -90,14 +90,9 @@ export const privgetuser = async (req, res) => {
     
     const token = req.cookies['Tookie'];
 
-
-    if (!token) return res.status(403).json({estado: 'error', msg: "No ha proporcionado un token, redirigiendo...", redirect: '/signin?error=not_logged' })
-
     try {
 
         const decoded = jwt.verify(token, cfig.SECRET_KEY);
-        
-        if (!decoded) console.log('El token ya expiró')
 
         req.UsuarioId = decoded.id;
 
