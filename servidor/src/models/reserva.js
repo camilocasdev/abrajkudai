@@ -5,14 +5,18 @@ const reserva = new Schema ({
         rel: 'Usuario',
         type: Schema.Types.ObjectId,
     }],
-    fecha: { type: Date },
-    hora: { type: String },
+    fechaInicio: { type: Date },
+    fechaHasta: { type: String },
     habitacion: [{
         rel: 'Room',
         type: Schema.Types.ObjectId
     }],
     total: { type: Number, require: true },
-    estadoPago: { type: String, require: true }
+    estado: { 
+        type: String, 
+        require: true,
+        enum: ['pendiente', 'cancelado', 'pagado']
+    }
 }, {
     timestamps: true,
     versionKey: false

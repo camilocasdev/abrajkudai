@@ -90,15 +90,12 @@ export const privgetuser = async (req, res) => {
     
     const token = req.cookies['Tookie'];
 
-    console.log(token)
 
     if (!token) return res.status(403).json({estado: 'error', msg: "No ha proporcionado un token, redirigiendo...", redirect: '/signin?error=not_logged' })
 
     try {
 
         const decoded = jwt.verify(token, cfig.SECRET_KEY);
-
-        console.log(!decoded)
         
         if (!decoded) console.log('El token ya expiró')
 
@@ -111,7 +108,11 @@ export const privgetuser = async (req, res) => {
         res.status(200).json(usuario)
 
     } catch (error) {
-        return res.status(401).json({estado: 'error', message: 'Error al autenticar el token', redirect: '/signin?error=invalid_token'});
+        return res.status(401).json({
+            error: true,
+            message: 'Error al autenticar el token',
+            redirect: '/signin?error=invalid_token'
+        });
     }
 
 }

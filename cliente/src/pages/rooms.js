@@ -7,6 +7,11 @@ function Rooms(){
     const [room, setRoom] = useState({})
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
+    const [fechaInicio, setFechaInicio] = useState()
+    const [fechaHasta, setFechaHasta] = useState()
+    const [cantidad, setCantidad] = useState()
+    const [error, setError] = useState()
+
 
     useEffect(() => {
 
@@ -37,17 +42,58 @@ function Rooms(){
                     return;
                 }
                 setRoom(data.roomServer)
+
+                console.log(room)
             } catch (error){
-                console.log(error)
+                console.error(error)
+                setError(error)
             }
         }
         datosHabitacion()
+
     }, [searchParams])
 
     useEffect(() => {
          //console.log("Estado actualizado de room:", room);
          //console.log(room?.descripcion?.[0])
         }, [room]);
+
+    const enviarForm = async() => {
+        
+        try {
+            const response = await fetch('/restr/reserva/new', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fechaInicio: fechaInicio,
+                    fechaHasta: fechaHasta,
+                    cantidad: cantidad,
+                    habitacion: room.nombre,
+                    estado: "pendiente",
+                    servicios: [
+                        //Implementar servicios ya que por ahora no se tiene en cuenta servicios ni precios de estos
+                    ]
+                }),
+            });
+
+            const data = await response.json()
+
+            console.log(data)
+
+            sessionStorage.setItem('resTemp', JSON.stringify(data))
+
+            if (error === true){
+                navigate(data.redirect)
+            }
+
+        } catch (error) {
+            console.error(error)
+            setError(error)
+        }
+    } 
+
 
     return(
         <div>
@@ -102,7 +148,7 @@ function Rooms(){
                             </div>
                             <div class="habconfigres">
                                 <fieldset>
-                                    <form method="post" action="/pago">
+                                    <form method="post" onSubmit={enviarForm} action='/restr/reserva/new'>
                                         <label>
                                             <div class="habformdiv">
                                                 <div class="habfieldsetdate">
@@ -110,11 +156,38 @@ function Rooms(){
                                                     <span>Hasta</span>
                                                 </div>
                                                 <div class="habfieldsetdate">
-                                                    <input type="date" name="decha_desde" required/>
-                                                    <input type="date" name="fecha_hasta" required/>
+                                                    <input 
+                                                        type ="date" 
+                                                        name ="fechaInicio"
+                                                        id = "fechaInicio"
+                                                        value = {fechaInicio}
+                                                        onChange ={(e) => setFechaInicio(e.target.value)}
+                                                        required
+                                                    />
+                                                    <input 
+                                                        type = "date" 
+                                                        name = "fechaHasta"
+                                                        id = "fechaHasta"
+                                                        value = {fechaHasta}
+                                                        onChange = {(e) => setFechaHasta(e.target.value)}
+                                                        required
+                                                    />
                                                 </div>
                                                 <div class="habfieldsetcant">
-                                                    <input type="number" name="cantidad" placeholder="Cantidad"/>
+                                                    <select 
+                                                        name="cantidad"
+                                                        id = "cantidad"
+                                                        value = {cantidad}
+                                                        onChange = {(e) => setCantidad(e.target.value)}
+                                                        placeholder="Cantidad"
+                                                        required
+                                                    >
+                                                        // Convertir este input de lista en un input de elección de botón
+                                                    
+                                                        <option value="">Seleccione cantidad</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                    </select>
                                                 </div>
                                                 <div class="habformdiv">
                                                     <div>
@@ -142,19 +215,6 @@ function Rooms(){
                                                     <div>
                                                         <span>Salon de Eventos</span>
                                                         <input type="datetime-local" name="salEvent"/>
-                                                    </div>
-                                                    <div>
-                                                        <span>Localización</span>
-                                                        <div>
-                                                            <select name="localizacion">
-                                                                <option>Torre 1</option>
-                                                                <option>Torre 2</option>
-                                                                <option>Torre 3</option>
-                                                                <option>Torre 4</option>
-                                                                <option>Torre 5</option>
-                                                                <option>Torre 6</option>
-                                                            </select>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -7,20 +7,34 @@ export const verifyToken = async (req, res, next) => {
 
     const token = req.cookies['Tookie'];
 
-    if (!token) return res.status(401).json({msg: "No se ha proporcionado un token...", redirect: ''}) //Limita la información o la ruta para los que no tienen un token, es decir un usuario no registrado o logeado
+    if (!token) return res.status(401).json({
+        error: true,
+        msg: 'No hay token, por favor inicia sesión',
+        redirect: '/signin?error=not_logged'
+    }) //Limita la información o la ruta para los que no tienen un token, es decir un usuario no registrado o logeado
 
     try {
         const decoded = jwt.verify(token, cfig.SECRET_KEY); //Verifica el token
+        console.log(decoded)
+
+        if (!decoded) return res.status(401).json({msg: "not decoded"})
+
         req.UsuarioId = decoded.id;
 
         const usuario = await Usuario.findById(req.UsuarioId, {contrasena: 0});
 
-        if (!usuario) return res.status(404).json({message: 'Token sin usuario asociado...'});
+        if (!usuario) return res.status(404).json({
+            message: 'Token sin usuario asociado...'
+        });
 
         next();
 
     } catch (error) {
-        res.status(404).json({msg: 'Token invalido...'})
+        res.status(404).json({
+            error: true,
+            msg: 'Error al autenticar el token',
+            redirect: '/signin?error=invalid_token'
+        });
     }
 }
 

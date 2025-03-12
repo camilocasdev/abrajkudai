@@ -7,7 +7,7 @@ export const roomList = async (req, res) => {
         path: 'roomid',
         model: 'Roomtype'
     });
-    
+
     const miniFilter = req.headers['filter']
 
     if (!miniFilter) return res.status(200).json(lista);
@@ -15,12 +15,15 @@ export const roomList = async (req, res) => {
     if (miniFilter === 'disponible') {
 
         try {
-            const listaDisponible = lista.filter(RoomType => RoomType.estado === 'Disponible').slice(0, 10);
+            const listaDisponible = lista.filter(RoomType => RoomType.estado === 'Disponible')// Limita los resultados .slice(0, 10);
 
             if (listaDisponible.length < 0) {
                 return res.status(200).json({ message: 'No hay habitaciones disponibles' });
             } else {
-                return res.status(200).json({ message: 'Habitaciones disponibles', Array: listaDisponible});
+                return res.status(200).json({ 
+                    message: 'Habitaciones disponibles',
+                    Array: listaDisponible
+                })
             }
         } catch (error) {
             console.log(error);
@@ -32,14 +35,17 @@ export const roomList = async (req, res) => {
 
         try {
 
-            const listaOcupada = lista.filter(RoomType => RoomType.estado === 'Ocupado').slice(0, 10)
+            const listaOcupada = lista.filter(RoomType => RoomType.estado === 'Ocupado')//Limita los resultados .slice(0, 10)
             console.log(listaOcupada.lenght)
 
             if (listaOcupada.lenght < 0) {
                 return res.status(200).json({ message: 'No hay habitaciones ocupadas'});
             } 
 
-            return res.status(200).json({ message: 'Habitaciones ocupadas', Array: listaOcupada});
+            return res.status(200).json({ 
+                message: 'Habitaciones ocupadas', 
+                Array: listaOcupada
+            })
 
         } catch (error) {
             console.log(error);

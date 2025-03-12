@@ -6,11 +6,10 @@ import User from '../models/user';
 export const createReserva = async (req, res) => {
 
     try {
-        const { fechaInicio, fechaHasta, cantidad, habitacion } = req.body; //Falta el total y el estado de pago
+        const { fechaInicio, fechaHasta, cantidad, habitacion, estado, servicios } = req.body; //Falta el total y el estado de pago
         
         const token = req.cookies['Tookie']
 
-        
         const decoded = jwt.verify(token, cfig.SECRET_KEY)
         
             const datos = {
@@ -18,13 +17,10 @@ export const createReserva = async (req, res) => {
                 fechaInicio: fechaInicio,
                 fechaHasta: fechaHasta,
                 cantidad: cantidad,
-                habitacion: habitacion, //Falta el total y el estado de pago
+                habitacion: habitacion,
+                estado: estado //Falta el total
             }
 
-        if (!token) {
-            res.status(401).json({error: '', msg: 'Inicie sesión para continuar con su reserva', datosTemp: nuevaReserva ,redirect: '/signin?error'})
-        }
-        
         return res.json({msg: 'Funciona', usuario: decoded, datos: datos})
 
         
