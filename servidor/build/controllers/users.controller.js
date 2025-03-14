@@ -228,52 +228,39 @@ var privgetuser = exports.privgetuser = /*#__PURE__*/function () {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
           token = req.cookies['Tookie'];
-          console.log(token);
-          if (token) {
-            _context6.next = 4;
-            break;
-          }
-          return _context6.abrupt("return", res.status(403).json({
-            estado: 'error',
-            msg: "No ha proporcionado un token, redirigiendo...",
-            redirect: '/signin?error=not_logged'
-          }));
-        case 4:
-          _context6.prev = 4;
+          _context6.prev = 1;
           decoded = _jsonwebtoken["default"].verify(token, _config["default"].SECRET_KEY);
-          console.log(!decoded);
-          if (!decoded) console.log('El token ya expiró');
           req.UsuarioId = decoded.id;
-          _context6.next = 11;
+          _context6.next = 6;
           return _user["default"].findById(req.UsuarioId, {
             contrasena: 0
           });
-        case 11:
+        case 6:
           usuario = _context6.sent;
           if (usuario) {
-            _context6.next = 14;
+            _context6.next = 9;
             break;
           }
           return _context6.abrupt("return", res.status(404).json({
             message: 'Usuario no encontrado'
           }));
-        case 14:
+        case 9:
           res.status(200).json(usuario);
-          _context6.next = 20;
+          _context6.next = 15;
           break;
-        case 17:
-          _context6.prev = 17;
-          _context6.t0 = _context6["catch"](4);
+        case 12:
+          _context6.prev = 12;
+          _context6.t0 = _context6["catch"](1);
           return _context6.abrupt("return", res.status(401).json({
-            estado: 'error',
+            error: true,
             message: 'Error al autenticar el token',
             redirect: '/signin?error=invalid_token'
           }));
-        case 20:
+        case 15:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[4, 17]]);
+    }, _callee6, null, [[1, 12]]);
   }));
   return function privgetuser(_x11, _x12) {
     return _ref6.apply(this, arguments);

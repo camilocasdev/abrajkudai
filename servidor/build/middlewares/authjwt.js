@@ -25,41 +25,52 @@ var verifyToken = exports.verifyToken = /*#__PURE__*/function () {
             break;
           }
           return _context.abrupt("return", res.status(401).json({
-            msg: "No se ha proporcionado un token...",
-            redirect: ''
+            error: true,
+            msg: 'No hay token, por favor inicia sesión',
+            redirect: '/signin?error=not_logged'
           }));
         case 3:
           _context.prev = 3;
           decoded = _jsonwebtoken["default"].verify(token, _config["default"].SECRET_KEY); //Verifica el token
+          if (decoded) {
+            _context.next = 7;
+            break;
+          }
+          return _context.abrupt("return", res.status(401).json({
+            msg: "not decoded"
+          }));
+        case 7:
           req.UsuarioId = decoded.id;
-          _context.next = 8;
+          _context.next = 10;
           return _user["default"].findById(req.UsuarioId, {
             contrasena: 0
           });
-        case 8:
+        case 10:
           usuario = _context.sent;
           if (usuario) {
-            _context.next = 11;
+            _context.next = 13;
             break;
           }
           return _context.abrupt("return", res.status(404).json({
             message: 'Token sin usuario asociado...'
           }));
-        case 11:
+        case 13:
           next();
-          _context.next = 17;
+          _context.next = 19;
           break;
-        case 14:
-          _context.prev = 14;
+        case 16:
+          _context.prev = 16;
           _context.t0 = _context["catch"](3);
           res.status(404).json({
-            msg: 'Token invalido...'
+            error: true,
+            msg: 'Error al autenticar el token',
+            redirect: '/signin?error=invalid_token'
           });
-        case 17:
+        case 19:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[3, 14]]);
+    }, _callee, null, [[3, 16]]);
   }));
   return function verifyToken(_x, _x2, _x3) {
     return _ref.apply(this, arguments);

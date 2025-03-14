@@ -38,7 +38,7 @@ var roomList = exports.roomList = /*#__PURE__*/function () {
           _context.prev = 7;
           listaDisponible = lista.filter(function (RoomType) {
             return RoomType.estado === 'Disponible';
-          }).slice(0, 10);
+          }); // Limita los resultados .slice(0, 10);
           if (!(listaDisponible.length < 0)) {
             _context.next = 13;
             break;
@@ -69,7 +69,7 @@ var roomList = exports.roomList = /*#__PURE__*/function () {
           _context.prev = 21;
           listaOcupada = lista.filter(function (RoomType) {
             return RoomType.estado === 'Ocupado';
-          }).slice(0, 10);
+          }); //Limita los resultados .slice(0, 10)
           console.log(listaOcupada.lenght);
           if (!(listaOcupada.lenght < 0)) {
             _context.next = 26;

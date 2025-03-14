@@ -23,7 +23,9 @@ try {
   (0, _initialSetup.crearRole)();
   (0, _initialSetup.defaultUsers)();
   (0, _initialSetup.crearRoomType)();
-  (0, _initialSetup.crearRoom)();
+  setTimeout(function () {
+    (0, _initialSetup.crearRoom)();
+  }, 2000);
 } catch (error) {
   console.log(error);
 }

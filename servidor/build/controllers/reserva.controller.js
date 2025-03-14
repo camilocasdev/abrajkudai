@@ -15,12 +15,12 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var createReserva = exports.createReserva = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body, fechaInicio, fechaHasta, cantidad, habitacion, token, decoded, datos;
+    var _req$body, fechaInicio, fechaHasta, cantidad, habitacion, estado, servicios, token, decoded, datos;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          _req$body = req.body, fechaInicio = _req$body.fechaInicio, fechaHasta = _req$body.fechaHasta, cantidad = _req$body.cantidad, habitacion = _req$body.habitacion; //Falta el total y el estado de pago
+          _req$body = req.body, fechaInicio = _req$body.fechaInicio, fechaHasta = _req$body.fechaHasta, cantidad = _req$body.cantidad, habitacion = _req$body.habitacion, estado = _req$body.estado, servicios = _req$body.servicios; //Falta el total y el estado de pago
           token = req.cookies['Tookie'];
           decoded = _jsonwebtoken["default"].verify(token, _config["default"].SECRET_KEY);
           datos = {
@@ -28,31 +28,24 @@ var createReserva = exports.createReserva = /*#__PURE__*/function () {
             fechaInicio: fechaInicio,
             fechaHasta: fechaHasta,
             cantidad: cantidad,
-            habitacion: habitacion //Falta el total y el estado de pago
+            habitacion: habitacion,
+            estado: estado //Falta el total
           };
-          if (!token) {
-            res.status(401).json({
-              error: '',
-              msg: 'Inicie sesión para continuar con su reserva',
-              datosTemp: nuevaReserva,
-              redirect: '/signin?error'
-            });
-          }
-          return _context.abrupt("return", res.json({
+          return _context.abrupt("return", res.status(201).json({
             msg: 'Funciona',
-            usuario: decoded,
+            usuario: decoded.id,
             datos: datos
           }));
-        case 9:
-          _context.prev = 9;
+        case 8:
+          _context.prev = 8;
           _context.t0 = _context["catch"](0);
           res.status(401).json('Ha ocurrido un error inesperado');
           console.log(_context.t0);
-        case 13:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
   return function createReserva(_x, _x2) {
     return _ref.apply(this, arguments);

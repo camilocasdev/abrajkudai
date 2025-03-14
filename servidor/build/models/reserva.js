@@ -10,10 +10,10 @@ var reserva = new _mongoose.Schema({
     rel: 'Usuario',
     type: _mongoose.Schema.Types.ObjectId
   }],
-  fecha: {
+  fechaInicio: {
     type: Date
   },
-  hora: {
+  fechaHasta: {
     type: String
   },
   habitacion: [{
@@ -24,9 +24,10 @@ var reserva = new _mongoose.Schema({
     type: Number,
     require: true
   },
-  estadoPago: {
+  estado: {
     type: String,
-    require: true
+    require: true,
+    "enum": ['pendiente', 'cancelado', 'pagado']
   }
 }, {
   timestamps: true,

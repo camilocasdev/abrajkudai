@@ -4,6 +4,10 @@ import React, { useEffect, useState } from 'react'
 
 function Rooms(){
 
+
+
+    
+
     const [room, setRoom] = useState({})
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
@@ -38,12 +42,11 @@ function Rooms(){
                  //console.log("Datos recibidos en React:", data);  //Borrar
 
                 if (!data.roomServer) {
-                    console.error("No hay datos de habitación en la respuesta.");  //Borrar
+                    console.error("No hay datos de habitación en la respuesta." + error);  //Borrar
                     return;
                 }
                 setRoom(data.roomServer)
             } catch (error){
-                console.error(error)
                 setError(error)
             }
         }
@@ -131,104 +134,77 @@ function Rooms(){
                 </section>
                 <main>
                     <section class="habitacion"> 
-                        <article class="habimgcontein"> 
-                            <div class="habimgtext">
-                                <h2>{room?.nombre}</h2>
+                        <article class='roomTitle'>
+                            <div class=''>
+                                <h1>{room?.nombre}</h1>
                             </div>
-                            <div class="habimgwidth">
-                                <img src={room?.imagen} alt="Imagen de la habitación"/>
+                            <div class='starRate'>
+                                <img src=''/>
                             </div>
                         </article>
-                        <article class="habdescontein"> 
-                            <div>
-                                <h2><strong>{room?.nombre}</strong></h2>
-                                <p>
-                                    {room?.descripcion?.[0]}
-                                </p>
+                        <article class='roomContent'>
+                            <div class='roomData'>
+                                <div class='roomImg'>
+                                    <img src={room?.imagen} alt="Imagen de la habitación"/>
+                                </div>
+                                <div class='roomScript'>
+                                    <div dangerouslySetInnerHTML={{ __html: room?.scriptLong }} />
+                                </div>
                             </div>
-                            <div class="habconfigres">
-                                <fieldset>
-                                    <form method="post" onSubmit={enviarForm} action='/restr/reserva/new'>
-                                        <label>
-                                            <div class="habformdiv">
-                                                <div class="habfieldsetdate">
-                                                    <span>Desde</span>
-                                                    <span>Hasta</span>
-                                                </div>
-                                                <div class="habfieldsetdate">
-                                                    <input 
-                                                        type ="date" 
-                                                        name ="fechaInicio"
-                                                        id = "fechaInicio"
-                                                        value = {fechaInicio}
-                                                        onChange ={(e) => setFechaInicio(e.target.value)}
-                                                        required
-                                                    />
-                                                    <input 
-                                                        type = "date" 
-                                                        name = "fechaHasta"
-                                                        id = "fechaHasta"
-                                                        value = {fechaHasta}
-                                                        onChange = {(e) => setFechaHasta(e.target.value)}
-                                                        required
-                                                    />
-                                                </div>
-                                                <div class="habfieldsetcant">
-                                                    <select 
-                                                        name="cantidad"
-                                                        id = "cantidad"
-                                                        value = {cantidad}
-                                                        onChange = {(e) => setCantidad(e.target.value)}
-                                                        placeholder="Cantidad"
-                                                        required
-                                                    >
-                                                        (/* Convertir este input de lista en un input de elección de botón */)
-                                                    
-                                                        <option value="">Seleccione cantidad</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                    </select>
-                                                </div>
-                                                <div class="habformdiv">
-                                                    <div>
-                                                        <span><strong>Servicios Extra</strong></span>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" name="bieneSpa"/>
-                                                        <span>Bienestar y Spa</span>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" name="limpieza"/>
-                                                        <span>Limpieza diaria</span>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" name="cuidadoInf"/>
-                                                        <span>Cuidado Infantil</span>
-                                                    </div>
-                                                    <div>
-                                                        <input type="checkbox" name="confidence"/>
-                                                        <span>Confidencialidad</span>
-                                                    </div>
-                                                    <div>
-                                                        <span><strong>Apartar Zonas Sociales</strong></span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Salon de Eventos</span>
-                                                        <input type="datetime-local" name="salEvent"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </label>
+                            <div class="roomContRight">
+                                <form method="post" onSubmit={enviarForm} action='/restr/reserva/new'>
+                                    <div class='roomForm'>
+                                        <div class="formDate">
+                                            <span><strong>Desde</strong></span>
+                                            <span><strong>Hasta</strong></span>
+                                        </div>
+                                        <div class="formDate">
+                                            <input 
+                                                type ="date" 
+                                                name ="fechaInicio"
+                                                id = "fechaInicio"
+                                                value = {fechaInicio}
+                                                onChange ={(e) => setFechaInicio(e.target.value)}
+                                                required
+                                            />
+                                            <input 
+                                                type = "date" 
+                                                name = "fechaHasta"
+                                                id = "fechaHasta"
+                                                value = {fechaHasta}
+                                                onChange = {(e) => setFechaHasta(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                        <div class="formQuantity">
+                                            <span><strong>Cantidad</strong></span>
+                                            <select 
+                                                name="cantidad"
+                                                id = "cantidad"
+                                                value = {cantidad}
+                                                onChange = {(e) => setCantidad(e.target.value)}
+                                                placeholder="Cantidad"
+                                                required
+                                            >
+                                                (/* Convertir este input de lista en un input de elección de botón */)
+                                            
+                                                <option value="">Seleccione cantidad</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                        </div>
                                         <button type="submit">Reservar</button>
-                                    </form>
-                                </fieldset>
+                                    </div>
+                                </form>
+                                <div class="otherRooms">
+                                    <div class="otherRooms-title">
+                                        <h1>Sugerencias</h1>
+                                    </div>
+                                </div>
                             </div>
                         </article>
-                    </section>
-                    <section class="sugerencias">
-                        <div class="cajaSug">
-                            <h2 style={{color: "#131313"}}>sugerencias</h2>
-                        </div>
                     </section>
                 </main>
                 <footer>

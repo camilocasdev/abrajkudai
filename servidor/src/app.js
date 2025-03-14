@@ -20,7 +20,9 @@ try {
     crearRole();
     defaultUsers();
     crearRoomType();
-    crearRoom();
+    setTimeout(function(){
+        crearRoom();
+    }, 2000)
     
 
 } catch (error) {
