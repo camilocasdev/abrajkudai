@@ -22,6 +22,7 @@
                 font-family:"Lora", Bold;
                 font-size: 30px;
                 text-align: center;
+                margin: 0rem
             }
             h4{
                 margin: 0rem
@@ -936,60 +937,113 @@
             }
         /* Página de lista de habitaciones */
 
-        .resSection{
+        .res-rooms-section{
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-content: center;
             flex-wrap: wrap;
             margin: 2rem;
-            padding: 1rem;
             gap: 0.5rem;    
         }
         .fixer{
-            max-width: 80rem;
+            max-width: 100%;
+            box-sizing: border-box;
         }
-        .resSection h2{
+        .res-rooms-section h2{
             margin: 0;
+            color: #eeeeee;
         }
-        .resFilter{
+        .res-filter{
             display: flex;
             flex-direction: column;
             padding: 0.5rem;
             border-radius: 1rem;
-            background-color: rgba(102, 122, 223, 0.5);
-            backdrop-filter: blur(5px);
-            filter: drop-shadow(1, 1, 1, 0.5);
+            background: rgb(77, 87, 139);
             gap: 0.2rem;
-            margin: 1rem;
-            z-index: 0;
         }
-        .resFilter p{
+        .res-filter p{
             margin: 0.4rem;
         }
-        .resSectRow{
+        .res-room-title{
+            display: flex;
+            flex-direction: column;
+            gap: .8rem
+        }
+        .filters{
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: #eeeeee;
+            font-family: Rubik;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .filter-fix{
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
         }
-        .resResult{
+        .filter-date-from {
+            background-color:rgb(76, 72, 109);
+            background-color: #656e99;
+            padding: .5rem 2rem;
+            border-radius: .5rem;
+        }
+        .result-page{
             display: flex;
             flex-direction: column;
             margin: 1rem;
+            gap: 1rem
+
         }
-        .defaulttarjet{
+        .default-tarjet{
             display: flex;
             flex-direction: column;
             background-color: #e2e2e2;
             filter: drop-shadow(1, 1, 1, 0.5);
-            width: 40rem;
+            width: 100%;
             color:rgba(0, 0, 0);
             border-radius: 1rem;
-            padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+            gap: .5rem;
+            padding: 0rem;
+            box-sizing: border-box;
         }
-        .defaulttarjet :is(h2, p, h1){
-            color:#131313
+        .default-tarjet img{
+            width: 100%;
+            box-sizing: border-box;
         }
-        .resultRow{
+        .default-tarjet :is(h2, p, h1, h3){
+            color:#131313;
+            margin: 0rem;
+        }
+        .room-name h2{
+            font-size: 2rem;
+        }
+        .room-price-title{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: end;
+            padding: 1rem;
+            gap: .5rem
+        }
+        .room-price{
+            background-color: rgb(97, 110, 67, 0.8);
+            padding: .3rem 2rem;
+            border-radius: .8rem;
+        }
+        .room-price h2{
+            font-size: 1.5rem;
+            color: #eeeeee;
+        }
+        .result-box{
             display: flex;
             flex-direction: row;
             gap: 1rem;
@@ -1137,7 +1191,29 @@
             .payment-box h2{
                 font-size: 2.5rem;
             }
-
+            .res-filter{
+                margin-bottom: 1rem
+            }
+            .result-page{
+                margin: 0rem;
+            }
+            .room-name h2{
+                font-size: 1.5rem;
+            }
+            .room-price-title{
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                align-items: flex-start;
+            }
+            .room-price{
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .result-box a{
+                width: 100%;
+                box-sizing: border-box;
+            }
             input{
                 width: 100%;
                 box-sizing: border-box;
@@ -1161,12 +1237,22 @@
             .booking-total p{
                 font-size: 1rem;
             }
+            .res-room-title h2{ 
+                font-size: 2rem
+            }
+            .room-name h2{
+                font-size: 1.5rem
+            }
             .payment-form-title h2{
                 font-size: 1.7rem;
             }
             .payment-methods a{
                 font-size: 1rem;
                 padding: .8rem 1rem
+            }
+            .result-box{
+                display: flex;
+                flex-direction: column;
             }
             .footer h3{
                 text-align: center;
@@ -1189,3 +1275,4 @@
                 display: none;
             }
         }
+

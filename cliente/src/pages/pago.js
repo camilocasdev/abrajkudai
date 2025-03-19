@@ -6,17 +6,25 @@ function Pago(){
 
     const [error, setError] = useState()
     const [searchParams] = useSearchParams()
+    const navigate = useNavigate()
 
     const email = 'correo'
 
-    const resTemp = [{img: 'https://nicodev.s-ul.eu/pKAPd7Qs'}]
+    const resTemp = [{img: ''}]
     const res = [{total: 200, data: {nombre: 'Junior Suite', dias: 6, servicios: {uno: 1, dos: 2}}}]
     const currency = 'USD'
     
+    const isLoading = async() =>{
+        //Función para que se haga una pantalla del carga, mientras aparecen todos los elementos necesarios.
+    }
 
+    const isRestemp = function(){
+        // Chequea si esta pasando al pago de manera lógica y no forzada, en caso de no ser así devolver a otra página o a una página especifica de error 404.
+        navigate('/error')
+    }
 
     const bankpay = function(){
-
+        // Cambio de inputs para los diferentes metodos de pago a implementar en un futuro
     }
 
     useEffect(() => {
@@ -29,34 +37,31 @@ function Pago(){
     const reservar = async(event) => {
         event.preventDefault()
 
-        try {
-            const resTemp = sessionStorage.get('resTemp')
+            try {
+                const resTemp = sessionStorage.get('resTemp')
 
-            const response = await fetch('/restr/reserva/new', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: {
+                const response = await fetch('/restr/reserva/new', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: {
 
+                    }
+                })
+
+                const data = response.JSON()
+                
+                if (!response.ok){
+                    console.error('Funcionando la conexión' + data.error)
                 }
-            })
 
-            const data = response.JSON()
-            
-            if (!response.ok){
-                console.error('Funcionando la conexión' + data.error)
+            } catch (error) {
+                setError(error)
+                console.error(error)
             }
-
-
-
-        } catch (error) {
-            
         }
-    }
-
-
-
+    
     return(
         <div>
             <div>

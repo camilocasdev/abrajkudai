@@ -9,6 +9,10 @@ function Reserva(){
 
     const navigate = useNavigate();
 
+    const room = [{precio: 200}] //BORRAR
+    const number = 0
+    const currency = 'USD'
+
     useEffect(() => {
 
         const resultados = async () => {
@@ -70,41 +74,191 @@ function Reserva(){
                         </div>
                     </article>
                 </section>
-                <section class="resSection">
+                <section class="res-rooms-section">
                     <div class="fixer">
-                        <h2>Reservas Disponibles</h2>
-                        <article class="resFilter">
-                            <div class="resSectRow">
-                                <p>Filtros</p>
+                        <article class='res-room-title'>
+                            <h2>Reservas Disponibles</h2>
+                            <p>Encuentra tu alojamiento ideal para tu próxima estancia.</p>
+                        </article>
+                        <article class="res-filter"
+                            //Filtros de fechas, cantidad y servicios
+                            //Orden ascendente y descendente de precio
+                        >
+                            <div class="filters">
+                                <div class="filter-title">
+                                    <p>Filtros</p>
+                                </div>
+                                <div class='filter-fix'>
+                                    <div class='filter-date-from'>
+                                        <a style={{'pointer-events': 'none'}} >
+                                            Desde
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class='filter-date-to' style={{'pointer-events': 'none'}} >
+                                            Hasta
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class='quantity' style={{'pointer-events': 'none'}} >
+                                            Cantidad
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class='services' style={{'pointer-events': 'none'}} >
+                                            Servicios
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="resSectRow">
-                                <p>Filtros low section</p>
+                            <div class="order-by">
+                                <p>Ordenar por</p>
                             </div>
                         </article>
-                        <article class="resResult">
-                            <div class="resultRow">
-                                <div class="defaulttarjet">
-                                    <p>nombre</p>
-                                    <img 
-                                        src='${room[0].imagen}'
-                                        alt='Imagen de la habitación '
-                                    />
-                                    
-                                </div>
-                                <div class="defaulttarjet">
-                                    <p>"nombre</p>
-                                    <img 
-                                        src='${room[0].imagen}'
-                                        alt='Imagen de la habitación '
-                                    />
-                                </div>
-                                <div class="defaulttarjet">
-                                    <p>nombre</p>
-                                    <img 
-                                        src='${room[0].imagen}'
-                                        alt='Imagen de la habitación '
-                                    />
-                                </div>
+                        <article class="result-page">
+                            <div class="result-box">
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="result-box">
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="result-box">
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="result-box">
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href='/habitacion?t=${number}' class="default-tarjet">
+                                    <div>
+                                        <img 
+                                            src='https://nicodev.s-ul.eu/pKAPd7Qs'
+                                            alt='Imagen de la habitación'
+                                            
+                                            />
+                                    </div>
+                                    <div class='room-price-title'>
+                                        <div class='room-name'>
+                                            <h2>Penthouse Black</h2>
+                                        </div>
+                                        <div class='room-price'>
+                                            <h2>{room[number]?.precio}{currency}/noche</h2>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </article>
                     </div>
