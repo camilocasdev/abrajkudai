@@ -1,6 +1,62 @@
 import './style.css'
+import React, { useEffect, useState} from 'react'
+import { useNavigate, useSearchParams} from 'react-router'
 
 function Pago(){
+
+    const [error, setError] = useState()
+    const [searchParams] = useSearchParams()
+
+    const email = 'correo'
+
+    const resTemp = [{img: 'https://nicodev.s-ul.eu/pKAPd7Qs'}]
+    const res = [{total: 200, data: {nombre: 'Junior Suite', dias: 6, servicios: {uno: 1, dos: 2}}}]
+    const currency = 'USD'
+    
+
+
+    const bankpay = function(){
+
+    }
+
+    useEffect(() => {
+        // Otros métodos de págo
+        const url = searchParams.get('m')
+        const methodChange = async() => {
+        }
+    },[searchParams])
+
+    const reservar = async(event) => {
+        event.preventDefault()
+
+        try {
+            const resTemp = sessionStorage.get('resTemp')
+
+            const response = await fetch('/restr/reserva/new', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: {
+
+                }
+            })
+
+            const data = response.JSON()
+            
+            if (!response.ok){
+                console.error('Funcionando la conexión' + data.error)
+            }
+
+
+
+        } catch (error) {
+            
+        }
+    }
+
+
+
     return(
         <div>
             <div>
@@ -38,12 +94,95 @@ function Pago(){
                     </section>
                 </header>
                 <main>
-                    <section>
-                        <h1>Hola mundo</h1>
-                        <article>
-                            <div>
-                                <p>Hola mundo</p>
+                    <section class='payment-box'>
+                        <article class='payment-form'>
+                            <form method='POST' action=''>
+                                <div class='payment-form-title'>
+                                    <h2>Payment Method</h2>
+                                </div>
+                                <div class='payment-methods'>
+                                    <a href='?m=0' class='method-bank-card' onClick={bankpay}>
+                                        Banco
+                                    </a>
+                                    <a href='?m=1' class='method-paypal' >
+                                        Paypal  
+                                    </a>
+                                    <a href='?m=2' class='method-transfering' >
+                                        Transferencia
+                                    </a>
+                                </div>
+                                <div class='payment-form-column'>
+                                    <input
+                                    name='card-holder'
+                                    placeholder='John Example'
+                                    >
+                                    </input>
+                                    <input
+                                    name='card-number'
+                                    placeholder='xxxx'
+                                    >
+                                    </input>
+                                </div>
+                                <div class='payment-form-row'>
+
+                                    <input
+                                        // INVESTIGAR COMO HACER EL INPUT DE FECHA ESPECIFICA PARA TARJETA DE CREDITO
+                                        
+                                        name='card-expiration'
+                                        type='text'
+                                        pattern="(0[1-9]|1[0-2])\/([0-9]{2})" 
+                                        placeholder="MM/AA" 
+                                        maxlength="5" 
+                                        title="Ingresa la fecha en formato MM/AA (ejemplo: 05/26)"
+                                        required
+                                    >
+                                    </input>
+                                    <input
+                                    // Falta funcion: Para que se vea los digitos escritos por un segundo y luego se escondan en *
+
+                                    name='card-code'
+                                    placeholder='cvv'
+                                    type='password'
+                                    maxLength={3}
+                                    >
+                                    </input>
+                                </div>
+                                <div class='payment-form-column'>
+                                    <input
+                                    name='email'
+                                    placeholder={email}
+                                    readOnly
+                                    >
+                                    </input>
+                                    <input
+                                    name='tel'
+                                    
+                                    placeholder='123'
+                                    >
+                                    </input>
+                                </div>
+                                <button onSubmit=''>
+                                    Pay
+                                </button>
+                            </form>
+                        </article>
+                        <article class='booking-summary'>
+                            <div class='booking-summary-title'>
+                                <h1>Order Summary</h1>
                             </div>
+                            <div class='booking-img'>
+                                <img src={resTemp[0]?.img} alt='Imagen de la habitación elegida'/>
+                            </div>
+                            <div class='booking-data'>
+                                {JSON.stringify(res[0]?.data)}
+                            </div>
+                            <div class='booking-total'>
+                                <p>Monto Completo</p>
+                                <p>{JSON.stringify(res[0].total)}{currency}</p>
+                            </div>
+                            <button type='submit' onSubmit={reservar}> 
+                                RESERVAR (Solo Test)
+                            </button>
                         </article>
                     </section>
                 </main>
@@ -62,7 +201,7 @@ function Pago(){
                                 <div class="footerubicontact">
                                     <div class="footerp1">
                                         <div>
-                                        <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                        <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4016468,39.8269677,845m/data=!3m1!1e3!4m6!3m5!1s0x15c205ab3d1054c5:0x7706c3b19d8c5606!8m2!3d21.4016468!4d39.8288002!16s%2Fm%2F0138vpf8?entry=ttu&g_ep=EgoyMDI1MDMxNi4wIKXMDSoASAFQAw%3D%3D" 
                                             target="_blank"
                                             rel="noreferrer"
                                             >
@@ -70,7 +209,7 @@ function Pago(){
                                             </a>
                                         </div>
                                         <div>
-                                            <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4022905,39.8278211,18.04z" 
+                                            <a href="https://www.google.com/maps/place/Abraj+Kudai/@21.4016468,39.8269677,845m/data=!3m1!1e3!4m6!3m5!1s0x15c205ab3d1054c5:0x7706c3b19d8c5606!8m2!3d21.4016468!4d39.8288002!16s%2Fm%2F0138vpf8?entry=ttu&g_ep=EgoyMDI1MDMxNi4wIKXMDSoASAFQAw%3D%3D" 
                                             target="_blank"
                                             rel="noreferrer">
                                                     <span>King Abdul Aziz Road, Manafia District, La Meca, Arabia Saudita</span>

@@ -39,7 +39,10 @@ var createReserva = exports.createReserva = /*#__PURE__*/function () {
         case 8:
           _context.prev = 8;
           _context.t0 = _context["catch"](0);
-          res.status(401).json('Ha ocurrido un error inesperado');
+          res.status(401).json({
+            error: true,
+            msg: 'Error inesperado'
+          });
           console.log(_context.t0);
         case 12:
         case "end":

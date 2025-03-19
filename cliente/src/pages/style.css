@@ -53,6 +53,10 @@
                 font-size: 20px;
                 text-align: right;
             }
+            ::placeholder{
+                font-family: Rubik;
+                font-size: 1rem;
+            }
             a{
                 text-decoration: none;
             }
@@ -990,3 +994,198 @@
             flex-direction: row;
             gap: 1rem;
         } 
+        /* Página de Pago */
+        .payment-box{
+            display: flex;
+            flex-direction: row;
+            background-color: #eeeeee;
+            border-radius: 2rem;
+            padding: 1.7rem;
+            gap: 1rem
+        }
+        .payment-methods{   
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: space-evenly;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .payment-methods a{
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 2rem;
+            width: 100%;
+            font-family: Rubik;
+            border-radius: .6rem;
+        }
+        .method-bank-card{
+            background-color: #464D70;
+            color: #eeeeee;
+        }
+        .payment-methods p{
+            color: #131313;
+        }
+        .method-paypal, .method-transfering{
+            cursor: default;
+            pointer-events: none;
+            background-color: rgb(196, 196, 196);
+            color: rgb(105, 105, 105);
+        }
+        .method-bank-card a{
+            background-color: transparent;
+            color: #131313
+        }
+        .payment-form-title{
+            background: rgb(97,110,67);
+            background: linear-gradient(90deg, rgba(97,110,67,1) 50%, rgba(238,238,238,1) 100%);
+            padding: .7rem;
+            border-radius: 1rem;
+        }
+        .payment-form-title h2{
+            font-size: 2rem;
+            margin: 0rem;
+            color: #eeeeee
+        }
+        .payment-form-column{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0rem;
+        }
+        .payment-form-row{
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+        .booking-summary{
+            display: flex;
+            flex-direction: column;
+            background-color: #6d7a4f;
+            border-radius: 1rem;
+            padding: 1rem;
+            gap: 1rem;
+        }
+        .booking-data{
+            color: #eeeeee;
+            text-align: right;
+        }
+        .booking-img img{
+            width: 100%;
+        }
+        .booking-total{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .booking-total p{
+            margin: 0rem;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+        .booking-total p:last-child{
+            font-weight: 800;
+            font-size: 2rem;
+        }
+        .payment-form button{
+            width: 100%;
+            border-radius: 1rem;
+        }
+        .payment-form input{
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+        .booking-summary{
+            width: 30rem;
+        }
+        .booking-summary-title{
+            background-color: #eeeeee;
+            border-radius: .7rem;
+            align-items: left;
+            padding: .2rem
+        }
+        .booking-summary-title h1{
+            color:#616E43;
+            font-size: 2rem;
+            margin: 0rem
+        }
+        
+        /*------------------------#
+        |                         |
+        |     Responsive Test     |
+        |                         |
+        #-------------------------*/
+        @media (max-width: 1200px){
+            /*
+            En este punto hay que dejar el header con un icono y 
+            tres puntos que abriran una pestaña que despliega las
+            redirecciones
+            */
+            .headerbox{
+                width: 80%
+            }
+            .payment-box{
+                display: flex;
+                flex-direction: column;
+                width: 90%;
+            }
+            .payment-box h2{
+                font-size: 2.5rem;
+            }
+
+            input{
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .booking-summary{
+                width: 100%;
+                box-sizing: border-box
+            }
+            .booking-summary-title h1{
+                font-size: 1.5rem
+            }
+            /* Footer */
+            .footerlogo{
+                display: none;
+            }
+        }
+        @media (max-width: 700px) {
+            .payment-box{
+                width: 80%;
+            }
+            .booking-total p{
+                font-size: 1rem;
+            }
+            .payment-form-title h2{
+                font-size: 1.7rem;
+            }
+            .payment-methods a{
+                font-size: 1rem;
+                padding: .8rem 1rem
+            }
+            .footer h3{
+                text-align: center;
+            }
+            .footercontlv2{
+                display: flex;
+                flex-direction: column;
+            }
+            .footerp3{
+                display: flex;
+                justify-content: space-around;
+            }
+            .footerubicontact{
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .footercredit{
+                display: none;
+            }
+        }

@@ -47,7 +47,7 @@ export const createReserva = async (req, res) => {
 
         return res.status(201).json(guardarReserva);*/
     } catch (error) {
-        res.status(401).json('Ha ocurrido un error inesperado');
+        res.status(401).json({error: true, msg:'Error inesperado'});
         console.log(error);
     }
 }
