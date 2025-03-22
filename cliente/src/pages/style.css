@@ -10,6 +10,7 @@
                 font-family: "Lora", sans-serif;
                 font-size: 80px;
                 text-align: center;
+                margin: 0rem
             }
             h2{
                 color: #eeeeee;
@@ -30,13 +31,14 @@
             p{
                 color: #eeeeee;
                 font-family: "Rubik";
+                margin: 0rem
             }
             button{
                 border: 0;
                 background-color: #616E43;
                 color:#eeeeee;
                 font-family: "Rubik", Bold;
-                border-radius: 10px;
+                border-radius: 1.2rem;
                 font-size: 20px;
                 cursor: pointer;
                 padding: 1rem;
@@ -69,6 +71,7 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                align-items: center;
             }
             span{
                 font-family: "Rubik", sans-serif;
@@ -114,7 +117,7 @@
                 width: auto;
                 gap: 15rem;
                 border-radius: 20px;
-                position: absolute;
+                position: sticky;
                 overflow: hidden;
                 position: fixed;
                 backdrop-filter: blur(5px);
@@ -153,124 +156,107 @@
                 padding: 0px;
                 overflow: hidden;
             }
-            /* Banner Homepage*/
-            .bannerbox{
+            /*----------- mainpage --------------*/
+            /*_________ Banner Homepage ________*/
+            .banner-box{
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
             }
-            .bannerbox img{
+            .banner-box img{
                 width: 100%;
-                max-width: 1920px;
-                border-radius: 0px 0px 10px 10px;
-            }
-            .bannerboxperf img{
-                width: 100%;
-                max-width: 1920px;
-                border-radius: 0px 0px 10px 10px;
-                filter: blur(1em);
+                box-sizing: border-box;
+                border-radius: 0rem 0rem 1rem 1rem;
                 mask-image: linear-gradient(
                     black 60%,
                     transparent
                 );
-                position: relative;
             }
-            .bannertitle{
+            .banner-cont{
                 display: flex;
                 flex-direction: column;
                 position: absolute;
                 justify-content: center;
-                top: 10%;
+                text-align: center;
+                align-items: center;
+                top: 10rem;
+                gap: 4rem;
+                overflow: hidden;
             }
             /* Acá deberia haber otro subtexto en caja con letras arabes */
-            .bannertitle h1{
+            .banner-cont-title{
                 text-shadow: 0px 2px 10px rgb(0, 0, 0, 0.50);
+                margin: 0rem
             }
-            .bannerp{
-                max-width: 727px;
-                font-size: 20px;
+            .banner-cont-description{
+                max-width: 40rem;
+                font-size: 1.5rem;
                 text-align: center;
-                margin-top: -40px;
                 text-shadow: 0px 2px 10px rgb(0, 0, 0, 1);
             }
-            .indexfieldset{
+            .mainpage-fieldset{
                 display: flex;
                 flex-direction: row;
-                background-color: rgb(70, 77, 112, 0.7);
+                width: 100%;
+                box-sizing: border-box;
+                gap: 1rem;
+                background-color: rgb(103, 114, 167, 0.5);
                 backdrop-filter: blur(5px);
-                margin-top: 100px;
-                gap: 10px;
-                align-items: center;
-                justify-content: space-around;
-                min-height: 100px;
-                min-width: 700px;
-                border-radius: 20px;
-                filter: drop-shadow(0 0 0.75rem rgb(19, 19, 19, 0.05))
+                filter: drop-shadow(0 0 0.75rem rgb(19, 19, 19, 0.05));
+                padding: 1rem;
+                border-radius: 2rem;
             }
-            .indexfieldset input{
-                min-height: 50px;
-                min-width: 180px;
-                border-radius: 10px;
+            .mainpage-fieldset input{
+                border-radius: 1.2rem;
                 background-color: rgb(103, 114, 167, 0.5);
                 color: #eeeeee;
+                padding-right: 1rem;
             }
-            .bannertitle fieldset{
-                border: 0px;
-            }
-            .bannertitle button{
-                background-color: #FFFFFF;
-                opacity: 40%;
-                color:#464D70;
-                padding: 15px;
-            }
-            .bannerflexcolumn{
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-            }
-            .bannerflexrow{
-                display: flex;
-                flex-direction: row;
-                gap: 20px;
-                min-width: 180px;
-            }
-            .bannerflexrow span{
-                min-width: 180px;
+            .mainpage-fieldset input::placeholder{
+                color: #eeeeee;
                 text-align: center;
             }
-            /* Index.html */
-            .homeCont{
+            .mainpage-content{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 gap: 5rem;
-                padding: 4rem 2rem;
-                max-width: 2400px;
+                padding: 2rem;
+                width: 100%;
+                max-width: 1500px;
+                box-sizing: border-box;
             }
-            .homeCont h2{
-                display:block;
-                color:#A1AC88;
-                margin: -5px 0px 10px 0px;
-            }
-            .homeCont p{
-                font-size: 23px;
-                line-height: 40px;
-                text-align: justify;
-                font-weight: 200;
-                max-width: 800px;
-            }
-            .homeCont img{
-                width: 600px;
-                height: 400px;
-                opacity: 100%;
-            }
-            .homeContArt{
+            .mainpage-content-expo{
                 display: flex;
                 flex-direction: row;
-                gap: 20px;
+                box-sizing: border-box;
+                gap: 2rem;
+                width: 100%;
             }
+            .main-content-expo-image{
+                width: 40%;
+                aspect-ratio: 2/1;
+            }
+            .mainpage-content-expo-text{
+                display:flex;
+                flex-direction: column;
+                width: 100%;
+                text-align: justify;
+                line-height: 3rem;
+                font-size: 1.5rem;
+                font-weight: 100;
+                gap: 2rem;
+            }
+            .mainpage-content-expo-text h2{
+                color: #A1AC88
+            }
+            .main-content-expo-image-res1200{
+                display: none
+            }
+
+
             /* Footer o Pie de Página */
             .footer{
                 display: flex;
@@ -291,6 +277,7 @@
                 display: flex;
                 flex-direction: column;
                 margin: 30px;
+                gap: 1rem
             }
             .footercontlv2{
                 display: flex;
@@ -357,6 +344,10 @@
                 height: 45px;
                 margin: 10px 10px 10px 10px;
                 padding: 10px 0px 0px 0px;
+            }
+            .footer ion-icon{
+                width: 3rem;
+                height: 3rem;
                 color:#eeeeee;
             }
             /* Alojamiento */
@@ -366,7 +357,8 @@
                 padding: 1rem 2rem;
                 align-items: center;
                 gap: 2rem;
-                max-width: 1920px;
+                width: 100%;
+                box-sizing: border-box;
                 overflow: hidden;
             }
             .habrow{
@@ -720,6 +712,17 @@
                 justify-content: center;
                 margin: 20px;
             }
+            .banner-box-perfil img{
+                width: 100%;
+                max-width: 1920px;
+                border-radius: 0px 0px 10px 10px;
+                filter: blur(1em);
+                mask-image: linear-gradient(
+                    black 60%,
+                    transparent
+                );
+                position: relative;
+            }
             .banner img{
                 width: 1280px;
                 height: 400px;
@@ -866,7 +869,7 @@
             .roomData, .roomData img{
                 max-width: 	50rem;
             }
-            .habitacion p, h3, h2{
+            .habitacion :is(p, h3, h2){
                 color:#131313;
                 text-align: left;
                 text-align: justify;
@@ -1180,6 +1183,32 @@
             tres puntos que abriran una pestaña que despliega las
             redirecciones
             */
+
+            /*-------------- MAINPAGE.JS ------------------*/
+            .banner-cont{
+                top: 7rem;
+                gap: 1.7rem
+            }
+            .banner-cont-description{
+                max-width: 30rem;
+                font-size: 1.2rem;
+                text-align: center;
+                text-shadow: 0px 2px 10px rgb(0, 0, 0, 1);
+            }
+            .mainpage-content-expo{
+                flex-direction: column;
+            }
+            .main-content-expo-image{
+                display: none;  
+            }
+            .main-content-expo-image-res1200{
+                display: block;
+            }
+            .main-content-expo-image-res1200{
+                width: 100%;
+                box-sizing: border-box;
+                aspect-ratio: 16/9;
+            }
             .headerbox{
                 width: 80%
             }
@@ -1230,7 +1259,11 @@
                 display: none;
             }
         }
-        @media (max-width: 700px) {
+        @media (max-width: 720px) {
+            /*---- MAINPAGE -----*/
+            .mainpage-fieldset{
+                display: none;
+            }
             .payment-box{
                 width: 80%;
             }
@@ -1274,5 +1307,38 @@
             .footercredit{
                 display: none;
             }
-        }
+            .habfin{
+                gap: 2rem
+            }
+            .habfin h1{
+                font-size: 3.5rem;
+            }
 
+        }
+        
+        @media (max-width: 480px){
+            .banner-cont-description{
+                display: none;
+            }
+            .banner-cont{
+                top: 6rem
+            }
+            .banner-cont-title h1{
+                font-size: 4rem
+            }
+            .mainpage-content-expo-text{
+                line-height: 2.8rem;
+            }
+            .footerp1, .footerp2{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+            .footerubicontact{
+                gap: 2rem
+            }
+            .habfin h1{
+                font-size: 2.7rem;
+            }
+        }
