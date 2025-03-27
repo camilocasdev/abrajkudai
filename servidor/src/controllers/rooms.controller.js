@@ -12,47 +12,21 @@ export const roomList = async (req, res) => {
 
     if (!miniFilter) return res.status(200).json(lista);
 
-    if (miniFilter === 'disponible') {
-
         try {
-            const listaDisponible = lista.filter(RoomType => RoomType.estado === 'Disponible')// Limita los resultados .slice(0, 10);
+            const listFiltered = lista.filter(RoomType => RoomType.estado === miniFilter) // Para limitar los resultados .slice(0, 10);
 
-            if (listaDisponible.length < 0) {
+            if (listFiltered.length < 0) {
                 return res.status(200).json({ message: 'No hay habitaciones disponibles' });
             } else {
                 return res.status(200).json({ 
                     message: 'Habitaciones disponibles',
-                    Array: listaDisponible
+                    Array: listFiltered
                 })
             }
         } catch (error) {
             console.log(error);
             res.status(400).json({msg: 'Error inesperado...'})
         }
-    }
-
-    if (miniFilter === 'ocupado') {
-
-        try {
-
-            const listaOcupada = lista.filter(RoomType => RoomType.estado === 'Ocupado')//Limita los resultados .slice(0, 10)
-            console.log(listaOcupada.lenght)
-
-            if (listaOcupada.lenght < 0) {
-                return res.status(200).json({ message: 'No hay habitaciones ocupadas'});
-            } 
-
-            return res.status(200).json({ 
-                message: 'Habitaciones ocupadas', 
-                Array: listaOcupada
-            })
-
-        } catch (error) {
-            console.log(error);
-            res.status(400).json({msg: 'Error inesperado...'})
-        }
-    }
-
 }
 
 export const roomUpdate = async (req, res) => {

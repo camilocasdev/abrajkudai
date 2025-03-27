@@ -6,12 +6,8 @@ import React, { useEffect, useState } from 'react'
 
 function Rooms(){
 
-
-
-    
-
-    const [room, setRoom] = useState({})
     const navigate = useNavigate()
+    const [room, setRoom] = useState({})
     const [searchParams] = useSearchParams()
     const [fechaInicio, setFechaInicio] = useState()
     const [fechaHasta, setFechaHasta] = useState()
@@ -41,7 +37,7 @@ function Rooms(){
                 
                 // Traer la lista de disponibles por torre, si no hay en una torre, ocultar la opción.
 
-                 //console.log("Datos recibidos en React:", data);  //Borrar
+               //console.log("Datos recibidos del Servidor:", data);  //Borrar
 
                 if (!data.roomServer) {
                     console.error("No hay datos de habitación en la respuesta." + error);  //Borrar
@@ -55,17 +51,17 @@ function Rooms(){
         datosHabitacion()
 
     }, [searchParams])
-/*
+
     useEffect(() => {
-         //console.log("Estado actualizado de room:", room);
+        console.log("Estado actualizado de room: ", room._id ,room);
          //console.log(room?.descripcion?.[0])
         }, [room]);
-*/
+
     const enviarForm = async(event) => {
         event.preventDefault()
 
         try {
-            const response = await fetch('/restr/reserva/new', {
+            const response = await fetch('/restr/booking/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -74,8 +70,8 @@ function Rooms(){
                     fechaInicio: fechaInicio,
                     fechaHasta: fechaHasta,
                     cantidad: cantidad,
-                    habitacion: room.nombre,
-                    estado: "pendiente",
+                    habitacion: room._id,
+                    estado: "Pendiente",
                     servicios: [
                         //Implementar servicios ya que por ahora no se tiene en cuenta servicios ni precios de estos
                     ]

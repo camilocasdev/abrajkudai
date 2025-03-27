@@ -6,7 +6,8 @@ const router = Router();
 
 router.get('/reserva', [verifyToken, isAdminOrEmpleado] , reservactrl.getReserva)
 router.get('/reserva/:reservaId', [verifyToken], reservactrl.getReservaId) // Operación por ID
-router.post('/reserva/new', [ verifyToken ], reservactrl.createReserva)
+router.post('/booking/create', [ verifyToken ], reservactrl.bookingToPaying)
+router.post('/booking/confirm', [ verifyToken ] , reservactrl.bookingConfirmPay)
 router.put('/reserva/:reservaId', [verifyToken, isAdminOrEmpleado], reservactrl.updateReserva) // Operación por ID
 router.delete('/reserva/:reservaId', [verifyToken, isAdminOrEmpleado] ,reservactrl.deleteReserva) // Operación por ID
 

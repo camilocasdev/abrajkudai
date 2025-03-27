@@ -1,21 +1,21 @@
 import { Schema, model} from "mongoose";
 
 const reserva = new Schema ({
-    usuario: [{
+    usuario: {
         rel: 'Usuario',
         type: Schema.Types.ObjectId,
-    }],
+    },
     fechaInicio: { type: Date },
     fechaHasta: { type: String },
-    habitacion: [{
+    habitacion: {
         rel: 'Room',
         type: Schema.Types.ObjectId
-    }],
+    },
     total: { type: Number, require: true },
     estado: { 
         type: String, 
         require: true,
-        enum: ['pendiente', 'cancelado', 'pagado']
+        enum: ['Pendiente', 'Cancelado', 'Pagado']
     }
 }, {
     timestamps: true,
