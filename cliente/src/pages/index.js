@@ -7,5 +7,6 @@ import reserva from './reserva';
 import signin from './signin'
 import signup from './signup'
 import rooms from './rooms'
+import error from './error'
 
-export { amenidades, eventos, mainpage, pago, perfil, reserva, signin, signup, rooms};
+export { amenidades, eventos, mainpage, pago, perfil, reserva, signin, signup, rooms, error};

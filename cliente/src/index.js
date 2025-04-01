@@ -24,7 +24,8 @@ ReactDOM.createRoot(root).render(
       <Route path="perfil" element={<pages.perfil />} />
       <Route path="signin" element={<pages.signin />} />
       <Route path="signup" element={<pages.signup />} />
-      <Route path="/habitacion" element={<pages.rooms />} /> 
+      <Route path="/habitacion" element={<pages.rooms />} />
+      <Route path="/404" element={<pages.error />}/>
     </Routes>
   </BrowserRouter>
 )

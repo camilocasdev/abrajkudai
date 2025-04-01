@@ -11,7 +11,15 @@ const reserva = new Schema ({
         rel: 'Room',
         type: Schema.Types.ObjectId
     },
-    total: { type: Number, require: true },
+    tipo:{
+        rel: 'Roomtype',
+        type: Schema.Types.ObjectId
+    },
+    dias: { type: Number },
+    total: {
+        type: Number,
+        require: true
+    },
     estado: { 
         type: String, 
         require: true,

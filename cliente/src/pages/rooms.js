@@ -14,12 +14,23 @@ function Rooms(){
     const [cantidad, setCantidad] = useState()
     const [error, setError] = useState()
 
+    //Agregamos un limitador para los dates tomados de las fechas desde, siendo el mismo día el minimo.
+    const formMinDate = new Date()
+    const minDate = formMinDate.toISOString().split("T")[0] //funciona
+
+    const formSugDate = new Date()
+    formSugDate.setMonth(formSugDate.getMonth() + 1) //+1 Mes a la sugerencia
+    const sugDate = formSugDate.toISOString().split("T")[0] //Transforma la fecha.
+        //toISOString() cambiara el formato a YYYY-MM-DDTHH:mm:ss.sssZ, especificamente cambia a un UTC.
+        //.split dividira las fechas[0] y la hora[1] en un array con el mismo orden.
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
 
         const datosHabitacion = async() => {
 
-            const url = searchParams.get('t')
+            let url = searchParams.get('t')
+            if (!url) { url = 0 };
 
             try{
                 const response = await fetch(`/public/search?t=${encodeURIComponent(url)}`, {
@@ -53,7 +64,7 @@ function Rooms(){
     }, [searchParams])
 
     useEffect(() => {
-        console.log("Estado actualizado de room: ", room._id ,room);
+        //console.log("Estado actualizado de room: ", room._id ,room);
          //console.log(room?.descripcion?.[0])
         }, [room]);
 
@@ -161,6 +172,7 @@ function Rooms(){
                                                 type ="date" 
                                                 name ="fechaInicio"
                                                 id = "fechaInicio"
+                                                min = {minDate}
                                                 value = {fechaInicio}
                                                 onChange ={(e) => setFechaInicio(e.target.value)}
                                                 required
@@ -169,6 +181,7 @@ function Rooms(){
                                                 type = "date" 
                                                 name = "fechaHasta"
                                                 id = "fechaHasta"
+                                                min = {minDate}
                                                 value = {fechaHasta}
                                                 onChange = {(e) => setFechaHasta(e.target.value)}
                                                 required

@@ -14,19 +14,39 @@ export const bookingToPaying = async ( req, res) => {
         const token = req.cookies['Tookie']
         const decoded = jwt.verify(token, cfig.SECRET_KEY)
 
+        const room = await Room.findOne({roomid: habitacion}).sort({updatedAt: 1})
+
+        //Transformamos en fecha el String que nos llega de la base de datos
+        const [dayFrom, dayTo] = [new Date(fechaInicio), new Date(fechaHasta)]
+        
+        /*--------------------------------------------------------------------------------#
+        |  TRANSFORMACIÓN DE FECHAS                                                       |
+        |  Con Math.abs forzamos a que el resultado sea positivo                          |                                    |
+        |  getTime() hace el calculo de los milisegundos que trascurrieron desde          |
+        |  la fecha que ingresamos hasta 1970, con los dos calculos nos da una            |
+        |  diferencias de milisegundos, lo que procedemos es a restar esta diferencia     |
+        |  y luego multiplicarla, por 1000 para un segundo, por 60 para un minuto, por    |
+        |  60 para una hora y luego por 24 para un día, de esta forma nos dan los días.   |
+        #________________________________________________________________________________*/
+
+        const diffms = Math.abs(dayTo.getTime() - dayFrom.getTime());
+
+        const dias = diffms / (1000 * 60 * 60 * 24); //Sería igual a decir que dividimos por 86.4M 
+        //        == diffms / 86400000
+
         const booking = new Reserva({
             usuario: decoded.id,
-            habitacion: habitacion,
+            habitacion: room, //Habitación guardará el ID de una habitación
+            tipo: habitacion, //Tipo guardará el tipo de habitación que el usuario desea
             fechaInicio: fechaInicio,
             fechaHasta: fechaHasta,
+            dias: dias,
             cantidad: cantidad,
             estado: estado,
             servicios: servicios
         })
         
         const temp = await booking.save()
-        
-        const room = await Room.findOne({roomid: habitacion}).sort({updatedAt: 1})
         
         const updateRoom = await Room.findOneAndUpdate({_id: room._id}, {estado: estado}, {new: true})
         
@@ -53,72 +73,56 @@ export const bookingToPaying = async ( req, res) => {
 
 }
 
-export const bookingConfirmPay = async ( req, res ) => {
-
-    // const reservaID = decodeURIComponent(req.cookies.reservaID); Descodificar la id de reserva
-
-}
-
-                /*--------------------------------------------------------------------------------------- #
-                |                                                                                         |
-                |    Para que traiga el Id sin new ObjectID(-id) se debe traer el documento sin array     |
-                |    en caso de que sean varios documentos, se debera especificar la posición del array   |
-                |    para que retorne un documento sin array y así muestre correctamenete el _id.         |
-                |                                                                                         |
-                |   Sin embargo a veces no funciona eso :sob:, para ello usar toString() o toHexString()  |
-                |                                                                                         |
-                # ---------------------------------------------------------------------------------------*/
-
-
-/* 
-export const createReserva = async (req, res) => {
+export const payData = async ( req, res) => {
 
     try {
-        const { fechaInicio, fechaHasta, cantidad, habitacion, estado, servicios } = req.body; //Falta el total y el estado de pago
-        
-        const token = req.cookies['Tookie']
-        const step = req.params
-        console.log(step) 
-        return res.status(201).json(step);
+        const bookingId = req.cookies['Booking-Temp'] //Id de Reserva (SIN CODIFICACIÓN)
+        const userId = jwt.verify(req.cookies['Tookie'], cfig.SECRET_KEY) // ID DE USUARIO
 
-        const decoded = jwt.verify(token, cfig.SECRET_KEY)
-            
-        const datos = {
-            usuario: decoded.id,
-            fechaInicio: fechaInicio,
-            fechaHasta: fechaHasta,
-            cantidad: cantidad,
-            habitacion: habitacion,
-            estado: estado, //Falta el total
-            services: servicios
+        if (bookingId == undefined || userId == undefined) {
+            return res.status(401).json({error: true, msg: 'Error en la toma de datos...', redirect: '/404?error=booking-data-missing'})
         }
 
-        console.log(datos) 
-        
-        
+        const booking = await Reserva.findOne({_id: bookingId})
+        const user = await User.findOne({_id: userId.id})
+        const roomtype = await Roomtype.findOne({_id: booking.tipo})
+    
+        //Descodificar la id de reserva en caso de que no decodifique en el req.cookies
+        //const reservaID = decodeURIComponent(cookie); 
+
+        res.status(200).json({
+            error: false,
+            msg: 'Todo OK!',
+            booking: booking,
+            room: {
+                nombre: roomtype.nombre,
+                img: roomtype.imagen,
+            },
+            user: {
+                mail: user.correo,
+                tel: user.telefono
+            }
+        })
+    
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: true, msg: "Error Interno Inesperado"})
+    }
+}
+
+export const bookingConfirmPay = async ( req, res ) => {
+    
+    const cookie = req.cookies['Booking-Temp']
+
+    const booking = await Reserva.findOne({_id: cookie})
+
+    const {cardName, cardNumber, cardExpire, cardCode, email, userNumber} = req.body;
 
 
-            if (step === 0) {
 
-                const type = await Roomtype.findOne({nombre: datos.habitacion})
+    res.status(201).json({msg: 'Todo OK!', contenido: 'w'})
 
-                
-                
-                const room = await Room.find({
-                    roomid: type._id.toString(), 
-                    estado: 'Disponible'
-                }).sort({
-                    updateAt: 1
-                }).limit(5); // Usar limit() para limitar la cantidad de resultados.
-                
-                if (room == undefined || room == null) return console.log('Consulta retorna vacia...');
-                
-                /* console.log(await room[0].populate('roomid'))
-                console.log({Type: type._id.toString()}) */
-
-
-
-                //const saveBooking = await newBooking.save()*/
+}
 
 export const getReserva = async (req, res) => {
     const reservas = await Reserva.find();
