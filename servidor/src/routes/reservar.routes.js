@@ -14,4 +14,5 @@ router.delete('/reserva/:reservaId', [verifyToken, isAdminOrEmpleado] ,reservact
 router.get('/paydata', [ verifyToken ], reservactrl.payData)
 router.post('/booking/create', [ verifyToken ], reservactrl.bookingToPaying)
 router.post('/booking/confirm', [ verifyToken ] , reservactrl.bookingConfirmPay)
+
 export default router;

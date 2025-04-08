@@ -56,6 +56,9 @@
                 font-size: 20px;
                 text-align: right;
             }
+            ul{
+                margin: 0rem;
+            }
             ::placeholder{
                 font-family: Rubik;
                 font-size: 1rem;
@@ -1060,6 +1063,11 @@
             padding: 1.7rem;
             gap: 1rem
         }
+        .pay-form{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
         .payment-methods{   
             display: flex;
             flex-direction: row;
@@ -1124,6 +1132,7 @@
             border-radius: 1rem;
             padding: 1rem;
             gap: 1rem;
+            justify-content: space-between;
         }
         .booking-data{
             color: #eeeeee;

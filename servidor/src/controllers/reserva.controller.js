@@ -19,34 +19,44 @@ export const bookingToPaying = async ( req, res) => {
         //Transformamos en fecha el String que nos llega de la base de datos
         const [dayFrom, dayTo] = [new Date(fechaInicio), new Date(fechaHasta)]
         
-        /*--------------------------------------------------------------------------------#
-        |  TRANSFORMACIÓN DE FECHAS                                                       |
-        |  Con Math.abs forzamos a que el resultado sea positivo                          |                                    |
-        |  getTime() hace el calculo de los milisegundos que trascurrieron desde          |
-        |  la fecha que ingresamos hasta 1970, con los dos calculos nos da una            |
-        |  diferencias de milisegundos, lo que procedemos es a restar esta diferencia     |
-        |  y luego multiplicarla, por 1000 para un segundo, por 60 para un minuto, por    |
-        |  60 para una hora y luego por 24 para un día, de esta forma nos dan los días.   |
-        #________________________________________________________________________________*/
-
         const diffms = Math.abs(dayTo.getTime() - dayFrom.getTime());
+        
+            /*--------------------------------------------------------------------------------#
+            |  TRANSFORMACIÓN DE FECHAS                                                       |
+            |  Con Math.abs forzamos a que el resultado sea positivo                          |                                    |
+            |  getTime() hace el calculo de los milisegundos que trascurrieron desde          |
+            |  la fecha que ingresamos hasta 1970, con los dos calculos nos da una            |
+            |  diferencias de milisegundos, lo que procedemos es a restar esta diferencia     |
+            |  y luego multiplicarla, por 1000 para un segundo, por 60 para un minuto, por    |
+            |  60 para una hora y luego por 24 para un día, de esta forma nos dan los días.   |
+            #________________________________________________________________________________*/
 
         const dias = diffms / (1000 * 60 * 60 * 24); //Sería igual a decir que dividimos por 86.4M 
         //        == diffms / 86400000
 
+        const roomType = await Roomtype.findOne({_id: habitacion})
+
+        const total = dias * roomType.precio
+
         const booking = new Reserva({
             usuario: decoded.id,
-            habitacion: room, //Habitación guardará el ID de una habitación
-            tipo: habitacion, //Tipo guardará el tipo de habitación que el usuario desea
+            habitacion: room, // (1) Habitación guardará el ID de una habitación
+            tipo: habitacion, // (1)Tipo guardará el tipo de habitación que el usuario desea
             fechaInicio: fechaInicio,
             fechaHasta: fechaHasta,
+            cantidad: cantidad, //la cantidad maxima se manejara desde el front
             dias: dias,
-            cantidad: cantidad,
+            total: total,
             estado: estado,
             servicios: servicios
         })
+            /*--------------------------------------------------------------------------------#
+            |  (1) Corregir la toma de datos desde el front para que quede más claro en la    |
+            |   lectura del back, ya que de la manera como esta, pueden confundirse el tipo   |
+            |   de ID que se esta tomando.                                                    |
+            #________________________________________________________________________________*/
         
-        const temp = await booking.save()
+        const save = await booking.save()
         
         const updateRoom = await Room.findOneAndUpdate({_id: room._id}, {estado: estado}, {new: true})
         
@@ -62,7 +72,7 @@ export const bookingToPaying = async ( req, res) => {
             samesite: "Strict"
         }
 
-        res.cookie('Booking-Temp', temp._id, cookiecfg)
+        res.cookie('Booking-Temp', save._id, cookiecfg)
 
         return res.status(201).json({error: false, msg: 'Redirigiendo al pago...'})
     

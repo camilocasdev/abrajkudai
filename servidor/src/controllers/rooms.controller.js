@@ -19,7 +19,7 @@ export const roomList = async (req, res) => {
                 return res.status(200).json({ message: 'No hay habitaciones disponibles' });
             } else {
                 return res.status(200).json({ 
-                    message: 'Habitaciones disponibles',
+                    message: 'Habitaciones ' + miniFilter,
                     Array: listFiltered
                 })
             }

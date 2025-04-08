@@ -5,8 +5,6 @@ const reserva = new Schema ({
         rel: 'Usuario',
         type: Schema.Types.ObjectId,
     },
-    fechaInicio: { type: Date },
-    fechaHasta: { type: String },
     habitacion: {
         rel: 'Room',
         type: Schema.Types.ObjectId
@@ -15,6 +13,9 @@ const reserva = new Schema ({
         rel: 'Roomtype',
         type: Schema.Types.ObjectId
     },
+    fechaInicio: { type: Date },
+    fechaHasta: { type: String },
+    cantidad: { type: Number },
     dias: { type: Number },
     total: {
         type: Number,
@@ -24,7 +25,10 @@ const reserva = new Schema ({
         type: String, 
         require: true,
         enum: ['Pendiente', 'Cancelado', 'Pagado']
-    }
+    },
+    servicios: [{
+        type: String
+    }]
 }, {
     timestamps: true,
     versionKey: false

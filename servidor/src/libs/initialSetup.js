@@ -1,7 +1,7 @@
-import { TIMEOUT } from 'dns';
 import Role from '../models/role';
 import Room from '../models/room';
 import Roomtype from '../models/roomtype';
+import Reserva from '../models/reserva'
 import User from '../models/user';
 
 export const crearRole = async (req, res) => {
@@ -241,3 +241,39 @@ export const crearRoom = async (req, res) => {
     }
 }
 
+
+export const expireBooking = async (req, res) => {
+    
+    const pending = await Reserva.find({estado: 'Pendiente'})
+    const canceled = await Reserva.find({estado: 'Cancelado'})
+
+    const current = new Date()
+    
+    for (var i = 0 ; i < canceled.length ; i++){
+        const bookingDate = canceled[i].updatedAt.getTime()
+        const days = Math.trunc(Math.abs(bookingDate / ( 1000 * 60 * 60 * 24 ) - current.getTime() / (86400000)))
+
+        if ( days >= 2 ){
+            try{
+                const deleteBooking = await Reserva.findOneAndDelete({_id: canceled[i]._id})
+                const changeRoomState = await Room.findOneAndUpdate({_id: canceled[i].habitacion}, {estado: 'Disponible'}, {new: true})
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    }
+
+    for (var i = 0 ; i < pending.length ; i++ ){
+        const bookingDate = pending[i].createdAt.getTime()
+        const hours = Math.trunc(Math.abs(bookingDate / ( 1000 * 60 * 60) - current.getTime() / (3600000)))
+        
+        if ( hours > 2) {
+            try {
+                const changeRoomState = await Room.findOneAndUpdate({_id: pending[i].habitacion}, {estado: 'Disponible'}, {new: true})
+                const changeBookingState = await Reserva.findOneAndUpdate({_id: pending[i]._id}, {estado: 'Cancelado'}, {new: true})
+            } catch (error) {
+                console.error(error)
+            }
+        } 
+    }
+}

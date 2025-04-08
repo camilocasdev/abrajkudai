@@ -20,7 +20,6 @@ function Pago(){
     const [user, setUser] = useState()
     const [room, setRoom] = useState()
 
-    const res = [{total: 200, data: {nombre: 'Junior Suite', dias: 6, servicios: {uno: 1, dos: 2}}}]
     const currency = 'USD'
     
     useEffect(() => {
@@ -50,7 +49,8 @@ function Pago(){
     }, [])
 
     useEffect(() => { //Refresca los estados (SOLO TESTING)
-        //console.log(booking, user, room)
+        
+
     }, [user, booking, room])
 
     useEffect (() => {
@@ -72,6 +72,7 @@ function Pago(){
         const methodChange = async() => {
         }
     },[searchParams])
+
     
     return(
         <div>
@@ -86,7 +87,7 @@ function Pago(){
                     </section>
                     <section className='payment-box'>
                         <article className='payment-form'>
-                            <form method='POST' action=''>
+                            <form class='pay-form' method='POST' action='/'>
                                 <div className='payment-form-title'>
                                     <h2>Payment Method</h2>
                                 </div>
@@ -118,7 +119,7 @@ function Pago(){
                                         // INVESTIGAR COMO HACER EL INPUT DE FECHA ESPECIFICA PARA TARJETA DE CREDITO
                                         name='card-expiration'
                                         type='text'
-                                        pattern="(0[1-9]|1[0-2])\/([0-9]{2})" 
+                                        pattern="(0[1-9]|1[0-2])\/([0-9]{2})" //Esto sirve a medias
                                         placeholder="MM/AA" 
                                         maxLength="5" 
                                         title="Ingresa la fecha en formato MM/AA (ejemplo: 05/26)"
@@ -164,14 +165,17 @@ function Pago(){
                                 </div>
                                 <div class='booking-data-list'>
                                     <ul>
-                                        <li>{room?.nombre}. {booking?.days} Days </li>
-                                        {booking?.services}
+                                        <li><strong>Habitación: </strong>{room?.nombre} <strong>({booking?.dias} Días)</strong></li>
+                                        {booking?.servicios.map((service, i) => {
+                                            <li>{i} {service.nombre}: {service.precio}</li>
+                                            return
+                                        })}
                                     </ul>
                                 </div>
                             </div>
                             <div className='booking-total'>
                                 <p>Monto Completo</p>
-                                <p>{JSON.stringify(res[0].total)}{currency}</p>
+                                <p>{booking?.total}{currency}</p>
                             </div>
                         </article>
                     </section>

@@ -6,7 +6,7 @@ import authrt from './routes/auth.routes';
 import userprivrt from './routes/userpriv.routes';
 import usersrt from './routes/user.routes';
 import roomsrt from './routes/rooms.routes';
-import { crearRole, crearRoom, defaultUsers, crearRoomType } from './libs/initialSetup';
+import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking} from './libs/initialSetup';
 import path from 'path';
 import cookieParser  from 'cookie-parser';
 
@@ -20,10 +20,16 @@ try {
     crearRole();
     defaultUsers();
     crearRoomType();
-    setTimeout(function(){
+
+    setTimeout(function(){ //El uso de function para la definicion del setTimeout o setInterval esta en desuso
         crearRoom();
-    }, 2000)
-    
+    }, 2000); // 2 Segundos
+
+    setInterval(() => { //Este uso es más moderno y fácil de implementar
+        console.log('[Auto Clean] Chequeando estado de reservas...')
+        expireBooking()
+    }, 43200000); // 12 Horas
+    // 86400000); // 24 Horas
 
 } catch (error) {
     console.log(error);
