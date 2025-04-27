@@ -24,17 +24,35 @@ export const signIn = async (req, res) => {
         if (!matchPass) {
             return res.status(401).json({token: null, msg: "Contraseña Invalida", redirect: '/signin?error=invalid_password'});
         }
+
+        let tokenExpire;
+        let cookieExpire;
+
+        if (req.body.keepSession === false){
+            tokenExpire = 86400
+            cookieExpire = 24 * 60 * 60 * 1000
+        } else {
+            tokenExpire = 15 * 86400
+            cookieExpire = 15 * 24 * 60 * 60 * 1000
+        }
+
+        //console.log(cookieExpire)
+        // IMPLEMENTAR DOS TOKENS, UNO DE CORTA DURACIÓN Y OTRO DE RENOVACIÓN PARA REDUCIR RIESGOS.
+
         const token = jwt.sign({id: usuarioEncontrado._id}, cfig.SECRET_KEY, {
-            expiresIn: 86400
+            expiresIn: tokenExpire
         });
+        //console.log(token.expiresIn)
 
         const cookiecfg = {
-            expires: new Date(Date.now() + cfig.COOKIE_EXPIRATION * 24 * 60 * 60 * 1000),
+            expires: new Date(Date.now() + cfig.COOKIE_EXPIRATION * cookieExpire),
             path: "/",
             httpOnly: true,
             secure: true,
             samesite: "Strict"
         }
+
+        //console.log(cookiecfg.expires)
 
         res.cookie('Tookie', token, cookiecfg)
 

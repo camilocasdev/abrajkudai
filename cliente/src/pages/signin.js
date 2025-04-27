@@ -8,6 +8,7 @@ function Login(){
     
     const [correo, setCorreo] = useState('');
     const [contrasena, setContrasena] = useState('');
+    const [keepSession, setKeepSession] = useState(false)
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ function Login(){
                 body: JSON.stringify({
                     correo: correo,
                     contrasena: contrasena,
+                    keepSession: keepSession
                 }),
             });
 
@@ -92,7 +94,7 @@ function Login(){
                             <form method="post" onSubmit={ingresar} action="/validation/signin">
                                 <fieldset class="signin">
                                     <div class="signincampos">
-                                        <label for="correo">
+                                        <label>
                                             <input type="email" 
                                             id="correo" 
                                             value={correo} 
@@ -110,7 +112,11 @@ function Login(){
                                     </div>
                                     <div class="signincheckbox">
                                         <label>
-                                            <input type="checkbox"/>
+                                            <input 
+                                                type="checkbox"
+                                                value = {keepSession}
+                                                onChange = {(e)=> setKeepSession(e.target.checked)}
+                                            />
                                             <span>¿Mantener sesión iniciada?</span>
                                         </label>
                                     </div>
