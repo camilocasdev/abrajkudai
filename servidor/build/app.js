@@ -24,8 +24,16 @@ try {
   (0, _initialSetup.defaultUsers)();
   (0, _initialSetup.crearRoomType)();
   setTimeout(function () {
+    //El uso de function para la definicion del setTimeout o setInterval esta en desuso
     (0, _initialSetup.crearRoom)();
-  }, 2000);
+  }, 2000); // 2 Segundos
+
+  setInterval(function () {
+    //Este uso es más moderno y fácil de implementar
+    console.log('[Auto Clean] Chequeando estado de reservas...');
+    (0, _initialSetup.expireBooking)();
+  }, 43200000); // 12 Horas
+  // 86400000); // 24 Horas
 } catch (error) {
   console.log(error);
 }

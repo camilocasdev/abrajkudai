@@ -227,40 +227,41 @@ var privgetuser = exports.privgetuser = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
+          _context6.prev = 0;
           token = req.cookies['Tookie'];
-          _context6.prev = 1;
           decoded = _jsonwebtoken["default"].verify(token, _config["default"].SECRET_KEY);
-          req.UsuarioId = decoded.id;
-          _context6.next = 6;
-          return _user["default"].findById(req.UsuarioId, {
+          _context6.next = 5;
+          return _user["default"].findById(decoded.id, {
             contrasena: 0
           });
-        case 6:
+        case 5:
           usuario = _context6.sent;
           if (usuario) {
-            _context6.next = 9;
+            _context6.next = 8;
             break;
           }
           return _context6.abrupt("return", res.status(404).json({
             message: 'Usuario no encontrado'
           }));
-        case 9:
+        case 8:
+          ;
           res.status(200).json(usuario);
-          _context6.next = 15;
+          _context6.next = 16;
           break;
         case 12:
           _context6.prev = 12;
-          _context6.t0 = _context6["catch"](1);
+          _context6.t0 = _context6["catch"](0);
+          console.log(_context6.t0);
           return _context6.abrupt("return", res.status(401).json({
             error: true,
             message: 'Error al autenticar el token',
             redirect: '/signin?error=invalid_token'
           }));
-        case 15:
+        case 16:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[1, 12]]);
+    }, _callee6, null, [[0, 12]]);
   }));
   return function privgetuser(_x11, _x12) {
     return _ref6.apply(this, arguments);
@@ -272,11 +273,12 @@ var logout = exports.logout = /*#__PURE__*/function () {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
           res.clearCookie('Tookie');
+          res.clearCookie('accessToken');
           res.status(200).json({
             message: 'Sesión cerrada'
           });
           return _context7.abrupt("return");
-        case 3:
+        case 4:
         case "end":
           return _context7.stop();
       }

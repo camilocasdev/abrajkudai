@@ -88,21 +88,23 @@ export const update_user = async (req, res) => {
 
 export const privgetuser = async (req, res) => {
     
-    const token = req.cookies['Tookie'];
-
     try {
+        const token = req.cookies['Tookie'];
 
         const decoded = jwt.verify(token, cfig.SECRET_KEY);
 
-        req.UsuarioId = decoded.id;
+        const usuario = await Usuario.findById(decoded.id, {contrasena: 0});
 
-        const usuario = await Usuario.findById(req.UsuarioId, {contrasena: 0});
-
-        if (!usuario) return res.status(404).json({message: 'Usuario no encontrado'});
+        if (!usuario) {
+            return(
+                res.status(404).json({message: 'Usuario no encontrado'})
+            )
+        };
 
         res.status(200).json(usuario)
 
     } catch (error) {
+        console.log(error)
         return res.status(401).json({
             error: true,
             message: 'Error al autenticar el token',
@@ -114,6 +116,7 @@ export const privgetuser = async (req, res) => {
 
 export const logout = async (req, res) => {
     res.clearCookie('Tookie');
+    res.clearCookie('accessToken')
     res.status(200).json({message: 'Sesión cerrada'});
     return;
 }

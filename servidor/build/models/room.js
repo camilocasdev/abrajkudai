@@ -13,7 +13,7 @@ var roomSchema = new _mongoose.Schema({
   },
   estado: {
     type: String,
-    "enum": ['Disponible', 'Ocupado', 'Mantenimiento', 'Limpieza', 'Reservado'],
+    "enum": ['Disponible', 'Ocupado', 'Mantenimiento', 'Limpieza', 'Reservado', 'Pendiente'],
     "default": 'Disponible'
   },
   roomid: {
@@ -22,7 +22,7 @@ var roomSchema = new _mongoose.Schema({
     required: true
   }
 }, {
-  timestamp: true,
+  timestamps: true,
   versionkey: false
 });
 

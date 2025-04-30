@@ -1,8 +1,6 @@
 import {Role} from '../models/role';
 import Usuario from '../models/user';
 
-
-
 export const checkExisteRol = (req, res, next) => {
     if (req.body.role) {
         for (let i = 0; i < req.body.role.length; i++){

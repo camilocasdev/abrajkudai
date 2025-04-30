@@ -10,5 +10,20 @@ var _default = exports["default"] = {
   SALT_DEVELOPMENT: 5,
   //en este caso elegimos una más corta para cuando se este desarrollando para que no se relentize el proceso 
   SECRET_KEY: 'esta-es-la-secret-key-y-debe-ser-larga-y-secreta-podemos-usar-signos-@@-y-numero',
-  COOKIE_EXPIRATION: 1
+  COOKIE_CFG: {
+    path: "/",
+    httpOnly: true,
+    secure: true,
+    samesite: "Strict"
+  },
+  //AccessToken será el token de persistencia, el que permitirá generar un token de transacción.
+  //Tookie será mi token de transacción, su vida debe ser corta, accessToken lo renovará cada vez.
+  EXPIRE_COOKIE: {
+    Tookie: 1000 * 60 * 60 * 2,
+    accessToken: 1000 * 60 * 60 * 24 * 45
+  },
+  EXPIRE_TOKEN: {
+    Tookie: 3600 * 2,
+    accessToken: 86400 * 45
+  }
 };

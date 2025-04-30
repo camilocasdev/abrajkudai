@@ -6,20 +6,30 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _mongoose = require("mongoose");
 var reserva = new _mongoose.Schema({
-  usuario: [{
+  usuario: {
     rel: 'Usuario',
     type: _mongoose.Schema.Types.ObjectId
-  }],
+  },
+  habitacion: {
+    rel: 'Room',
+    type: _mongoose.Schema.Types.ObjectId
+  },
+  tipo: {
+    rel: 'Roomtype',
+    type: _mongoose.Schema.Types.ObjectId
+  },
   fechaInicio: {
     type: Date
   },
   fechaHasta: {
     type: String
   },
-  habitacion: [{
-    rel: 'Room',
-    type: _mongoose.Schema.Types.ObjectId
-  }],
+  cantidad: {
+    type: Number
+  },
+  dias: {
+    type: Number
+  },
   total: {
     type: Number,
     require: true
@@ -27,8 +37,11 @@ var reserva = new _mongoose.Schema({
   estado: {
     type: String,
     require: true,
-    "enum": ['pendiente', 'cancelado', 'pagado']
-  }
+    "enum": ['Pendiente', 'Cancelado', 'Pagado']
+  },
+  servicios: [{
+    type: String
+  }]
 }, {
   timestamps: true,
   versionKey: false

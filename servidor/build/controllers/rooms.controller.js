@@ -13,7 +13,7 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var roomList = exports.roomList = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var lista, miniFilter, listaDisponible, listaOcupada;
+    var lista, miniFilter, listFiltered;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -31,70 +31,37 @@ var roomList = exports.roomList = /*#__PURE__*/function () {
           }
           return _context.abrupt("return", res.status(200).json(lista));
         case 6:
-          if (!(miniFilter === 'disponible')) {
-            _context.next = 20;
-            break;
-          }
-          _context.prev = 7;
-          listaDisponible = lista.filter(function (RoomType) {
-            return RoomType.estado === 'Disponible';
-          }); // Limita los resultados .slice(0, 10);
-          if (!(listaDisponible.length < 0)) {
-            _context.next = 13;
+          _context.prev = 6;
+          listFiltered = lista.filter(function (RoomType) {
+            return RoomType.estado === miniFilter;
+          }); // Para limitar los resultados .slice(0, 10);
+          if (!(listFiltered.length < 0)) {
+            _context.next = 12;
             break;
           }
           return _context.abrupt("return", res.status(200).json({
             message: 'No hay habitaciones disponibles'
           }));
-        case 13:
+        case 12:
           return _context.abrupt("return", res.status(200).json({
-            message: 'Habitaciones disponibles',
-            Array: listaDisponible
+            message: 'Habitaciones ' + miniFilter,
+            Array: listFiltered
           }));
-        case 14:
-          _context.next = 20;
+        case 13:
+          _context.next = 19;
           break;
-        case 16:
-          _context.prev = 16;
-          _context.t0 = _context["catch"](7);
+        case 15:
+          _context.prev = 15;
+          _context.t0 = _context["catch"](6);
           console.log(_context.t0);
           res.status(400).json({
             msg: 'Error inesperado...'
           });
-        case 20:
-          if (!(miniFilter === 'ocupado')) {
-            _context.next = 33;
-            break;
-          }
-          _context.prev = 21;
-          listaOcupada = lista.filter(function (RoomType) {
-            return RoomType.estado === 'Ocupado';
-          }); //Limita los resultados .slice(0, 10)
-          console.log(listaOcupada.lenght);
-          if (!(listaOcupada.lenght < 0)) {
-            _context.next = 26;
-            break;
-          }
-          return _context.abrupt("return", res.status(200).json({
-            message: 'No hay habitaciones ocupadas'
-          }));
-        case 26:
-          return _context.abrupt("return", res.status(200).json({
-            message: 'Habitaciones ocupadas',
-            Array: listaOcupada
-          }));
-        case 29:
-          _context.prev = 29;
-          _context.t1 = _context["catch"](21);
-          console.log(_context.t1);
-          res.status(400).json({
-            msg: 'Error inesperado...'
-          });
-        case 33:
+        case 19:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[7, 16], [21, 29]]);
+    }, _callee, null, [[6, 15]]);
   }));
   return function roomList(_x, _x2) {
     return _ref.apply(this, arguments);

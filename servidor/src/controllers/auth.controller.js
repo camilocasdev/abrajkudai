@@ -6,10 +6,11 @@ import Role from '../models/role';
 
 
 export const signIn = async (req, res) => {
-
     try {
+
+        const { correo, contrasena, keepSession } = req.body;
         
-        const usuarioEncontrado = await Usuario.findOne({correo: req.body.correo}).populate("role")
+        const usuarioEncontrado = await Usuario.findOne({correo: correo}).populate("role")
         
         if (!usuarioEncontrado) {
             return res.status(401).json({token: null, msg: "Usuario no encontrado", redirect: '/signin?error=user_not_found'});
@@ -19,44 +20,35 @@ export const signIn = async (req, res) => {
             return res.status(401).json({ token: null, msg: "Contraseña no encontrada", redirect: '/signin?error=password_not_found'});
         }
         
-        const matchPass = await Usuario.comparePassword(req.body.contrasena, usuarioEncontrado.contrasena);
+        const matchPass = await Usuario.comparePassword(contrasena, usuarioEncontrado.contrasena);
         
         if (!matchPass) {
             return res.status(401).json({token: null, msg: "Contraseña Invalida", redirect: '/signin?error=invalid_password'});
         }
-
-        let tokenExpire;
-        let cookieExpire;
-
-        if (req.body.keepSession === false){
-            tokenExpire = 86400
-            cookieExpire = 24 * 60 * 60 * 1000
+        const tokens = [];
+        if (keepSession === false) {
+            ['accessToken', 'Tookie'].forEach((name, i) => {
+                let expire;
+                if (name === 'Tookie'){
+                    expire = ({maxAge: cfig.EXPIRE_COOKIE[name]})
+                }
+                tokens[i] = jwt.sign({id: usuarioEncontrado._id, refresh: keepSession}, cfig.SECRET_KEY, {
+                    expiresIn: cfig.EXPIRE_TOKEN[name]
+                })
+                res.cookie(name, tokens[i], {...cfig.COOKIE_CFG, ...expire})
+            })
         } else {
-            tokenExpire = 15 * 86400
-            cookieExpire = 15 * 24 * 60 * 60 * 1000
+            ['accessToken', 'Tookie'].forEach((name, i) => {
+                tokens[i] = jwt.sign({id: usuarioEncontrado._id, refresh: keepSession}, cfig.SECRET_KEY, {
+                    expiresIn: cfig.EXPIRE_TOKEN[name]
+                })
+                res.cookie(name, tokens[i], {...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE[name]})
+            })
         }
 
-        //console.log(cookieExpire)
         // IMPLEMENTAR DOS TOKENS, UNO DE CORTA DURACIÓN Y OTRO DE RENOVACIÓN PARA REDUCIR RIESGOS.
 
-        const token = jwt.sign({id: usuarioEncontrado._id}, cfig.SECRET_KEY, {
-            expiresIn: tokenExpire
-        });
-        //console.log(token.expiresIn)
-
-        const cookiecfg = {
-            expires: new Date(Date.now() + cfig.COOKIE_EXPIRATION * cookieExpire),
-            path: "/",
-            httpOnly: true,
-            secure: true,
-            samesite: "Strict"
-        }
-
-        //console.log(cookiecfg.expires)
-
-        res.cookie('Tookie', token, cookiecfg)
-
-        return res.json({ msg: "Usuario autenticado, iniciando sesión..." , token: token });
+        return res.json({ msg: "Usuario autenticado, iniciando sesión..." , token: tokens });
     } catch (error) {
         console.log(error)
         res.status(400).json('Error al autenticar el usuario')

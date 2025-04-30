@@ -3,24 +3,81 @@ import cfig from '../config';
 import Usuario from '../models/user';
 import Role from '../models/role';
 
+export const refreshToken = async (req, res, next) => {
+    try {
+        
+        const accessCookie = req.cookies['accessToken']
+        const tookieCookie = req.cookies['Tookie']
+
+        if (!accessCookie && !tookieCookie || !accessCookie) {
+            return next();
+        }
+        
+        //PARA ESTA PARTE HAY QUE APRENDER A USAR SNIPPETS O COMO SE LLAMEN (si valen la pena usarlos acá)
+        const accessTookieData = jwt.decode(accessCookie, cfig.SECRET_KEY)
+        
+        if (!tookieCookie){
+            if (accessTookieData.refresh === true){
+                let token = jwt.sign({id: accessTookieData.id}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.Tookie})
+                res.cookie('Tookie', token, {...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.Tookie})
+                let aToken = jwt.sign({id: accessTookieData.id, refresh: true}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.accessToken})
+                res.cookie('accessToken', aToken, { ...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.accessToken })
+                req.cookies.Tookie = token
+            } else if (accessCookie) {
+                let token = jwt.sign({id: accessTookieData.id}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.Tookie})
+                res.cookie('Tookie', token, {...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.Tookie})
+                req.cookies.Tookie = token
+                //Acá no se renueva el token de funciones porque el refresh != true
+            }
+        } else {
+            const tookieCookieData = jwt.decode(tookieCookie, cfig.SECRET_KEY)
+
+            const current = new Date()
+            const left = ((tookieCookieData.exp - (current.getTime() / 1000)) / 60)
+
+            if (left < 15 || !tookieCookie){
+                console.log('Renovacion previa a la caducidad')
+                let token = jwt.sign({id: tookieCookieData.id}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.Tookie})
+                res.cookie('Tookie', token, {...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.Tookie})
+
+                if (accessTookieData.refresh === true){
+                    let aToken = jwt.sign({id: accessTookieData.id, refresh: true}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.accessToken})
+                    res.cookie('accessToken', aToken, { ...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.accessToken })
+                }
+            }
+        }
+        
+        next();
+
+    } catch (error) {
+        console.log(error)
+        res.status(402).json({msg: "Error"})
+    }
+}
+
+
 export const verifyToken = async (req, res, next) => {
 
-    const token = req.cookies['Tookie'];
-
-    if (!token) return res.status(401).json({
-        error: true,
-        msg: 'No hay token, por favor inicia sesión',
-        redirect: '/signin?error=not_logged'
-    }) //Limita la información o la ruta para los que no tienen un token, es decir un usuario no registrado o logeado
+     //Limita la información o la ruta para los que no tienen un token, es decir un usuario no registrado o logeado
 
     try {
+        let token;
+
+        try {
+            token = await req.cookies['Tookie'];
+        } catch (error) {
+            res.status(401).json({
+                error: true,
+                msg: 'No hay token, por favor inicia sesión',
+                redirect: '/signin?error=not_logged'
+            })
+        }
+        
         const decoded = jwt.verify(token, cfig.SECRET_KEY); //Verifica el token
 
         if (!decoded) return res.status(401).json({msg: "not decoded"})
 
-        req.UsuarioId = decoded.id;
-
-        const usuario = await Usuario.findById(req.UsuarioId, {contrasena: 0});
+        const usuario = await Usuario.findById(decoded.id, {contrasena: 0});
 
         if (!usuario) return res.status(404).json({
             message: 'Token sin usuario asociado...'
@@ -101,3 +158,5 @@ export const isAdminOrEmpleado = async (req, res, next) => {
         return res.status(500).json({ message: "Error interno del servidor" });
     }
 };
+
+//REVISAR LAS FUNCIONES SUPERIORES, EL CHEQUEO DE QUE ROL ES SE PUEDE HACER EN UNA SOLA FUNCIÓN

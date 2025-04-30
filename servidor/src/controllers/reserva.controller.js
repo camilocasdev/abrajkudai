@@ -11,7 +11,11 @@ export const bookingToPaying = async ( req, res) => {
         
         const { fechaInicio, fechaHasta, cantidad, habitacion, estado, servicios } = req.body;
         
-        const token = req.cookies['Tookie']
+        let token = req.cookies['Tookie'];
+        
+        if (!token) {
+            token = req.cookies['accessToken']
+        }
         const decoded = jwt.verify(token, cfig.SECRET_KEY)
 
         const room = await Room.findOne({roomid: habitacion}).sort({updatedAt: 1})
@@ -86,8 +90,13 @@ export const bookingToPaying = async ( req, res) => {
 export const payData = async ( req, res) => {
 
     try {
+        let token = req.cookies['Tookie'];
+        
+        if (!token) {
+            token = req.cookies['accessToken']
+        }
         const bookingId = req.cookies['Booking-Temp'] //Id de Reserva (SIN CODIFICACIÓN)
-        const userId = jwt.verify(req.cookies['Tookie'], cfig.SECRET_KEY) // ID DE USUARIO
+        const userId = jwt.verify(token, cfig.SECRET_KEY) // ID DE USUARIO
 
         if (bookingId == undefined || userId == undefined) {
             return res.status(401).json({error: true, msg: 'Error en la toma de datos...', redirect: '/404?error=booking-data-missing'})

@@ -117,7 +117,7 @@ function Login(){
                                                 value = {keepSession}
                                                 onChange = {(e)=> setKeepSession(e.target.checked)}
                                             />
-                                            <span>¿Mantener sesión iniciada?</span>
+                                            <span>¿Mantener la sesión iniciada?</span>
                                         </label>
                                     </div>
                                     <div class="signpost">
