@@ -57,7 +57,6 @@ export const search = async (req, res) => {
         
         const roomNumber = req.query.t
         
-        
         const type = await Roomtype.find().sort({precio: 1})
             
             //console.log(type)

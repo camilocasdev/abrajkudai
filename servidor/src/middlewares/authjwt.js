@@ -78,12 +78,8 @@ export const verifyToken = async (req, res, next) => {
                 redirect: '/signin?error=not%20logged'
             })
         }
-        
-        console.log({token: token, secret: process.env.SECRET_KEY})
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY); //Verifica el token
-
-        console.log(decoded)
 
         if (!decoded) return res.status(401).json({msg: "not decoded"})
 
@@ -155,7 +151,10 @@ export const isEmpleado = async (req, res, next) => {
 
 export const isAdminOrEmpleado = async (req, res, next) => {
     try {
-        const user = await Usuario.findById(req.UsuarioId);
+
+        const tokenData = jwt.decode( req.cookies['Tookie'] , process.env.SECRET_KEY)
+
+        const user = await Usuario.findById(tokenData.id);
         const roles = await Role.find({ _id: { $in: user.role } });
 
         for (let i = 0; i < roles.length; i++) {
@@ -167,7 +166,7 @@ export const isAdminOrEmpleado = async (req, res, next) => {
         // Si no cumple con ninguno de los roles, retorna error
         return res.status(403).json({ message: "Requiere perfil de administrador o empleado" });
     } catch (error) {
-        return res.status(500).json({ message: "Error interno del servidor" });
+        return res.status(500).json({ message: "Error interno del servidor", error: error});
     }
 };
 

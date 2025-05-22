@@ -1,15 +1,10 @@
 import express from 'express';
 import morgan from 'morgan';
 import pkg from '../package.json';
-import reservart from './routes/reservar.routes';
-import authrt from './routes/auth.routes';
-import userprivrt from './routes/userpriv.routes';
-import usersrt from './routes/user.routes';
-import roomsrt from './routes/rooms.routes';
-import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking} from './libs/initialSetup';
+import mainrouter from './routes/main.routes'
+import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking } from './libs/initialSetup';
 import path from 'path';
 import cookieParser  from 'cookie-parser';
-import dotenv from 'dotenv'
 
 const app = express();
 
@@ -42,10 +37,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/validation', authrt);
-app.use('/public', roomsrt);
-app.use('/restr', usersrt, reservart);
-app.use('/priv', userprivrt);
+app.use('/api', mainrouter)
 
 const basePath = path.resolve('..');
 app.use(express.static(path.join(basePath, 'cliente/build')));

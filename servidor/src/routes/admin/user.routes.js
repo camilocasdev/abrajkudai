@@ -1,6 +1,6 @@
 import {Router} from 'express';
-import * as usersctrl from '../controllers/users.controller'
-import { isAdminOrEmpleado, verifyToken } from '../middlewares/authjwt';
+import * as usersctrl from '../../controllers/users.controller'
+import { isAdminOrEmpleado, verifyToken } from '../../middlewares/authjwt';
 
 const router = Router();
 

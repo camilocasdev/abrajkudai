@@ -40,7 +40,7 @@ const usuarioSchema = new Schema ({
 )
 
 usuarioSchema.statics.encryptPassword = async (contrasena) => {
-    const salt = await bcrypt.genSalt(process.env.SALT_DEVELOPMENT);
+    const salt = await bcrypt.genSalt(parseInt(process.env.SALT_DEVELOPMENT));
     return await bcrypt.hash(contrasena, salt);
 }
 

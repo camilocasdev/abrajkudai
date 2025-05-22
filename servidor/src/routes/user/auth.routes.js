@@ -1,6 +1,6 @@
 import {Router} from 'express';
-import * as authctrl from '../controllers/auth.controller.js';
-import { verifyToken } from '../middlewares/authjwt.js'
+import * as authctrl from '../../controllers/auth.controller.js';
+import { verifyToken } from '../../middlewares/authjwt.js'
 
 const router = Router();
 

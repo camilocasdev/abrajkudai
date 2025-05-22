@@ -134,6 +134,9 @@ export const bookingConfirmPay = async ( req, res ) => {
 }
 
 export const getReserva = async (req, res) => {
+
+    console.log('Dentro de la funcion')
+
     const reservas = await Reserva.find();
     if (reservas.length < 1) res.status(200).json('Historial de reservas vacio.')
 
