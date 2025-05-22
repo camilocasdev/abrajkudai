@@ -9,6 +9,7 @@ import roomsrt from './routes/rooms.routes';
 import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking} from './libs/initialSetup';
 import path from 'path';
 import cookieParser  from 'cookie-parser';
+import dotenv from 'dotenv'
 
 const app = express();
 
@@ -39,7 +40,6 @@ app.set(morgan('dev'));
 
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/validation', authrt);

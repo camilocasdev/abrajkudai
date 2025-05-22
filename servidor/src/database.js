@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-import { MongoClient, ServerApiVersion } from 'mongodb'
-import cfig from './config.js'
-
+//import { MongoClient, ServerApiVersion } from 'mongodb'
+//import cfig from './config.js'
 
 export const dbconnect = async function connect() {
-    mongoose.connect(cfig.DB_URL, {
+    mongoose.connect(process.env.DB_URI , {
         dbName: 'db'
 }, {
     useFindAndModify: true,
@@ -14,7 +13,7 @@ export const dbconnect = async function connect() {
 })
 .then(db => console.log('Se conecto a la DB'))
 .catch(error => {
-    console.log(url)
+    console.log(process.env.DB_URI)
     console.log(error)
 })
 }

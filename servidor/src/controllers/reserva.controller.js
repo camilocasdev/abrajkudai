@@ -1,5 +1,4 @@
 import Reserva from '../models/reserva.js';
-import cfig from '../config.js';
 import jwt, { verify } from 'jsonwebtoken';
 import User from '../models/user';
 import Room from '../models/room.js'
@@ -13,10 +12,7 @@ export const bookingToPaying = async ( req, res) => {
         
         let token = req.cookies['Tookie'];
         
-        if (!token) {
-            token = req.cookies['accessToken']
-        }
-        const decoded = jwt.verify(token, cfig.SECRET_KEY)
+        const decoded = jwt.verify(token, process.env.SECRET_KEY)
 
         const room = await Room.findOne({roomid: habitacion}).sort({updatedAt: 1})
 
@@ -67,16 +63,14 @@ export const bookingToPaying = async ( req, res) => {
         if (!updateRoom) {
             return res.status(404).json({ msg: 'Habitación no encontrada' });
         }
-        
-        const cookiecfg = {
-            expires: new Date(Date.now() + cfig.COOKIE_EXPIRATION * 2 * 60 * 60 * 1000),
-            path: "/",
-            httpOnly: true,
-            secure: true,
-            samesite: "Strict"
-        }
 
-        res.cookie('Booking-Temp', save._id, cookiecfg)
+        res.cookie('tb', save._id, {
+            expires: new Date(Date.now() + 1 * 2 * 60 * 60 * 1000),
+            path: process.env.COOKIE_CONFIG_ENV,
+            secure: process.env.COOKIE_CFG_SECURE,
+            httpOnly: process.env.COOKIE_CFG_HTTPONLY,
+            samesite: process.env.COOKIE_CFG_SAME_SITE,
+        }) // tb === Temporal Booking
 
         return res.status(201).json({error: false, msg: 'Redirigiendo al pago...'})
     
@@ -87,19 +81,15 @@ export const bookingToPaying = async ( req, res) => {
 
 }
 
-export const payData = async ( req, res) => {
+export const payData = async ( req, res ) => {
 
     try {
         let token = req.cookies['Tookie'];
-        
-        if (!token) {
-            token = req.cookies['accessToken']
-        }
-        const bookingId = req.cookies['Booking-Temp'] //Id de Reserva (SIN CODIFICACIÓN)
-        const userId = jwt.verify(token, cfig.SECRET_KEY) // ID DE USUARIO
+        const bookingId = req.cookies['tb'] //Id de Reserva (SIN CODIFICACIÓN)
+        const userId = jwt.verify(token, process.env.SECRET_KEY) // ID DE USUARIO
 
         if (bookingId == undefined || userId == undefined) {
-            return res.status(401).json({error: true, msg: 'Error en la toma de datos...', redirect: '/404?error=booking-data-missing'})
+            return res.status(401).json({error: true, msg: 'Error en la toma de datos...', redirect: '/404?error=booking%20data%20missing'})
         }
 
         const booking = await Reserva.findOne({_id: bookingId})
@@ -131,7 +121,7 @@ export const payData = async ( req, res) => {
 
 export const bookingConfirmPay = async ( req, res ) => {
     
-    const cookie = req.cookies['Booking-Temp']
+    const cookie = req.cookies['tb']
 
     const booking = await Reserva.findOne({_id: cookie})
 

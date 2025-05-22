@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import cfig from '../config';
 import Usuario from '../models/user';
 import Role from '../models/role';
 
@@ -14,35 +13,42 @@ export const refreshToken = async (req, res, next) => {
         }
         
         //PARA ESTA PARTE HAY QUE APRENDER A USAR SNIPPETS O COMO SE LLAMEN (si valen la pena usarlos acá)
-        const accessTookieData = jwt.decode(accessCookie, cfig.SECRET_KEY)
+        const accessTookieData = jwt.decode(accessCookie, process.env.SECRET_KEY)
+
+        let COOKIE_CFG = {
+            path: process.env.COOKIE_CONFIG_ENV,
+            secure: process.env.COOKIE_CFG_SECURE,
+            httpOnly: process.env.COOKIE_CFG_HTTPONLY,
+            samesite: process.env.COOKIE_CFG_SAME_SITE,
+        }
         
         if (!tookieCookie){
             if (accessTookieData.refresh === true){
-                let token = jwt.sign({id: accessTookieData.id}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.Tookie})
-                res.cookie('Tookie', token, {...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.Tookie})
-                let aToken = jwt.sign({id: accessTookieData.id, refresh: true}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.accessToken})
-                res.cookie('accessToken', aToken, { ...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.accessToken })
+                let token = jwt.sign({id: accessTookieData.id}, process.env.SECRET_KEY, {expiresIn: parseInt(process.env.EXPIRE_TOKEN_Tookie)})
+                res.cookie('Tookie', token, {...COOKIE_CFG, maxAge: parseInt(process.env.EXPIRE_COOKIE_Tookie)})
+                let aToken = jwt.sign({id: accessTookieData.id, refresh: true}, process.env.SECRET_KEY, {expiresIn: parseInt(process.env.EXPIRE_TOKEN_accessToken)})
+                res.cookie('accessToken', aToken, { ...process.env.COOKIE_CFG, maxAge: parseInt(process.env.EXPIRE_COOKIE_accessToken) })
                 req.cookies.Tookie = token
             } else if (accessCookie) {
-                let token = jwt.sign({id: accessTookieData.id}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.Tookie})
-                res.cookie('Tookie', token, {...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.Tookie})
+                let token = jwt.sign({id: accessTookieData.id}, process.env.SECRET_KEY, {expiresIn: parseInt(process.env.EXPIRE_TOKEN_Tookie)})
+                res.cookie('Tookie', token, {...COOKIE_CFG, maxAge: parseInt(process.env.EXPIRE_COOKIE_Tookie)})
                 req.cookies.Tookie = token
                 //Acá no se renueva el token de funciones porque el refresh != true
             }
         } else {
-            const tookieCookieData = jwt.decode(tookieCookie, cfig.SECRET_KEY)
+            const tookieCookieData = jwt.decode(tookieCookie, process.env.SECRET_KEY)
 
             const current = new Date()
             const left = ((tookieCookieData.exp - (current.getTime() / 1000)) / 60)
 
             if (left < 15 || !tookieCookie){
                 console.log('Renovacion previa a la caducidad')
-                let token = jwt.sign({id: tookieCookieData.id}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.Tookie})
-                res.cookie('Tookie', token, {...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.Tookie})
+                let token = jwt.sign({id: tookieCookieData.id}, process.env.SECRET_KEY, {expiresIn: parseInt(process.env.EXPIRE_TOKEN_Tookie)})
+                res.cookie('Tookie', token, {...COOKIE_CFG, maxAge: parseInt(process.env.EXPIRE_COOKIE_Tookie)})
 
                 if (accessTookieData.refresh === true){
-                    let aToken = jwt.sign({id: accessTookieData.id, refresh: true}, cfig.SECRET_KEY, {expiresIn: cfig.EXPIRE_TOKEN.accessToken})
-                    res.cookie('accessToken', aToken, { ...cfig.COOKIE_CFG, maxAge: cfig.EXPIRE_COOKIE.accessToken })
+                    let aToken = jwt.sign({id: accessTookieData.id, refresh: true}, process.env.SECRET_KEY, {expiresIn: parseInt(process.env.EXPIRE_TOKEN_accessToken)})
+                    res.cookie('accessToken', aToken, { ...COOKIE_CFG, maxAge: parseInt(process.env.EXPIRE_COOKIE_accessToken) })
                 }
             }
         }
@@ -66,21 +72,27 @@ export const verifyToken = async (req, res, next) => {
         try {
             token = await req.cookies['Tookie'];
         } catch (error) {
-            res.status(401).json({
+            return res.status(401).json({
                 error: true,
                 msg: 'No hay token, por favor inicia sesión',
-                redirect: '/signin?error=not_logged'
+                redirect: '/signin?error=not%20logged'
             })
         }
         
-        const decoded = jwt.verify(token, cfig.SECRET_KEY); //Verifica el token
+        console.log({token: token, secret: process.env.SECRET_KEY})
+
+        const decoded = jwt.verify(token, process.env.SECRET_KEY); //Verifica el token
+
+        console.log(decoded)
 
         if (!decoded) return res.status(401).json({msg: "not decoded"})
 
         const usuario = await Usuario.findById(decoded.id, {contrasena: 0});
 
         if (!usuario) return res.status(404).json({
-            message: 'Token sin usuario asociado...'
+            error: true,
+            message: 'Token sin usuario asociado...',
+            redirect: '/signin?error=user%20not%20found'
         });
 
         next();
@@ -89,7 +101,7 @@ export const verifyToken = async (req, res, next) => {
         res.status(404).json({
             error: true,
             msg: 'Error al autenticar el token',
-            redirect: '/signin?error=invalid_token'
+            redirect: '/signin?error=invalid%20token'
         });
     }
 }

@@ -28,7 +28,11 @@ const usuarioSchema = new Schema ({
     role: [{
         ref: "Role",
         type: Schema.Types.ObjectId
-    }]
+    }],
+    codigo: {
+        type: Number,
+        default: null
+    }
 },{
     timestamps: true,
     versionKey: false
@@ -36,12 +40,13 @@ const usuarioSchema = new Schema ({
 )
 
 usuarioSchema.statics.encryptPassword = async (contrasena) => {
-    const salt = await bcrypt.genSalt(5);
+    const salt = await bcrypt.genSalt(process.env.SALT_DEVELOPMENT);
     return await bcrypt.hash(contrasena, salt);
 }
 
 usuarioSchema.statics.comparePassword = async (contrasenaIng, contrasenaGuard) => {
     return await bcrypt.compare(contrasenaIng, contrasenaGuard);
 }
+
 
 export default model('Usuario', usuarioSchema);

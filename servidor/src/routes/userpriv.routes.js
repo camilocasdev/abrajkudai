@@ -6,5 +6,6 @@ const router = Router();
 
 router.get('/get', [ refreshToken, verifyToken ] , usersctrl.privgetuser);
 router.post('/logout', usersctrl.logout);
+router.post('/resetpassword', usersctrl.newPassword)
 
 export default router;

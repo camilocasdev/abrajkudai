@@ -6,5 +6,6 @@ const router = Router();
 
 router.post('/signin', authctrl.signIn)
 router.post('/signup', authctrl.signUp)
+router.post('/forgotpassword', authctrl.forgotPass)
 
 export default router;

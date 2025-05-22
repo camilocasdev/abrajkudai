@@ -1,7 +1,6 @@
 import Usuario from "../models/user";
 import Role from "../models/role";
 import jwt from "jsonwebtoken";
-import cfig from '../config';
 
 export const get_user = async (req, res) => {
     const usuarios = await Usuario.find();
@@ -62,7 +61,7 @@ export const add_user = async (req, res) => {
     
         
 
-        jwt.sign({id: usuarioGuardado._id}, cfig.SECRET_KEY, {
+        jwt.sign({id: usuarioGuardado._id}, process.env.SECRET_KEY, {
             expiresIn: 864000 //24 Horas
         });
     
@@ -91,7 +90,7 @@ export const privgetuser = async (req, res) => {
     try {
         const token = req.cookies['Tookie'];
 
-        const decoded = jwt.verify(token, cfig.SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
         const usuario = await Usuario.findById(decoded.id, {contrasena: 0});
 
@@ -119,4 +118,21 @@ export const logout = async (req, res) => {
     res.clearCookie('accessToken')
     res.status(200).json({message: 'Sesión cerrada'});
     return;
+}
+
+export const newPassword = async (req, res) => {
+    
+    const coded = req.cookies['rupc']
+
+    if (!coded) {
+        res.status(401).json({
+            error: true,
+            msg: 'Sin datos disponibles, realice el proceso nuevamente',
+            redirect: '/validation/forgotpassword?error=no%20data%20avaible'
+        })
+    }
+
+    const data = jwt.verify(coded, process.env.SECRET_KEY)
+    
+    console.log(data)
 }
