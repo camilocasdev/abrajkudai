@@ -5,8 +5,8 @@ import { verifyToken, refreshToken } from "../../middlewares/authjwt.js";
 const router = Router();
 
 //Crear reserva desde la Página de Habitación hasta el Pago confirmado de esta.
-router.get('/paydata', [ refreshToken, verifyToken ], reservactrl.payData)
-router.post('/booking/create', [ refreshToken, verifyToken ], reservactrl.bookingToPaying)
-router.post('/booking/confirm', [ refreshToken, verifyToken ] , reservactrl.bookingConfirmPay)
+router.post('/booking/create', [ refreshToken, verifyToken ], reservactrl.bookingToPaying) // Crea reserva
+router.get('/booking/summary', [ refreshToken, verifyToken ], reservactrl.bookingSumamry) // Resumen de la reserva en transacción
+router.post('/booking/confirm', [ refreshToken, verifyToken ] , reservactrl.bookingPay) // Pago de reserva
 
 export default router;

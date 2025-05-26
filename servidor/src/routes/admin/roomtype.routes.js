@@ -1,0 +1,13 @@
+import { Router } from 'express'
+import * as roomtypectrl from '../../controllers/roomtype.controller'
+import { verifyToken, refreshToken, isAdminOrEmpleado, isAdmin } from '../../middlewares/authjwt'
+
+const router = Router()
+
+router.post('/roomtype/create' , [ refreshToken, verifyToken, isAdminOrEmpleado ] , roomtypectrl.roomtypeCreate)
+router.get('/roomtype/get/list' , [ refreshToken, verifyToken, isAdminOrEmpleado ] , roomtypectrl.roomtypeList)
+router.get('/roomtype/get/:roomtypeId' , [ refreshToken, verifyToken, isAdminOrEmpleado ] , roomtypectrl.roomtypeById)
+router.put('/roomtype/update/:roomtypeId' , [ refreshToken, verifyToken, isAdminOrEmpleado ] , roomtypectrl.roomtypeUpdate)
+router.delete('/roomtype/delete/:roomtypeId' , [ refreshToken, verifyToken, isAdminOrEmpleado ] , roomtypectrl.roomtypeDelete)
+
+export default router;

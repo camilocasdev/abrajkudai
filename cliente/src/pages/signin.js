@@ -17,7 +17,7 @@ function Login(){
         event.preventDefault()
         
         try {
-            const response = await fetch('/validation/signin', {
+            const response = await fetch('/api/user/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

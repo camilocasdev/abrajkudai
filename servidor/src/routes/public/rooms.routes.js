@@ -5,7 +5,7 @@ import { refreshToken , verifyToken } from "../../middlewares/authjwt.js";
 const router = Router();
 
 router.get('/roomlist', [ refreshToken ] , roomsctrl.roomList);
-router.get('/search', [ refreshToken ], roomsctrl.search)
+router.get('/search', [ refreshToken ], roomsctrl.roomInfo)
 router.put('/update/:roomId', [ refreshToken, verifyToken ], roomsctrl.roomUpdate)
 
 export default router;

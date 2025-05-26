@@ -4,6 +4,8 @@ import User from '../models/user';
 import Room from '../models/room.js'
 import Roomtype from '../models/roomtype.js'
 
+
+//  ---------------------------------  FUNCIONES DE USUARIO  ----------------------------------------  //
 export const bookingToPaying = async ( req, res) => {
 
     try {
@@ -81,7 +83,7 @@ export const bookingToPaying = async ( req, res) => {
 
 }
 
-export const payData = async ( req, res ) => {
+export const bookingSumamry = async ( req, res ) => {
 
     try {
         let token = req.cookies['Tookie'];
@@ -119,7 +121,7 @@ export const payData = async ( req, res ) => {
     }
 }
 
-export const bookingConfirmPay = async ( req, res ) => {
+export const bookingPay = async ( req, res ) => {
     
     const cookie = req.cookies['tb']
 
@@ -127,15 +129,87 @@ export const bookingConfirmPay = async ( req, res ) => {
 
     const {cardName, cardNumber, cardExpire, cardCode, email, userNumber} = req.body;
 
-
-
     res.status(201).json({msg: 'Todo OK!', contenido: 'w'})
 
 }
 
-export const getReserva = async (req, res) => {
 
-    console.log('Dentro de la funcion')
+
+//  -------------------------  FUNCIONES DE ADMINISTRADOR Y/O EMPLEADO  ------------------------------  //
+export const directBookingCreation = async ( req, res ) => {
+
+    /* Pasos
+        Como probablemente no tienen cuenta de usurio, vamos a crearle un usuario temporal sin contraseña,
+        en el que se les envie automaticamente un correo en el que se le envie un correo para resetar o crear
+        una nueva contraseña y complementar datos?
+    */
+
+    try {
+
+        const { nombre, apellido, identificacion, telefono, email, fechaInicio,
+        fechaHasta, cantidad, roomTypeId, servicios, cardName, cardNumber,
+        cardExpire, cardCode, userNumber } = req.body
+
+        let { contrasena, codigo, pais, estado } = null // codigo in the model by default is null
+
+        const user = await new Usuario({
+            nombre: nombre, 
+            apellido: apellido,
+            pais: pais,
+            identificacion: identificacion,
+            telefono: telefono,
+            contrasena: contrasena,
+            correo: email, 
+            codigo: codigo,
+            role: 'usuario'
+        }).save()
+
+        const room = await Room.findOne({roomid: roomTypeId}).sort({updatedAt: 1})
+
+        const [dayFrom, dayTo] = [new Date(fechaInicio), new Date(fechaHasta)]
+        
+        const diffms = Math.abs(dayTo.getTime() - dayFrom.getTime());
+        const dias = diffms / (1000 * 60 * 60 * 24); // === divide by 86.4M 
+        
+        const roomType = await Roomtype.findOne({_id: roomTypeId})
+
+        const total = dias * roomType.precio
+
+        /*  AQUÍ DEBEMOS VERIFICAR EL PAGO DEL USUARIO DIRECTAMENTE; DESPUES SE GUARDA LA RESERVA  #
+        |                                                                                          |
+        |                                                                                          |
+        |                                                                                          |
+        # _______________________________________________________________________________________ */
+
+        if( pay.status === 'Paid'){
+            estado = 'Pagado'
+        } else (
+            res.status(403).json({
+                msg: 'Pago rechazado'
+            })
+        )
+
+        const booking = new Reserva({
+            usuario: user._id,
+            habitacion: room,
+            tipo: roomTypeId, 
+            fechaInicio: fechaInicio,
+            fechaHasta: fechaHasta,
+            cantidad: cantidad,
+            dias: dias,
+            total: total,
+            estado: estado,
+            servicios: servicios
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({msg: 'Error'})
+    }
+
+}
+
+export const getReserva = async (req, res) => {
 
     const reservas = await Reserva.find();
     if (reservas.length < 1) res.status(200).json('Historial de reservas vacio.')
@@ -145,14 +219,14 @@ export const getReserva = async (req, res) => {
 
 export const getReservaId = async (req, res) => {
 
-    const reserva = await Reserva.findById(req.params.reservaId)
+    const reserva = await Reserva.findById(req.params['reservaId'])
     
     res.status(200).json(reserva);
 }
 
 export const updateReserva = async (req, res) => {
     
-    const actualizarReserva = await Reserva.findByIdAndUpdate(req.params.reservaId, req.body, { new: true });
+    const actualizarReserva = await Reserva.findByIdAndUpdate(req.params['reservaId'], req.body, { new: true });
     
     res.status(204).json(actualizarReserva)
 }

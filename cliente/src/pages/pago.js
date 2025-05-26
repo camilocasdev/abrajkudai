@@ -27,7 +27,7 @@ function Pago(){
         const defaultData = async() => {
 
             try {
-                const response = await fetch('restr/paydata', {
+                const response = await fetch('/api/user/booking/summary', {
                     method: 'GET'
                 })
 

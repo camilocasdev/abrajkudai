@@ -5,7 +5,7 @@ import path from 'path'
 
 const env = dotenv.config({path: path.resolve('./.env')})
 
-const port = 3000
+const port = process.env.PORT
 
 try {
     app.listen(port);

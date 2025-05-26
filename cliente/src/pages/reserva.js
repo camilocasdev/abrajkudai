@@ -19,7 +19,7 @@ function Reserva(){
         const resultados = async () => {
     
             try {
-                const response = await fetch("/public/list", {
+                const response = await fetch("/api/public/list", {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'

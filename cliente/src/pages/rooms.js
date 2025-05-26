@@ -33,7 +33,7 @@ function Rooms(){
             if (!url) { url = 0 };
 
             try{
-                const response = await fetch(`/public/search?t=${encodeURIComponent(url)}`, {
+                const response = await fetch(`/api/public/search?t=${encodeURIComponent(url)}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'

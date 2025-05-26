@@ -4,7 +4,6 @@ import Role from '../models/role';
 
 export const refreshToken = async (req, res, next) => {
     try {
-        
         const accessCookie = req.cookies['accessToken']
         const tookieCookie = req.cookies['Tookie']
 
@@ -65,7 +64,6 @@ export const refreshToken = async (req, res, next) => {
 export const verifyToken = async (req, res, next) => {
 
      //Limita la información o la ruta para los que no tienen un token, es decir un usuario no registrado o logeado
-
     try {
         let token;
 
@@ -103,8 +101,11 @@ export const verifyToken = async (req, res, next) => {
 }
 
 export const isAdmin = async (req, res, next) => {
-    const user = await Usuario.findById(req.UsuarioId);
-    const role = await Role.find({_id: {$in: user.role}});  
+    
+    const decoded = jwt.verify(req.cookies['Tookie'], process.env.SECRET_KEY)
+
+    const user = await Usuario.findById(decoded.id);
+    const role = await Role.find({_id: user.role });  
 
     for (let i = 0; i < role.length; i++) {
         if (role[i].nombre === "admin") {

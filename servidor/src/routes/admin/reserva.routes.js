@@ -5,10 +5,11 @@ import { verifyToken, refreshToken, isAdminOrEmpleado } from "../../middlewares/
 const router = Router();
 
 //Controladores para Empleados (A Implementar)
-router.get('/reserva', [ refreshToken, verifyToken, isAdminOrEmpleado] , reservactrl.getReserva)
-router.get('/reserva/:reservaId', [ refreshToken, verifyToken], reservactrl.getReservaId) // Operación por ID
-router.put('/reserva/:reservaId', [refreshToken, verifyToken, isAdminOrEmpleado], reservactrl.updateReserva) // Operación por ID
-router.delete('/reserva/:reservaId', [refreshToken, verifyToken, isAdminOrEmpleado] ,reservactrl.deleteReserva) // Operación por ID
+router.post('/booking/create', [refreshToken, verifyToken, isAdminOrEmpleado], reservactrl.directBookingCreation)
+router.get('/booking/get/list', [ refreshToken, verifyToken, isAdminOrEmpleado] , reservactrl.getReserva)
+router.get('/booking/get/:reservaId', [ refreshToken, verifyToken, isAdminOrEmpleado], reservactrl.getReservaId) // Operación por ID
+router.put('/booking/update/:reservaId', [refreshToken, verifyToken, isAdminOrEmpleado], reservactrl.updateReserva) // Operación por ID
+router.delete('/booking/delete/:reservaId', [refreshToken, verifyToken, isAdminOrEmpleado] ,reservactrl.deleteReserva) // Operación por ID
 
 
 export default router;

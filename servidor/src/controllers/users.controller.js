@@ -1,5 +1,6 @@
 import Usuario from "../models/user";
 import Role from "../models/role";
+import Reserva from "../models/reserva"
 import jwt from "jsonwebtoken";
 
 export const get_user = async (req, res) => {
@@ -85,14 +86,24 @@ export const update_user = async (req, res) => {
     }
 }
 
-export const privgetuser = async (req, res) => {
-    
+export const profileData = async (req, res) => {
+    console.log('profileData')
     try {
         const token = req.cookies['Tookie'];
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
         const usuario = await Usuario.findById(decoded.id, {contrasena: 0});
+        const reservas = await Reserva.find({usuario: decoded.id}).populate({
+            path: 'habitacion',
+            model: 'Room'
+        }).populate({
+            path: 'tipo',
+            model: 'Roomtype'
+        })
+
+        //console.log(reservas[0].habitacion['numero'])
+
 
         if (!usuario) {
             return(
@@ -100,7 +111,7 @@ export const privgetuser = async (req, res) => {
             )
         };
 
-        res.status(200).json(usuario)
+        res.status(200).json({error: false, userData: usuario, reservasData: reservas})
 
     } catch (error) {
         console.log(error)

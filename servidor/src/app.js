@@ -5,6 +5,7 @@ import mainrouter from './routes/main.routes'
 import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking } from './libs/initialSetup';
 import path from 'path';
 import cookieParser  from 'cookie-parser';
+import cors from 'cors'
 
 const app = express();
 
@@ -32,6 +33,24 @@ try {
 }
 
 app.set(morgan('dev'));
+
+const allowedOrigins = [
+    process.env.CORS_ORIGIN_ONE,
+    process.env.CORS_ORIGIN_RENDER,
+    process.env.CORS_ORIGIN_VERCEL,
+    process.env.CORS_ORIGIN_ANDROID
+].filter(Boolean)
+
+app.use(cors({
+        origin: function (origin, callback) {
+            if ( !origin || allowedOrigins.indexOf(origin) !== -1) {
+                callback(null, true)
+            } else {
+                callback(new Error('Not allowed by CORS'))
+            }
+        },
+        credentials: true
+    }))
 
 app.use(express.json());
 app.use(cookieParser());

@@ -17,7 +17,7 @@ function Perfil(){
     useEffect(() => {
         const userdata = async() => {
             try {
-                const response = await fetch('/priv/get', {
+                const response = await fetch('/api/user/get', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ function Perfil(){
     const clearData = async(event) => {
         event.preventDefault()
 
-        fetch('/priv/logout', {method:'POST'})
+        fetch('/api/user/logout', {method:'POST'})
             .then(response =>{
                 if(response.ok){
                     localStorage.clear()

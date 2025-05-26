@@ -30,9 +30,7 @@ export const roomList = async (req, res) => {
 }
 
 export const roomUpdate = async (req, res) => {
-    
     try{
-        
         const prueba = await Room.findById(req.params.roomId)
         console.log('Antes ' + prueba)
 
@@ -44,29 +42,77 @@ export const roomUpdate = async (req, res) => {
         
         console.log('Despues ' + prueba)
         res.status(200).json({msg: 'Habitación Actualizada Existosamente', actualizacion: room});
-        
     } catch (error) {
         console.error(error);
     }
-
 }
 
 
-export const search = async (req, res) => {
+export const createRoom = async ( req, res ) => {
     try {
+        let { numero, estado, roomid } = req.body
+
+        let update;
+
+        const check = await Room.find({numero: numero})
+
+        if (check === numero) { 
+            res.status(400).json({error: true, msg:'El número de habitación ya existe. Intente uno diferente'})
+        } else {
+            if ( estado === null || undefined){
+                estado = 'Disponible'
+            }
+
+            update = await new Room({
+                numero: numero,
+                estado: estado,
+                roomid: roomid
+            }).save()
+        }
+
+        res.status(200).json({msg: 'Creado', room: update})
+    } catch (error) {
+        res.status(500).json({msg: 'Error del servidor'})
+    }
+}
+
+export const getRoomById = async ( req, res ) => {
+    try {
+        const room = await Room.findById(req.params['roomId'])
+
+        if (!room) {
+            return(
+                res.status(404).json({msg: 'No existe una habitación asociada a ese ID'})
+            )
+        }
         
+        res.status(201).json({msg: 'Clear', data: room})
+    } catch (error) {
+        res.status(1200).json({msg: 'Error inesperado'})
+    }
+}
+
+export const deleteRoom = async ( req, res ) => {
+try {
+        const room = await Room.findByIdAndDelete(req.params['roomId'])
+        
+        res.status(204).json()
+    } catch (error) {
+        res.status(1200).json({msg: 'Error inesperado'})
+    }
+}
+
+export const roomInfo = async (req, res) => {
+    try {
         const roomNumber = req.query.t
         
         const type = await Roomtype.find().sort({precio: 1})
             
-            //console.log(type)
         const roomshow = type[roomNumber]
         
         res.status(201).json({params: roomNumber, roomServer: roomshow})
-
     } catch (error) {
         console.log(error)
         res.status(400).json({error: 'error', msg: 'Error inesperado...'})
     }
 }
-

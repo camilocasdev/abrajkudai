@@ -37,8 +37,6 @@ export const signIn = async (req, res) => {
                 tokens[i] = jwt.sign({id: usuarioEncontrado._id, refresh: keepSession}, process.env.SECRET_KEY, {
                     expiresIn: parseInt(process.env[`EXPIRE_TOKEN_${name}`])
                 })
-                console.log({nombre: name, tokenExpire: process.env[`EXPIRE_TOKEN_${name}`], cookieExpire: {...expire}})
-
 
                 res.cookie(name, tokens[i], {
                     path: process.env.COOKIE_CONFIG_ENV,
