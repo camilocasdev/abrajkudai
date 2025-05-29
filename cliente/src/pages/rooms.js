@@ -28,12 +28,11 @@ function Rooms(){
     useEffect(() => {
 
         const datosHabitacion = async() => {
-
             let url = searchParams.get('t')
             if (!url) { url = 0 };
 
             try{
-                const response = await fetch(`/api/public/search?t=${encodeURIComponent(url)}`, {
+                const response = await fetch(`/api/public/roomtype/get?t=${encodeURIComponent(url)}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -45,10 +44,6 @@ function Rooms(){
                 if (!data) {
                     console.error('No hay datos de respuesta del servidor.')  //Borrar
                 } 
-                
-                // Traer la lista de disponibles por torre, si no hay en una torre, ocultar la opción.
-
-               //console.log("Datos recibidos del Servidor:", data);  //Borrar
 
                 if (!data.roomServer) {
                     console.error("No hay datos de habitación en la respuesta." + error);  //Borrar
@@ -72,7 +67,7 @@ function Rooms(){
         event.preventDefault()
 
         try {
-            const response = await fetch('/restr/booking/create', {
+            const response = await fetch('/api/user/booking/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -161,7 +156,7 @@ function Rooms(){
                                 </div>
                             </div>
                             <div class="roomContRight">
-                                <form method="post" onSubmit={enviarForm} action='/restr/reserva/new'>
+                                <form method="post" onSubmit={enviarForm}>
                                     <div class='roomForm'>
                                         <div class="formDate">
                                             <span><strong>Desde</strong></span>

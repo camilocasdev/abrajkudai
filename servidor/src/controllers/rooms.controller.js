@@ -102,17 +102,3 @@ try {
     }
 }
 
-export const roomInfo = async (req, res) => {
-    try {
-        const roomNumber = req.query.t
-        
-        const type = await Roomtype.find().sort({precio: 1})
-            
-        const roomshow = type[roomNumber]
-        
-        res.status(201).json({params: roomNumber, roomServer: roomshow})
-    } catch (error) {
-        console.log(error)
-        res.status(400).json({error: 'error', msg: 'Error inesperado...'})
-    }
-}

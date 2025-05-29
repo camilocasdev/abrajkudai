@@ -94,7 +94,7 @@ export const profileData = async (req, res) => {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
         const usuario = await Usuario.findById(decoded.id, {contrasena: 0});
-        const reservas = await Reserva.find({usuario: decoded.id}).populate({
+        const reservas = await Reserva.find({usuario: decoded.id}).sort({createdAt: -1}).populate({
             path: 'habitacion',
             model: 'Room'
         }).populate({
@@ -102,15 +102,12 @@ export const profileData = async (req, res) => {
             model: 'Roomtype'
         })
 
-        //console.log(reservas[0].habitacion['numero'])
-
-
         if (!usuario) {
             return(
                 res.status(404).json({message: 'Usuario no encontrado'})
             )
         };
-
+        
         res.status(200).json({error: false, userData: usuario, reservasData: reservas})
 
     } catch (error) {

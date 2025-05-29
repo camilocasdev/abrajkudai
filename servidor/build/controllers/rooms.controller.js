@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.roomUpdate = exports.roomList = exports.roomInfo = exports.getRoomById = exports.deleteRoom = exports.createRoom = void 0;
+exports.roomUpdate = exports.roomList = exports.getRoomById = exports.deleteRoom = exports.createRoom = void 0;
 var _room = _interopRequireDefault(require("../models/room"));
 var _roomtype = _interopRequireDefault(require("../models/roomtype"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
@@ -242,44 +242,5 @@ var deleteRoom = exports.deleteRoom = /*#__PURE__*/function () {
   }));
   return function deleteRoom(_x9, _x0) {
     return _ref5.apply(this, arguments);
-  };
-}();
-var roomInfo = exports.roomInfo = /*#__PURE__*/function () {
-  var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(req, res) {
-    var roomNumber, type, roomshow;
-    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-      while (1) switch (_context6.prev = _context6.next) {
-        case 0:
-          _context6.prev = 0;
-          roomNumber = req.query.t;
-          _context6.next = 4;
-          return _roomtype["default"].find().sort({
-            precio: 1
-          });
-        case 4:
-          type = _context6.sent;
-          roomshow = type[roomNumber];
-          res.status(201).json({
-            params: roomNumber,
-            roomServer: roomshow
-          });
-          _context6.next = 13;
-          break;
-        case 9:
-          _context6.prev = 9;
-          _context6.t0 = _context6["catch"](0);
-          console.log(_context6.t0);
-          res.status(400).json({
-            error: 'error',
-            msg: 'Error inesperado...'
-          });
-        case 13:
-        case "end":
-          return _context6.stop();
-      }
-    }, _callee6, null, [[0, 9]]);
-  }));
-  return function roomInfo(_x1, _x10) {
-    return _ref6.apply(this, arguments);
   };
 }();

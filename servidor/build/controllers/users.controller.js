@@ -240,6 +240,8 @@ var profileData = exports.profileData = /*#__PURE__*/function () {
           _context6.next = 9;
           return _reserva["default"].find({
             usuario: decoded.id
+          }).sort({
+            createdAt: -1
           }).populate({
             path: 'habitacion',
             model: 'Room'

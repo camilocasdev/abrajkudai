@@ -87,7 +87,7 @@ function Pago(){
                     </section>
                     <section className='payment-box'>
                         <article className='payment-form'>
-                            <form class='pay-form' method='POST' action='/'>
+                            <form class='pay-form' method='POST'>
                                 <div className='payment-form-title'>
                                     <h2>Payment Method</h2>
                                 </div>

@@ -6,6 +6,9 @@ import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking } from
 import path from 'path';
 import cookieParser  from 'cookie-parser';
 import cors from 'cors'
+import dotenv from 'dotenv'
+
+dotenv.config(process.cwd(), '.env')
 
 const app = express();
 
@@ -34,12 +37,14 @@ try {
 
 app.set(morgan('dev'));
 
+
+
 const allowedOrigins = [
     process.env.CORS_ORIGIN_ONE,
     process.env.CORS_ORIGIN_RENDER,
     process.env.CORS_ORIGIN_VERCEL,
     process.env.CORS_ORIGIN_ANDROID
-].filter(Boolean)
+]
 
 app.use(cors({
         origin: function (origin, callback) {

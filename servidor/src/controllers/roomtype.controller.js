@@ -75,3 +75,25 @@ export const roomtypeDelete = async ( req, res ) => {
         res.status(500).json({msg: 'Error inesperado'})
     }
 }
+
+export const roomtypeInfo = async (req, res) => {
+    try {
+        const roomNumber = req.query['t']
+
+        var type = await Roomtype.find().sort({precio: 1})
+        
+
+        if (!roomNumber || roomNumber > (type.length - 1) || roomNumber < 0){ 
+            return(
+                res.status(200).json({msg: 'Clear', data: type})
+            )
+        }
+
+        const roomSelected = type[roomNumber]
+        
+        res.status(200).json({params: roomNumber, roomServer: roomSelected})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: 'error', msg: 'Error inesperado...'})
+    }
+}

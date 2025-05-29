@@ -20,7 +20,7 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var signIn = exports.signIn = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body, correo, contrasena, keepSession, usuarioEncontrado, matchPass, tokens;
+    var redirect, _req$body, correo, contrasena, keepSession, usuarioEncontrado, matchPass, tokens;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -66,6 +66,11 @@ var signIn = exports.signIn = /*#__PURE__*/function () {
             redirect: '/signin?error=invalid%20password'
           }));
         case 14:
+          if (['admin', 'empleado'].includes(usuarioEncontrado.role[0].nombre)) {
+            redirect = '/dashboard';
+          } else {
+            redirect = '/perfil';
+          }
           tokens = ['accessToken', 'Tookie'];
           if (keepSession === false) {
             tokens.forEach(function (name, i) {
@@ -105,22 +110,21 @@ var signIn = exports.signIn = /*#__PURE__*/function () {
               });
             });
           }
-
-          // IMPLEMENTAR DOS TOKENS, UNO DE CORTA DURACIÓN Y OTRO DE RENOVACIÓN PARA REDUCIR RIESGOS.
-          return _context.abrupt("return", res.json({
+          return _context.abrupt("return", res.status(200).json({
             msg: "Usuario autenticado, iniciando sesión...",
-            token: tokens
+            token: tokens,
+            redirect: redirect
           }));
-        case 19:
-          _context.prev = 19;
+        case 20:
+          _context.prev = 20;
           _context.t0 = _context["catch"](0);
           console.log(_context.t0);
-          res.status(400).json('Error al autenticar el usuario');
-        case 23:
+          res.status(500).json('Error al autenticar el usuario');
+        case 24:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 19]]);
+    }, _callee, null, [[0, 20]]);
   }));
   return function signIn(_x, _x2) {
     return _ref.apply(this, arguments);

@@ -12,7 +12,9 @@ var _initialSetup = require("./libs/initialSetup");
 var _path = _interopRequireDefault(require("path"));
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _cors = _interopRequireDefault(require("cors"));
+var _dotenv = _interopRequireDefault(require("dotenv"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+_dotenv["default"].config(process.cwd(), '.env');
 var app = (0, _express["default"])();
 app.set('pkg', _package["default"]);
 try {
@@ -35,7 +37,7 @@ try {
   console.log(error);
 }
 app.set((0, _morgan["default"])('dev'));
-var allowedOrigins = [process.env.CORS_ORIGIN_ONE, process.env.CORS_ORIGIN_RENDER, process.env.CORS_ORIGIN_VERCEL, process.env.CORS_ORIGIN_ANDROID].filter(Boolean);
+var allowedOrigins = [process.env.CORS_ORIGIN_ONE, process.env.CORS_ORIGIN_RENDER, process.env.CORS_ORIGIN_VERCEL, process.env.CORS_ORIGIN_ANDROID];
 app.use((0, _cors["default"])({
   origin: function origin(_origin, callback) {
     if (!_origin || allowedOrigins.indexOf(_origin) !== -1) {

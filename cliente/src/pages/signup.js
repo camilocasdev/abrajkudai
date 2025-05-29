@@ -104,7 +104,7 @@ function Signup(){
                             <p><strong>O</strong></p>
                         </article>
                         <article class="signincampos">
-                            <form method="post" onSubmit={registrar} action="/validation/signup">
+                            <form method="post" onSubmit={registrar}>
                                 <fieldset class="signup">
                                     <div class="signupclose">
                                         <label for="nombre">

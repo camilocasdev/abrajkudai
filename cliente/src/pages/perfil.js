@@ -11,6 +11,7 @@ function Perfil(){
     var {$proxResShow} = 'on work...'
 
     const [usuario, setUsuario] = useState({});
+    const [userBookings, setUserBookings] = useState([{}]);
 
     const navigate = useNavigate()
 
@@ -29,7 +30,10 @@ function Perfil(){
                         navigate(data.redirect)
                     }
 
-                    setUsuario(data)
+                    console.log(data)
+
+                    setUsuario(data.userData)
+                    setUserBookings(data.reservasData)
             } catch (error) {
                 console.error('ERROR: No se pudo obtener el token ' + error);
             }
@@ -41,7 +45,7 @@ function Perfil(){
         event.preventDefault()
 
         fetch('/api/user/logout', {method:'POST'})
-            .then(response =>{
+            .then(response => {
                 if(response.ok){
                     localStorage.clear()
                     sessionStorage.clear()
@@ -128,11 +132,11 @@ function Perfil(){
                             <h2>Reserva Próximas</h2>
                             <div class="perftarjet">
                                 <div>
-                                    <img src={$currentRoom} alt="Imágenen de la habitación actual"/>
+                                    <img src={userBookings[0]?.tipo?.imagen[0]} alt="Imágenen de la habitación actual"/>
                                 </div>
                                 <div>
-                                    <h3>{$proxResShow}</h3>
-                                    <p>Lorem ipsum</p>
+                                    <h3>{userBookings[0]?.tipo?.nombre}</h3>
+                                    <p>{userBookings[0]?.tipo?.scriptShort}</p>
                                 </div>
                             </div>
                         </div>

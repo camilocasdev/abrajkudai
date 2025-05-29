@@ -7,7 +7,8 @@ import nodemailer from 'nodemailer';
 
 export const signIn = async (req, res) => {
     try {
-
+        let redirect;
+        
         const { correo, contrasena, keepSession } = req.body;
         
         const usuarioEncontrado = await Usuario.findOne({correo: correo}).populate("role")
@@ -25,6 +26,13 @@ export const signIn = async (req, res) => {
         if (!matchPass) {
             return res.status(401).json({token: null, msg: "Contraseña Invalida", redirect: '/signin?error=invalid%20password'});
         }
+
+        if (['admin', 'empleado'].includes(usuarioEncontrado.role[0].nombre)) {
+            redirect = '/dashboard'
+        } else {
+            redirect = '/perfil'
+        }
+
         const tokens = ['accessToken', 'Tookie'];
 
         if (keepSession === false) {
@@ -64,12 +72,10 @@ export const signIn = async (req, res) => {
             })
         }
 
-        // IMPLEMENTAR DOS TOKENS, UNO DE CORTA DURACIÓN Y OTRO DE RENOVACIÓN PARA REDUCIR RIESGOS.
-
-        return res.json({ msg: "Usuario autenticado, iniciando sesión..." , token: tokens });
+        return res.status(200).json({ msg: "Usuario autenticado, iniciando sesión..." , token: tokens, redirect: redirect });
     } catch (error) {
         console.log(error)
-        res.status(400).json('Error al autenticar el usuario')
+        res.status(500).json('Error al autenticar el usuario')
     }
 };
     
