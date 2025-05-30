@@ -69,6 +69,7 @@ function Rooms(){
         try {
             const response = await fetch('/api/user/booking/create', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },

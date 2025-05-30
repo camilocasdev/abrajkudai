@@ -219,7 +219,16 @@ export const getReserva = async (req, res) => {
 
 export const getReservaId = async (req, res) => {
 
-    const reserva = await Reserva.findById(req.params['reservaId'])
+    const reserva = await Reserva.findById(req.params['reservaId']).populate({
+        path: 'usuario',
+        model: 'Usuario'
+    }).populate({
+        path: 'tipo',
+        model: 'Roomtype'
+    }).populate({
+        path: 'habitacion',
+        model: 'Room'
+    })
     
     res.status(200).json(reserva);
 }

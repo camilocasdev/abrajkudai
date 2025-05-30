@@ -23,6 +23,7 @@ function Signup(){
         try {
             const response = await fetch('/api/user/signup', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

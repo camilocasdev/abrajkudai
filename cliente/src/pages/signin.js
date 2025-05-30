@@ -19,6 +19,7 @@ function Login(){
         try {
             const response = await fetch('/api/user/signin', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

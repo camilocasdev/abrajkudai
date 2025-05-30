@@ -107,6 +107,7 @@ export const profileData = async (req, res) => {
                 res.status(404).json({message: 'Usuario no encontrado'})
             )
         };
+
         
         res.status(200).json({error: false, userData: usuario, reservasData: reservas})
 

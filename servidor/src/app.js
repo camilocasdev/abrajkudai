@@ -37,8 +37,6 @@ try {
 
 app.set(morgan('dev'));
 
-
-
 const allowedOrigins = [
     process.env.CORS_ORIGIN_ONE,
     process.env.CORS_ORIGIN_RENDER,
@@ -46,16 +44,18 @@ const allowedOrigins = [
     process.env.CORS_ORIGIN_ANDROID
 ]
 
-app.use(cors({
-        origin: function (origin, callback) {
-            if ( !origin || allowedOrigins.indexOf(origin) !== -1) {
-                callback(null, true)
-            } else {
-                callback(new Error('Not allowed by CORS'))
-            }
-        },
-        credentials: true
-    }))
+
+var corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    if (allowedOrigins.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+    corsOptions = { origin: false } // disable CORS for this request
+    }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+app.use(cors(corsOptionsDelegate))
 
 app.use(express.json());
 app.use(cookieParser());
