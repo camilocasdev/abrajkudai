@@ -102,6 +102,15 @@ export const profileData = async (req, res) => {
             model: 'Roomtype'
         })
 
+        const confirmedBooking = await Reserva.find({usuario: decoded.id, estado: 'Pagado'}).sort({createdAt: -1}).populate({
+            path: 'habitacion',
+            model: 'Room'
+        }).populate({
+            path: 'tipo',
+            model: 'Roomtype'
+        })
+
+
         if (!usuario) {
             return(
                 res.status(404).json({message: 'Usuario no encontrado'})

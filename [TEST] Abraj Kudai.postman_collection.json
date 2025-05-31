@@ -1,0 +1,1516 @@
+{
+	"info": {
+		"_postman_id": "f9ddd548-dd17-44af-9dec-811f3308e5a9",
+		"name": "[TEST] Abraj Kudai",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40208689"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Autenticación",
+					"item": [
+						{
+							"name": "User Sign In",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"correo\" : \"default@admin.com\",\r\n    \"contrasena\" : \"na\",\r\n    \"keepSession\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/user/signin",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Sign Up",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Eren\",\r\n    \"apellido\": \"Yeager\",\r\n    \"pais\": \"Eldia\",\r\n    \"identificacion\": \"0000000000\",\r\n    \"contrasena\": \"123456\",\r\n    \"correo\":\"fundador.eren@correo.com\",\r\n    \"telefono\": 1234552\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/user/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Logout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/api/user/logout",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Forgot Password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"camilo.castillo3090@gmail.com\",\r\n    \"verificationCode\" : 518067\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/user/forgotpassword",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"forgotpassword"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/user/resetpassword",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"resetpassword"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reservar",
+					"item": [
+						{
+							"name": "Pay Info (user - booking)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/user/booking/summary",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"booking",
+										"summary"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear reserva",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "Tookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzcyOTQxYzg2NzdlNzg3MThkZTQ4NyIsImlhdCI6MTc0MTgwOTIyNCwiZXhwIjoxNzQxODk1NjI0fQ._Rn4j_w8jLsp13_DMMewbB9ZncUgcGpUsbWbpuRNBhU",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fechaInicio\": \"2025-5-25\",\r\n    \"fechaHasta\": \"2025-8-30\",\r\n    \"habitacion\": \"682d5d19814ed70ae2df7ab4\",\r\n    \"cantidad\": 2,\r\n    \"estado\": \"Pendiente\",\r\n    \"servicios\": [\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/user/booking/create",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"booking",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pagar Reserva",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "Tookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzcyOTQxYzg2NzdlNzg3MThkZTQ4NyIsImlhdCI6MTc0MTgwOTIyNCwiZXhwIjoxNzQxODk1NjI0fQ._Rn4j_w8jLsp13_DMMewbB9ZncUgcGpUsbWbpuRNBhU",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fechaInicio\": \"2025-02-30\",\r\n    \"fechaHasta\": \"22:00 UTC -5\",\r\n    \"habitacion\": \"67e59eea6757bc9e340cae75\",\r\n    \"cantidad\": 2,\r\n    \"estado\": \"Pendiente\",\r\n    \"servicios\": [\r\n\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/user/booking/confirm",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"booking",
+										"confirm"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Perfil",
+					"item": [
+						{
+							"name": "Datos de Usuario \"/perfil\"",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/user/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"get"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Roomlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>ID</th>\r",
+									"        <th>Codigo</th>\r",
+									"        <th>Room ID</th>\r",
+									"        <th>Nombre</th>\r",
+									"        <th>Precio</th>\r",
+									"        <th>__v</th>\r",
+									"    </tr>\r",
+									"    \r",
+									"    {{#each response}}\r",
+									"        <tr>\r",
+									"            <td>{{_id}}</td>\r",
+									"            <td>{{codigo}}</td>\r",
+									"            <td>{{roomid}}</td>\r",
+									"            <td>{{nombre}}</td>\r",
+									"            <td>{{precio}}</td>\r",
+									"            <td>{{__v}}</td>\r",
+									"        </tr>\r",
+									"    {{/each}}\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return {response: pm.response.json()}\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "filter",
+								"value": "Ocupado",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "filter",
+								"value": "Disponible",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "filter",
+								"value": "Pendiente",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/public/room/get/list",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"public",
+								"room",
+								"get",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RoomtypeGet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/public/roomtype/get?t=7",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"public",
+								"roomtype",
+								"get"
+							],
+							"query": [
+								{
+									"key": "t",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "[CRUD] Rooms",
+					"item": [
+						{
+							"name": "[CREATE] Habitación",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numero\": \"T1 -ORIGINAL\",\r\n    \"estado\": \"Disponible\",\r\n    \"roomid\": { \r\n        \"_id\": \"682d5d19814ed70ae2df7aad\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/room/create",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"room",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Lista de habitaciones",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/room/get/list",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"room",
+										"get",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Habitación por ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/room/get/683a921dc9ceb607e4cfa783",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"room",
+										"get",
+										"683a921dc9ceb607e4cfa783"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[UPDATE] Habitación por ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numero\" : \"T-CAMBIO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/room/update/683a921dc9ceb607e4cfa783",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"room",
+										"update",
+										"683a921dc9ceb607e4cfa783"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[DELETE] Habitación por ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/room/delete/683a921dc9ceb607e4cfa783",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"room",
+										"delete",
+										"683a921dc9ceb607e4cfa783"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "[CRUD] Reservas",
+					"item": [
+						{
+							"name": "[CREATE] Crear reserva",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/booking/create",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"booking",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Lista de reservas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/booking/get/list",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"booking",
+										"get",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Reserva por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/booking/get/682f818cb699d1bf6803a21d",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"booking",
+										"get",
+										"682f818cb699d1bf6803a21d"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": "asdasd",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[UPDATE] Reserva por ID",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estado\": \"Pagado\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/booking/update/682f818cb699d1bf6803a21d",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"booking",
+										"update",
+										"682f818cb699d1bf6803a21d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[DELETE] Reserva por ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/booking/delete/682f818cb699d1bf6803a21d",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"booking",
+										"delete",
+										"682f818cb699d1bf6803a21d"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "[CRUD] Roles",
+					"item": [
+						{
+							"name": "[CREATE] Role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Developer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/role/create",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"role",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Lista de roles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/role/get/list",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"role",
+										"get",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Role por ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/role/get/683a951cc9ceb607e4cfa7cb",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"role",
+										"get",
+										"683a951cc9ceb607e4cfa7cb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[UPDATE] Role por ID",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Owner\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/role/update/683a951cc9ceb607e4cfa7cb",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"role",
+										"update",
+										"683a951cc9ceb607e4cfa7cb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[DELETE] Role por ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/role/delete/683a951cc9ceb607e4cfa7cb",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"role",
+										"delete",
+										"683a951cc9ceb607e4cfa7cb"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "[CRUD] Usuarios",
+					"item": [
+						{
+							"name": "[CREATE] Crear usuario",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGMzYWVhMzQzNGE0NTU3NWNmOWQwNiIsImlhdCI6MTczODQzMDEzNiwiZXhwIjoxNzM4NTE2NTM2fQ.Hh4vaxc-ylZnd8E0izvqZTDzmTELhAw32KYcLTYBgNg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"default\",\r\n    \"apellido\": \"testing\",\r\n    \"pais\": \"na\",\r\n    \"identificacion\": \"323aws\",\r\n    \"contrasena\": \"na\",\r\n    \"correo\":\"default@testing.com\",\r\n    \"telefono\": 0,\r\n    \"role\": [\"empleado\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/user/create",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"user",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Lista de usuarios",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGMzYWVhMzQzNGE0NTU3NWNmOWQwNiIsImlhdCI6MTczODQzMDEzNiwiZXhwIjoxNzM4NTE2NTM2fQ.Hh4vaxc-ylZnd8E0izvqZTDzmTELhAw32KYcLTYBgNg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/user/get/list",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"user",
+										"get",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Usuarios por ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjFjZTJhYWNhZjlkZTQ2OGM0ZDQxMCIsImlhdCI6MTczNDQ2MzA0NCwiZXhwIjoxNzM0NTQ5NDQ0fQ._twxf5MR1iWD1JWvBuKavXzvRCfcc7vRa4w0JGFyw4w",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Camilo\",\r\n    \"apellido\": \"Castillo\",\r\n    \"contraseña\": \"123456\",\r\n    \"correo\":\"camilo.castillo3090@gmail.com\",\r\n    \"telefono\": 3214436503\r\n    //\"role\": [\"role.0\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/user/get/683a969308d7020ae5e03ef3",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"user",
+										"get",
+										"683a969308d7020ae5e03ef3"
+									],
+									"query": [
+										{
+											"key": "s",
+											"value": "676086582cca9d4b88018f55",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[UPDATE] Usuario por ID",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjA3MzIwYTBhNDA4OWM0YzgxYzlhYiIsImlhdCI6MTczNDQxMTAxMSwiZXhwIjoxNzM0NDk3NDExfQ.8leB7CocCELtgZpGdb7JxjB5S0c0b92gc0jx9o3SMQ4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"nombre\" : \"testing_postman\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/user/update/683a969308d7020ae5e03ef3",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"user",
+										"update",
+										"683a969308d7020ae5e03ef3"
+									],
+									"query": [
+										{
+											"key": "t",
+											"value": "123",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[DELETE] Usuario por ID",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjFjM2JkNjliZTc1NGM5MDc3YjM2MCIsImlhdCI6MTczNDQ2MDUwOCwiZXhwIjoxNzM0NTQ2OTA4fQ.3Zjm57z0LTyTNu7vH80LN_9m-CnsrF-2zFjSdByz__Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/api/admin/user/delete/683a969308d7020ae5e03ef3",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"user",
+										"delete",
+										"683a969308d7020ae5e03ef3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "[CRUD] Tipos de Habitación",
+					"item": [
+						{
+							"name": "[CREATE] Roomtype",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Small Home\",\r\n    \"precio\" : 100,\r\n    \"capacidad\" : 1,\r\n    \"scriptLong\" : \"\",\r\n    \"scriptShort\" : \"\",\r\n    \"imagen\" : []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/roomtype/create",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"roomtype",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Lista de Roomtypes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/roomtype/get/list",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"roomtype",
+										"get",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Roomtype por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/roomtype/get/683a9320c9ceb607e4cfa7a0",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"roomtype",
+										"get",
+										"683a9320c9ceb607e4cfa7a0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[UPDATE] Roomtype por ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Testing House Dream\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/roomtype/update/683a9320c9ceb607e4cfa7a0",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"roomtype",
+										"update",
+										"683a9320c9ceb607e4cfa7a0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[DELETE] Roomtype por ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/roomtype/delete/683a9320c9ceb607e4cfa7a0",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"roomtype",
+										"delete",
+										"683a9320c9ceb607e4cfa7a0"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "[CRUD] Servicios",
+					"item": [
+						{
+							"name": "[CREATE] Servicios",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mayordomo\",\r\n    \"description\": \"Mayordomo personal 24/7\",\r\n    \"price\": 250,\r\n    \"pricing_type\": \"per_days\",\r\n    \"status\": \"avaible\",\r\n    \"roomtype_fe\": \"682d5d19814ed70ae2df7ab4\" // Penthouse Black\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/services/create",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"services",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Lista de Servicios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/services/get/list",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"services",
+										"get",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Servicios por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/services/get/683a97ec08d7020ae5e03f10",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"services",
+										"get",
+										"683a97ec08d7020ae5e03f10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[UPDATE] Servicios por ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"price\" : 700\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/admin/services/update/683a97ec08d7020ae5e03f10",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"services",
+										"update",
+										"683a97ec08d7020ae5e03f10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[DELETE] Servicios por ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/admin/services/delete/683a97ec08d7020ae5e03f10",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"services",
+										"delete",
+										"683a97ec08d7020ae5e03f10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "[CRUD] Facturas",
+					"item": [
+						{
+							"name": "[CREATE] Factura",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_name\" : \"Camilo Castillo\",\r\n    \"booking_id\" : \"6837debec7caa2984b21b796\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/admin/factura/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"factura",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Lista de facturas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/admin/factura/get/list",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"admin",
+										"factura",
+										"get",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[READ] Factura por ID",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "[UPDATE] Factura por ID",
+							"request": {
+								"method": "PUT",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "[DELETE] Factura por ID",
+							"request": {
+								"method": "DELETE",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

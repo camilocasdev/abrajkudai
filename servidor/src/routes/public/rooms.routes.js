@@ -7,6 +7,6 @@ const router = Router();
 
 router.get('/room/get/list', [ refreshToken ] , roomsctrl.roomList);
 router.get('/roomtype/get', [ refreshToken ], roomtypectrl.roomtypeInfo)
-router.put('/room/update/:roomId', [ refreshToken, verifyToken ], roomsctrl.roomUpdate)
+//router.put('/room/update/:roomId', [ refreshToken, verifyToken ], roomsctrl.roomUpdate)
 
 export default router;

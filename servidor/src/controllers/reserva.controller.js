@@ -94,6 +94,8 @@ export const bookingSumamry = async ( req, res ) => {
             return res.status(401).json({error: true, msg: 'Error en la toma de datos...', redirect: '/404?error=booking%20data%20missing'})
         }
 
+        console.log(bookingId)
+
         const booking = await Reserva.findOne({_id: bookingId})
         const user = await User.findOne({_id: userId.id})
         const roomtype = await Roomtype.findOne({_id: booking.tipo})
