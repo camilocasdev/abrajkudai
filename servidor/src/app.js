@@ -7,6 +7,7 @@ import path from 'path';
 import cookieParser  from 'cookie-parser';
 import cors from 'cors'
 import dotenv from 'dotenv'
+import helmet from 'helmet'
 
 dotenv.config(process.cwd(), '.env')
 
@@ -56,6 +57,19 @@ var corsOptionsDelegate = function (req, callback) {
 }
 
 app.use(cors(corsOptionsDelegate))
+
+
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            imgSrc: ["'self'", 'https://nicodev.s-ul.eu/', 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/'],
+            scriptSrc: ["'self'", 'https://unpkg.com'],
+            connectSrc: ["'self'", 'https://unpkg.com']
+        }
+    }
+}))
 
 app.use(express.json());
 app.use(cookieParser());
