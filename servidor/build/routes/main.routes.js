@@ -1,29 +1,22 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _express = require("express");
-var _reserva = _interopRequireDefault(require("./admin/reserva.routes"));
-var _user = _interopRequireDefault(require("./admin/user.routes"));
-var _room = _interopRequireDefault(require("./admin/room.routes"));
-var _role = _interopRequireDefault(require("./admin/role.routes"));
-var _roomtype = _interopRequireDefault(require("./admin/roomtype.routes"));
-var _services = _interopRequireDefault(require("./admin/services.routes"));
-var _account = _interopRequireDefault(require("./user/account.routes"));
-var _auth = _interopRequireDefault(require("./user/auth.routes"));
-var _reservar = _interopRequireDefault(require("./user/reservar.routes"));
-var _rooms = _interopRequireDefault(require("./public/rooms.routes"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+import { Router } from 'express';
 // Admin Routes Import
+import reserva_rt from './admin/reserva.routes.js';
+import user_rt from './admin/user.routes.js';
+import room_rt from './admin/room.routes.js';
+import role_rt from './admin/role.routes.js';
+import roomtype_rt from './admin/roomtype.routes.js';
+import services_rt from './admin/services.routes.js';
+import factura_rt from './admin/factura.routes.js';
 
 // User Routes Import
+import account_rt from './user/account.routes.js';
+import auth_rt from './user/auth.routes.js';
+import reservar_rt from './user/reservar.routes.js';
 
 // Public Routes Import
-
-var router = (0, _express.Router)();
-router.use('/admin', _reserva["default"], _user["default"], _room["default"], _role["default"], _roomtype["default"], _services["default"]);
-router.use('/user', _account["default"], _auth["default"], _reservar["default"]);
-router.use('/public', _rooms["default"]);
-var _default = exports["default"] = router;
+import rooms_rt from './public/rooms.routes.js';
+var router = Router();
+router.use('/admin', reserva_rt, user_rt, room_rt, role_rt, roomtype_rt, services_rt, factura_rt);
+router.use('/user', account_rt, auth_rt, reservar_rt);
+router.use('/public', rooms_rt);
+export default router;

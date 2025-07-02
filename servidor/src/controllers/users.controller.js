@@ -1,12 +1,12 @@
-import Usuario from "../models/user";
-import Role from "../models/role";
-import Reserva from "../models/reserva"
+import Usuario from "../models/user.js";
+import Role from "../models/role.js";
+import Reserva from "../models/reserva.js"
 import jwt from "jsonwebtoken";
 
 export const get_user = async (req, res) => {
     const usuarios = await Usuario.find();
     
-    res.status(201).json(usuarios)
+    res.status(200).json({msg:'¡Consulta realizada exitosamente!', data: usuarios})
 }
 
 export const del_user = async (req, res) => {
@@ -21,7 +21,7 @@ export const get_user_by_id = async (req, res) => {
     const {userId} = req.params;
     const userById = await Usuario.findById(userId);
 
-    res.status(201).json(userById);
+    res.status(200).json({msg:'¡Usuario consultado exitosamente!', data: userById});
 }
 
 export const add_user = async (req, res) => {
@@ -66,8 +66,7 @@ export const add_user = async (req, res) => {
             expiresIn: 864000 //24 Horas
         });
     
-        res.status(200).json(usuarioGuardado)
-        
+        res.status(201).json({msg:'¡Usuario creado exitosamente!', created: usuarioGuardado})
 }
 
 export const update_user = async (req, res) => {
@@ -79,7 +78,7 @@ export const update_user = async (req, res) => {
             return res.status(404).json({ msg: 'Usuario no encontrado' });
         }
         
-        res.status(200).json(actualizarUsuario)
+        res.status(200).json({msg:'¡Usuario modificado exitosamente!', updated: actualizarUsuario})
     } catch (error) {
         console.log(error)
         res.status(500).json({ msg: 'Error al actualizar el usuario' });
@@ -132,9 +131,10 @@ export const profileData = async (req, res) => {
 }
 
 export const logout = async (req, res) => {
+
     res.clearCookie('Tookie');
     res.clearCookie('accessToken')
-    res.status(200).json({message: 'Sesión cerrada'});
+    res.status(200).json({msg: 'Sesión cerrada', redirect: '/'});
     return;
 }
 

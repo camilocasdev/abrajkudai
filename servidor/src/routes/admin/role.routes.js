@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import * as rolectrl from '../../controllers/role.controller'
-import { verifyToken, refreshToken, isAdminOrEmpleado, isAdmin } from '../../middlewares/authjwt'
+import * as rolectrl from '../../controllers/role.controller.js'
+import { verifyToken, refreshToken, isAdminOrEmpleado, isAdmin } from '../../middlewares/authjwt.js'
 
 const router = Router()
 

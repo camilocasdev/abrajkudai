@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import * as servicesctrl from '../../controllers/services.controller'
-import { verifyToken, refreshToken, isAdminOrEmpleado, isAdmin } from '../../middlewares/authjwt'
+import * as servicesctrl from '../../controllers/services.controller.js'
+import { verifyToken, refreshToken, isAdminOrEmpleado, isAdmin } from '../../middlewares/authjwt.js'
 
 const router = Router()
 

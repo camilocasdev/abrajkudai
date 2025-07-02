@@ -1,8 +1,8 @@
-import Role from '../models/role';
-import Room from '../models/room';
-import Roomtype from '../models/roomtype';
-import Reserva from '../models/reserva'
-import User from '../models/user';
+import Role from '../models/role.js';
+import Room from '../models/room.js';
+import Roomtype from '../models/roomtype.js';
+import Reserva from '../models/reserva.js'
+import User from '../models/user.js';
 
 export const crearRole = async (req, res) => {
 

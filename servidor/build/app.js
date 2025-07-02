@@ -1,68 +1,79 @@
-"use strict";
+import express from 'express';
+import morgan from 'morgan';
+//import pkg from '../package.json' assert { type: 'json' };
+import mainrouter from './routes/main.routes.js';
+import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking } from './libs/initialSetup.js';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import helmet from 'helmet';
+dotenv.config(process.cwd(), '.env');
+var app = express();
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = exports.browser = void 0;
-var _express = _interopRequireDefault(require("express"));
-var _morgan = _interopRequireDefault(require("morgan"));
-var _package = _interopRequireDefault(require("../package.json"));
-var _main = _interopRequireDefault(require("./routes/main.routes"));
-var _initialSetup = require("./libs/initialSetup");
-var _path = _interopRequireDefault(require("path"));
-var _cookieParser = _interopRequireDefault(require("cookie-parser"));
-var _cors = _interopRequireDefault(require("cors"));
-var _dotenv = _interopRequireDefault(require("dotenv"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
-_dotenv["default"].config(process.cwd(), '.env');
-var app = (0, _express["default"])();
-app.set('pkg', _package["default"]);
+//app.set('pkg', pkg);
+
 try {
   console.log('Iniciando entorno... ');
-  (0, _initialSetup.crearRole)();
-  (0, _initialSetup.defaultUsers)();
-  (0, _initialSetup.crearRoomType)();
+  crearRole();
+  defaultUsers();
+  crearRoomType();
   setTimeout(function () {
     //El uso de function para la definicion del setTimeout o setInterval esta en desuso
-    (0, _initialSetup.crearRoom)();
+    crearRoom();
   }, 2000); // 2 Segundos
 
   setInterval(function () {
     //Este uso es más moderno y fácil de implementar
     console.log('[Auto Clean] Chequeando estado de reservas...');
-    (0, _initialSetup.expireBooking)();
+    expireBooking();
   }, 43200000); // 12 Horas
   // 86400000); // 24 Horas
 } catch (error) {
   console.log(error);
 }
-app.set((0, _morgan["default"])('dev'));
+app.set(morgan('dev'));
 var allowedOrigins = [process.env.CORS_ORIGIN_ONE, process.env.CORS_ORIGIN_RENDER, process.env.CORS_ORIGIN_VERCEL, process.env.CORS_ORIGIN_ANDROID];
-app.use((0, _cors["default"])({
-  origin: function origin(_origin, callback) {
-    if (!_origin || allowedOrigins.indexOf(_origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+var corsOptionsDelegate = function corsOptionsDelegate(req, callback) {
+  var corsOptions;
+  if (allowedOrigins.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = {
+      origin: true
+    }; // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = {
+      origin: false
+    }; // disable CORS for this request
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
+app.use(cors(corsOptionsDelegate));
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'https://nicodev.s-ul.eu/', 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/'],
+      scriptSrc: ["'self'", 'https://unpkg.com'],
+      connectSrc: ["'self'", 'https://unpkg.com']
     }
-  },
-  credentials: true
+  }
 }));
-app.use(_express["default"].json());
-app.use((0, _cookieParser["default"])());
-app.use(_express["default"].urlencoded({
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({
   extended: true
 }));
-app.use('/api', _main["default"]);
-var basePath = _path["default"].resolve('..');
-app.use(_express["default"]["static"](_path["default"].join(basePath, 'cliente/build')));
-console.log(_path["default"].join(basePath, 'cliente/build', 'index.html'));
+app.use('/api', mainrouter);
+var basePath = path.resolve('..');
+app.use(express["static"](path.join(basePath, 'cliente/build')));
+console.log(path.join(basePath, 'cliente/build', 'index.html'));
 app.get('*', function (req, res) {
-  res.sendFile(_path["default"].join(basePath, 'cliente/build', 'index.html'));
+  res.sendFile(path.join(basePath, 'cliente/build', 'index.html'));
 });
-var browser = exports.browser = function browser() {
+export var browser = function browser() {
   if (typeof window !== "undefined") {
     window.open('http://localhost:3000', '_blank');
   }
 };
-var _default = exports["default"] = app;
+export default app;

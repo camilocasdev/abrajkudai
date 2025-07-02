@@ -1,11 +1,5 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _mongoose = require("mongoose");
-var roomSchema = new _mongoose.Schema({
+import { Schema, model } from 'mongoose';
+var roomSchema = new Schema({
   numero: {
     type: String,
     unique: true,
@@ -18,7 +12,7 @@ var roomSchema = new _mongoose.Schema({
   },
   roomid: {
     rel: 'Roomtype',
-    type: _mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true
   }
 }, {
@@ -27,4 +21,5 @@ var roomSchema = new _mongoose.Schema({
 });
 
 //NO OLVIDAR EL POPULATE PARA TRAER LOS DATOS RELACIONADOS DE OTROS MODELOS
-var _default = exports["default"] = (0, _mongoose.model)('Room', roomSchema);
+
+export default model('Room', roomSchema);

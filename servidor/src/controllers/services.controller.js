@@ -1,4 +1,4 @@
-import Services from '../models/services'
+import Services from '../models/services.js'
 
 export const serviceCreate = async ( req, res ) => {
     try {
@@ -18,7 +18,7 @@ export const serviceCreate = async ( req, res ) => {
                 roomtype_fe: roomtype_fe
             }).save()
 
-            res.status(200).json({msg: 'Clear', created: newService})
+            res.status(201).json({msg: '¡Servicio de habitación creado exitosamente!', created: newService})
         }
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
@@ -29,7 +29,7 @@ export const servicesList = async ( req, res ) => {
     try {
         const servicesList = await Services.find()
 
-        res.status(201).json({msg: 'Clear', lista: servicesList})
+        res.status(200).json({msg: '¡Consulta realizada exitosamente!', data: servicesList})
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
     }
@@ -43,7 +43,7 @@ export const serviceById = async ( req, res ) => {
             res.status(400).json({msg: 'No existe una habitación asignada a ese ID', servicio: service})
         }
 
-        res.status(201).json({msg: 'Clear', servicio: service})
+        res.status(200).json({msg: '¡Servicio de habitación consultado exitosamente!', data: service})
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
     }
@@ -57,7 +57,7 @@ export const serviceUpdate = async ( req, res ) => {
             res.status(400).json({msg: 'No existe una habitación asignada a ese ID', servicio: service})
         } 
 
-        res.status(201).json({msg: 'Clear', actualizado: service})
+        res.status(200).json({msg: '¡Servicio de habitación modificado exitosamente!', updated: service})
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
     }

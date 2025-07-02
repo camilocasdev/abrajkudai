@@ -2,11 +2,12 @@
   "name": "evidencia",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js --exec babel-node",
     "build": "babel src --out-dir build",
     "start": "node build/index.js",
-    "test": "jest"
+    "test": "mocha src/test/general.test.js"
   },
   "keywords": [],
   "author": "Camilo Castillo",
@@ -24,7 +25,8 @@
     "mongoose": "^8.16.1",
     "morgan": "^1.10.0",
     "nodemailer": "^6.10.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "stripe": "^18.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",

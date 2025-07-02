@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as roomctrl from '../../controllers/rooms.controller'
+import * as roomctrl from '../../controllers/rooms.controller.js'
 import { verifyToken, refreshToken, isAdminOrEmpleado } from "../../middlewares/authjwt.js";
 
 const router = Router()

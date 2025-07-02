@@ -1,11 +1,5 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _mongoose = require("mongoose");
-var roomType = new _mongoose.Schema({
+import { Schema, model } from 'mongoose';
+var roomType = new Schema({
   nombre: {
     type: String,
     unique: true,
@@ -32,4 +26,4 @@ var roomType = new _mongoose.Schema({
   timestamps: false,
   versionkey: false
 });
-var _default = exports["default"] = (0, _mongoose.model)('Roomtype', roomType);
+export default model('Roomtype', roomType);

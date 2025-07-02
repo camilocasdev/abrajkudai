@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import Usuario from '../models/user';
-import Role from '../models/role';
+import Usuario from '../models/user.js';
+import Role from '../models/role.js';
 
 export const refreshToken = async (req, res, next) => {
     try {
@@ -83,7 +83,7 @@ export const verifyToken = async (req, res, next) => {
 
         const usuario = await Usuario.findById(decoded.id, {contrasena: 0});
 
-        if (!usuario) return res.status(404).json({
+        if (!usuario) return res.status(401).json({
             error: true,
             message: 'Token sin usuario asociado...',
             redirect: '/signin?error=user%20not%20found'
@@ -92,7 +92,7 @@ export const verifyToken = async (req, res, next) => {
         next();
 
     } catch (error) {
-        res.status(404).json({
+        res.status(401).json({
             error: true,
             msg: 'Error al autenticar el token',
             redirect: '/signin?error=invalid%20token'

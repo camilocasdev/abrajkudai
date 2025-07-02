@@ -1,22 +1,16 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _mongoose = require("mongoose");
-var reserva = new _mongoose.Schema({
+import { Schema, model } from "mongoose";
+var reserva = new Schema({
   usuario: {
     rel: 'Usuario',
-    type: _mongoose.Schema.Types.ObjectId
+    type: Schema.Types.ObjectId
   },
   habitacion: {
     rel: 'Room',
-    type: _mongoose.Schema.Types.ObjectId
+    type: Schema.Types.ObjectId
   },
   tipo: {
     rel: 'Roomtype',
-    type: _mongoose.Schema.Types.ObjectId
+    type: Schema.Types.ObjectId
   },
   fechaInicio: {
     type: Date
@@ -46,4 +40,4 @@ var reserva = new _mongoose.Schema({
   timestamps: true,
   versionKey: false
 });
-var _default = exports["default"] = (0, _mongoose.model)('Reserva', reserva);
+export default model('Reserva', reserva);

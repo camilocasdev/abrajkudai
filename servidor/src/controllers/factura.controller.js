@@ -1,5 +1,5 @@
-import Factura from '../models/factura'
-import Reserva from '../models/reserva'
+import Factura from '../models/factura.js'
+import Reserva from '../models/reserva.js'
 
 
 export const createBill = async ( req, res ) => {

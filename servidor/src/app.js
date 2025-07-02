@@ -1,8 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
-import pkg from '../package.json';
-import mainrouter from './routes/main.routes'
-import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking } from './libs/initialSetup';
+//import pkg from '../package.json' assert { type: 'json' };
+import mainrouter from './routes/main.routes.js'
+import { crearRole, crearRoom, defaultUsers, crearRoomType, expireBooking } from './libs/initialSetup.js';
 import path from 'path';
 import cookieParser  from 'cookie-parser';
 import cors from 'cors'
@@ -13,7 +13,7 @@ dotenv.config(process.cwd(), '.env')
 
 const app = express();
 
-app.set('pkg', pkg);
+//app.set('pkg', pkg);
 
 try {
     console.log('Iniciando entorno... ')

@@ -86,8 +86,6 @@ function Rooms(){
             });
             const data = await response.json()
 
-            sessionStorage.setItem('temporal-booking', JSON.stringify(data))
-
             if (data.error === true){
                 console.error('Hubo un error')
                 navigate(data.redirect)

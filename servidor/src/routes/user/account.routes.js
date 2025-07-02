@@ -1,6 +1,6 @@
 import {Router} from 'express'
-import * as userctrl from '../../controllers/users.controller'
-import { refreshToken, verifyToken } from '../../middlewares/authjwt'
+import * as userctrl from '../../controllers/users.controller.js'
+import { refreshToken, verifyToken } from '../../middlewares/authjwt.js'
 
 const router = Router();
 

@@ -1,9 +1,14 @@
 import './style.css'
 import Header from './components/header.js';
 import Footer from './components/footer.js';
+import Loading from './components/loadingScreen.js'
+import CheckoutForm from './components/booking-payment/checkoutform.js'
+import ConfirmedPayment from './components/booking-payment/confirmedpayment.js';
 
 import React, { useEffect, useState} from 'react'
 import { useNavigate, useSearchParams} from 'react-router'
+import { Elements } from '@stripe/react-stripe-js' 
+import { loadStripe } from '@stripe/stripe-js'
 
 function Pago(){
 
@@ -19,13 +24,24 @@ function Pago(){
     const [booking, setBooking] = useState()
     const [user, setUser] = useState()
     const [room, setRoom] = useState()
+    const [stripeIntent, setStripeIntent] = useState()
+    const [status, setStatus] = useState()
 
     const currency = 'USD'
     
-    useEffect(() => {
-        
-        const defaultData = async() => {
+    const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
 
+    const appearance = {
+        theme: 'flat',
+        variables: {
+            colorPrimary: '#616E43',
+            borderRadius: '1rem',
+            spacingUnit: '.3rem'
+        }
+    }
+
+    useEffect(() => {
+        const defaultData = async() => {
             try {
                 const response = await fetch('/api/user/booking/summary', {
                     method: 'GET'
@@ -33,13 +49,16 @@ function Pago(){
 
                 const data = await response.json()
                 
-                if (data.error == true){
+                if (data.error === true){
                     navigate(data.redirect)
                 }
+
+                console.log(data.stripe)
 
                 setRoom(data.room)
                 setBooking(data.booking)
                 setUser(data.user)
+                setStripeIntent(data.stripe)
             } catch (error) {
                 setError(error)
                 console.log({msg: 'Hay un error en la recuperación de datos' + error})
@@ -48,32 +67,21 @@ function Pago(){
         defaultData()
     }, [])
 
-    useEffect(() => { //Refresca los estados (SOLO TESTING)
-        
-
-    }, [user, booking, room])
-
-    useEffect (() => {
-        const isLoading = async() => {
-            //Función para que se haga una pantalla del carga, mientras aparecen todos los elementos necesarios.
-        } 
-        isLoading()
-    }) 
-    
-    const bankpay = function(){
-        // Cambio de inputs para los diferentes metodos de pago a implementar en un futuro
-    }
-    bankpay()
-
+    useEffect(() => {
+        const s = searchParams.get('redirect_status')
+        if (s) setStatus(s);
+    }, [])
 
     useEffect(() => {
-        // Otros métodos de págo
-        const url = searchParams.get('m')
-        const methodChange = async() => {
-        }
-    },[searchParams])
+        
+    }, [stripeIntent, user, booking, room])
 
-    
+    if (!stripeIntent) return (
+        <div class = 'loading-box'>
+            <Loading />
+        </div>
+    );
+        
     return(
         <div>
             <div>
@@ -82,75 +90,20 @@ function Pago(){
             <div>
                 <Header />
                 <main>
-                    <section class='loading'>
-                        
-                    </section>
                     <section className='payment-box'>
                         <article className='payment-form'>
-                            <form class='pay-form' method='POST'>
-                                <div className='payment-form-title'>
-                                    <h2>Payment Method</h2>
+                            <div className='payment-form-title'>
+                                <h2>Payment Method</h2>
+                            </div>
+                            {status === 'confirmed' || status === 'succeeded' ? (
+                                <ConfirmedPayment status = {status} />
+                            ) : (
+                                <div>
+                                    <Elements stripe={stripePromise} options={{clientSecret: stripeIntent.cli_secret, appearance: appearance}}>
+                                        <CheckoutForm />
+                                    </Elements>
                                 </div>
-                                <div className='payment-methods'>
-                                    <a href='?m=0' className='method-bank-card' onClick={bankpay}>
-                                        Banco
-                                    </a>
-                                    <a href='?m=1' className='method-paypal' >
-                                        Paypal  
-                                    </a>
-                                    <a href='?m=2' className='method-transfering' >
-                                        Transferencia
-                                    </a>
-                                </div>
-                                <div className='payment-form-column'>
-                                    <input
-                                        name='card-holder'
-                                        placeholder='John Example'
-                                    />
-                                    <input
-                                        name='card-number'
-                                        placeholder='xxxx'
-                                        value = {cardNumber}
-                                        onChange = {(e) => setCardNumber(e.target.value)}
-                                    />
-                                </div>
-                                <div className='payment-form-row'>
-                                    <input
-                                        // INVESTIGAR COMO HACER EL INPUT DE FECHA ESPECIFICA PARA TARJETA DE CREDITO
-                                        name='card-expiration'
-                                        type='text'
-                                        pattern="(0[1-9]|1[0-2])\/([0-9]{2})" //Esto sirve a medias
-                                        placeholder="MM/AA" 
-                                        maxLength="5" 
-                                        title="Ingresa la fecha en formato MM/AA (ejemplo: 05/26)"
-                                        required
-                                    />
-                                    <input
-                                        // Falta funcion: Para que se vea los digitos escritos por un segundo y luego se escondan en *
-                                        name='card-code'
-                                        placeholder='cvv'
-                                        type='password'
-                                        maxLength = {3}
-                                    />
-                                </div>
-                                <div className='payment-form-column'>
-                                    <input
-                                        name = 'email'
-                                        id = 'email'
-                                        placeholder = {user?.mail}
-                                        readOnly
-                                    />
-                                    <input
-                                        name = 'tel'
-                                        id = 'tel'
-                                        placeholder = {user?.tel}
-                                        readOnly
-                                    />
-                                </div>
-                                <button type='submit' onSubmit>
-                                    Pay
-                                </button>
-                            </form>
+                            )}
                         </article>
                         <article className='booking-summary'>
                             <div className='booking-summary-title'>

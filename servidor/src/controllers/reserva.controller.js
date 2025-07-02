@@ -1,8 +1,10 @@
 import Reserva from '../models/reserva.js';
-import jwt, { verify } from 'jsonwebtoken';
-import User from '../models/user';
+import jwt from 'jsonwebtoken';
+import User from '../models/user.js';
 import Room from '../models/room.js'
 import Roomtype from '../models/roomtype.js'
+import { Stripe } from 'stripe'
+import { toStripeAmout } from '../utils/math.utils.js';
 
 
 //  ---------------------------------  FUNCIONES DE USUARIO  ----------------------------------------  //
@@ -17,6 +19,16 @@ export const bookingToPaying = async ( req, res) => {
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
 
         const room = await Room.findOne({roomid: habitacion}).sort({updatedAt: 1})
+
+        if (new Date(fechaInicio) < new Date) {
+            return(
+                res.status(400).json({msg:'La fecha ingresadas son incorrectas.', redirect: '?error=initial%20date%20is%20not%20valid'})
+            )
+        } else if (new Date(fechaHasta) < new Date) {
+            return(
+                res.status(400).json({msg:'La fecha ingresadas son incorrectas.', redirect: '?error=final%20date%20is%20not%20valid'})
+            )
+        }
 
         //Transformamos en fecha el String que nos llega de la base de datos
         const [dayFrom, dayTo] = [new Date(fechaInicio), new Date(fechaHasta)]
@@ -65,8 +77,14 @@ export const bookingToPaying = async ( req, res) => {
         if (!updateRoom) {
             return res.status(404).json({ msg: 'Habitación no encontrada' });
         }
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-        res.cookie('tb', save._id, {
+        const paymentTry = await stripe.paymentIntents.create({
+            amount: toStripeAmout(total),
+            currency: 'usd'
+        })
+
+        res.cookie('tb', {bookingId: save._id, stripeId: paymentTry.id}, {
             expires: new Date(Date.now() + 1 * 2 * 60 * 60 * 1000),
             path: process.env.COOKIE_CONFIG_ENV,
             secure: process.env.COOKIE_CFG_SECURE,
@@ -74,7 +92,7 @@ export const bookingToPaying = async ( req, res) => {
             samesite: process.env.COOKIE_CFG_SAME_SITE,
         }) // tb === Temporal Booking
 
-        return res.status(201).json({error: false, msg: 'Redirigiendo al pago...'})
+        return res.status(201).json({error: false, msg: 'Redirigiendo al pago...', redirect: '/pago'})
     
     } catch (error) {
         console.log('Error inesperado: ' + error)
@@ -87,21 +105,20 @@ export const bookingSumamry = async ( req, res ) => {
 
     try {
         let token = req.cookies['Tookie'];
-        const bookingId = req.cookies['tb'] //Id de Reserva (SIN CODIFICACIÓN)
+        const temporalBooking_Cookie = req.cookies['tb'] //Id de Reserva (SIN CODIFICACIÓN)
         const userId = jwt.verify(token, process.env.SECRET_KEY) // ID DE USUARIO
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-        if (bookingId == undefined || userId == undefined) {
+
+        if (temporalBooking_Cookie == undefined || userId == undefined) {
             return res.status(401).json({error: true, msg: 'Error en la toma de datos...', redirect: '/404?error=booking%20data%20missing'})
         }
 
-        console.log(bookingId)
-
-        const booking = await Reserva.findOne({_id: bookingId})
+        const booking = await Reserva.findOne({_id: temporalBooking_Cookie.bookingId})
         const user = await User.findOne({_id: userId.id})
         const roomtype = await Roomtype.findOne({_id: booking.tipo})
-    
-        //Descodificar la id de reserva en caso de que no decodifique en el req.cookies
-        //const reservaID = decodeURIComponent(cookie); 
+        
+        const stripeData = await stripe.paymentIntents.retrieve(temporalBooking_Cookie.stripeId)
 
         res.status(200).json({
             error: false,
@@ -114,6 +131,10 @@ export const bookingSumamry = async ( req, res ) => {
             user: {
                 mail: user.correo,
                 tel: user.telefono
+            },
+            stripe: {
+                id: stripeData.id,
+                cli_secret: stripeData.client_secret
             }
         })
     
@@ -123,16 +144,21 @@ export const bookingSumamry = async ( req, res ) => {
     }
 }
 
-export const bookingPay = async ( req, res ) => {
-    
-    const cookie = req.cookies['tb']
+export const bookingConfirmed = async ( req, res ) => {
+    try {
+        const data = req.cookies['tb']
 
-    const booking = await Reserva.findOne({_id: cookie})
+        const booking = await Reserva.findOneAndUpdate({_id: data.bookingId}, {estado: 'Pagado'},{ new: true})
 
-    const {cardName, cardNumber, cardExpire, cardCode, email, userNumber} = req.body;
+        /*------------------------------------------------------#
+        |    AQUÍ INCLUIR LA LÓGICA DE CREACIÓN DE FACTURAS     |
+        #------------------------------------------------------*/
 
-    res.status(201).json({msg: 'Todo OK!', contenido: 'w'})
-
+        res.status(200).json({msg: '¡Reserva confirmada exitosamente!', resumen: booking})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({msg: 'Internal Server Error', redirect: '/perfil'})
+    }
 }
 
 
@@ -216,7 +242,7 @@ export const getReserva = async (req, res) => {
     const reservas = await Reserva.find();
     if (reservas.length < 1) res.status(200).json('Historial de reservas vacio.')
 
-    res.status(200).json(reservas)
+    res.status(200).json({msg: '¡Consulta realizada exitosamente!', data: reservas})
 }
 
 export const getReservaId = async (req, res) => {
@@ -232,20 +258,21 @@ export const getReservaId = async (req, res) => {
         model: 'Room'
     })
     
-    res.status(200).json(reserva);
+    res.status(200).json({msg:'¡Habitación consultada exitosamente!', data: reserva});
 }
 
 export const updateReserva = async (req, res) => {
     
     const actualizarReserva = await Reserva.findByIdAndUpdate(req.params['reservaId'], req.body, { new: true });
     
-    res.status(204).json(actualizarReserva)
+    res.status(200).json({msg:'¡Habitación modificada exitosamente!', updated: actualizarReserva})
 }
 
 export const deleteReserva = async (req, res) => {
     
     const {reservaId} = req.params;
     const eliminarReserva = await Reserva.findByIdAndDelete(reservaId);
+
     res.status(204).json(eliminarReserva) 
 }
 

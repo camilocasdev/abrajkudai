@@ -1,10 +1,4 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _default = exports["default"] = {
+export default {
   DB_URI: 'mongodb+srv://dev_admin:dX3hG5qTYHLZ2enZ@abrajkudaidb.yqlzr0w.mongodb.net/?retryWrites=true&w=majority&appName=AbrajKudaiDB',
   SALT_PRODUCTION: 10,
   //Podemos configurar el numero de vueltas que puede hacer el hash de Dcrypt para encriptar nuestras variables.

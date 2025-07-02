@@ -1,11 +1,5 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _mongoose = require("mongoose");
-var serviceSchema = new _mongoose.Schema({
+import { Schema, model } from 'mongoose';
+var serviceSchema = new Schema({
   name: {
     type: String
   },
@@ -26,10 +20,10 @@ var serviceSchema = new _mongoose.Schema({
   roomtype_fe: {
     // fe = foranean entity
     ref: "Roomtype",
-    type: _mongoose.Schema.Types.ObjectId
+    type: Schema.Types.ObjectId
   },
   schedule: {
     type: Date
   }
 });
-var _default = exports["default"] = (0, _mongoose.model)('Services', serviceSchema);
+export default model('Services', serviceSchema);

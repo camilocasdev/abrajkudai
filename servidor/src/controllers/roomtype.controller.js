@@ -1,4 +1,4 @@
-import Roomtype from '../models/roomtype'
+import Roomtype from '../models/roomtype.js'
 
 export const roomtypeCreate = async ( req, res ) => {
 
@@ -21,7 +21,7 @@ export const roomtypeCreate = async ( req, res ) => {
                 imagen: imagen
             }).save()
 
-            res.status(200).json({msg: 'Clear', Roomtype: newRoomtype})
+            res.status(201).json({msg: '¡Tipo de habitación creado exitosamente!', created: newRoomtype})
         }
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
@@ -32,7 +32,7 @@ export const roomtypeList = async ( req, res ) => {
     try {
         const roomtypeList = await Roomtype.find()
 
-        res.status(201).json({msg: 'Clear', lista: roomtypeList})
+        res.status(200).json({msg: '¡Consulta realizada exitosamente!', data: roomtypeList})
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
     }
@@ -43,10 +43,10 @@ export const roomtypeById = async ( req, res ) => {
         const roomtype = await Roomtype.findById(req.params['roomtypeId'])
 
         if (!roomtype) {
-            res.status(400).json({msg: 'No existe una habitación asignada a ese ID', lista: roomtype})
+            res.status(400).json({msg: 'No existe una habitación asignada a ese ID', data: roomtype})
         }
 
-        res.status(201).json({msg: 'Clear', lista: roomtype})
+        res.status(200).json({msg: '¡Tipo de habitación consultado exitosamente!', data: roomtype})
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
     }
@@ -57,10 +57,10 @@ export const roomtypeUpdate = async ( req, res ) => {
         const roomtype = await Roomtype.findByIdAndUpdate(req.params['roomtypeId'], req.body, {new: true})
 
         if (!roomtype) {
-            res.status(400).json({msg: 'No existe una habitación asignada a ese ID', lista: roomtype})
+            res.status(400).json({msg: 'No existe una habitación asignada a ese ID', updated: null})
         } 
 
-        res.status(201).json({msg: 'Clear', lista: roomtype})
+        res.status(200).json({msg: '¡Tipo de habitación modificado exitosamente!', updated: roomtype})
     } catch (error) {
         res.status(500).json({msg: 'Error inesperado'})
     }
