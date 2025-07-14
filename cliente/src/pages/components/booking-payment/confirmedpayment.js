@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../style.css'
 import { useNavigate } from 'react-router';
+import ErrorMsg from '../errormsg';
 
 function ConfirmedPayment({status}){
 
@@ -9,6 +10,9 @@ function ConfirmedPayment({status}){
 
     useEffect(() => {
         const confirmBooking = async() => {
+
+            setError(null)
+
             try {
                 const response = await fetch('/api/user/booking/confirm', {
                     method: 'POST',
@@ -37,6 +41,7 @@ function ConfirmedPayment({status}){
 
     return(
         <div class = 'confirmed-pay'>
+            <ErrorMsg error={error}/>
             <h2>¡Pago Confirmado!</h2>
             <ion-icon name="bag-check-outline"></ion-icon>
             <a href={window.location.origin + '/perfil'}>Volver a Perfil</a>

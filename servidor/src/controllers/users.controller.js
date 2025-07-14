@@ -86,7 +86,6 @@ export const update_user = async (req, res) => {
 }
 
 export const profileData = async (req, res) => {
-    console.log('profileData')
     try {
         const token = req.cookies['Tookie'];
 
@@ -108,14 +107,6 @@ export const profileData = async (req, res) => {
             path: 'tipo',
             model: 'Roomtype'
         })
-
-
-        if (!usuario) {
-            return(
-                res.status(404).json({message: 'Usuario no encontrado'})
-            )
-        };
-
         
         res.status(200).json({error: false, userData: usuario, reservasData: reservas})
 

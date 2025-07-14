@@ -9,6 +9,7 @@ import React, { useEffect, useState} from 'react'
 import { useNavigate, useSearchParams} from 'react-router'
 import { Elements } from '@stripe/react-stripe-js' 
 import { loadStripe } from '@stripe/stripe-js'
+import ErrorMsg from './components/errormsg.js';
 
 function Pago(){
 
@@ -16,9 +17,6 @@ function Pago(){
     const [searchParams] = useSearchParams()
     const [error, setError] = useState()
     const navigate = useNavigate()
-
-    //Form
-    const [cardNumber, setCardNumber] = useState()
 
     //Objetos traidos del servidor
     const [booking, setBooking] = useState()
@@ -42,6 +40,9 @@ function Pago(){
 
     useEffect(() => {
         const defaultData = async() => {
+
+            setError(null)
+
             try {
                 const response = await fetch('/api/user/booking/summary', {
                     method: 'GET'
@@ -88,7 +89,9 @@ function Pago(){
                 <title>Pago | Abraj Kudai</title>
             </div>
             <div>
-                <Header />
+                <section className="header">
+                    <Header />
+                </section>
                 <main>
                     <section className='payment-box'>
                         <article className='payment-form'>
@@ -105,6 +108,7 @@ function Pago(){
                                 </div>
                             )}
                         </article>
+                        <ErrorMsg error={error}/>
                         <article className='booking-summary'>
                             <div className='booking-summary-title'>
                                 <h1>Order Summary</h1>

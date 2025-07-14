@@ -1,15 +1,15 @@
 import './style.css';
 import Footer from './components/footer.js';
+import Header from './components/header.js';
 
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+
 
 function Reserva(){
 
     const [resultados, setResultados] = useState([{}]);
     const [error, setError] = useState()
 
-    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -27,8 +27,8 @@ function Reserva(){
                 const data = await response.json()
 
                 if (!data){
-                    throw 1;
-                }
+                    throw error;
+                } 
                 setResultados(data.data)
             } catch (error) {
                 setError(error)
@@ -71,33 +71,8 @@ function Reserva(){
                 <title>Reservas | Abraj Kudai</title>
             </div>
             <body>
-                <section class="header">
-                    <article class="headerbox">
-                        <div>
-                            <a class="headerlogo" href="/">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
-                        </div>
-                        <div class="headeranchores">
-                            <div>
-                                <a href="amenidades">Amenidades</a>
-                            </div>
-                            <div>
-                                <a href="eventos">Eventos</a>
-                            </div>
-                            <div>
-                                <a 
-                                href="reserva"
-                                rel="noreferrer">
-                                Reservar
-                                </a>
-                            </div>
-                        </div>
-                        <div class="perfil">
-                            <a href="signin">
-                                <ion-icon name="person-circle" alt="Icono de perfil"></ion-icon>
-                            </a>
-                        </div>
-                    </article>
+                <section className="header">
+                    <Header />
                 </section>
                 <section class="res-rooms-section">
                     <div class="fixer">

@@ -1,14 +1,11 @@
 import './style.css';
 import Footer from './components/footer.js';
+import Header from './components/header.js';
 
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 function Perfil(){
-
-    var {$currentRoom} = 'on work...'
-    var {$historial} = 'on work...'
-    var {$proxResShow} = 'on work...'
 
     const [usuario, setUsuario] = useState({});
     const [userBookings, setUserBookings] = useState([{}]);
@@ -56,111 +53,100 @@ function Perfil(){
             })
             .catch (error => console.error('Error:', error))
     }
+
+    if (!Array.isArray(userBookings)) {
+        return <p>Cargando historial de reservas...</p>;
+    }
+
+    const bookingHistorial = userBookings.map((e, i) => {
+        try{
+            return (
+                <div className="profile-booking-tarjet" key={i}>
+                    <div>
+                        <img src={e?.tipo?.imagen?.[0]} alt={`Habitación número ${i} del historial de reservas.`} />
+                    </div>
+                    <div className="profile-booking-tarjet-content">
+                        <h3>{e?.tipo?.nombre}</h3>
+                        <p>{`Fecha de Inicio: ${e?.fechaInicio}`}</p>
+                        <p>{`Fecha de Fin: ${e?.fechaHasta}`}</p>
+                        <p>{`Estado: ${e?.estado}`}</p>
+                    </div>
+                </div>
+            );
+        } catch (error){
+            console.log(error)
+        }
+    });
     return(
         <div>
             <div>
                 <title>Perfil | Abraj Kudai</title>
             </div>
             <body>
-                <section class="header">
-                    <article class="banner-box-perfil">
-                        <img src="https://nicodev.s-ul.eu/VfvJhItz"
-                            title="Habitacion Actual"
-                            alt="Imagen de la habitacion actual del usuario"
-                            />
+                <section className="header">
+                    <article class="bg-profile-banner-box">
+                        <img 
+                            src={userBookings[userBookings.length-1]?.tipo?.imagen[0]} 
+                            title="Apartado del hotel"
+                            alt="Fondo de la reserva actual del hotel"
+                        />
                     </article>
-                    <article class="headerbox">
-                        <div>
-                            <a class="headerlogo" href="/">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
-                        </div>
-                        <div class="headeranchores">
-                            <div>
-                                <a href="amenidades">Amenidades</a>
-                            </div>
-                            <div>
-                                <a href="eventos">Eventos</a>
-                            </div>
-                            <div>
-                                <a 
-                                href="reserva"
-                                rel="noreferrer">
-                                Reservar
-                                </a>
-                            </div>
-                        </div>
-                        <div class="perfil">
-                            <a href="signin">
-                                <ion-icon name="person-circle" alt="Icono de perfil"></ion-icon>
-                            </a>
-                        </div>
-                    </article>
+                    <Header />
                 </section>
                 <section class="banner">
-                    <article class="currentroom">
-                        <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Habitación Actual"/>
-                        <div class="curRoom">
+                    <article class="current-room">
+                        <img src={userBookings[0]?.tipo?.imagen[0]} alt="Habitación Actual"/>
+                        <div class="current-room-content">
                             <h1>¡Hola! {usuario?.nombre}</h1>
-                            <p> Habitacion Actual ...</p>
+                            <div className='current-room-content-text'>
+                                <h3>{userBookings[0]?.tipo?.nombre}</h3>
+                                <p>Habitacion Actual</p>
+                            </div>
                         </div>
                     </article>            
                 </section>
-                <section class="perfcontent">
-                    <article>
-                        <nav>
-                            <div class="navbar">
+                <section class="profile-content">
+                    <article className='navbar-box'>
+                        <div class="navbar">
+                            <div className='navbar-anchores'>
                                 <a href="#reservas"><strong>Reservas</strong></a>
+                                <a href="#datos"><strong>Datos</strong></a>
                                 <a href="#configuracion"><strong>Configuración</strong></a>
-                                <button class="logout" href='#' onClick={clearData}><strong>Cerrar Sesión</strong></button>                    
                             </div>
-                        </nav>
+                            <button class="logout" href='#' onClick={clearData}><strong>Cerrar Sesión</strong></button>                    
+                        </div>
                     </article>
                     <article id="reservas">
                         <div>
                             <h2>Reserva Actual</h2>
-                            <div class="perftarjet">
+                            <div class="profile-booking-tarjet">
                                 <div>
-                                    <img src="https://nicodev.s-ul.eu/VfvJhItz" alt=""/>
+                                    <img src={userBookings[6]?.tipo?.imagen[0]} alt="Imágenen de la habitación actual"/>
                                 </div>
-                                <div>
-                                    <h3>{$currentRoom}</h3>
-                                    <p>Lorem ipsum</p>
+                                <div className="profile-booking-tarjet-content">
+                                    <h3>{userBookings[6]?.tipo?.nombre}</h3>
+                                    <p>{userBookings[6]?.tipo?.scriptShort}</p>
+                                    <p><strong>{userBookings[6]?.fechaInicio}</strong></p>
                                 </div>
-                            </div>             
+                            </div>            
                         </div>
                         <div>
                             <h2>Reserva Próximas</h2>
-                            <div class="perftarjet">
+                            <div class="profile-booking-tarjet">
                                 <div>
                                     <img src={userBookings[0]?.tipo?.imagen[0]} alt="Imágenen de la habitación actual"/>
                                 </div>
-                                <div>
+                                <div className="profile-booking-tarjet-content">
                                     <h3>{userBookings[0]?.tipo?.nombre}</h3>
                                     <p>{userBookings[0]?.tipo?.scriptShort}</p>
+                                    <p><strong>{userBookings[0]?.fechaInicio}</strong></p>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <div class="histcontein">
+                            <div class="profile-booking-historial">
                                 <h2>Historial de Reservas</h2>
-                                <div class="perftarjet">
-                                    <div>
-                                        <img src="https://nicodev.s-ul.eu/VfvJhItz" alt="Imágen relaciónada a la habitación del historial"/>
-                                    </div>
-                                    <div>
-                                        <h3>{$historial}</h3>
-                                        <p>Lorem ipsum</p>
-                                    </div>
-                                </div>
-                                <div class="perftarjet">
-                                    <div>
-                                        <img src={$currentRoom} alt="Imágen relacionada a la habitación del historial"/>
-                                    </div>
-                                    <div>
-                                        <h3>{$historial}</h3>
-                                        <p>Lorem ipsum</p>
-                                    </div>
-                                </div>
+                                {bookingHistorial}
                             </div>
                         </div>
                     </article>

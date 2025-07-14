@@ -1,7 +1,9 @@
 import './style.css'
 import Footer from './components/footer.js'
+import Header from './components/header.js'
+import ErrorMsg from './components/errormsg.js';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Signup(){
@@ -13,12 +15,16 @@ function Signup(){
     const [telefono, setTelefono] = useState('')
     const [correo, setCorreo] = useState('')
     const [contrasena, setContrasena] = useState('')
+    const [confirmarContrasena, setConfirmarContrasena] = useState('')
     const [error, setError] = useState('')
-
+    const [passwordMatch, setPasswordMatch] = useState(true)
+    
     const navigate = useNavigate()
 
     const registrar = async (event) => {
         event.preventDefault();
+
+        setError(null)
 
         try {
             const response = await fetch('/api/user/signup', {
@@ -43,7 +49,7 @@ function Signup(){
             if (response.ok){
                 return navigate('/signin')
             } else {
-                error(data.message || 'Error en la autenticación');
+                setError(data.msg || 'Error en la autenticación');
             }
         } catch (error) {
             setError('Hubo un problema con la solicitud.');
@@ -51,6 +57,11 @@ function Signup(){
         }
     }
 
+    useEffect(() => {
+        if (confirmarContrasena !== '') {
+            setPasswordMatch(contrasena === confirmarContrasena)
+        }
+    }, [contrasena, confirmarContrasena])
 
     return(
         <div>
@@ -58,33 +69,8 @@ function Signup(){
                 <title>Sign Up | Abraj Kudai</title>
             </div>
             <body>
-                <section class="header">
-                    <article class="headerbox">
-                        <div>
-                            <a class="headerlogo" href="/">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
-                        </div>
-                        <div class="headeranchores">
-                            <div>
-                                <a href="amenidades">Amenidades</a>
-                            </div>
-                            <div>
-                                <a href="eventos">Eventos</a>
-                            </div>
-                            <div>
-                                <a 
-                                href="reserva"
-                                rel="noreferrer">
-                                Reservar
-                                </a>
-                            </div>
-                        </div>
-                        <div class="perfil">
-                            <a href="signin">
-                                <ion-icon name="person-circle" alt="Icono de perfil"></ion-icon>
-                            </a>
-                        </div>
-                    </article>
+                <section className="header">
+                    <Header />
                 </section>
                 <main>
                     <div class="fix"></div>
@@ -93,6 +79,7 @@ function Signup(){
                             <h1>¡Registrate!</h1>
                             <p>Inicia Sesión para acceder a todos los beneficios</p>
                         </article>
+                        <ErrorMsg error={error} />
                         <article class="conexion">
                             <div class="conexionlinks">
                                 <a href="ignore" target="_blank" class="google-btn">
@@ -139,18 +126,16 @@ function Signup(){
                                                 required/>
                                             </label>
                                         </div> 
-                                        <div class="signmedium">
-                                            <label for="identificacion">
-                                                <input type="number" 
-                                                inputmode="numeric" 
-                                                id="identificacion" 
-                                                name="identificacion"
-                                                value={identificacion}
-                                                onChange={(e) => setIdentificacion(e.target.value)}
-                                                placeholder="Identificacion" 
-                                                required/>
-                                            </label>
-                                        </div>
+                                        <label for="identificacion">
+                                            <input type="number" 
+                                            inputmode="numeric" 
+                                            id="identificacion" 
+                                            name="identificacion"
+                                            value={identificacion}
+                                            onChange={(e) => setIdentificacion(e.target.value)}
+                                            placeholder="Identificacion" 
+                                            required/>
+                                        </label>
                                     </div>
                                     <div class="signupclose">
                                         <label for="telefono">
@@ -173,44 +158,42 @@ function Signup(){
                                             required/>
                                         </label>
                                     </div>
-                                    <div class="signlong">
-                                        <label for="contrasena">
-                                            <input 
-                                            type="password" 
-                                            name="contrasena"
-                                            value={contrasena}
-                                            onChange={(e) => setContrasena(e.target.value)}
-                                            placeholder="Contraseña"
-                                            required/>
-                                        </label>
-                                    </div>
-                                    <div class="signlong">
-                                        <label for="repcontrasena">
-                                            <input 
-                                            type="password" 
-                                            name="repcontrasena" 
-                                            placeholder="Repetir Contraseña"
-                                            required/>
-                                        </label>
-                                    </div>
-                                    <div class="chulito">
+                                    <label for="contrasena">
+                                        <input 
+                                        type="password" 
+                                        name="contrasena"
+                                        value={contrasena}
+                                        onChange={(e) => setContrasena(e.target.value)}
+                                        placeholder="Contraseña"
+                                        required/>
+                                    </label>
+                                    {!passwordMatch && confirmarContrasena !== '' && (
+                                        <span className="error-text">Las contraseñas no coinciden</span>
+                                    )}
+                                    <label for="repeat-password">
+                                        <input 
+                                        type="password" 
+                                        name="confirmar-contrasena" 
+                                        placeholder="Repetir Contraseña"
+                                        value = {confirmarContrasena}
+                                        onChange = {(e) => setConfirmarContrasena(e.target.value)}
+                                        className={!passwordMatch ? 'error-input' : ''}
+                                        required/>
+                                    </label>
+                                    <div className='check-box'>
                                         <label>
-                                            <div class="chulitofix">
-                                                <div>
-                                                    <input type="checkbox"/>
-                                                    <span>Creando una cuenta, aceptas los Términos y Condiciones y la Política de Privacidad.</span>
-                                                </div>
-                                                <div>
-                                                    <input type="checkbox"/>
-                                                    <span>Deseas recibir correos de ofertas y promociones?</span>
-                                                </div>
-                                            </div>
+                                            <input type="checkbox" name='T&C'/>
+                                            <span>Creando una cuenta, aceptas los Términos y Condiciones y la Política de Privacidad.</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name='email-notifications'/>
+                                            <span>Deseas recibir correos de ofertas y promociones?</span>
                                         </label>
                                     </div>
                                     <div class="signpost">
-                                        <div>
-                                            <a href="signin"><p>¿Ya tienes cuenta? Inicia Sesión</p></a>
-                                            <a href="reportproblem"><p>Reportar Problemas</p></a>
+                                        <div className='sign-post-redirects'>
+                                            <a href="signin">¿Ya tienes cuenta? Inicia Sesión</a>
+                                            <a href="reportproblem">Reportar Problemas</a>
                                         </div>
                                         <button type="submit">Registrarse</button>
                                     </div>

@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
-//NO SE EJECUTA ANTES DEL APP :RAGEE:
-dotenv.config(process.cwd(), '.env');
+import path from 'path';
+import { fileURLToPath } from 'url';
+dotenv.config({
+  path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../.env')
+});
 import app, { browser } from './app.js';
 import * as db from './database.js';
 var port = process.env.PORT;

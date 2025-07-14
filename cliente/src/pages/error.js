@@ -7,7 +7,9 @@ function Error() {
 
     return(
         <div>
-            <Header />
+            <section className="header">
+                <Header />
+            </section>
             <div>
                 <h1>404 Unespected</h1>
             </div>

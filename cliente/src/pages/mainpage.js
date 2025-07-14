@@ -1,7 +1,28 @@
 import './style.css';
 import Footer from './components/footer.js';
+import Header from './components/header.js'
+import { useEffect } from 'react';
 
 function Mainpage() {
+
+    useEffect(() => {
+
+        const scroll = window.scrollY
+
+        if (scroll === 0) {
+            const headerbox = document.querySelector('.headerbox')
+            if (headerbox){
+                try{
+                    headerbox.style.backgroundColor = 'rgba(70, 77, 112, 0.7)';
+                    headerbox.style.margin = '1.3rem 0rem';
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+            
+        }
+    }, [])
+
     return(
         <div>
             <div>
@@ -35,7 +56,7 @@ function Mainpage() {
                                             type="text"
                                             onfocus="(this.type='date')"
                                             onblur="(this.type='text')"
-                                            id="date" 
+                                            id="date-from" 
                                         />
                                         <input
                                             placeholder="Hasta"
@@ -43,7 +64,7 @@ function Mainpage() {
                                             type="text"
                                             onfocus="(this.type='date')"
                                             onblur="(this.type='text')"
-                                            id="date" 
+                                            id="date-to" 
                                         />
                                         <button type="submit">Reservar</button>
                                     </div>
@@ -51,32 +72,7 @@ function Mainpage() {
                             </div>
                         </div>
                     </article>
-                    <article className="headerbox">
-                        <div>
-                            <a className="headerlogo" href="/">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
-                        </div>
-                        <div className="headeranchores">
-                            <div>
-                                <a href="amenidades">Amenidades</a>
-                            </div>
-                            <div>
-                                <a href="eventos">Eventos</a>
-                            </div>
-                            <div>
-                                <a 
-                                href="reserva"
-                                rel="noreferrer">
-                                Reservar
-                                </a>
-                            </div>
-                        </div>
-                        <div className="perfil">
-                            <a href="signin">
-                                <ion-icon name="person-circle" alt="Icono de perfil"></ion-icon>
-                            </a>
-                        </div>
-                    </article>
+                    <Header />
                 </section>
                 <main>
                     <section class="mainpage-content">

@@ -8,7 +8,10 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
-dotenv.config(process.cwd(), '.env');
+import { fileURLToPath } from 'url';
+dotenv.config({
+  path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../.env')
+});
 var app = express();
 
 //app.set('pkg', pkg);
@@ -54,8 +57,9 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       imgSrc: ["'self'", 'https://nicodev.s-ul.eu/', 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/'],
-      scriptSrc: ["'self'", 'https://unpkg.com'],
-      connectSrc: ["'self'", 'https://unpkg.com']
+      scriptSrc: ["'self'", 'https://unpkg.com', 'https://js.stripe.com'],
+      connectSrc: ["'self'", 'https://unpkg.com', 'https://js.stripe.com'],
+      frameSrc: ["'self'", 'https://js.stripe.com']
     }
   }
 }));
@@ -65,7 +69,14 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use('/api', mainrouter);
-var basePath = path.resolve('..');
+var basePath;
+if (process.env.DOCKER_ACTIVE == 'true') {
+  basePath = path.resolve('');
+  console.log('Docker is running, basepath not modified: ', basePath);
+} else {
+  basePath = path.resolve('..');
+  console.log('Docker is NOT running, basepath modified: ', basePath);
+}
 app.use(express["static"](path.join(basePath, 'cliente/build')));
 console.log(path.join(basePath, 'cliente/build', 'index.html'));
 app.get('*', function (req, res) {

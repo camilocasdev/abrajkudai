@@ -1,5 +1,6 @@
 import './style.css'
 import Footer from './components/footer.js';
+import Header from './components/header.js';
 
 function Eventos(){
     return(
@@ -9,82 +10,59 @@ function Eventos(){
             </div>
             <body>
                 <section class="header">
-                    <article class="bannerbox">
-                        <img src="https://nicodev.s-ul.eu/7CgDXBBX" 
+                    <article class="banner-box">
+                        <img 
+                            src="https://nicodev.s-ul.eu/7CgDXBBX" 
                             title="Apartado del hotel"
-                            alt="Imagen de un apartado del hotel"
-                            class="homeImg"/>
-                        <div class="bannertitle">
-                            <div>
+                            alt="Imagen de los eventos generales del hotel"
+                            class="homeImg"
+                        />
+                        <div class="banner-cont">
+                            <div className='banner-cont-title'>
                                 <h1><strong>Eventos</strong></h1>
                             </div>
-                            <div class="bannerp">
+                            <div class="banner-cont-description">
                                 <p>
-                                    Descubra los eventos más exclusivos en el Hotel Abraj Kudai. 
-                                    Desde celebraciones privadas hasta conferencias de prestigio, 
-                                    nuestro equipo se encarga de cada detalle para que su evento 
-                                    sea un éxito inolvidable.
+                                    Las amenidades del <strong>Hotel Abraj Kudai</strong> estan diseñadas para brindar
+                                    una experiencia de lujo incomparable. Cada detalle esta pensado para
+                                    su comodidad y bienestar.
                                 </p>
                             </div>
                         </div>
                     </article>
-                    <article class="headerbox">
-                        <div>
-                            <a class="headerlogo" href="/">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
-                        </div>
-                        <div class="headeranchores">
-                            <div>
-                                <a href="amenidades">Amenidades</a>
-                            </div>
-                            <div>
-                                <a href="eventos">Eventos</a>
-                            </div>
-                            <div>
-                                <a 
-                                href="reserva"
-                                rel="noreferrer">
-                                Reservar
-                                </a>
-                            </div>
-                        </div>
-                        <div class="perfil">
-                            <a href="signin">
-                                <ion-icon name="person-circle" alt="Icono de perfil"></ion-icon>
-                            </a>
-                        </div>
-                    </article>
+                    <Header />
                 </section>
                 <main>
-                    <section class="eventcont">
-                        <a href="signin">
-                            <article class="mainevent">
-                                <a href="signin">
-                                    <img src="https://nicodev.s-ul.eu/vOUPwrhG" alt="Concierto Exclusivo"/>
-                                    <div class="maineventext">
-                                        <h2>BILLIE EILISH EN EXCLUSIVA EN ABRAJ KUDAI</h2>
-                                        <button>
-                                            <strong>Reservar Tickets</strong>
-                                        </button>
-                                    </div>
-                                </a>
-                            </article>
-                        </a>
-                        <article class="restevent">
-                            <div class="eventarjet">
+                    <section class="event-box">
+                        <article class="main-event">
+                            <a href="signin">
+                                <img src="https://nicodev.s-ul.eu/nYBTHVf3" alt="Concierto Exclusivo"/>
+                                <div class="main-event-content">
+                                    <h2>MAHER ZAIN EN EXCLUSIVA EN ABRAJ KUDAI</h2>
+                                    <button>
+                                        <strong>Reservar Tickets</strong>
+                                    </button>
+                                </div>
+                            </a>
+                        </article>
+                        <article class="other-events">
+                            <div class="other-events-tarjet">
                                 <div class="estado">
                                     <p><strong>En marcha</strong> Hasta 25 Ago</p>
                                 </div>
                                 <div>
                                     <img src="https://nicodev.s-ul.eu/waDYn6v1" alt="Eventos exclusivos"/>
                                 </div>
-                                <div>
-                                    <p>
-                                        El Consumer Electronics Show (CES) es el epicentro de la innovación global, 
-                                        y en el Hotel Abraj Kudai, ofrecemos el escenario perfecto para visionarios 
-                                        y creadores. Con tecnología de punta, lujo y confort, hacemos que su 
-                                        experiencia durante el CES sea extraordinaria
-                                    </p>
+                                <div className="other-events-tarjet-content">
+                                    <div>
+                                        <h2>CES 2025</h2>
+                                        <p>
+                                            El Consumer Electronics Show (CES) es el epicentro de la innovación global, 
+                                            y en el Hotel Abraj Kudai, ofrecemos el escenario perfecto para visionarios 
+                                            y creadores. Con tecnología de punta, lujo y confort, hacemos que su 
+                                            experiencia durante el CES sea extraordinaria
+                                        </p>
+                                    </div>
                                     <p><strong>Ubicación: Mega Salón de Eventos 101</strong></p>
                                 </div>
                             </div>

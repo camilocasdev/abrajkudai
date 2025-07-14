@@ -1,5 +1,6 @@
 import './style.css';
 import Footer from './components/footer.js';
+import Header from './components/header.js'
 
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
@@ -18,13 +19,13 @@ function Rooms(){
     const formMinDate = new Date()
     const minDate = formMinDate.toISOString().split("T")[0] //funciona
 
-    const formSugDate = new Date()
+    /* const formSugDate = new Date()
     formSugDate.setMonth(formSugDate.getMonth() + 1) //+1 Mes a la sugerencia
     const sugDate = formSugDate.toISOString().split("T")[0] //Transforma la fecha.
         //toISOString() cambiara el formato a YYYY-MM-DDTHH:mm:ss.sssZ, especificamente cambia a un UTC.
         //.split dividira las fechas[0] y la hora[1] en un array con el mismo orden.
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps */
     useEffect(() => {
 
         const datosHabitacion = async() => {
@@ -107,33 +108,8 @@ function Rooms(){
                 <title>{room?.nombre} | Abraj Kudai</title>
             </div>
             <body> 
-                <section class="header">
-                    <article class="headerbox">
-                        <div>
-                            <a class="headerlogo" href="/">
-                                <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" /></a>
-                        </div>
-                        <div class="headeranchores">
-                            <div>
-                                <a href="amenidades">Amenidades</a>
-                            </div>
-                            <div>
-                                <a href="eventos">Eventos</a>
-                            </div>
-                            <div>
-                                <a 
-                                href="reserva"
-                                rel="noreferrer">
-                                Reservar
-                                </a>
-                            </div>
-                        </div>
-                        <div class="perfil">
-                            <a href="signin">
-                                <ion-icon name="person-circle" alt="Icono de perfil"></ion-icon>
-                            </a>
-                        </div>
-                    </article>
+                <section className="header">
+                    <Header />
                 </section>
                 <main>
                     <section class="habitacion"> 

@@ -240,17 +240,16 @@ export var profileData = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
-          console.log('profileData');
-          _context6.prev = 1;
+          _context6.prev = 0;
           token = req.cookies['Tookie'];
           decoded = jwt.verify(token, process.env.SECRET_KEY);
-          _context6.next = 6;
+          _context6.next = 5;
           return Usuario.findById(decoded.id, {
             contrasena: 0
           });
-        case 6:
+        case 5:
           usuario = _context6.sent;
-          _context6.next = 9;
+          _context6.next = 8;
           return Reserva.find({
             usuario: decoded.id
           }).sort({
@@ -262,9 +261,9 @@ export var profileData = /*#__PURE__*/function () {
             path: 'tipo',
             model: 'Roomtype'
           });
-        case 9:
+        case 8:
           reservas = _context6.sent;
-          _context6.next = 12;
+          _context6.next = 11;
           return Reserva.find({
             usuario: decoded.id,
             estado: 'Pagado'
@@ -277,38 +276,29 @@ export var profileData = /*#__PURE__*/function () {
             path: 'tipo',
             model: 'Roomtype'
           });
-        case 12:
+        case 11:
           confirmedBooking = _context6.sent;
-          if (usuario) {
-            _context6.next = 15;
-            break;
-          }
-          return _context6.abrupt("return", res.status(404).json({
-            message: 'Usuario no encontrado'
-          }));
-        case 15:
-          ;
           res.status(200).json({
             error: false,
             userData: usuario,
             reservasData: reservas
           });
-          _context6.next = 23;
+          _context6.next = 19;
           break;
-        case 19:
-          _context6.prev = 19;
-          _context6.t0 = _context6["catch"](1);
+        case 15:
+          _context6.prev = 15;
+          _context6.t0 = _context6["catch"](0);
           console.log(_context6.t0);
           return _context6.abrupt("return", res.status(401).json({
             error: true,
             message: 'Error al autenticar el token',
             redirect: '/signin?error=invalid_token'
           }));
-        case 23:
+        case 19:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[1, 19]]);
+    }, _callee6, null, [[0, 15]]);
   }));
   return function profileData(_x1, _x10) {
     return _ref6.apply(this, arguments);

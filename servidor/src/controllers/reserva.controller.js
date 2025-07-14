@@ -102,13 +102,11 @@ export const bookingToPaying = async ( req, res) => {
 }
 
 export const bookingSumamry = async ( req, res ) => {
-
     try {
         let token = req.cookies['Tookie'];
         const temporalBooking_Cookie = req.cookies['tb'] //Id de Reserva (SIN CODIFICACIÓN)
         const userId = jwt.verify(token, process.env.SECRET_KEY) // ID DE USUARIO
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-
 
         if (temporalBooking_Cookie == undefined || userId == undefined) {
             return res.status(401).json({error: true, msg: 'Error en la toma de datos...', redirect: '/404?error=booking%20data%20missing'})
@@ -117,9 +115,8 @@ export const bookingSumamry = async ( req, res ) => {
         const booking = await Reserva.findOne({_id: temporalBooking_Cookie.bookingId})
         const user = await User.findOne({_id: userId.id})
         const roomtype = await Roomtype.findOne({_id: booking.tipo})
-        
         const stripeData = await stripe.paymentIntents.retrieve(temporalBooking_Cookie.stripeId)
-
+        
         res.status(200).json({
             error: false,
             msg: 'Todo OK!',
@@ -137,7 +134,6 @@ export const bookingSumamry = async ( req, res ) => {
                 cli_secret: stripeData.client_secret
             }
         })
-    
     } catch (error) {
         console.log(error)
         res.status(500).json({error: true, msg: "Error Interno Inesperado"})
