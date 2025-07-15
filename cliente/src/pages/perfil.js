@@ -1,13 +1,14 @@
 import './style.css';
 import Footer from './components/footer.js';
 import Header from './components/header.js';
+import Loading from './components/loadingScreen.js';
 
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 function Perfil(){
 
-    const [usuario, setUsuario] = useState({});
+    const [usuario, setUsuario] = useState(null);
     const [userBookings, setUserBookings] = useState([{}]);
 
     const navigate = useNavigate()
@@ -77,6 +78,13 @@ function Perfil(){
             console.log(error)
         }
     });
+
+    if (usuario === null) return (
+        <div class = 'loading-box'>
+            <Loading nombre='perfil'/>
+        </div>
+    );
+    
     return(
         <div>
             <div>

@@ -2,28 +2,44 @@ import '../style.css'
 import { useEffect } from 'react';
 
 function Header(){
-    
+
     useEffect(() => {
+        const headerbox = document.querySelector('.headerbox');
+        const anchores = document.querySelectorAll('.headerbox a')
 
-        const scroll = window.scrollY
+        const handleScroll = () => {
+            const scroll = window.scrollY;
 
-        if (scroll === 0) {
-            const headerbox = document.querySelector('.headerbox')
-            if (headerbox){
-                try{
+            if (headerbox) {
+                if (scroll === 0) {
                     headerbox.style.backgroundColor = 'rgba(70, 77, 112, 0.7)';
                     headerbox.style.margin = '1.3rem 0rem';
-                } catch (error) {
-                    console.error(error)
+                } else if (scroll >= 200) {
+                    headerbox.style.backgroundColor = 'transparent';
+                    headerbox.style.margin = '.5rem 0rem';
+                }   
+            }
+
+            if (anchores) {
+                if (scroll === 0) {
+                    anchores.forEach(anchor => anchor.style.opacity = '1');
+                } else if ( scroll >= 200) {
+                    anchores.forEach(anchor => anchor.style.opacity = '0.5');
                 }
             }
-            
-        }
-    }, [])
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Llamamos a la función una vez para el estado inicial
+        handleScroll();
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     return(
         <article className="headerbox">
             <div>
-                <a className="headerlogo" href="/">
+                <a href="/" className="headerlogo">
                     <img src="https://nicodev.s-ul.eu/hJFC5YUy" alt="Logotipo del Hotel" />
                 </a>
             </div>
@@ -46,9 +62,9 @@ function Header(){
                 </a>
             </div>
             <div className='smartphone-menu'>
-                <a>
+                <button>
                     <ion-icon name="menu-outline" alt="Menu Desplegable"></ion-icon>
-                </a>
+                </button>
             </div>
         </article>  
 )

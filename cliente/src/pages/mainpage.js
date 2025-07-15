@@ -1,28 +1,8 @@
 import './style.css';
 import Footer from './components/footer.js';
 import Header from './components/header.js'
-import { useEffect } from 'react';
 
 function Mainpage() {
-
-    useEffect(() => {
-
-        const scroll = window.scrollY
-
-        if (scroll === 0) {
-            const headerbox = document.querySelector('.headerbox')
-            if (headerbox){
-                try{
-                    headerbox.style.backgroundColor = 'rgba(70, 77, 112, 0.7)';
-                    headerbox.style.margin = '1.3rem 0rem';
-                } catch (error) {
-                    console.error(error)
-                }
-            }
-            
-        }
-    }, [])
-
     return(
         <div>
             <div>
@@ -54,7 +34,7 @@ function Mainpage() {
                                             placeholder="Desde"
                                             class="textbox-n"
                                             type="text"
-                                            onfocus="(this.type='date')"
+                                            onfocus= "({this.type='date'})"
                                             onblur="(this.type='text')"
                                             id="date-from" 
                                         />

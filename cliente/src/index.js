@@ -3,15 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './pages/style.css';
 import reportWebVitals from './reportWebVitals';
 
-
 //Páginas Principales
 import * as pages from './pages';
 //Páginas de Habitaciones
 import { BrowserRouter, Routes, Route } from 'react-router';
 
 const root = document.getElementById('root');
-
-
 
 ReactDOM.createRoot(root).render(
   <BrowserRouter>
@@ -26,6 +23,7 @@ ReactDOM.createRoot(root).render(
       <Route path="signup" element={<pages.signup />} />
       <Route path="/habitacion" element={<pages.rooms />} />
       <Route path="/404" element={<pages.error />}/>
+      <Route path="/dashboard" element={<pages.Dashboard />} />
     </Routes>
   </BrowserRouter>
 )

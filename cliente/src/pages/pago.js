@@ -79,7 +79,7 @@ function Pago(){
 
     if (!stripeIntent) return (
         <div class = 'loading-box'>
-            <Loading />
+            <Loading nombre='pago'/>
         </div>
     );
         

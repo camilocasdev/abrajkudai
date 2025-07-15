@@ -8,5 +8,6 @@ import signin from './signin'
 import signup from './signup'
 import rooms from './rooms'
 import error from './error'
+import Dashboard from './dashboard';
 
-export { amenidades, eventos, mainpage, pago, perfil, reserva, signin, signup, rooms, error};
+export { amenidades, eventos, mainpage, pago, perfil, reserva, signin, signup, rooms, error, Dashboard};

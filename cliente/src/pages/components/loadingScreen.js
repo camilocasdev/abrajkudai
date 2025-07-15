@@ -1,12 +1,13 @@
 import '../style.css'
 
-function Loading(){
+function Loading({ nombre }){
     return(
-        <div>
-            <section class='loading'>
-                <p>Cargando datos de pago...</p>
-            </section>
-        </div>
+        <section className='loading-box'>
+            <div>
+                <p>Cargando datos de {nombre}...</p>
+            </div>
+            <div className="pulse"></div>
+        </section>
     )
 }
 
