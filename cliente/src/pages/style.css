@@ -660,7 +660,8 @@
                 flex-direction: column;
                 gap: 2rem
             }
-            .signin label{
+            .signin label,
+            .signup label{
                 display: flex;      
                 flex-direction: row;
                 margin: 0rem;
@@ -668,7 +669,8 @@
                 width: 100%;
                 box-sizing: border-box;
             }
-            .signin input{
+            .signin input,
+            .signup input {
                 padding: 1.3rem;
                 border-radius: 1.3rem;
                 width: 100%;
@@ -676,7 +678,8 @@
                 align-items: center;
                 text-align: left;
             }
-            .signin input::placeholder{
+            .signin input::placeholder,
+            .signup input::placeholder{
                 text-align: right;
                 transform: translate(9px, 17px);
                 font-family: "Rubik";
