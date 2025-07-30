@@ -64,7 +64,7 @@ function Signup(){
     }, [contrasena, confirmarContrasena])
 
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>Sign Up | Abraj Kudai</title>
             </div>
@@ -195,7 +195,9 @@ function Signup(){
                                             <a href="signin">¿Ya tienes cuenta? Inicia Sesión</a>
                                             <a href="reportproblem">Reportar Problemas</a>
                                         </div>
-                                        <button type="submit">Registrarse</button>
+                                        <button
+                                            disabled={confirmarContrasena === '' || contrasena !== confirmarContrasena} 
+                                            type='submit'>Registrarse</button>
                                     </div>
                                 </fieldset>
                             </form>

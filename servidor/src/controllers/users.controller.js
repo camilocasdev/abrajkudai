@@ -130,18 +130,27 @@ export const logout = async (req, res) => {
 }
 
 export const newPassword = async (req, res) => {
-    
-    const coded = req.cookies['rupc']
-
-    if (!coded) {
-        res.status(401).json({
-            error: true,
-            msg: 'Sin datos disponibles, realice el proceso nuevamente',
-            redirect: '/validation/forgotpassword?error=no%20data%20avaible'
-        })
+    try {
+        let coded = req.cookies['rupc']
+        if (!coded) {
+            let codedParams = req.query.t
+            if (!codedParams){
+                return(
+                    res.status(401).json({
+                        error: true,
+                        msg: 'Sin datos disponibles, realice el proceso nuevamente',
+                        redirect: '/forgotpassword?error=no%20data%20avaible'
+                    })
+                )
+            } else {
+                coded = codedParams
+            }
+        }
+        const data = jwt.verify(coded, process.env.SECRET_KEY)
+        const { newPassword } = req.body
+        const updatePassword = await Usuario.findOneAndUpdate({_id: data.id}, {contrasena: await Usuario.encryptPassword(newPassword)}, {new: true})
+        res.status(200).json({msg: 'Contraseña cambiada correctamente', error: false, redirect: '/signin'})
+    } catch (error) {
+        res.status(500).json("Server Error")
     }
-
-    const data = jwt.verify(coded, process.env.SECRET_KEY)
-    
-    console.log(data)
 }

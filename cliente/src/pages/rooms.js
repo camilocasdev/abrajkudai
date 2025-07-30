@@ -101,9 +101,12 @@ function Rooms(){
         }
     } 
 
+    function modalServices() {
+        console.log('Abriendo menu de servicios')
+    }
 
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>{room?.nombre} | Abraj Kudai</title>
             </div>
@@ -132,30 +135,35 @@ function Rooms(){
                             </div>
                             <div class="roomContRight">
                                 <form method="post" onSubmit={enviarForm}>
+                                    <div className="form-title">
+                                        <h2>Reservar</h2>
+                                    </div>
                                     <div class='roomForm'>
                                         <div class="formDate">
-                                            <span><strong>Desde</strong></span>
-                                            <span><strong>Hasta</strong></span>
-                                        </div>
-                                        <div class="formDate">
-                                            <input 
-                                                type ="date" 
-                                                name ="fechaInicio"
-                                                id = "fechaInicio"
-                                                min = {minDate}
-                                                value = {fechaInicio}
-                                                onChange ={(e) => setFechaInicio(e.target.value)}
-                                                required
-                                            />
-                                            <input 
-                                                type = "date" 
-                                                name = "fechaHasta"
-                                                id = "fechaHasta"
-                                                min = {minDate}
-                                                value = {fechaHasta}
-                                                onChange = {(e) => setFechaHasta(e.target.value)}
-                                                required
-                                            />
+                                            <div>
+                                                <span><strong>Desde</strong></span>
+                                                <input 
+                                                    type ="date" 
+                                                    name ="fechaInicio"
+                                                    id = "fechaInicio"
+                                                    min = {minDate}
+                                                    value = {fechaInicio}
+                                                    onChange ={(e) => setFechaInicio(e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+                                            <div>
+                                                <span><strong>Hasta</strong></span>
+                                                <input 
+                                                    type = "date" 
+                                                    name = "fechaHasta"
+                                                    id = "fechaHasta"
+                                                    min = {minDate}
+                                                    value = {fechaHasta}
+                                                    onChange = {(e) => setFechaHasta(e.target.value)}
+                                                    required
+                                                />
+                                            </div>
                                         </div>
                                         <div class="formQuantity">
                                             <span><strong>Cantidad</strong></span>
@@ -174,10 +182,15 @@ function Rooms(){
                                                 <option value="2">2</option>
                                             </select>
                                         </div>
-                                        <div>
+                                        <div className = "room-form-services">
+                                            <span><strong>Servicios</strong></span>
+                                            <button type="button" onClick={modalServices}>
+                                                <div>Extender</div>
+                                                <ion-icon name="chevron-down-outline"></ion-icon>
+                                            </button>
                                         </div>
                                         <button type="submit">Reservar</button>
-                                    </div>
+                                    </div>  
                                 </form>
                                 <div class="otherRooms">
                                     <div class="otherRooms-title">

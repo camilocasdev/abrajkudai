@@ -2,16 +2,20 @@
                 height: 100%;
             }
             body{
-                background-color: transparent;
                 background: linear-gradient(60deg, rgba(70,77,112,1) 0%, rgba(52,56,75,1) 55%);
                 padding:0px;
                 margin: 0px;
                 transition: background-color 0.3s ease-in,
                 color 0.3s ease-in;
                 height: 100%;
+                min-height: 100vh;
             }
             #root{
+                min-height: 100vh;
                 height: 100%;
+            }
+            #root-m{
+                background: linear-gradient(60deg, rgba(70,77,112,1) 0%, rgba(52,56,75,1) 55%);
             }
             h1{
                 color: #eeeeee;
@@ -50,10 +54,18 @@
                 font-size: 20px;
                 cursor: pointer;
                 padding: 1rem;
+                transition: background-color 0.3s ease,
+                color 0.3s ease;
             }
             button:hover{
                 background-color: #6d7a4f
             }   
+            button:disabled {
+                background-color: #ccc;
+                color: #666;
+                cursor: not-allowed;
+                opacity: 0.6;
+            }
             img{
                 border-radius: 10px;
             }
@@ -74,8 +86,14 @@
             a, a:visited, a:active, a:link{
                 text-decoration: none;
             }
+            a{
+                color: #eeeeee;
+                font-family: Rubik;
+                transition: color 0.3s ease;
+            }
             a:hover{
-                cursor: pointer,
+                cursor: pointer;
+                color: #A1AC88;
             }
             main{
                 display: flex;
@@ -761,39 +779,27 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
-                gap: 70px;
+                gap: 3rem;
             }
+            .facebook-btn,
             .google-btn{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 10px 20px;
-                background-color: #eeeeee;
+                padding: .9rem 2rem;
+                background-color: rgb(238, 238, 238, .7);
                 text-decoration: none;
                 border-radius: 17px;
                 width: 100px;
                 transition: background-color 0.3s ease;
             }
-            .facebook-btn{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 10px 20px;
+            .facebook-btn ion-icon,
+            .google-btn ion-icon{
+                font-size: 2rem;
+                color:#464D70;
+            }
+            .conexionlinks a:hover{
                 background-color: #eeeeee;
-                text-decoration: none;
-                border-radius: 17px;
-                width: 100px;
-                transition: background-color 0.3s ease;
-            }
-            .google{
-                height:35px;
-                width:52px;
-                color:#464D70;
-            }
-            .facebook{
-                height:35px;
-                width:52px;
-                color:#464D70;
             }
             .signup{
                 display: flex;
@@ -845,6 +851,55 @@
             }
             .error-text{
                 margin: -1rem -1rem;
+            }
+            /* Forgot Password */
+            .forgot-password-box,
+            .reset-password-box{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                margin: 10rem 0rem;
+            }
+            .forgot-password-form,
+            .reset-password-form{
+                display: flex;
+                flex-direction: column;
+                max-width: 20rem;
+                gap: 2rem
+            }
+            .forgot-password-form input,
+            .reset-password-form input{
+                padding: 1.3rem;
+                border-radius: 1.3rem;
+                width: 100%;
+                box-sizing: border-box;
+                align-items: center;
+                text-align: left;
+            }
+            .forgot-password-form input::placeholder,
+            .reset-password-form input::placeholder{
+                text-align: right;
+                transform: translate(9px, 17px);
+                font-family: "Rubik";
+                font-weight: 460;
+                color: #A1AC88;
+            }
+            .forgot-password-title h1,
+            .reset-password-title h1{
+                font-size: 3.5rem;
+            }
+            .forgot-password-title,
+            .reset-password-title {
+                display: inherit;
+                flex-direction: inherit;
+                justify-content: center;
+                align-items: center;
+                max-width: 50rem;
+                text-align: center;
+            }
+            .restore-error-text{
+                text-align: center;
             }
             /* Perfil */
             .bg-profile-banner-box{
@@ -1090,14 +1145,16 @@
                 display: flex;
                 flex-direction: column;
                 align-content: center;
-                gap: .5rem;
+                gap: 1rem;
                 border-radius: .7rem;
                 width: 100%;
             }
             .roomContRight form{
+                display: flex;
+                flex-direction: column;
                 background-color: #616E43;
                 border-radius: .7rem;
-                padding: .7rem
+                padding: .7rem;
             }
             .otherRooms{
                 background-color: #dadada;
@@ -1112,8 +1169,7 @@
             .roomForm{
                 display: flex;
                 flex-direction: column;
-                gap: .5rem;
-
+                gap: 1rem;
             }
             .roomForm button{
                 background-color: rgba(188, 216, 156, 0.7);
@@ -1123,6 +1179,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: flex-start;
+                justify-content: space-around;
                 gap: 1rem;
                 color: black
             }
@@ -1147,6 +1204,35 @@
             }
             .formQuantity option:hover{
                 background-color: #464D70;
+            }
+            .form-title{
+                background-color: #eeeeee;
+                padding: .5rem;
+                border-radius: .4rem;
+                margin-bottom: 1rem
+            } 
+            .form-title h2{
+                color: #616E43;
+                font-size: 2rem;
+                margin: 0rem;
+            }
+            .room-form-services{
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+            }
+            .room-form-services button{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+                box-sizing: border-box;
+                background-color: rgba(255, 255, 255, 0.7) ;
+                height: 2.838rem;
+                border-radius: .5rem;
+                font-size: 1rem;
+                font-weight: 400;
             }
 
         /* Página de lista de habitaciones */
@@ -1649,7 +1735,7 @@
                 height: 60px;
                 background: #fff;
                 border-radius: 50%;
-                margin: 0 auto 20px;
+
                 animation: pulse 2s ease-in-out infinite;
             }
 
@@ -1662,6 +1748,20 @@
                     transform: scale(1);
                     opacity: 0;
                 }
+            }
+
+            .simple-loading-box{
+                display: flex;
+                flex-direction: column;
+                background-color: rgb(238, 238, 238, .3);
+                backdrop-filter: blur(.2rem);
+                padding: 2.4rem 7rem;
+                border-radius: 1.5rem;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 20.75rem;
+                box-sizing: border-box
             }
             /* Error Messages */
             .error{

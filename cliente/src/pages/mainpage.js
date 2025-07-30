@@ -4,7 +4,7 @@ import Header from './components/header.js'
 
 function Mainpage() {
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>Abraj Kudai</title>
             </div>

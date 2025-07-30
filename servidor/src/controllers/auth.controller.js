@@ -2,6 +2,8 @@ import Usuario from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import Role from '../models/role.js';
 import nodemailer from 'nodemailer';
+import { getRandomInt } from '../utils/math.utils.js';
+
 
 export const signIn = async (req, res) => {
     try {
@@ -135,12 +137,12 @@ export const forgotPass = async (req, res) => {
     
         // VALIDACIÓN DE CONEXIÓN CON EL SERVICIO DE EMAIL
         transporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
+            host: "smtp-relay.brevo.com",
             port: 587,
             secure: false, // use TLS
             auth: {
-                user: "vern.reinger64@ethereal.email",
-                pass: "QEcf8KAY7eck4D8g1W",
+                user: "93762e001@smtp-brevo.com",
+                pass: "Gv2c83SkabR1hqOM",
             },
             tls: {
                 // do not fail on invalid certs
@@ -154,7 +156,6 @@ export const forgotPass = async (req, res) => {
                 return( res.status(501).json({error: true, msg: "Error interno del servidor."}) )
             } else {
                 console.log("Server is ready to take our messages");
-                console.log(success)
             }
         });
 
@@ -170,24 +171,55 @@ export const forgotPass = async (req, res) => {
         } 
     
         // CREACIÓN DE CÓDIGO Y ENVÍO DE CORREO
-        function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min) + min);
-        }
-    
+
         const code = getRandomInt(100000 , 999999)
 
         const userUpdateCode = await Usuario.findOneAndUpdate({_id: user._id}, {codigo: code}, {new: true})
 
-        const tokenCode = jwt.sign({codigo: code, correo: email}, process.env.SECRET_KEY, {expiresIn: 60 * 30})
-    
+        const tokenCode = jwt.sign({id: user._id, codigo: code, correo: email}, process.env.SECRET_KEY, {expiresIn: 60 * 30})
+        
+        const html = `<div style="font-family: Arial, sans-serif; color: #333; padding: 20px; max-width: 600px; margin: auto;">
+            <h2 style="color: #005087;">Restablecimiento de contraseña</h2>
+            <p>Hola,</p>
+            <p>
+                Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en <strong>Abraj Kudai</strong>.
+            </p>
+            <p>
+                Si has sido tú, tu código de verificación es:
+            </p>
+            <p style="font-size: 24px; font-weight: bold; color: #007bff;">
+                ${code}
+            </p>
+            <p>
+                O alternativamente, puedes hacer clic en el siguiente enlace:
+            </p>
+            <p>
+                <a href="https://www.abrajkudai.com/restorepassword?t=${tokenCode}" style="color: #007bff;">
+                https://www.abrajkudai.com/restorepassword?t=${tokenCode}
+                </a>
+            </p>
+            <p>
+                Este enlace será válido por <strong>30 minutos</strong>. Si no realizas el cambio dentro de ese periodo, deberás solicitar uno nuevo.
+            </p>
+            <p>
+                Si <strong>no solicitaste esta recuperación</strong>, puedes ignorar este mensaje. Tu cuenta seguirá segura.
+            </p>
+            <p>
+                Gracias por confiar en <strong>Abraj Kudai</strong>. Te esperamos pronto.
+            </p>
+            <p>Atentamente,<br><strong>El equipo de Abraj Kudai</strong></p>
+            <hr style="margin-top: 30px;">
+            <p style="font-size: 12px; color: #888;">
+                Si tienes problemas para hacer clic en el enlace, copia y pégalo en tu navegador.
+            </p>
+            </div>`;
+
         const message = {
-            from: 'no-reply@abrajkudai.com',
+            from: '"Support Abraj Kudai" <camilo.castillo3090@gmail.com>',
             to: email,
             subject: 'Solicitud de cambio de contraseña de Abraj Kudai',
             text: `Hola, Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Abraj Kudai. Si has sido tú, el codigo de verificación es ${code} o alternativamente clic en el siguiente enlace: https://www.abrajkudai.com/restorepassword?t=${tokenCode} Este enlace será válido por 30 minutos. Si no realizas el cambio dentro de ese periodo, deberás solicitar uno nuevo. Si no has solicitado esta recuperación, puedes ignorar este mensaje. Tu cuenta seguirá segura. Gracias por confiar en Abraj Kudai. Te esperamos pronto. Atentamente, El equipo de Abraj Kudai`,
-            html: `<p><b>No sé</b> que es esto!</p>`
+            html: html
         };
     
     
@@ -206,10 +238,10 @@ export const forgotPass = async (req, res) => {
         
         const user = await Usuario.findOne({correo: email})
 
-        if (user.codigo === verificationCode){
+        if (user.codigo === parseInt(verificationCode)){
             
             const userUpdateCode = await Usuario.findOneAndUpdate({correo: email}, {codigo: null}, {new: true})
-
+            
             const coded = jwt.sign({id: user._id}, process.env.SECRET_KEY, { expiresIn: 1800})
 
             res.cookie('rupc', coded, {
@@ -223,6 +255,4 @@ export const forgotPass = async (req, res) => {
             res.status(401).json({error: true, msg: 'El código ingresado no es valido'})
         }
     }
-    // VALIDACIÓN DE CORREO
-    
 }

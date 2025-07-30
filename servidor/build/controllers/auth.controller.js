@@ -19,6 +19,7 @@ import Usuario from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import Role from '../models/role.js';
 import nodemailer from 'nodemailer';
+import { getRandomInt } from '../utils/math.utils.js';
 export var signIn = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
     var redirect, _req$body, correo, contrasena, keepSession, usuarioEncontrado, matchPass, tokens;
@@ -254,7 +255,7 @@ export var signUp = /*#__PURE__*/function () {
 }();
 export var forgotPass = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
-    var _req$body3, email, verificationCode, getRandomInt, transporter, user, code, userUpdateCode, tokenCode, message, _user, _userUpdateCode, coded;
+    var _req$body3, email, verificationCode, transporter, user, code, userUpdateCode, tokenCode, html, message, _user, _userUpdateCode, coded;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -263,21 +264,15 @@ export var forgotPass = /*#__PURE__*/function () {
             _context3.next = 25;
             break;
           }
-          // CREACIÓN DE CÓDIGO Y ENVÍO DE CORREO
-          getRandomInt = function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min) + min);
-          };
           // VALIDACIÓN DE CONEXIÓN CON EL SERVICIO DE EMAIL
           transporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
+            host: "smtp-relay.brevo.com",
             port: 587,
             secure: false,
             // use TLS
             auth: {
-              user: "vern.reinger64@ethereal.email",
-              pass: "QEcf8KAY7eck4D8g1W"
+              user: "93762e001@smtp-brevo.com",
+              pass: "Gv2c83SkabR1hqOM"
             },
             tls: {
               // do not fail on invalid certs
@@ -293,34 +288,34 @@ export var forgotPass = /*#__PURE__*/function () {
               });
             } else {
               console.log("Server is ready to take our messages");
-              console.log(success);
             }
           });
-          _context3.prev = 5;
-          _context3.next = 8;
+          _context3.prev = 4;
+          _context3.next = 7;
           return Usuario.findOne({
             correo: email
           });
-        case 8:
+        case 7:
           user = _context3.sent;
           if (!(user === null || !user)) {
-            _context3.next = 11;
+            _context3.next = 10;
             break;
           }
           throw 1;
-        case 11:
-          _context3.next = 16;
+        case 10:
+          _context3.next = 15;
           break;
-        case 13:
-          _context3.prev = 13;
-          _context3.t0 = _context3["catch"](5);
+        case 12:
+          _context3.prev = 12;
+          _context3.t0 = _context3["catch"](4);
           return _context3.abrupt("return", res.status(401).json({
             error: true,
             msg: "El correo no existe en el sistema."
           }));
-        case 16:
+        case 15:
+          // CREACIÓN DE CÓDIGO Y ENVÍO DE CORREO
           code = getRandomInt(100000, 999999);
-          _context3.next = 19;
+          _context3.next = 18;
           return Usuario.findOneAndUpdate({
             _id: user._id
           }, {
@@ -328,20 +323,22 @@ export var forgotPass = /*#__PURE__*/function () {
           }, {
             "new": true
           });
-        case 19:
+        case 18:
           userUpdateCode = _context3.sent;
           tokenCode = jwt.sign({
+            id: user._id,
             codigo: code,
             correo: email
           }, process.env.SECRET_KEY, {
             expiresIn: 60 * 30
           });
+          html = "<div style=\"font-family: Arial, sans-serif; color: #333; padding: 20px; max-width: 600px; margin: auto;\">\n            <h2 style=\"color: #005087;\">Restablecimiento de contrase\xF1a</h2>\n            <p>Hola,</p>\n            <p>\n                Hemos recibido una solicitud para restablecer la contrase\xF1a de tu cuenta en <strong>Abraj Kudai</strong>.\n            </p>\n            <p>\n                Si has sido t\xFA, tu c\xF3digo de verificaci\xF3n es:\n            </p>\n            <p style=\"font-size: 24px; font-weight: bold; color: #007bff;\">\n                ".concat(code, "\n            </p>\n            <p>\n                O alternativamente, puedes hacer clic en el siguiente enlace:\n            </p>\n            <p>\n                <a href=\"https://www.abrajkudai.com/restorepassword?t=").concat(tokenCode, "\" style=\"color: #007bff;\">\n                https://www.abrajkudai.com/restorepassword?t=").concat(tokenCode, "\n                </a>\n            </p>\n            <p>\n                Este enlace ser\xE1 v\xE1lido por <strong>30 minutos</strong>. Si no realizas el cambio dentro de ese periodo, deber\xE1s solicitar uno nuevo.\n            </p>\n            <p>\n                Si <strong>no solicitaste esta recuperaci\xF3n</strong>, puedes ignorar este mensaje. Tu cuenta seguir\xE1 segura.\n            </p>\n            <p>\n                Gracias por confiar en <strong>Abraj Kudai</strong>. Te esperamos pronto.\n            </p>\n            <p>Atentamente,<br><strong>El equipo de Abraj Kudai</strong></p>\n            <hr style=\"margin-top: 30px;\">\n            <p style=\"font-size: 12px; color: #888;\">\n                Si tienes problemas para hacer clic en el enlace, copia y p\xE9galo en tu navegador.\n            </p>\n            </div>");
           message = {
-            from: 'no-reply@abrajkudai.com',
+            from: '"Support Abraj Kudai" <camilo.castillo3090@gmail.com>',
             to: email,
             subject: 'Solicitud de cambio de contraseña de Abraj Kudai',
             text: "Hola, Hemos recibido una solicitud para restablecer la contrase\xF1a de tu cuenta en Abraj Kudai. Si has sido t\xFA, el codigo de verificaci\xF3n es ".concat(code, " o alternativamente clic en el siguiente enlace: https://www.abrajkudai.com/restorepassword?t=").concat(tokenCode, " Este enlace ser\xE1 v\xE1lido por 30 minutos. Si no realizas el cambio dentro de ese periodo, deber\xE1s solicitar uno nuevo. Si no has solicitado esta recuperaci\xF3n, puedes ignorar este mensaje. Tu cuenta seguir\xE1 segura. Gracias por confiar en Abraj Kudai. Te esperamos pronto. Atentamente, El equipo de Abraj Kudai"),
-            html: "<p><b>No s\xE9</b> que es esto!</p>"
+            html: html
           };
           transporter.sendMail(message, function (err, info) {
             if (err) {
@@ -366,7 +363,7 @@ export var forgotPass = /*#__PURE__*/function () {
           });
         case 27:
           _user = _context3.sent;
-          if (!(_user.codigo === verificationCode)) {
+          if (!(_user.codigo === parseInt(verificationCode))) {
             _context3.next = 37;
             break;
           }
@@ -408,7 +405,7 @@ export var forgotPass = /*#__PURE__*/function () {
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[5, 13]]);
+    }, _callee3, null, [[4, 12]]);
   }));
   return function forgotPass(_x5, _x6) {
     return _ref3.apply(this, arguments);

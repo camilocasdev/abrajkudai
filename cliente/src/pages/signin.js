@@ -53,17 +53,17 @@ function Login(){
         }
     }
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>Sign In | Abraj Kudai</title>
             </div>
-            <body>
+            <div>
                 <section className="header">
                     <Header />
                 </section> 
                 <main> 
-                    <section class="signcaja">
-                        <section class="signbackground">
+                    <section className="signcaja">
+                        <section className="signbackground">
                             <img src="https://nicodev.s-ul.eu/2wafDffC" alt=""/> 
                         </section>
                         <ErrorMsg error={error} />
@@ -73,7 +73,7 @@ function Login(){
                         </article>
                         <article>
                             <form method="post" onSubmit={ingresar}>
-                                <fieldset class="signin">
+                                <fieldset className="signin">
                                     <label>
                                         <input type="email" 
                                         id="correo" 
@@ -89,7 +89,7 @@ function Login(){
                                         placeholder="Contrasena"
                                         required/>
                                     </label>
-                                    <div class="signin-checkbox">
+                                    <div className="signin-checkbox">
                                         <label>
                                             <input 
                                                 type="checkbox"
@@ -99,9 +99,9 @@ function Login(){
                                             <span>¿Mantener la sesión iniciada?</span>
                                         </label>
                                     </div>
-                                    <div class="signpost">
+                                    <div className="signpost">
                                         <div className='sign-post-redirects'>
-                                            <a href="forgotmypassword">Olvide mi contraseña</a>
+                                            <a href="forgotpassword">Olvide mi contraseña</a>
                                             <a href="signup">Registrarse</a>
                                         </div>
                                         <button type="submit">Ingresar</button>
@@ -111,21 +111,21 @@ function Login(){
                         </article>
                         <article>
                         </article>
-                        <article class="conexion">
+                        <article className="conexion">
                             <p><strong>Conexión</strong></p>
-                            <div class="conexionlinks">
-                                <a href="ignore" target="_blank" class="google-btn">
-                                    <ion-icon class="google" alt="Ingresar con Google" name="logo-google"></ion-icon>
+                            <div className="conexionlinks">
+                                <a href="ignore" target="_blank" className="google-btn">
+                                    <ion-icon className="google" alt="Ingresar con Google" name="logo-google"></ion-icon>
                                 </a>
-                                <a href="ignore" target="_blank" class="facebook-btn">
-                                    <ion-icon class="facebook" alt="Ingresar con Facebook" name="logo-facebook"></ion-icon>
+                                <a href="ignore" target="_blank" className="facebook-btn">
+                                    <ion-icon className="facebook" alt="Ingresar con Facebook" name="logo-facebook"></ion-icon>
                                 </a>
                             </div>
                         </article>
                     </section>
                 </main>
                 <Footer />
-            </body>
+            </div>
         </div>
     )
 }

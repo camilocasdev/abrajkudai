@@ -68,7 +68,7 @@ export const verifyToken = async (req, res, next) => {
         let token;
 
         try {
-            token = await req.cookies['Tookie'];
+            token = req.cookies['Tookie'];
         } catch (error) {
             return res.status(401).json({
                 error: true,

@@ -66,7 +66,7 @@ function Reserva(){
 
 
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>Reservas | Abraj Kudai</title>
             </div>

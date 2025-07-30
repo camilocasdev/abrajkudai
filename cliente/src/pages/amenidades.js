@@ -4,7 +4,7 @@ import Header from './components/header.js';
 
 function Amenidades(){
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>Amenidades | Abraj Kudai</title>
             </div>

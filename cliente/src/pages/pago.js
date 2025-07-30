@@ -1,7 +1,7 @@
 import './style.css'
 import Header from './components/header.js';
 import Footer from './components/footer.js';
-import Loading from './components/loadingScreen.js'
+import Loading from './components/loading-modals/loadingScreen'
 import CheckoutForm from './components/booking-payment/checkoutform.js'
 import ConfirmedPayment from './components/booking-payment/confirmedpayment.js';
 
@@ -84,7 +84,7 @@ function Pago(){
     );
         
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>Pago | Abraj Kudai</title>
             </div>

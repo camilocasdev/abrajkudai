@@ -24,6 +24,8 @@ ReactDOM.createRoot(root).render(
       <Route path="/habitacion" element={<pages.rooms />} />
       <Route path="/404" element={<pages.error />}/>
       <Route path="/dashboard" element={<pages.Dashboard />} />
+      <Route path="/forgotpassword" element={<pages.ForgotPassword />} />
+      <Route path="/restorepassword" element={<pages.ResetPassword />} />
     </Routes>
   </BrowserRouter>
 )

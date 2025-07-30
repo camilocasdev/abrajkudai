@@ -128,38 +128,35 @@ export var verifyToken = /*#__PURE__*/function () {
         case 0:
           _context2.prev = 0;
           _context2.prev = 1;
-          _context2.next = 4;
-          return req.cookies['Tookie'];
-        case 4:
-          token = _context2.sent;
-          _context2.next = 10;
+          token = req.cookies['Tookie'];
+          _context2.next = 8;
           break;
-        case 7:
-          _context2.prev = 7;
+        case 5:
+          _context2.prev = 5;
           _context2.t0 = _context2["catch"](1);
           return _context2.abrupt("return", res.status(401).json({
             error: true,
             msg: 'No hay token, por favor inicia sesión',
             redirect: '/signin?error=not%20logged'
           }));
-        case 10:
+        case 8:
           decoded = jwt.verify(token, process.env.SECRET_KEY); //Verifica el token
           if (decoded) {
-            _context2.next = 13;
+            _context2.next = 11;
             break;
           }
           return _context2.abrupt("return", res.status(401).json({
             msg: "not decoded"
           }));
-        case 13:
-          _context2.next = 15;
+        case 11:
+          _context2.next = 13;
           return Usuario.findById(decoded.id, {
             contrasena: 0
           });
-        case 15:
+        case 13:
           usuario = _context2.sent;
           if (usuario) {
-            _context2.next = 18;
+            _context2.next = 16;
             break;
           }
           return _context2.abrupt("return", res.status(401).json({
@@ -167,23 +164,23 @@ export var verifyToken = /*#__PURE__*/function () {
             message: 'Token sin usuario asociado...',
             redirect: '/signin?error=user%20not%20found'
           }));
-        case 18:
+        case 16:
           next();
-          _context2.next = 24;
+          _context2.next = 22;
           break;
-        case 21:
-          _context2.prev = 21;
+        case 19:
+          _context2.prev = 19;
           _context2.t1 = _context2["catch"](0);
           res.status(401).json({
             error: true,
             msg: 'Error al autenticar el token',
             redirect: '/signin?error=invalid%20token'
           });
-        case 24:
+        case 22:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 21], [1, 7]]);
+    }, _callee2, null, [[0, 19], [1, 5]]);
   }));
   return function verifyToken(_x4, _x5, _x6) {
     return _ref2.apply(this, arguments);

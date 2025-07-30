@@ -75,7 +75,7 @@ function Footer(){
                         <p>
                             El Hotel Abraj Kudai, diseñado por Dar Al-Handasah, representa una obra
                             maestra de la arquitectura moderna en le corazon de La Meca. Este sitio
-                            web ha sido desarrollado en colaboración con 404 Developers, garantizando
+                            web ha sido desarrollado en colaboración con 202 OK Developer Group, garantizando
                             uan experiencia digital excepcional para nuestros huéspedes.
                         </p>
                     </div>

@@ -9,5 +9,21 @@ import signup from './signup'
 import rooms from './rooms'
 import error from './error'
 import Dashboard from './dashboard';
+import ForgotPassword from './forgotpassword';
+import ResetPassword from './resetpassword';
 
-export { amenidades, eventos, mainpage, pago, perfil, reserva, signin, signup, rooms, error, Dashboard};
+export { 
+    amenidades, 
+    eventos, 
+    mainpage, 
+    pago, 
+    perfil, 
+    reserva, 
+    signin, 
+    signup, 
+    rooms, 
+    error, 
+    Dashboard, 
+    ForgotPassword,
+    ResetPassword
+};

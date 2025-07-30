@@ -328,25 +328,65 @@ export var logout = /*#__PURE__*/function () {
 }();
 export var newPassword = /*#__PURE__*/function () {
   var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
-    var coded, data;
+    var coded, codedParams, data, _newPassword, updatePassword;
     return _regeneratorRuntime().wrap(function _callee8$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
         case 0:
+          _context8.prev = 0;
           coded = req.cookies['rupc'];
-          if (!coded) {
-            res.status(401).json({
-              error: true,
-              msg: 'Sin datos disponibles, realice el proceso nuevamente',
-              redirect: '/validation/forgotpassword?error=no%20data%20avaible'
-            });
+          if (coded) {
+            _context8.next = 9;
+            break;
           }
+          codedParams = req.query.t;
+          if (codedParams) {
+            _context8.next = 8;
+            break;
+          }
+          return _context8.abrupt("return", res.status(401).json({
+            error: true,
+            msg: 'Sin datos disponibles, realice el proceso nuevamente',
+            redirect: '/forgotpassword?error=no%20data%20avaible'
+          }));
+        case 8:
+          coded = codedParams;
+        case 9:
           data = jwt.verify(coded, process.env.SECRET_KEY);
-          console.log(data);
-        case 4:
+          _newPassword = req.body.newPassword;
+          _context8.t0 = Usuario;
+          _context8.t1 = {
+            _id: data.id
+          };
+          _context8.next = 15;
+          return Usuario.encryptPassword(_newPassword);
+        case 15:
+          _context8.t2 = _context8.sent;
+          _context8.t3 = {
+            contrasena: _context8.t2
+          };
+          _context8.t4 = {
+            "new": true
+          };
+          _context8.next = 20;
+          return _context8.t0.findOneAndUpdate.call(_context8.t0, _context8.t1, _context8.t3, _context8.t4);
+        case 20:
+          updatePassword = _context8.sent;
+          res.status(200).json({
+            msg: 'Contraseña cambiada correctamente',
+            error: false,
+            redirect: '/signin'
+          });
+          _context8.next = 27;
+          break;
+        case 24:
+          _context8.prev = 24;
+          _context8.t5 = _context8["catch"](0);
+          res.status(500).json("Server Error");
+        case 27:
         case "end":
           return _context8.stop();
       }
-    }, _callee8);
+    }, _callee8, null, [[0, 24]]);
   }));
   return function newPassword(_x13, _x14) {
     return _ref8.apply(this, arguments);

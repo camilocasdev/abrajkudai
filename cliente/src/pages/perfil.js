@@ -1,7 +1,7 @@
 import './style.css';
 import Footer from './components/footer.js';
 import Header from './components/header.js';
-import Loading from './components/loadingScreen.js';
+import Loading from './components/loading-modals/loadingScreen'
 
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
@@ -86,7 +86,7 @@ function Perfil(){
     );
     
     return(
-        <div>
+        <div id='root-m'>
             <div>
                 <title>Perfil | Abraj Kudai</title>
             </div>
@@ -129,12 +129,12 @@ function Perfil(){
                             <h2>Reserva Actual</h2>
                             <div class="profile-booking-tarjet">
                                 <div>
-                                    <img src={userBookings[6]?.tipo?.imagen[0]} alt="Imágenen de la habitación actual"/>
+                                    <img src={userBookings[userBookings.length-1]?.tipo?.imagen[0]} alt="Imágenen de la habitación actual"/>
                                 </div>
                                 <div className="profile-booking-tarjet-content">
-                                    <h3>{userBookings[6]?.tipo?.nombre}</h3>
-                                    <p>{userBookings[6]?.tipo?.scriptShort}</p>
-                                    <p><strong>{userBookings[6]?.fechaInicio}</strong></p>
+                                    <h3>{userBookings[userBookings.length-1]?.tipo?.nombre}</h3>
+                                    <p>{userBookings[userBookings.length-1]?.tipo?.scriptShort}</p>
+                                    <p><strong>{userBookings[userBookings.length-1]?.fechaInicio}</strong></p>
                                 </div>
                             </div>            
                         </div>
