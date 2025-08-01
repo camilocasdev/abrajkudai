@@ -22,13 +22,13 @@ function Pago(){
     const [booking, setBooking] = useState()
     const [user, setUser] = useState()
     const [room, setRoom] = useState()
+    const [services, setServices] = useState([{}])
     const [stripeIntent, setStripeIntent] = useState()
     const [status, setStatus] = useState()
 
     const currency = 'USD'
     
     const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
-
     const appearance = {
         theme: 'flat',
         variables: {
@@ -37,28 +37,21 @@ function Pago(){
             spacingUnit: '.3rem'
         }
     }
-
     useEffect(() => {
         const defaultData = async() => {
-
             setError(null)
-
             try {
                 const response = await fetch('/api/user/booking/summary', {
                     method: 'GET'
                 })
-
                 const data = await response.json()
-                
                 if (data.error === true){
                     navigate(data.redirect)
                 }
-
-                console.log(data.stripe)
-
                 setRoom(data.room)
                 setBooking(data.booking)
                 setUser(data.user)
+                setServices(data.services)
                 setStripeIntent(data.stripe)
             } catch (error) {
                 setError(error)
@@ -121,11 +114,12 @@ function Pago(){
                                     <h2>{room?.nombre}</h2>
                                 </div>
                                 <div class='booking-data-list'>
-                                    <ul>
+                                    <ul className='booking-data-list-l'>
                                         <li><strong>Habitación: </strong>{room?.nombre} <strong>({booking?.dias} Días)</strong></li>
-                                        {booking?.servicios.map((service, i) => {
-                                            <li>{i} {service.nombre}: {service.precio}</li>
-                                            return
+                                        {services.map((service, i) => {
+                                            return(
+                                                <li key={i}>{service.nombre} <strong>({service.precio} {currency}/{service.tipo})</strong></li>
+                                            )
                                         })}
                                     </ul>
                                 </div>

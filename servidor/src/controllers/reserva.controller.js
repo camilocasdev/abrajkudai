@@ -5,6 +5,7 @@ import Room from '../models/room.js'
 import Roomtype from '../models/roomtype.js'
 import { Stripe } from 'stripe'
 import { toStripeAmout } from '../utils/math.utils.js';
+import Services from '../models/services.js';
 
 
 //  ---------------------------------  FUNCIONES DE USUARIO  ----------------------------------------  //
@@ -50,7 +51,21 @@ export const bookingToPaying = async ( req, res) => {
 
         const roomType = await Roomtype.findOne({_id: habitacion})
 
-        const total = dias * roomType.precio
+        let servicesPrice = 0
+        const resultados = await Promise.all( //PASAR ESTA FUNCIÓN A UTILS
+            servicios.map(async (e) => {
+                const servicio = await Services.findById(e)
+                if (servicio.pricing_type === "per_reservation") {
+                    servicesPrice += servicio.price
+                } else if (servicio.pricing_type === "per_person") {
+                    servicesPrice += servicio.price * cantidad
+                } else { //per_days
+                    servicesPrice += servicio.price * dias
+                }
+            })
+        ) //CAMBIAR A FOR OF, MEJOR PRACTICA (MAP SE USA SOLO PARA RETORNAR NUEVOS OBJETOS)
+
+        const total = (dias * roomType.precio) + servicesPrice
 
         const booking = new Reserva({
             usuario: decoded.id,
@@ -115,6 +130,16 @@ export const bookingSumamry = async ( req, res ) => {
         const booking = await Reserva.findOne({_id: temporalBooking_Cookie.bookingId})
         const user = await User.findOne({_id: userId.id})
         const roomtype = await Roomtype.findOne({_id: booking.tipo})
+        const serviciosInfo = await Promise.all(
+            (booking.servicios).map(async (id) => {
+                const servicio = await Services.findById(id);
+                return {
+                    nombre: servicio.name,
+                    precio: servicio.price,
+                    tipo: servicio.pricing_type
+                };
+            })
+        );
         const stripeData = await stripe.paymentIntents.retrieve(temporalBooking_Cookie.stripeId)
         
         res.status(200).json({
@@ -129,6 +154,7 @@ export const bookingSumamry = async ( req, res ) => {
                 mail: user.correo,
                 tel: user.telefono
             },
+            services: serviciosInfo,
             stripe: {
                 id: stripeData.id,
                 cli_secret: stripeData.client_secret
@@ -149,6 +175,13 @@ export const bookingConfirmed = async ( req, res ) => {
         /*------------------------------------------------------#
         |    AQUÍ INCLUIR LA LÓGICA DE CREACIÓN DE FACTURAS     |
         #------------------------------------------------------*/
+
+        res.clearCookie("tb", {
+            path: "/", 
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+        });
 
         res.status(200).json({msg: '¡Reserva confirmada exitosamente!', resumen: booking})
     } catch (error) {

@@ -271,8 +271,8 @@ export var forgotPass = /*#__PURE__*/function () {
             secure: false,
             // use TLS
             auth: {
-              user: "93762e001@smtp-brevo.com",
-              pass: "Gv2c83SkabR1hqOM"
+              user: process.env.EMAIL_SMTP,
+              pass: process.env.PASSW_SMTP
             },
             tls: {
               // do not fail on invalid certs
@@ -334,7 +334,7 @@ export var forgotPass = /*#__PURE__*/function () {
           });
           html = "<div style=\"font-family: Arial, sans-serif; color: #333; padding: 20px; max-width: 600px; margin: auto;\">\n            <h2 style=\"color: #005087;\">Restablecimiento de contrase\xF1a</h2>\n            <p>Hola,</p>\n            <p>\n                Hemos recibido una solicitud para restablecer la contrase\xF1a de tu cuenta en <strong>Abraj Kudai</strong>.\n            </p>\n            <p>\n                Si has sido t\xFA, tu c\xF3digo de verificaci\xF3n es:\n            </p>\n            <p style=\"font-size: 24px; font-weight: bold; color: #007bff;\">\n                ".concat(code, "\n            </p>\n            <p>\n                O alternativamente, puedes hacer clic en el siguiente enlace:\n            </p>\n            <p>\n                <a href=\"https://www.abrajkudai.com/restorepassword?t=").concat(tokenCode, "\" style=\"color: #007bff;\">\n                https://www.abrajkudai.com/restorepassword?t=").concat(tokenCode, "\n                </a>\n            </p>\n            <p>\n                Este enlace ser\xE1 v\xE1lido por <strong>30 minutos</strong>. Si no realizas el cambio dentro de ese periodo, deber\xE1s solicitar uno nuevo.\n            </p>\n            <p>\n                Si <strong>no solicitaste esta recuperaci\xF3n</strong>, puedes ignorar este mensaje. Tu cuenta seguir\xE1 segura.\n            </p>\n            <p>\n                Gracias por confiar en <strong>Abraj Kudai</strong>. Te esperamos pronto.\n            </p>\n            <p>Atentamente,<br><strong>El equipo de Abraj Kudai</strong></p>\n            <hr style=\"margin-top: 30px;\">\n            <p style=\"font-size: 12px; color: #888;\">\n                Si tienes problemas para hacer clic en el enlace, copia y p\xE9galo en tu navegador.\n            </p>\n            </div>");
           message = {
-            from: '"Support Abraj Kudai" <camilo.castillo3090@gmail.com>',
+            from: "\"Support Abraj Kudai\" <".concat(process.env.FROM_EMAIL_SMTP, ">"),
             to: email,
             subject: 'Solicitud de cambio de contraseña de Abraj Kudai',
             text: "Hola, Hemos recibido una solicitud para restablecer la contrase\xF1a de tu cuenta en Abraj Kudai. Si has sido t\xFA, el codigo de verificaci\xF3n es ".concat(code, " o alternativamente clic en el siguiente enlace: https://www.abrajkudai.com/restorepassword?t=").concat(tokenCode, " Este enlace ser\xE1 v\xE1lido por 30 minutos. Si no realizas el cambio dentro de ese periodo, deber\xE1s solicitar uno nuevo. Si no has solicitado esta recuperaci\xF3n, puedes ignorar este mensaje. Tu cuenta seguir\xE1 segura. Gracias por confiar en Abraj Kudai. Te esperamos pronto. Atentamente, El equipo de Abraj Kudai"),

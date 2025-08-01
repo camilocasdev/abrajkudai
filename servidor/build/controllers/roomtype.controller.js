@@ -11,6 +11,7 @@ function _OverloadYield(e, d) { this.v = e, this.k = d; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 import Roomtype from '../models/roomtype.js';
+import Services from '../models/services.js';
 export var roomtypeCreate = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
     var _req$body, nombre, precio, capacidad, scriptLong, scriptShort, imagen, roomtypes, newRoomtype;
@@ -215,7 +216,7 @@ export var roomtypeDelete = /*#__PURE__*/function () {
 }();
 export var roomtypeInfo = /*#__PURE__*/function () {
   var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(req, res) {
-    var roomNumber, type, roomSelected;
+    var roomNumber, type, roomSelected, services;
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
@@ -237,25 +238,34 @@ export var roomtypeInfo = /*#__PURE__*/function () {
           }));
         case 7:
           roomSelected = type[roomNumber];
+          _context6.next = 10;
+          return Services.find({
+            roomtype_fe: {
+              $in: roomSelected._id
+            }
+          });
+        case 10:
+          services = _context6.sent;
           res.status(200).json({
             params: roomNumber,
-            roomServer: roomSelected
+            roomServer: roomSelected,
+            services: services
           });
-          _context6.next = 15;
+          _context6.next = 18;
           break;
-        case 11:
-          _context6.prev = 11;
+        case 14:
+          _context6.prev = 14;
           _context6.t0 = _context6["catch"](0);
           console.log(_context6.t0);
           res.status(500).json({
             error: 'error',
             msg: 'Error inesperado...'
           });
-        case 15:
+        case 18:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[0, 11]]);
+    }, _callee6, null, [[0, 14]]);
   }));
   return function roomtypeInfo(_x1, _x10) {
     return _ref6.apply(this, arguments);

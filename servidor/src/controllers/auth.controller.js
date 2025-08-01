@@ -141,8 +141,8 @@ export const forgotPass = async (req, res) => {
             port: 587,
             secure: false, // use TLS
             auth: {
-                user: "93762e001@smtp-brevo.com",
-                pass: "Gv2c83SkabR1hqOM",
+                user: process.env.EMAIL_SMTP,
+                pass: process.env.PASSW_SMTP,
             },
             tls: {
                 // do not fail on invalid certs
@@ -215,7 +215,7 @@ export const forgotPass = async (req, res) => {
             </div>`;
 
         const message = {
-            from: '"Support Abraj Kudai" <camilo.castillo3090@gmail.com>',
+            from: `"Support Abraj Kudai" <${process.env.FROM_EMAIL_SMTP}>`,
             to: email,
             subject: 'Solicitud de cambio de contraseña de Abraj Kudai',
             text: `Hola, Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Abraj Kudai. Si has sido tú, el codigo de verificación es ${code} o alternativamente clic en el siguiente enlace: https://www.abrajkudai.com/restorepassword?t=${tokenCode} Este enlace será válido por 30 minutos. Si no realizas el cambio dentro de ese periodo, deberás solicitar uno nuevo. Si no has solicitado esta recuperación, puedes ignorar este mensaje. Tu cuenta seguirá segura. Gracias por confiar en Abraj Kudai. Te esperamos pronto. Atentamente, El equipo de Abraj Kudai`,

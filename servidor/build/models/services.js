@@ -17,11 +17,11 @@ var serviceSchema = new Schema({
     type: String,
     "enum": ["avaible", "overtaken", "unavaible"]
   },
-  roomtype_fe: {
+  roomtype_fe: [{
     // fe = foranean entity
     ref: "Roomtype",
     type: Schema.Types.ObjectId
-  },
+  }],
   schedule: {
     type: Date
   }

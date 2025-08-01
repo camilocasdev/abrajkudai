@@ -1,4 +1,5 @@
 import Roomtype from '../models/roomtype.js'
+import Services from '../models/services.js'
 
 export const roomtypeCreate = async ( req, res ) => {
 
@@ -88,10 +89,10 @@ export const roomtypeInfo = async (req, res) => {
                 res.status(200).json({msg: 'Clear', data: type})
             )
         }
-
         const roomSelected = type[roomNumber]
-        
-        res.status(200).json({params: roomNumber, roomServer: roomSelected})
+        const services = await Services.find({roomtype_fe: {$in: roomSelected._id}})
+
+        res.status(200).json({params: roomNumber, roomServer: roomSelected, services: services})
     } catch (error) {
         console.log(error)
         res.status(500).json({error: 'error', msg: 'Error inesperado...'})

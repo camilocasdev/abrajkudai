@@ -3,35 +3,30 @@ import Footer from './components/footer.js';
 import Header from './components/header.js'
 
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import RoomTypeTarjet from './components/room-types/roomtype-tarjet.js';
 
 function Rooms(){
 
     const navigate = useNavigate()
     const [room, setRoom] = useState({})
+    const [services, setServices] = useState([{}])
     const [searchParams] = useSearchParams()
     const [fechaInicio, setFechaInicio] = useState()
     const [fechaHasta, setFechaHasta] = useState()
     const [cantidad, setCantidad] = useState()
     const [error, setError] = useState()
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
+    const [seleccionados, setSeleccionados] = useState([]);
 
     //Agregamos un limitador para los dates tomados de las fechas desde, siendo el mismo día el minimo.
     const formMinDate = new Date()
     const minDate = formMinDate.toISOString().split("T")[0] //funciona
 
-    /* const formSugDate = new Date()
-    formSugDate.setMonth(formSugDate.getMonth() + 1) //+1 Mes a la sugerencia
-    const sugDate = formSugDate.toISOString().split("T")[0] //Transforma la fecha.
-        //toISOString() cambiara el formato a YYYY-MM-DDTHH:mm:ss.sssZ, especificamente cambia a un UTC.
-        //.split dividira las fechas[0] y la hora[1] en un array con el mismo orden.
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps */
     useEffect(() => {
-
         const datosHabitacion = async() => {
             let url = searchParams.get('t')
             if (!url) { url = 0 };
-
             try{
                 const response = await fetch(`/api/public/roomtype/get?t=${encodeURIComponent(url)}`, {
                     method: 'GET',
@@ -39,34 +34,30 @@ function Rooms(){
                         'Content-Type': 'application/json'
                     }
                 }) 
-
                 const data = await response.json()
-
+                console.log(data)
                 if (!data) {
                     console.error('No hay datos de respuesta del servidor.')  //Borrar
                 } 
-
                 if (!data.roomServer) {
                     console.error("No hay datos de habitación en la respuesta." + error);  //Borrar
                     return;
                 }
+                setServices(data.services)
                 setRoom(data.roomServer)
             } catch (error){
                 setError(error)
             }
         }
         datosHabitacion()
-
     }, [searchParams])
-
     useEffect(() => {
         //console.log("Estado actualizado de room: ", room._id ,room);
-         //console.log(room?.descripcion?.[0])
-        }, [room]);
-
+/*         console.log(room)
+        console.log(services) */
+        }, [room, services]);
     const enviarForm = async(event) => {
         event.preventDefault()
-
         try {
             const response = await fetch('/api/user/booking/create', {
                 method: 'POST',
@@ -80,13 +71,10 @@ function Rooms(){
                     cantidad: cantidad,
                     habitacion: room._id,
                     estado: "Pendiente",
-                    servicios: [
-                        //Implementar servicios ya que por ahora no se tiene en cuenta servicios ni precios de estos
-                    ]
+                    servicios: seleccionados
                 }),
             });
             const data = await response.json()
-
             if (data.error === true){
                 console.error('Hubo un error')
                 navigate(data.redirect)
@@ -94,53 +82,56 @@ function Rooms(){
                 console.log("Redirigiendo")
                 return navigate('/pago')
             }
-
         } catch (error) {
             console.error(error)
             setError(error)
         }
     } 
-
-    function modalServices() {
+    const modalServices = () => {
         console.log('Abriendo menu de servicios')
+        setIsServicesOpen(!isServicesOpen);
     }
-
+    const toggleServicio = (id) => {
+        setSeleccionados((prev) =>
+            prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+        );
+    };
     return(
         <div id='root-m'>
             <div>
                 <title>{room?.nombre} | Abraj Kudai</title>
             </div>
-            <body> 
+            <div> 
                 <section className="header">
                     <Header />
                 </section>
                 <main>
-                    <section class="habitacion"> 
-                        <article class='roomTitle'>
-                            <div class=''>
+                    <section className="habitacion"> 
+                        <article className='roomTitle'>
+                            <div className=''>
                                 <h1>{room?.nombre}</h1>
                             </div>
-                            <div class='starRate'>
+                            <div className='starRate'>
                                 <img src=''/>
                             </div>
                         </article>
-                        <article class='roomContent'>
-                            <div class='roomData'>
-                                <div class='roomImg'>
+                        <article className='roomContent'>
+                            <div className='roomData'>
+                                <div className='roomImg'>
                                     <img src={room?.imagen} alt="Imagen de la habitación"/>
                                 </div>
-                                <div class='roomScript'>
+                                <div className='roomScript'>
                                     <div dangerouslySetInnerHTML={{ __html: room?.scriptLong }} />
                                 </div>
                             </div>
-                            <div class="roomContRight">
+                            <div className="roomContRight">
                                 <form method="post" onSubmit={enviarForm}>
                                     <div className="form-title">
                                         <h2>Reservar</h2>
                                     </div>
-                                    <div class='roomForm'>
-                                        <div class="formDate">
-                                            <div>
+                                    <div className='roomForm'>
+                                        <div className="formDate">
+                                            <div className="form-date-boxes">
                                                 <span><strong>Desde</strong></span>
                                                 <input 
                                                     type ="date" 
@@ -152,7 +143,7 @@ function Rooms(){
                                                     required
                                                 />
                                             </div>
-                                            <div>
+                                            <div className="form-date-boxes">
                                                 <span><strong>Hasta</strong></span>
                                                 <input 
                                                     type = "date" 
@@ -165,7 +156,7 @@ function Rooms(){
                                                 />
                                             </div>
                                         </div>
-                                        <div class="formQuantity">
+                                        <div className="formQuantity">
                                             <span><strong>Cantidad</strong></span>
                                             <select 
                                                 name="cantidad"
@@ -184,25 +175,45 @@ function Rooms(){
                                         </div>
                                         <div className = "room-form-services">
                                             <span><strong>Servicios</strong></span>
-                                            <button type="button" onClick={modalServices}>
+                                            {/*<button type="button" onClick={modalServices}>
                                                 <div>Extender</div>
                                                 <ion-icon name="chevron-down-outline"></ion-icon>
-                                            </button>
+                                            </button> */}
+                                            <aside id='form-services-box' className={`form-services-box ${isServicesOpen ? 'show' : ''}`}>
+                                                {
+                                                    services.map((e, i) => {
+                                                        return(
+                                                            <label key={i}>
+                                                                <div>
+                                                                    <input 
+                                                                        type='checkbox'
+                                                                        checked={seleccionados.includes(e?._id)}
+                                                                        onChange={() => toggleServicio(e?._id)}
+                                                                    />
+                                                                    <span>{e?.name}</span>
+                                                                </div>
+                                                                <span>$ {e?.price}</span>
+                                                            </label>
+                                                        )
+                                                    })
+                                                }
+                                            </aside>
                                         </div>
                                         <button type="submit">Reservar</button>
                                     </div>  
                                 </form>
-                                <div class="otherRooms">
-                                    <div class="otherRooms-title">
+                                <div className="other-rooms">
+                                    <div className="otherRooms-title">
                                         <h1>Sugerencias</h1>
                                     </div>
+                                    <RoomTypeTarjet rows={3} />
                                 </div>
                             </div>
                         </article>
                     </section>
                 </main>
                 <Footer />
-            </body>
+            </div>
         </div>
     )
 }
