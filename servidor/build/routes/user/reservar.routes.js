@@ -7,5 +7,5 @@ var router = Router();
 router.post('/booking/create', [refreshToken, verifyToken], reservactrl.bookingToPaying); // Crea reserva
 router.get('/booking/summary', [refreshToken, verifyToken], reservactrl.bookingSumamry); // Resumen de la reserva en transacción
 router.post('/booking/confirm', [refreshToken, verifyToken], reservactrl.bookingConfirmed); // Pago de reserva
-
+router.put('/booking/cancel', [refreshToken, verifyToken], reservactrl.cancelBooking);
 export default router;

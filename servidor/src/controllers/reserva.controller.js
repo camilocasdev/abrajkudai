@@ -70,7 +70,7 @@ export const bookingToPaying = async ( req, res) => {
         const booking = new Reserva({
             usuario: decoded.id,
             habitacion: room, // (1) Habitación guardará el ID de una habitación
-            tipo: habitacion, // (1)Tipo guardará el tipo de habitación que el usuario desea
+            tipo: habitacion, // (1) Tipo guardará el tipo de habitación que el usuario desea
             fechaInicio: fechaInicio,
             fechaHasta: fechaHasta,
             cantidad: cantidad, //la cantidad maxima se manejara desde el front
@@ -190,7 +190,26 @@ export const bookingConfirmed = async ( req, res ) => {
     }
 }
 
+export const cancelBooking = async (req, res) => {
+    try {
+        const cookie = req.cookies['tb']
+        if (!cookie) { res.status(404).json({
+            error: true,
+            msg: 'No hay datos de reseva',
+            redirect: '/404'
+        })}
 
+        const booking = await Reserva.findByIdAndUpdate(cookie.bookingId, {estado: "Cancelado"}, {new: true})
+
+        res.clearCookie('tb')
+
+        res.status(200).json({error: false, msg: '¡Reserva cancelada existosamente!', redirect: '/reserva'})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: true, msg: 'Internal Server Error'})
+    }
+
+}
 
 //  -------------------------  FUNCIONES DE ADMINISTRADOR Y/O EMPLEADO  ------------------------------  //
 export const directBookingCreation = async ( req, res ) => {

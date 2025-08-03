@@ -1511,7 +1511,7 @@
         .booking-data-list-l{
             display: flex;
             flex-direction: column;
-            gap: .3rem
+            gap: .5rem
         }
         .booking-data{
             color: #eeeeee;
@@ -1551,7 +1551,9 @@
             font-size: 2rem;
             margin: 0rem
         }
-        
+        .booking-cancel button:hover{
+            text-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px !important;
+        }
         /*------------------------#
         |                         |
         |     Responsive Test     |

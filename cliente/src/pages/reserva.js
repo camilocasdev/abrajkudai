@@ -41,7 +41,7 @@ function Reserva(){
 
     const showResultados = resultados.map((e, i) => {
         return(
-            <a href={`/habitacion?t=${i}`} class="default-tarjet">
+            <a key={i} href={`/habitacion?t=${i}`} className="default-tarjet">
                 <div>
                     <img 
                         src={e?.imagen}
@@ -49,13 +49,13 @@ function Reserva(){
                     />
                 </div>
                 
-                <div class='room-content'>
-                    <div class='room-name'>
+                <div className='room-content'>
+                    <div className='room-name'>
                         <h2>{e?.nombre}</h2>
                     </div>
-                    <div class='room-content-price'>
+                    <div className='room-content-price'>
                         <h2>${e?.precio}<span>/noche</span></h2>
-                        <div class='room-price-button'>
+                        <div className='room-price-button'>
                             <h3>Reservar</h3>
                         </div>
                     </div>
@@ -70,68 +70,68 @@ function Reserva(){
             <div>
                 <title>Reservas | Abraj Kudai</title>
             </div>
-            <body>
+            <div>
                 <section className="header">
                     <Header />
                 </section>
-                <section class="res-rooms-section">
-                    <div class="fixer">
-                        <article class='res-room-title'>
+                <section className="res-rooms-section">
+                    <div className="fixer">
+                        <article className='res-room-title'>
                             <h2>Reservas Disponibles</h2>
                             <p>Encuentra tu alojamiento ideal para tu próxima estancia.</p>
                         </article>
-                        <article class='res-filter-box'>
-                            <section class='res-filter-box-p1'>
-                                <a class='filter-button' hidden>
+                        <article className='res-filter-box'>
+                            <section className='res-filter-box-p1'>
+                                <a className='filter-button' hidden>
                                     <ion-icon className="filter-icon" name="options"></ion-icon>
                                 </a>
-                                <div class="filter-title">
+                                <div className="filter-title">
                                     <p>Filtros</p>
                                 </div>
-                                <div class="filters">
-                                    <div class='filter-fix'>
-                                        <div class='filter-date-from'>
-                                            <a style={{'pointer-events': 'none'}} >
+                                <div className="filters">
+                                    <div className='filter-fix'>
+                                        <div className='filter-date-from'>
+                                            <a style={{'pointerEvents': 'none'}} >
                                                 Desde
                                             </a>
                                         </div>
                                         <div>
-                                            <a class='filter-date-to' style={{'pointer-events': 'none'}} >
+                                            <a className='filter-date-to' style={{'pointerEvents': 'none'}} >
                                                 Hasta
                                             </a>
                                         </div>
                                         <div>
-                                            <a class='quantity' style={{'pointer-events': 'none'}} >
+                                            <a className='quantity' style={{'pointerEvents': 'none'}} >
                                                 Cantidad
                                             </a>
                                         </div>
                                         <div>
-                                            <a class='services' style={{'pointer-events': 'none'}} >
+                                            <a className='services' style={{'pointerEvents': 'none'}} >
                                                 Servicios
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <section class='res-filter-box-p1'>
-                                <a class='filter-button' hidden>
+                            <section className='res-filter-box-p1'>
+                                <a className='filter-button' hidden>
                                     <ion-icon name="reorder-four"></ion-icon>
                                 </a>
                                 
-                                <div class="filters">
+                                <div className="filters">
                                     <p>Ordenar por</p>
                                 </div>
                             </section>
                         </article>
-                        <article class="result-page">
-                            <div class="result-box">
+                        <article className="result-page">
+                            <div className="result-box">
                                 {showResultados}
                             </div>
                         </article>
                     </div>
                 </section>
                 <Footer />
-            </body>
+            </div>
         </div>
     )
 }

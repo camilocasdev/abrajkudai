@@ -75,7 +75,18 @@ function Pago(){
             <Loading nombre='pago'/>
         </div>
     );
-        
+    const cancelBooking = async() => {
+        try {
+            const response = await fetch('/api/user/booking/cancel', {
+                method: 'PUT'
+            })
+            const data = await response.json();
+            navigate(data.redirect)
+        } catch (error) {
+            console.log(error)
+            navigate('/404')
+        }
+    }
     return(
         <div id='root-m'>
             <div>
@@ -128,6 +139,7 @@ function Pago(){
                                 <p>Monto Completo</p>
                                 <p>{booking?.total}{currency}</p>
                             </div>
+                            <button type="button" className='booking-cancel' onClick={cancelBooking}>Cancel Booking</button>
                         </article>
                     </section>
                 </main>

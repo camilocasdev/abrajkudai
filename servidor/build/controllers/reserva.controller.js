@@ -117,7 +117,7 @@ export var bookingToPaying = /*#__PURE__*/function () {
             habitacion: room,
             // (1) Habitación guardará el ID de una habitación
             tipo: habitacion,
-            // (1)Tipo guardará el tipo de habitación que el usuario desea
+            // (1) Tipo guardará el tipo de habitación que el usuario desea
             fechaInicio: fechaInicio,
             fechaHasta: fechaHasta,
             cantidad: cantidad,
@@ -356,18 +356,67 @@ export var bookingConfirmed = /*#__PURE__*/function () {
     return _ref5.apply(this, arguments);
   };
 }();
-
-//  -------------------------  FUNCIONES DE ADMINISTRADOR Y/O EMPLEADO  ------------------------------  //
-export var directBookingCreation = /*#__PURE__*/function () {
+export var cancelBooking = /*#__PURE__*/function () {
   var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(req, res) {
-    var _req$body2, nombre, apellido, identificacion, telefono, email, fechaInicio, fechaHasta, cantidad, roomTypeId, servicios, cardName, cardNumber, cardExpire, cardCode, userNumber, _ref7, contrasena, codigo, pais, estado, user, room, dayFrom, dayTo, diffms, dias, roomType, total, booking;
+    var cookie, booking;
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
           _context6.prev = 0;
-          _req$body2 = req.body, nombre = _req$body2.nombre, apellido = _req$body2.apellido, identificacion = _req$body2.identificacion, telefono = _req$body2.telefono, email = _req$body2.email, fechaInicio = _req$body2.fechaInicio, fechaHasta = _req$body2.fechaHasta, cantidad = _req$body2.cantidad, roomTypeId = _req$body2.roomTypeId, servicios = _req$body2.servicios, cardName = _req$body2.cardName, cardNumber = _req$body2.cardNumber, cardExpire = _req$body2.cardExpire, cardCode = _req$body2.cardCode, userNumber = _req$body2.userNumber;
-          _ref7 = null, contrasena = _ref7.contrasena, codigo = _ref7.codigo, pais = _ref7.pais, estado = _ref7.estado; // codigo in the model by default is null
+          cookie = req.cookies['tb'];
+          if (!cookie) {
+            res.status(404).json({
+              error: true,
+              msg: 'No hay datos de reseva',
+              redirect: '/404'
+            });
+          }
           _context6.next = 5;
+          return Reserva.findByIdAndUpdate(cookie.bookingId, {
+            estado: "Cancelado"
+          }, {
+            "new": true
+          });
+        case 5:
+          booking = _context6.sent;
+          res.clearCookie('tb');
+          res.status(200).json({
+            error: false,
+            msg: '¡Reserva cancelada existosamente!',
+            redirect: '/reserva'
+          });
+          _context6.next = 14;
+          break;
+        case 10:
+          _context6.prev = 10;
+          _context6.t0 = _context6["catch"](0);
+          console.log(_context6.t0);
+          res.status(500).json({
+            error: true,
+            msg: 'Internal Server Error'
+          });
+        case 14:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6, null, [[0, 10]]);
+  }));
+  return function cancelBooking(_x9, _x0) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+//  -------------------------  FUNCIONES DE ADMINISTRADOR Y/O EMPLEADO  ------------------------------  //
+export var directBookingCreation = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(req, res) {
+    var _req$body2, nombre, apellido, identificacion, telefono, email, fechaInicio, fechaHasta, cantidad, roomTypeId, servicios, cardName, cardNumber, cardExpire, cardCode, userNumber, _ref8, contrasena, codigo, pais, estado, user, room, dayFrom, dayTo, diffms, dias, roomType, total, booking;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.prev = 0;
+          _req$body2 = req.body, nombre = _req$body2.nombre, apellido = _req$body2.apellido, identificacion = _req$body2.identificacion, telefono = _req$body2.telefono, email = _req$body2.email, fechaInicio = _req$body2.fechaInicio, fechaHasta = _req$body2.fechaHasta, cantidad = _req$body2.cantidad, roomTypeId = _req$body2.roomTypeId, servicios = _req$body2.servicios, cardName = _req$body2.cardName, cardNumber = _req$body2.cardNumber, cardExpire = _req$body2.cardExpire, cardCode = _req$body2.cardCode, userNumber = _req$body2.userNumber;
+          _ref8 = null, contrasena = _ref8.contrasena, codigo = _ref8.codigo, pais = _ref8.pais, estado = _ref8.estado; // codigo in the model by default is null
+          _context7.next = 5;
           return new Usuario({
             nombre: nombre,
             apellido: apellido,
@@ -380,24 +429,24 @@ export var directBookingCreation = /*#__PURE__*/function () {
             role: 'usuario'
           }).save();
         case 5:
-          user = _context6.sent;
-          _context6.next = 8;
+          user = _context7.sent;
+          _context7.next = 8;
           return Room.findOne({
             roomid: roomTypeId
           }).sort({
             updatedAt: 1
           });
         case 8:
-          room = _context6.sent;
+          room = _context7.sent;
           dayFrom = new Date(fechaInicio), dayTo = new Date(fechaHasta);
           diffms = Math.abs(dayTo.getTime() - dayFrom.getTime());
           dias = diffms / (1000 * 60 * 60 * 24); // === divide by 86.4M 
-          _context6.next = 14;
+          _context7.next = 14;
           return Roomtype.findOne({
             _id: roomTypeId
           });
         case 14:
-          roomType = _context6.sent;
+          roomType = _context7.sent;
           total = dias * roomType.precio;
           /*  AQUÍ DEBEMOS VERIFICAR EL PAGO DEL USUARIO DIRECTAMENTE; DESPUES SE GUARDA LA RESERVA  #
           |                                                                                          |
@@ -421,35 +470,35 @@ export var directBookingCreation = /*#__PURE__*/function () {
             estado: estado,
             servicios: servicios
           });
-          _context6.next = 24;
+          _context7.next = 24;
           break;
         case 20:
-          _context6.prev = 20;
-          _context6.t0 = _context6["catch"](0);
-          console.log(_context6.t0);
+          _context7.prev = 20;
+          _context7.t0 = _context7["catch"](0);
+          console.log(_context7.t0);
           res.status(500).json({
             msg: 'Error'
           });
         case 24:
         case "end":
-          return _context6.stop();
+          return _context7.stop();
       }
-    }, _callee6, null, [[0, 20]]);
+    }, _callee7, null, [[0, 20]]);
   }));
-  return function directBookingCreation(_x9, _x0) {
-    return _ref6.apply(this, arguments);
+  return function directBookingCreation(_x1, _x10) {
+    return _ref7.apply(this, arguments);
   };
 }();
 export var getReserva = /*#__PURE__*/function () {
-  var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(req, res) {
+  var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
     var reservas;
-    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-      while (1) switch (_context7.prev = _context7.next) {
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
         case 0:
-          _context7.next = 2;
+          _context8.next = 2;
           return Reserva.find();
         case 2:
-          reservas = _context7.sent;
+          reservas = _context8.sent;
           if (reservas.length < 1) res.status(200).json('Historial de reservas vacio.');
           res.status(200).json({
             msg: '¡Consulta realizada exitosamente!',
@@ -457,21 +506,21 @@ export var getReserva = /*#__PURE__*/function () {
           });
         case 5:
         case "end":
-          return _context7.stop();
+          return _context8.stop();
       }
-    }, _callee7);
+    }, _callee8);
   }));
-  return function getReserva(_x1, _x10) {
-    return _ref8.apply(this, arguments);
+  return function getReserva(_x11, _x12) {
+    return _ref9.apply(this, arguments);
   };
 }();
 export var getReservaId = /*#__PURE__*/function () {
-  var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
+  var _ref0 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(req, res) {
     var reserva;
-    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-      while (1) switch (_context8.prev = _context8.next) {
+    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
         case 0:
-          _context8.next = 2;
+          _context9.next = 2;
           return Reserva.findById(req.params['reservaId']).populate({
             path: 'usuario',
             model: 'Usuario'
@@ -483,36 +532,10 @@ export var getReservaId = /*#__PURE__*/function () {
             model: 'Room'
           });
         case 2:
-          reserva = _context8.sent;
+          reserva = _context9.sent;
           res.status(200).json({
             msg: '¡Habitación consultada exitosamente!',
             data: reserva
-          });
-        case 4:
-        case "end":
-          return _context8.stop();
-      }
-    }, _callee8);
-  }));
-  return function getReservaId(_x11, _x12) {
-    return _ref9.apply(this, arguments);
-  };
-}();
-export var updateReserva = /*#__PURE__*/function () {
-  var _ref0 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(req, res) {
-    var actualizarReserva;
-    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-      while (1) switch (_context9.prev = _context9.next) {
-        case 0:
-          _context9.next = 2;
-          return Reserva.findByIdAndUpdate(req.params['reservaId'], req.body, {
-            "new": true
-          });
-        case 2:
-          actualizarReserva = _context9.sent;
-          res.status(200).json({
-            msg: '¡Habitación modificada exitosamente!',
-            updated: actualizarReserva
           });
         case 4:
         case "end":
@@ -520,30 +543,56 @@ export var updateReserva = /*#__PURE__*/function () {
       }
     }, _callee9);
   }));
-  return function updateReserva(_x13, _x14) {
+  return function getReservaId(_x13, _x14) {
     return _ref0.apply(this, arguments);
   };
 }();
-export var deleteReserva = /*#__PURE__*/function () {
+export var updateReserva = /*#__PURE__*/function () {
   var _ref1 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee0(req, res) {
-    var reservaId, eliminarReserva;
+    var actualizarReserva;
     return _regeneratorRuntime().wrap(function _callee0$(_context0) {
       while (1) switch (_context0.prev = _context0.next) {
         case 0:
-          reservaId = req.params.reservaId;
-          _context0.next = 3;
-          return Reserva.findByIdAndDelete(reservaId);
-        case 3:
-          eliminarReserva = _context0.sent;
-          res.status(204).json(eliminarReserva);
-        case 5:
+          _context0.next = 2;
+          return Reserva.findByIdAndUpdate(req.params['reservaId'], req.body, {
+            "new": true
+          });
+        case 2:
+          actualizarReserva = _context0.sent;
+          res.status(200).json({
+            msg: '¡Habitación modificada exitosamente!',
+            updated: actualizarReserva
+          });
+        case 4:
         case "end":
           return _context0.stop();
       }
     }, _callee0);
   }));
-  return function deleteReserva(_x15, _x16) {
+  return function updateReserva(_x15, _x16) {
     return _ref1.apply(this, arguments);
+  };
+}();
+export var deleteReserva = /*#__PURE__*/function () {
+  var _ref10 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee1(req, res) {
+    var reservaId, eliminarReserva;
+    return _regeneratorRuntime().wrap(function _callee1$(_context1) {
+      while (1) switch (_context1.prev = _context1.next) {
+        case 0:
+          reservaId = req.params.reservaId;
+          _context1.next = 3;
+          return Reserva.findByIdAndDelete(reservaId);
+        case 3:
+          eliminarReserva = _context1.sent;
+          res.status(204).json(eliminarReserva);
+        case 5:
+        case "end":
+          return _context1.stop();
+      }
+    }, _callee1);
+  }));
+  return function deleteReserva(_x17, _x18) {
+    return _ref10.apply(this, arguments);
   };
 }();
 
