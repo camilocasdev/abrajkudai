@@ -2,9 +2,12 @@ import './style.css';
 import Footer from './components/footer.js';
 import Header from './components/header.js';
 import Loading from './components/loading-modals/loadingScreen'
+import ProfileBooking from './components/profile-sections/profileBooking.js';
 
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import ProfileDataUser from './components/profile-sections/profileUserData.js';
+import ProfileSettings from './components/profile-sections/profileSettings.js';
 
 function Perfil(){
 
@@ -59,112 +62,61 @@ function Perfil(){
         return <p>Cargando historial de reservas...</p>;
     }
 
-    const bookingHistorial = userBookings.map((e, i) => {
-        try{
-            return (
-                <div className="profile-booking-tarjet" key={i}>
-                    <div>
-                        <img src={e?.tipo?.imagen?.[0]} alt={`Habitación número ${i} del historial de reservas.`} />
-                    </div>
-                    <div className="profile-booking-tarjet-content">
-                        <h3>{e?.tipo?.nombre}</h3>
-                        <p>{`Fecha de Inicio: ${e?.fechaInicio}`}</p>
-                        <p>{`Fecha de Fin: ${e?.fechaHasta}`}</p>
-                        <p>{`Estado: ${e?.estado}`}</p>
-                    </div>
-                </div>
-            );
-        } catch (error){
-            console.log(error)
-        }
-    });
-
     if (usuario === null) return (
-        <div class = 'loading-box'>
+        <div className = 'loading-box'>
             <Loading nombre='perfil'/>
         </div>
     );
-    
+    const hash = window.location.hash;
     return(
         <div id='root-m'>
             <div>
                 <title>Perfil | Abraj Kudai</title>
             </div>
-            <body>
+            <div>
                 <section className="header">
-                    <article class="bg-profile-banner-box">
+                    <article className="bg-profile-banner-box">
                         <img 
-                            src={userBookings[userBookings.length-1]?.tipo?.imagen[0]} 
+                            src={userBookings[userBookings.length-1]?.tipo?.imagen[0] || "https://nicodev.s-ul.eu/T8nI9Gxs"}
+                            onError={(e) => { e.target.src = "https://nicodev.s-ul.eu/T8nI9Gxs"; }}
                             title="Apartado del hotel"
                             alt="Fondo de la reserva actual del hotel"
                         />
                     </article>
                     <Header />
                 </section>
-                <section class="banner">
-                    <article class="current-room">
-                        <img src={userBookings[0]?.tipo?.imagen[0]} alt="Habitación Actual"/>
-                        <div class="current-room-content">
+                <section className="banner">
+                    <article className="current-room">
+                        <img 
+                            src={userBookings[0]?.tipo?.imagen[0] || "https://nicodev.s-ul.eu/T8nI9Gxs"} 
+                            onError={(e) => { e.target.src = "https://nicodev.s-ul.eu/T8nI9Gxs"; }}
+                            alt="Habitación Actual"
+                        />
+                        <div className="current-room-content">
                             <h1>¡Hola! {usuario?.nombre}</h1>
                             <div className='current-room-content-text'>
-                                <h3>{userBookings[0]?.tipo?.nombre}</h3>
+                                <h3>{userBookings[0]?.tipo?.nombre || "Sin Reservas"}</h3>
                                 <p>Habitacion Actual</p>
                             </div>
                         </div>
                     </article>            
                 </section>
-                <section class="profile-content">
+                <section className="profile-content">
                     <article className='navbar-box'>
-                        <div class="navbar">
+                        <div className="navbar">
                             <div className='navbar-anchores'>
                                 <a href="#reservas"><strong>Reservas</strong></a>
                                 <a href="#datos"><strong>Datos</strong></a>
                                 <a href="#configuracion"><strong>Configuración</strong></a>
                             </div>
-                            <button class="logout" href='#' onClick={clearData}><strong>Cerrar Sesión</strong></button>                    
+                            <button className="logout" href='#' onClick={clearData}><strong>Cerrar Sesión</strong></button>                    
                         </div>
                     </article>
-                    <article id="reservas">
-                        <div>
-                            <h2>Reserva Actual</h2>
-                            <div class="profile-booking-tarjet">
-                                <div>
-                                    <img src={userBookings[userBookings.length-1]?.tipo?.imagen[0]} alt="Imágenen de la habitación actual"/>
-                                </div>
-                                <div className="profile-booking-tarjet-content">
-                                    <h3>{userBookings[userBookings.length-1]?.tipo?.nombre}</h3>
-                                    <p>{userBookings[userBookings.length-1]?.tipo?.scriptShort}</p>
-                                    <p><strong>{userBookings[userBookings.length-1]?.fechaInicio}</strong></p>
-                                </div>
-                            </div>            
-                        </div>
-                        <div>
-                            <h2>Reserva Próximas</h2>
-                            <div class="profile-booking-tarjet">
-                                <div>
-                                    <img src={userBookings[0]?.tipo?.imagen[0]} alt="Imágenen de la habitación actual"/>
-                                </div>
-                                <div className="profile-booking-tarjet-content">
-                                    <h3>{userBookings[0]?.tipo?.nombre}</h3>
-                                    <p>{userBookings[0]?.tipo?.scriptShort}</p>
-                                    <p><strong>{userBookings[0]?.fechaInicio}</strong></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="profile-booking-historial">
-                                <h2>Historial de Reservas</h2>
-                                {bookingHistorial}
-                            </div>
-                        </div>
-                    </article>
-                    <article id="configuracion">
-                        <div>
-                            <p>Nada que ver aca</p>
-                        </div>
-                    </article>
+                    {(hash === '#reservas' || hash === '') && <ProfileBooking userBookings={userBookings} />}
+                    {hash === '#datos' && <ProfileDataUser usuario={usuario} setUsuario={setUsuario} />} 
+                    {hash === '#configuracion' && <ProfileSettings />}
                 </section>
-            </body>
+            </div>
             <Footer />
         </div>
     )

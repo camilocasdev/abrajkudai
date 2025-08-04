@@ -80,52 +80,55 @@ export const signIn = async (req, res) => {
 };
     
 export const signUp = async (req, res) => {
-
-    const { nombre, apellido, pais, identificacion, contrasena, correo, telefono, role } = req.body;
-
-    const nuevoUsuario = new Usuario({
-        nombre,
-        apellido,
-        pais,
-        identificacion,
-        contrasena: await Usuario.encryptPassword(contrasena),
-        correo,
-        telefono, 
-        role
-    })  
-
-    if (role){
-        const foundRoles = await Role.find({nombre:{$in: role}});
-        nuevoUsuario.role = foundRoles.map(role => role._id);
-
-        if (!nuevoUsuario.role.includes("usuario")){
-            const defaultRole = await Role.findOne({nombre: 'usuario'});
-            nuevoUsuario.role.push(defaultRole._id)
-        }
-    } else {
-        const defaultRole = await Role.findOne({nombre: 'usuario'});
-        nuevoUsuario.role = [defaultRole._id];
-    }
-
-    const emailFound = await Usuario.findOne({ correo: correo });
-
-    if (emailFound) {
-        return res.status(400).json({ msg: 'Correo ya existe', redirect: '/signup?email%20already%20exists' });
-    }
+    try {        
+        const { nombre, apellido, pais, identificacion, contrasena, correo, telefono, role } = req.body;
+        const nuevoUsuario = new Usuario({
+            nombre,
+            apellido,
+            pais,
+            identificacion,
+            contrasena: await Usuario.encryptPassword(contrasena),
+            correo,
+            telefono, 
+            role
+        })  
     
-    const identFound = await Usuario.findOne({ identificacion: identificacion });
-
-    if (identFound) {
-        return res.status(400).json({ msg: 'Identificación ya existe', redirect: '/signup?identification%20already%20exists'});
+        if (role){
+            const foundRoles = await Role.find({nombre:{$in: role}});
+            nuevoUsuario.role = foundRoles.map(role => role._id);
+    
+            if (!nuevoUsuario.role.includes("usuario")){
+                const defaultRole = await Role.findOne({nombre: 'usuario'});
+                nuevoUsuario.role.push(defaultRole._id)
+            }
+        } else {
+            const defaultRole = await Role.findOne({nombre: 'usuario'});
+            nuevoUsuario.role = [defaultRole._id];
+        }
+    
+        const emailFound = await Usuario.findOne({ correo: correo });
+    
+        if (emailFound) {
+            return res.status(400).json({ msg: 'Correo ya existe', redirect: '/signup?email%20already%20exists' });
+        }
+        
+        const identFound = await Usuario.findOne({ identificacion: identificacion });
+    
+        if (identFound) {
+            return res.status(400).json({ msg: 'Identificación ya existe', redirect: '/signup?identification%20already%20exists'});
+        }
+    
+        const usuarioGuardado = await nuevoUsuario.save();
+    
+        jwt.sign({id: usuarioGuardado._id}, process.env.SECRET_KEY, {
+            expiresIn: 864000 //24 Horas
+        });
+    
+        res.status(201).json({ msg: 'Registro exitoso.' , redirect: '/signin'})
+    } catch (error) {
+        res.status(500).json({error: true, msg: 'Internal Server Error'})
     }
 
-    const usuarioGuardado = await nuevoUsuario.save();
-
-    jwt.sign({id: usuarioGuardado._id}, process.env.SECRET_KEY, {
-        expiresIn: 864000 //24 Horas
-    });
-
-    res.status(201).json({ msg: 'Registro exitoso.' , redirect: '/signin'})
 };
 
 export const forgotPass = async (req, res) => {

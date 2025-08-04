@@ -138,15 +138,16 @@ export var signUp = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
+          _context2.prev = 0;
           _req$body2 = req.body, nombre = _req$body2.nombre, apellido = _req$body2.apellido, pais = _req$body2.pais, identificacion = _req$body2.identificacion, contrasena = _req$body2.contrasena, correo = _req$body2.correo, telefono = _req$body2.telefono, role = _req$body2.role;
           _context2.t0 = Usuario;
           _context2.t1 = nombre;
           _context2.t2 = apellido;
           _context2.t3 = pais;
           _context2.t4 = identificacion;
-          _context2.next = 8;
+          _context2.next = 9;
           return Usuario.encryptPassword(contrasena);
-        case 8:
+        case 9:
           _context2.t5 = _context2.sent;
           _context2.t6 = correo;
           _context2.t7 = telefono;
@@ -163,76 +164,76 @@ export var signUp = /*#__PURE__*/function () {
           };
           nuevoUsuario = new _context2.t0(_context2.t9);
           if (!role) {
-            _context2.next = 26;
+            _context2.next = 27;
             break;
           }
-          _context2.next = 17;
+          _context2.next = 18;
           return Role.find({
             nombre: {
               $in: role
             }
           });
-        case 17:
+        case 18:
           foundRoles = _context2.sent;
           nuevoUsuario.role = foundRoles.map(function (role) {
             return role._id;
           });
           if (nuevoUsuario.role.includes("usuario")) {
-            _context2.next = 24;
+            _context2.next = 25;
             break;
           }
-          _context2.next = 22;
+          _context2.next = 23;
           return Role.findOne({
             nombre: 'usuario'
           });
-        case 22:
+        case 23:
           defaultRole = _context2.sent;
           nuevoUsuario.role.push(defaultRole._id);
-        case 24:
-          _context2.next = 30;
+        case 25:
+          _context2.next = 31;
           break;
-        case 26:
-          _context2.next = 28;
+        case 27:
+          _context2.next = 29;
           return Role.findOne({
             nombre: 'usuario'
           });
-        case 28:
+        case 29:
           _defaultRole = _context2.sent;
           nuevoUsuario.role = [_defaultRole._id];
-        case 30:
-          _context2.next = 32;
+        case 31:
+          _context2.next = 33;
           return Usuario.findOne({
             correo: correo
           });
-        case 32:
+        case 33:
           emailFound = _context2.sent;
           if (!emailFound) {
-            _context2.next = 35;
+            _context2.next = 36;
             break;
           }
           return _context2.abrupt("return", res.status(400).json({
             msg: 'Correo ya existe',
             redirect: '/signup?email%20already%20exists'
           }));
-        case 35:
-          _context2.next = 37;
+        case 36:
+          _context2.next = 38;
           return Usuario.findOne({
             identificacion: identificacion
           });
-        case 37:
+        case 38:
           identFound = _context2.sent;
           if (!identFound) {
-            _context2.next = 40;
+            _context2.next = 41;
             break;
           }
           return _context2.abrupt("return", res.status(400).json({
             msg: 'Identificación ya existe',
             redirect: '/signup?identification%20already%20exists'
           }));
-        case 40:
-          _context2.next = 42;
+        case 41:
+          _context2.next = 43;
           return nuevoUsuario.save();
-        case 42:
+        case 43:
           usuarioGuardado = _context2.sent;
           jwt.sign({
             id: usuarioGuardado._id
@@ -243,11 +244,20 @@ export var signUp = /*#__PURE__*/function () {
             msg: 'Registro exitoso.',
             redirect: '/signin'
           });
-        case 45:
+          _context2.next = 51;
+          break;
+        case 48:
+          _context2.prev = 48;
+          _context2.t10 = _context2["catch"](0);
+          res.status(500).json({
+            error: true,
+            msg: 'Internal Server Error'
+          });
+        case 51:
         case "end":
           return _context2.stop();
       }
-    }, _callee2);
+    }, _callee2, null, [[0, 48]]);
   }));
   return function signUp(_x3, _x4) {
     return _ref2.apply(this, arguments);

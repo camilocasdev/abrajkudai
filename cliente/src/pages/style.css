@@ -1,3 +1,28 @@
+            :root {
+                /* Claros */
+                --color-white: #ffffff;
+                --color-light-green: #a1ac88;
+                --color-light-gray: #d9d9d9;
+                --color-light-blue: #464d70;
+                --color-dark-gray: #131313;
+
+                /* Oscuros */
+                --color-gray-light: #eeeeee;
+                --color-green-dark: #616f43;
+                --color-gray-medium: #b1b1b1;
+                --color-blue-dark: #34384b;
+                --color-black: #000000;
+
+                /* Avisos */
+                --color-red-dark: #D94F4F;
+                --color-red-light: #df7676;
+
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
             html{
                 height: 100%;
             }
@@ -9,6 +34,7 @@
                 color 0.3s ease-in;
                 height: 100%;
                 min-height: 100vh;
+                overflow-x: hidden;
             }
             #root{
                 min-height: 100vh;
@@ -915,7 +941,7 @@
             }
             .bg-profile-banner-box img{
                 box-sizing: border-box;
-                filter: blur(.7rem);
+                filter: blur(.8rem);
                 mask-image: linear-gradient(
                     black 60%,
                     transparent
@@ -925,6 +951,10 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                user-select: none;
+                z-index: -1rem;
+                pointer-events: none;
+                opacity: 50%;
             }
             .banner{
                 display: flex;
@@ -1011,19 +1041,28 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                min-width: 100%;
                 gap: 1rem;
                 margin: 0rem;
+                transition: width 0.3s ease;
             }
-            #reservas{
+            #reservas, #configuracion, #datos{
                 display: inherit;
                 flex-direction: inherit;
-                max-width: 1200px;
                 justify-content: center;
                 align-items: center;
-                gap: 2rem
+                gap: 2rem;
+                width: 70rem;
+                padding: 1rem;
+                border-radius: 1rem;
             }
-            #reservas h2{
+            #configuracion, #datos{
+                background-color: var(--color-light-blue);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(8.7px);
+                -webkit-backdrop-filter: blur(8.7px);
+                border: 1px solid rgba(255, 255, 255, 0.42);
+            }
+            #reservas h2, #datos h2, #configuracion h2{
                 color: #eeeeee;
                 text-align: left;
             }   
@@ -1065,8 +1104,124 @@
                 align-items: center;
                 text-align: left;
             }
-            #configuracion{
-                display: none;
+            .profile-data-form form{
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 2rem 0rem;
+                border-bottom: .1rem solid var(--color-gray-light);
+            }
+            .profile-data-form{
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 1.3rem 3rem
+            }
+            .profile-data-form span{
+                text-align: center;
+                margin-top: .5rem;
+            }
+            .profile-data-form-button{
+                display: flex;
+                flex-direction: row;
+                justify-content: right;
+                gap: 1rem;
+                align-items: center;
+            }
+            .profile-data-form-succes{
+                padding: .85rem;
+                border-radius: .7rem;
+                width: 40%;
+                background: #34384B;
+                background: linear-gradient(270deg, rgba(52, 56, 75, 1) 22%, rgba(237, 221, 83, 0) 100%);
+                text-align: right;
+            }
+            .profile-data-form-button button{
+                align-items:flex-end;
+                max-width: 20rem;
+                padding: .7rem 1.3rem;
+                border-radius: .7rem;
+            }
+            .profile-data-form-button button:hover{
+                background-color: var(--color-light-green);
+                color: var(--color-green-dark)
+            }
+            .profile-data-form-titles h3{
+                font-size: 1.2rem;
+                font-weight: 300;
+                letter-spacing: .1rem;
+            }
+            .profile-data-form-titles{
+                display: flex;
+                flex-direction: column;
+                min-width: 30%;
+                text-align: left;
+                align-items: flex-start;
+                gap: 1rem;
+                border-color: var(--color-gray-medium);
+            }
+            .profile-data-form label{
+                display: inherit;
+                flex-direction: column;
+                width: 100%;
+                box-sizing: border-box;
+                gap: .3rem
+            }
+            .profile-form-row{
+                display: inherit;
+                flex-direction: row;
+                gap: 2rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .profile-form-column{
+                display: inherit;
+                flex-direction: column;
+                gap: 2rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .profile-data-form input{
+                width: 100%;
+                box-sizing: border-box;
+                padding: .7rem;
+                border-radius: .7rem;
+            }
+            .profile-data-form input::placeholder{
+                font-family: Rubik;
+                font-weight: 600;
+            }
+            .profile-critic-options,
+            .profile-critic-delete,
+            .profile-critic-logout{
+                display: inherit;
+                flex-direction: column;
+                gap: .5rem
+            }
+            .profile-critic-options button{
+                max-width: 12rem;
+                padding: .7rem; 
+                border-radius: .7rem;
+            }
+            .profile-critic-logout button{
+                max-width: 12rem;
+                padding: .7rem; 
+                border-radius: .7rem;
+            }
+            .profile-critic-delete button{
+                background-color: var(--color-red-light);
+                color: var(--color-dark-gray);
+                max-width: 12rem;
+                padding: .7rem; 
+                border-radius: .7rem;
+            }
+            .profile-critic-delete button:hover{
+                background-color: var(--color-red-dark);
+                color: var(--color-red-light)
             }
             .current-room{
                 display: flex;
@@ -1074,8 +1229,10 @@
                 align-items: center;
                 position: absolute;
                 top: 3%;
-                left: 3%;
                 margin-top: 100px;
+                border-radius: 1rem;
+                border: 1px solid rgba(238, 238, 238, .4);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             }
             .current-room-content h1{
                 text-shadow: 0rem .5rem 1.5rem #000000;
@@ -1090,13 +1247,19 @@
             }
             .current-room img{
                 object-fit: cover;
+                box-sizing: border-box;
             }
             .current-room-content-text{
-                background-color: #A1AC88;
+                background-color: rgb(161, 172, 136, .39);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(8.7px);
+                -webkit-backdrop-filter: blur(8.7px);
+                border: 1px solid rgba(255, 255, 255, 0.37);
                 border-radius: 1.5rem;
                 padding: .7rem 3rem;
                 margin: 0rem;
                 text-align: center;
+                text-shadow: 0rem .2rem .6rem rgb(19, 19, 19, .8);
             }
             /* Reservar Habitación */
             .habitacion{
@@ -1809,8 +1972,8 @@
                 height: 60px;
                 background: #fff;
                 border-radius: 50%;
-
                 animation: pulse 2s ease-in-out infinite;
+
             }
 
             @keyframes pulse {
@@ -1836,6 +1999,11 @@
                 position: absolute;
                 top: 20.75rem;
                 box-sizing: border-box
+            }
+            .simple-loading-box button{
+                display: flex;
+                justify-content: center;
+                width: 20rem;
             }
             /* Error Messages */
             .error{
@@ -1868,4 +2036,48 @@
             }
             .error p, .error h2{
                 color: #131313
+            }
+            /* Delete Account Modal */
+            .delete-account-modal{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                justify-content: space-between;
+                background-color: var(--color-dark-gray);
+                backdrop-filter: blur(.6rem);
+                border-radius: 1rem;
+                padding: 1.5rem 2rem;
+                transform: translateY(0);
+                width: 78%;
+                box-sizing: border-box;
+                border: 1px solid rgba(238, 238, 238, .4);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, opacity 0.3s ease,
+                background-color 0.3 ease, color 0.3s ease !important;
+            }
+            .delete-account-modal h2{
+                font-size: 2rem;
+                margin: 0rem;
+                text-align: center !important;
+            }
+            .delete-account-modal button{
+                padding: .7rem;
+                border-radius: .7rem;
+            }
+            .delete-account-modal button:first-of-type{
+                background-color: var(--color-gray-light);
+                color: var(--color-dark-gray)
+            }
+            .delete-account-modal button:first-of-type:hover{
+                background-color: var(--color-gray-medium);
+            }
+            .delete-account-modal button:last-of-type{
+                display: flex;
+                justify-content: center;
+                background-color: var(--color-red-dark);
+                color: var(--color-dark-gray)
+            }
+            .delete-account-modal button:last-of-type:hover{
+                background-color: var(--color-red-light);
             }

@@ -154,3 +154,39 @@ export const newPassword = async (req, res) => {
         res.status(500).json("Server Error")
     }
 }
+
+export const updateAccountData = async(req, res) => {
+    try {
+        const token = req.cookies['Tookie']
+        const user = jwt.decode(token)
+        const { nombre, apellido, pais, identificacion, contrasena, correo, telefono } = req.body;
+        const updateUserData = await Usuario.findByIdAndUpdate(user.id, {
+            nombre: nombre, 
+            apellido: apellido, 
+            pais: pais, 
+            identificacion: identificacion, 
+            contrasena: contrasena, 
+            correo: correo, 
+            telefono: telefono
+        }, {new: true})
+        res.status(200).json({error: false, msg: "¡Usuario actualizado exitosamente!", userData: updateUserData})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: true, msg: 'Internal Server Error'})
+    }
+}
+
+export const deleteAccount = async(req, res) => {
+    try {        
+        const token = req.cookies
+        const user = jwt.decode(token?.Tookie)
+        const deleteUser = await Usuario.findByIdAndDelete(user.id)
+        Object.keys(token).forEach(key => {
+            res.clearCookie(key);
+        });
+        res.status(200).json({error: false, msg: "¡Usuario eliminado exitosamente!", redirect: '/'})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: true, msg: 'Internal Server Error'})
+    }
+}

@@ -392,3 +392,93 @@ export var newPassword = /*#__PURE__*/function () {
     return _ref8.apply(this, arguments);
   };
 }();
+export var updateAccountData = /*#__PURE__*/function () {
+  var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(req, res) {
+    var token, user, _req$body2, nombre, apellido, pais, identificacion, contrasena, correo, telefono, updateUserData;
+    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          _context9.prev = 0;
+          token = req.cookies['Tookie'];
+          user = jwt.decode(token);
+          _req$body2 = req.body, nombre = _req$body2.nombre, apellido = _req$body2.apellido, pais = _req$body2.pais, identificacion = _req$body2.identificacion, contrasena = _req$body2.contrasena, correo = _req$body2.correo, telefono = _req$body2.telefono;
+          _context9.next = 6;
+          return Usuario.findByIdAndUpdate(user.id, {
+            nombre: nombre,
+            apellido: apellido,
+            pais: pais,
+            identificacion: identificacion,
+            contrasena: contrasena,
+            correo: correo,
+            telefono: telefono
+          }, {
+            "new": true
+          });
+        case 6:
+          updateUserData = _context9.sent;
+          res.status(200).json({
+            error: false,
+            msg: "¡Usuario actualizado exitosamente!",
+            userData: updateUserData
+          });
+          _context9.next = 14;
+          break;
+        case 10:
+          _context9.prev = 10;
+          _context9.t0 = _context9["catch"](0);
+          console.log(_context9.t0);
+          res.status(500).json({
+            error: true,
+            msg: 'Internal Server Error'
+          });
+        case 14:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9, null, [[0, 10]]);
+  }));
+  return function updateAccountData(_x15, _x16) {
+    return _ref9.apply(this, arguments);
+  };
+}();
+export var deleteAccount = /*#__PURE__*/function () {
+  var _ref0 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee0(req, res) {
+    var token, user, deleteUser;
+    return _regeneratorRuntime().wrap(function _callee0$(_context0) {
+      while (1) switch (_context0.prev = _context0.next) {
+        case 0:
+          _context0.prev = 0;
+          token = req.cookies;
+          user = jwt.decode(token === null || token === void 0 ? void 0 : token.Tookie);
+          _context0.next = 5;
+          return Usuario.findByIdAndDelete(user.id);
+        case 5:
+          deleteUser = _context0.sent;
+          Object.keys(token).forEach(function (key) {
+            res.clearCookie(key);
+          });
+          res.status(200).json({
+            error: false,
+            msg: "¡Usuario eliminado exitosamente!",
+            redirect: '/'
+          });
+          _context0.next = 14;
+          break;
+        case 10:
+          _context0.prev = 10;
+          _context0.t0 = _context0["catch"](0);
+          console.log(_context0.t0);
+          res.status(500).json({
+            error: true,
+            msg: 'Internal Server Error'
+          });
+        case 14:
+        case "end":
+          return _context0.stop();
+      }
+    }, _callee0, null, [[0, 10]]);
+  }));
+  return function deleteAccount(_x17, _x18) {
+    return _ref0.apply(this, arguments);
+  };
+}();
